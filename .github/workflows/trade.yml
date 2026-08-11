@@ -2,8 +2,18 @@ name: Autonomous Trader
 
 on:
   schedule:
-    - cron: '0 21 * * 1-5'
+    - cron: '0 21 * * 1-5'    # 4:00pm ET — close phase: score & queue orders
+    - cron: '35 13 * * 2-6'   # 9:35am ET — open phase: fill orders at market open
   workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Which phase to run'
+        required: false
+        default: 'close'
+        type: choice
+        options:
+          - close
+          - open
 
 permissions:
   contents: write
@@ -31,8 +41,19 @@ jobs:
       - name: Pull latest
         run: git pull --rebase -X theirs origin main || true
 
+      - name: Determine phase
+        id: phase
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "phase=${{ github.event.inputs.phase }}" >> $GITHUB_OUTPUT
+          elif [ "$(date -u +%H)" = "13" ]; then
+            echo "phase=open" >> $GITHUB_OUTPUT
+          else
+            echo "phase=close" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run trader
-        run: python trader.py
+        run: python trader.py ${{ steps.phase.outputs.phase }}
 
       - name: Commit results
         run: |
@@ -41,7 +62,7 @@ jobs:
           done
           find reports -name 'autonomous_*.html' 2>/dev/null | xargs -r git add -f
           git diff --cached --quiet && echo "No changes" || \
-            git commit -m "trade: $(date -u '+%Y-%m-%d %H:%M') [skip ci]"
+            git commit -m "trade[${{ steps.phase.outputs.phase }}]: $(date -u '+%Y-%m-%d %H:%M') [skip ci]"
           for i in 1 2 3; do
             git pull --rebase -X theirs origin main && git push && break
             sleep 5

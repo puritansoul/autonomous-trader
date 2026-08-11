@@ -56,7 +56,9 @@ REGIME_TICKERS = ["SPY", "QQQ", "TLT", "GLD", "^VIX"]
 
 def load_state() -> dict:
     if STATE_FILE.exists():
-        return json.loads(STATE_FILE.read_text())
+        s = json.loads(STATE_FILE.read_text())
+        s.setdefault("pending_orders", [])
+        return s
     return {
         "capital":        STARTING_CAP,
         "positions":      {},   # {ticker: {shares, cost_per_share, cost, entry_date, thesis}}
@@ -71,6 +73,7 @@ def load_state() -> dict:
         },
         "regime_history": {},   # {date: regime}
         "daily_log":      [],
+        "pending_orders": [],   # queued at close, filled at next open
         "inception_date": date.today().isoformat(),
     }
 
@@ -97,6 +100,26 @@ def fetch_volume(tickers: list, period: str = "3mo") -> pd.DataFrame:
     if isinstance(raw.columns, pd.MultiIndex):
         return raw["Volume"].dropna(how="all")
     return pd.DataFrame()
+
+
+def fetch_opens(tickers: list) -> dict:
+    """Fetch today's open price for each ticker. Returns {ticker: open_price}."""
+    if not tickers:
+        return {}
+    raw = yf.download(tickers, period="2d", interval="1d", auto_adjust=True,
+                      progress=False, threads=True)
+    opens = {}
+    for tk in tickers:
+        try:
+            if isinstance(raw.columns, pd.MultiIndex):
+                series = raw["Open"][tk].dropna()
+            else:
+                series = raw["Open"].dropna()
+            if len(series) > 0:
+                opens[tk] = round(float(series.iloc[-1]), 4)
+        except Exception:
+            pass
+    return opens
 
 
 # ── Regime detection ──────────────────────────────────────────────────────────
@@ -645,17 +668,17 @@ def build_report(state: dict, prices: pd.DataFrame,
     return html
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# ── Phase 1: Close (4pm ET) — score universe, queue orders ───────────────────
 
-def run():
+def run_close():
+    """Run at market close (4pm ET). Score universe, decide entries/exits, queue
+    pending_orders. Does NOT execute any trades — actual fills happen at open."""
     today_str = date.today().isoformat()
-    state     = load_state()
-    print(f"[Autonomous Trader] {today_str}")
+    state = load_state()
+    print(f"[Autonomous Trader — CLOSE] {today_str}")
 
-    # 1. Fetch prices for regime + universe
-    all_tickers = list(UNIVERSE.keys()) + REGIME_TICKERS
-    all_tickers = list(dict.fromkeys(all_tickers))  # dedup
-
+    # Fetch close prices
+    all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
     print(f"  Fetching {len(all_tickers)} tickers…")
     prices  = fetch_prices(all_tickers, period="3mo")
     volumes = fetch_volume(list(UNIVERSE.keys()), period="3mo")
@@ -665,76 +688,252 @@ def run():
         print("  No data — aborting")
         return
 
-    # 2. Detect regime
+    # Detect regime
     regime, regime_details = detect_regime(prices)
     print(f"  Regime: {regime} | {regime_details}")
     state["regime_history"][today_str] = regime
 
-    # 3. Check exits on open positions
-    closed_today, state["positions"] = check_exits(
-        state["positions"], prices, regime, today_str)
+    # Identify exits (flagged here; filled at tomorrow's open)
+    pending_exits = []
+    for tk, pos in state["positions"].items():
+        if tk not in prices.columns:
+            continue
+        cur = float(prices[tk].dropna().iloc[-1])
+        cost_ps = pos["cost_per_share"]
+        pnl_pct = (cur - cost_ps) / cost_ps
+        entry_date = date.fromisoformat(pos["entry_date"])
+        hold_days = (date.today() - entry_date).days
 
-    for t in closed_today:
-        state["capital"] = round(state["capital"] + t["cost"] + t["pnl"], 2)
-        state["closed"].append(t)
-    print(f"  Exits: {[t['ticker'] for t in closed_today]}")
+        reason = None
+        if pnl_pct <= -0.08:
+            reason = f"stop loss ({pnl_pct:+.1%})"
+        elif pnl_pct >= 0.25:
+            reason = f"take profit ({pnl_pct:+.1%})"
+        elif hold_days >= 15:
+            reason = f"max hold {hold_days}d"
+        elif UNIVERSE.get(tk, "any") == "risk_on" and regime == "bear":
+            reason = "regime flip → bear"
+        elif UNIVERSE.get(tk, "any") == "risk_off" and regime == "bull":
+            reason = "regime flip → bull"
 
-    # 4. Score universe
+        if reason:
+            pending_exits.append({"ticker": tk, "reason": reason})
+
+    # Score universe for entries
     weights = state["signal_weights"]
     all_scores = []
     for tk in UNIVERSE:
         s = score_ticker(tk, prices, volumes, regime, weights)
         if s:
             all_scores.append(s)
-
     all_scores.sort(key=lambda x: x["total"], reverse=True)
 
-    # Skip tickers already held
-    held = set(state["positions"].keys())
-    candidates = [s for s in all_scores if s["ticker"] not in held]
+    # Exclude held and to-be-exited tickers from entry candidates
+    exiting = {e["ticker"] for e in pending_exits}
+    held = set(state["positions"].keys()) - exiting
+    candidates = [s for s in all_scores if s["ticker"] not in held and s["ticker"] not in exiting]
 
-    # 5. Size and enter new positions
-    buys = size_positions(candidates, state["capital"], len(state["positions"]))
+    # Estimate available capital after exits (using close prices as proxy)
+    freed_capital = 0.0
+    for e in pending_exits:
+        pos = state["positions"][e["ticker"]]
+        freed_capital += pos["cost"]  # rough — will be recalculated at open
 
+    est_capital = state["capital"] + freed_capital
+    est_open_positions = len(state["positions"]) - len(pending_exits)
+
+    # Size entries (using close prices as signal — actual fill at open)
+    buys = size_positions(candidates, est_capital, est_open_positions)
+
+    # Write pending orders (exits first, then entries)
+    pending_orders = []
+    for e in pending_exits:
+        pending_orders.append({"action": "exit", "ticker": e["ticker"], "reason": e["reason"]})
     for b in buys:
         top_signal = max(b["scores"], key=b["scores"].get)
-        state["positions"][b["ticker"]] = {
-            "shares":         b["shares"],
-            "cost_per_share": round(b["price"], 4),
-            "cost":           b["cost"],
-            "entry_date":     today_str,
-            "top_signal":     top_signal,
-            "thesis":         f"score {b['total']:+.3f} · led by {top_signal}",
-        }
-        state["capital"] = round(state["capital"] - b["cost"], 2)
+        pending_orders.append({
+            "action":     "entry",
+            "ticker":     b["ticker"],
+            "shares":     b["shares"],
+            "close_price": b["price"],
+            "score":      b["total"],
+            "scores":     b["scores"],
+            "top_signal": top_signal,
+        })
 
-    print(f"  Entries: {[b['ticker'] for b in buys]}")
+    state["pending_orders"] = pending_orders
+    print(f"  Queued exits: {[e['ticker'] for e in pending_exits]}")
+    print(f"  Queued entries: {[b['ticker'] for b in buys]}")
 
-    # 6. Update adaptive weights
-    state["signal_weights"] = update_weights(state, closed_today)
+    # Build thesis using close-day scores (entries show close price)
+    thesis = build_thesis(regime, regime_details, buys, [], all_scores[:10], state["signal_weights"])
+    state["daily_log"].append({"date": today_str, "thesis": f"[CLOSE PLAN]\n{thesis}"})
 
-    # 7. Update NAV
-    port_val = portfolio_value(state["capital"], state["positions"], prices)
-    state["nav_history"][today_str] = round(port_val, 2)
-    print(f"  Portfolio: ${port_val:,.2f}")
-
-    # 8. Build thesis
-    thesis = build_thesis(regime, regime_details, buys, closed_today, all_scores[:10], state["signal_weights"])
-    state["daily_log"].append({"date": today_str, "thesis": thesis})
-    print(f"\n--- THESIS ---\n{thesis}\n")
-
-    # 9. Save state
+    # Save and build interim report (no actual trade fills yet)
     save_state(state)
-
-    # 10. Build HTML report
+    port_val = portfolio_value(state["capital"], state["positions"], prices)
     html = build_report(state, prices, regime, regime_details, thesis, today_str)
     report_path = BASE_DIR / "reports" / f"autonomous_{today_str}.html"
+    report_path.parent.mkdir(exist_ok=True)
     report_path.write_text(html)
+    (BASE_DIR / "index.html").write_text(html)
+    print(f"  Portfolio (pre-fill): ${port_val:,.2f}  Report → {report_path}")
 
-    # Latest alias
+
+# ── Phase 2: Open (9:35am ET) — fill pending orders at today's open ──────────
+
+def run_open():
+    """Run 9:35am ET. Fill pending_orders at today's open price, then rebuild report."""
+    today_str = date.today().isoformat()
+    state = load_state()
+    print(f"[Autonomous Trader — OPEN] {today_str}")
+
+    pending = state.get("pending_orders", [])
+    if not pending:
+        print("  No pending orders — nothing to fill")
+        return
+
+    # Tickers we need open prices for
+    exit_tickers  = [o["ticker"] for o in pending if o["action"] == "exit"]
+    entry_tickers = [o["ticker"] for o in pending if o["action"] == "entry"]
+    all_fill_tickers = list(dict.fromkeys(exit_tickers + entry_tickers))
+
+    print(f"  Fetching opens for {all_fill_tickers}…")
+    open_prices = fetch_opens(all_fill_tickers)
+    print(f"  Got {len(open_prices)} open prices")
+
+    # Also fetch closes for NAV valuation
+    all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
+    prices  = fetch_prices(all_tickers, period="3mo")
+    volumes = fetch_volume(list(UNIVERSE.keys()), period="3mo")
+
+    regime, regime_details = detect_regime(prices)
+
+    closed_today = []
+
+    # 1. Fill exits at open
+    for order in pending:
+        if order["action"] != "exit":
+            continue
+        tk = order["ticker"]
+        if tk not in state["positions"]:
+            continue
+        pos = state["positions"][tk]
+        fill_price = open_prices.get(tk)
+        if fill_price is None:
+            # Fall back to last close
+            if tk in prices.columns:
+                fill_price = round(float(prices[tk].dropna().iloc[-1]), 4)
+            else:
+                fill_price = pos["cost_per_share"]
+
+        pnl = round((fill_price - pos["cost_per_share"]) * pos["shares"], 2)
+        pnl_pct = (fill_price - pos["cost_per_share"]) / pos["cost_per_share"]
+        closed_today.append({
+            "ticker":      tk,
+            "entry_date":  pos["entry_date"],
+            "exit_date":   today_str,
+            "entry_price": pos["cost_per_share"],
+            "exit_price":  round(fill_price, 4),
+            "shares":      pos["shares"],
+            "cost":        pos["cost"],
+            "pnl":         pnl,
+            "pnl_pct":    round(pnl_pct * 100, 2),
+            "reason":      order["reason"],
+            "top_signal":  pos.get("top_signal"),
+        })
+        proceeds = round(fill_price * pos["shares"], 2)
+        state["capital"] = round(state["capital"] + proceeds, 2)
+        del state["positions"][tk]
+        print(f"  EXIT  {tk} @ ${fill_price:.2f}  P&L {pnl:+.2f}  ({order['reason']})")
+
+    state["closed"].extend(closed_today)
+
+    # 2. Fill entries at open
+    filled_entries = []
+    for order in pending:
+        if order["action"] != "entry":
+            continue
+        tk = order["ticker"]
+        if tk in state["positions"]:
+            continue  # already held (shouldn't happen, but safe)
+
+        fill_price = open_prices.get(tk)
+        if fill_price is None:
+            print(f"  SKIP entry {tk} — no open price")
+            continue
+
+        # Recalculate shares at actual open price
+        shares = math.floor(order["shares"] * order["close_price"] / fill_price)
+        if shares < 1:
+            print(f"  SKIP entry {tk} — 0 shares at open ${fill_price:.2f}")
+            continue
+
+        cost = round(fill_price * shares, 2)
+        if cost > state["capital"] * 0.95:
+            print(f"  SKIP entry {tk} — insufficient capital (${state['capital']:.0f})")
+            continue
+
+        top_signal = order.get("top_signal", "momentum")
+        state["positions"][tk] = {
+            "shares":          shares,
+            "cost_per_share":  round(fill_price, 4),
+            "cost":            cost,
+            "entry_date":      today_str,
+            "top_signal":      top_signal,
+            "thesis":          f"score {order['score']:+.3f} · led by {top_signal}",
+        }
+        state["capital"] = round(state["capital"] - cost, 2)
+        filled_entries.append({"ticker": tk, "price": fill_price, "shares": shares,
+                                "cost": cost, "total": order["score"],
+                                "scores": order.get("scores", {}),
+                                "top_signal": top_signal})
+        print(f"  ENTRY {tk} @ ${fill_price:.2f}  × {shares} shares  ${cost:.0f}")
+
+    # 3. Update adaptive weights from today's exits
+    state["signal_weights"] = update_weights(state, closed_today)
+
+    # 4. Update NAV
+    port_val = portfolio_value(state["capital"], state["positions"], prices)
+    state["nav_history"][today_str] = round(port_val, 2)
+    print(f"  Portfolio (post-fill): ${port_val:,.2f}")
+
+    # 5. Update thesis with actual fills
+    thesis = build_thesis(regime, regime_details, filled_entries, closed_today,
+                          [], state["signal_weights"])
+    # Update or replace today's log entry
+    today_logs = [e for e in state["daily_log"] if e["date"] == today_str]
+    if today_logs:
+        today_logs[-1]["thesis"] = thesis
+    else:
+        state["daily_log"].append({"date": today_str, "thesis": thesis})
+
+    # 6. Clear pending orders
+    state["pending_orders"] = []
+
+    save_state(state)
+
+    # 7. Rebuild report with actual fills
+    html = build_report(state, prices, regime, regime_details, thesis, today_str)
+    report_path = BASE_DIR / "reports" / f"autonomous_{today_str}.html"
+    report_path.parent.mkdir(exist_ok=True)
+    report_path.write_text(html)
     (BASE_DIR / "index.html").write_text(html)
     print(f"  Report → {report_path}")
 
 
+# ── Entry point ───────────────────────────────────────────────────────────────
+
+def main():
+    phase = "close"
+    if len(sys.argv) > 1:
+        phase = sys.argv[1].lower()
+
+    if phase == "open":
+        run_open()
+    else:
+        run_close()
+
+
 if __name__ == "__main__":
-    run()
+    main()
