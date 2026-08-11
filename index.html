@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autonomous Trader — 2026-08-11</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0a; color: #e0e0e0;
+           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    h1 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    h2 { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase;
+          letter-spacing: 1px; margin: 20px 0 8px; }
+    .header { display:flex; justify-content:space-between; align-items:center;
+               border-bottom: 1px solid #1e1e1e; padding-bottom: 12px; margin-bottom: 16px; }
+    .regime-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px;
+                     font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .regime-bull   { background:#003300; color:#00e676; border:1px solid #00e676; }
+    .regime-bear   { background:#330000; color:#ff5252; border:1px solid #ff5252; }
+    .regime-neutral{ background:#1a1a1a; color:#ffd740; border:1px solid #ffd740; }
+    .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+    .stat-card { background:#111; border-radius:10px; padding:14px 16px;
+                  border: 1px solid #1e1e1e; }
+    .stat-label { font-size:11px; color:#666; text-transform:uppercase; letter-spacing:.5px; }
+    .stat-val   { font-size:22px; font-weight:700; margin-top:4px; }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+    .card { background:#111; border-radius:10px; padding:16px;
+             border:1px solid #1e1e1e; overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th { color:#555; font-weight:600; padding:6px 8px; text-align:left;
+          border-bottom:1px solid #1e1e1e; font-size:11px; text-transform:uppercase; }
+    td { padding:6px 8px; border-bottom:1px solid #141414; }
+    tr:last-child td { border-bottom:none; }
+    .tk { font-weight:700; color:#7c4dff; }
+    .spark-wrap { margin: 4px 0 12px; }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>&#9889; Autonomous Trader</h1>
+      <div style="font-size:12px;color:#555;margin-top:2px">Aug 11, 2026 · $10k paper portfolio</div>
+    </div>
+    <span class="regime-badge regime-bull">bull</span>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Portfolio</div>
+      <div class="stat-val" id="port-value">$10,000</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Today</div>
+      <div class="stat-val" id="day-pnl" data-pnl="0.00" style="color:#00e676">+$0<br>
+        <span style="font-size:14px">+0.00%</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">All-time</div>
+      <div class="stat-val" style="color:#00e676">
+        +0.00%<br>
+        <span style="font-size:14px">+$0</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Cash</div>
+      <div class="stat-val">$1,072
+        <span style="font-size:14px;color:#666"> / 11%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h2>Equity Curve</h2>
+      <div class="spark-wrap"><div style="color:#333;font-size:12px">Accumulating history…</div></div>
+      <div style="font-size:11px;color:#444">1 trading days tracked</div>
+    </div>
+    <div class="card">
+      <h2>Signal Weights (adaptive)</h2>
+      <div style="margin-top:8px"><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">momentum</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:25%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">25%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">trend</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:25%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">25%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">volume</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:20%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">20%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">mean_rev</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:15%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">15%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">regime_fit</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:15%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">15%</span>
+        </div></div>
+    </div>
+  </div>
+
+  <h2>Open Positions</h2>
+  <div class="card" style="margin-bottom:16px">
+    <table>
+      <thead><tr>
+        <th>Ticker</th><th>Entry</th><th>Hold</th><th>Cost/sh</th>
+        <th>Now</th><th>Shares</th><th>Invested</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
+      </tr></thead>
+      <tbody><tr>
+          <td class="tk">AMZN</td>
+          <td>2026-08-11</td>
+          <td>0d</td>
+          <td>$272.27</td>
+          <td>$272.27</td>
+          <td>6</td>
+          <td>$1,634</td>
+          <td style="color:#ff5252">-0 (-0.0%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr>
+          <td class="tk">MSFT</td>
+          <td>2026-08-11</td>
+          <td>0d</td>
+          <td>$503.81</td>
+          <td>$503.81</td>
+          <td>3</td>
+          <td>$1,511</td>
+          <td style="color:#ff5252">-0 (-0.0%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr>
+          <td class="tk">NVDA</td>
+          <td>2026-08-11</td>
+          <td>0d</td>
+          <td>$217.50</td>
+          <td>$217.50</td>
+          <td>6</td>
+          <td>$1,305</td>
+          <td style="color:#00e676">+0 (+0.0%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr>
+          <td class="tk">UPRO</td>
+          <td>2026-08-11</td>
+          <td>0d</td>
+          <td>$153.47</td>
+          <td>$153.47</td>
+          <td>9</td>
+          <td>$1,381</td>
+          <td style="color:#00e676">+0 (+0.0%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr>
+          <td class="tk">USO</td>
+          <td>2026-08-11</td>
+          <td>0d</td>
+          <td>$127.59</td>
+          <td>$127.59</td>
+          <td>13</td>
+          <td>$1,659</td>
+          <td style="color:#ff5252">-0 (-0.0%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr>
+          <td class="tk">XOM</td>
+          <td>2026-08-11</td>
+          <td>0d</td>
+          <td>$159.80</td>
+          <td>$159.80</td>
+          <td>9</td>
+          <td>$1,438</td>
+          <td style="color:#00e676">+0 (+0.0%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr></tbody>
+    </table>
+  </div>
+
+  <h2>Closed Trades</h2>
+  <div class="card" style="margin-bottom:16px">
+    <table>
+      <thead><tr>
+        <th>Ticker</th><th>Entry</th><th>Exit</th><th>Entry $</th>
+        <th>Exit $</th><th>Shares</th><th>P&amp;L</th><th>Reason</th>
+      </tr></thead>
+      <tbody><tr><td colspan="8" style="color:#666;text-align:center">No closed trades yet</td></tr></tbody>
+    </table>
+  </div>
+
+  <h2>Daily Thesis Log</h2>
+  <div style="margin-bottom:16px"><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-11</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">Regime: BULL
+VIX 15.3 · SPY trend up · risk appetite up
+Entered 6 position(s):
+  USO $127.59 × 13 shares (score +0.505, led by trend)
+  AMZN $272.27 × 6 shares (score +0.493, led by trend)
+  MSFT $503.81 × 3 shares (score +0.489, led by momentum)
+  XOM $159.80 × 9 shares (score +0.447, led by trend)
+  UPRO $153.47 × 9 shares (score +0.445, led by trend)
+  NVDA $217.50 × 6 shares (score +0.429, led by trend)
+Top candidates screened: USO +0.505, AMZN +0.493, MSFT +0.489
+Signal weights: momentum 25% · trend 25% · volume 20% · mean_rev 15% · regime_fit 15%</pre></div></div>
+
+</div>
+</body>
+</html>

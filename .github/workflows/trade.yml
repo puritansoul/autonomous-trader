@@ -1,0 +1,48 @@
+name: Autonomous Trader
+
+on:
+  schedule:
+    - cron: '0 21 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas numpy
+
+      - name: Configure git
+        run: |
+          git config user.name "Autonomous Trader"
+          git config user.email "bot@autonomous-trader"
+
+      - name: Pull latest
+        run: git pull --rebase -X theirs origin main || true
+
+      - name: Run trader
+        run: python trader.py
+
+      - name: Commit results
+        run: |
+          for f in state.json index.html; do
+            [ -f "$f" ] && git add -f "$f"
+          done
+          find reports -name 'autonomous_*.html' 2>/dev/null | xargs -r git add -f
+          git diff --cached --quiet && echo "No changes" || \
+            git commit -m "trade: $(date -u '+%Y-%m-%d %H:%M') [skip ci]"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push && break
+            sleep 5
+          done

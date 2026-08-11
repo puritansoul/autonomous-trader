@@ -1,0 +1,74 @@
+{
+  "capital": 1071.85,
+  "positions": {
+    "USO": {
+      "shares": 13,
+      "cost_per_share": 127.59,
+      "cost": 1658.67,
+      "entry_date": "2026-08-11",
+      "top_signal": "trend",
+      "thesis": "score +0.505 \u00b7 led by trend"
+    },
+    "AMZN": {
+      "shares": 6,
+      "cost_per_share": 272.27,
+      "cost": 1633.62,
+      "entry_date": "2026-08-11",
+      "top_signal": "trend",
+      "thesis": "score +0.493 \u00b7 led by trend"
+    },
+    "MSFT": {
+      "shares": 3,
+      "cost_per_share": 503.81,
+      "cost": 1511.43,
+      "entry_date": "2026-08-11",
+      "top_signal": "momentum",
+      "thesis": "score +0.489 \u00b7 led by momentum"
+    },
+    "XOM": {
+      "shares": 9,
+      "cost_per_share": 159.8,
+      "cost": 1438.2,
+      "entry_date": "2026-08-11",
+      "top_signal": "trend",
+      "thesis": "score +0.447 \u00b7 led by trend"
+    },
+    "UPRO": {
+      "shares": 9,
+      "cost_per_share": 153.47,
+      "cost": 1381.23,
+      "entry_date": "2026-08-11",
+      "top_signal": "trend",
+      "thesis": "score +0.445 \u00b7 led by trend"
+    },
+    "NVDA": {
+      "shares": 6,
+      "cost_per_share": 217.5,
+      "cost": 1305.0,
+      "entry_date": "2026-08-11",
+      "top_signal": "trend",
+      "thesis": "score +0.429 \u00b7 led by trend"
+    }
+  },
+  "closed": [],
+  "nav_history": {
+    "2026-08-11": 10000.0
+  },
+  "signal_weights": {
+    "momentum": 0.25,
+    "volume": 0.2,
+    "trend": 0.25,
+    "mean_rev": 0.15,
+    "regime_fit": 0.15
+  },
+  "regime_history": {
+    "2026-08-11": "bull"
+  },
+  "daily_log": [
+    {
+      "date": "2026-08-11",
+      "thesis": "Regime: BULL\nVIX 15.3 \u00b7 SPY trend up \u00b7 risk appetite up\nEntered 6 position(s):\n  USO $127.59 \u00d7 13 shares (score +0.505, led by trend)\n  AMZN $272.27 \u00d7 6 shares (score +0.493, led by trend)\n  MSFT $503.81 \u00d7 3 shares (score +0.489, led by momentum)\n  XOM $159.80 \u00d7 9 shares (score +0.447, led by trend)\n  UPRO $153.47 \u00d7 9 shares (score +0.445, led by trend)\n  NVDA $217.50 \u00d7 6 shares (score +0.429, led by trend)\nTop candidates screened: USO +0.505, AMZN +0.493, MSFT +0.489\nSignal weights: momentum 25% \u00b7 trend 25% \u00b7 volume 20% \u00b7 mean_rev 15% \u00b7 regime_fit 15%"
+    }
+  ],
+  "inception_date": "2026-08-11"
+}
