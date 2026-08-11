@@ -68,6 +68,10 @@
     {
       "date": "2026-08-11",
       "thesis": "Regime: BULL\nVIX 15.3 \u00b7 SPY trend up \u00b7 risk appetite up\nEntered 6 position(s):\n  USO $127.59 \u00d7 13 shares (score +0.505, led by trend)\n  AMZN $272.27 \u00d7 6 shares (score +0.493, led by trend)\n  MSFT $503.81 \u00d7 3 shares (score +0.489, led by momentum)\n  XOM $159.80 \u00d7 9 shares (score +0.447, led by trend)\n  UPRO $153.47 \u00d7 9 shares (score +0.445, led by trend)\n  NVDA $217.50 \u00d7 6 shares (score +0.429, led by trend)\nTop candidates screened: USO +0.505, AMZN +0.493, MSFT +0.489\nSignal weights: momentum 25% \u00b7 trend 25% \u00b7 volume 20% \u00b7 mean_rev 15% \u00b7 regime_fit 15%"
+    },
+    {
+      "date": "2026-08-11",
+      "thesis": "Regime: BULL\nVIX 15.3 \u00b7 SPY trend up \u00b7 risk appetite up\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: USO +0.505, AMZN +0.493, MSFT +0.489\nSignal weights: momentum 25% \u00b7 trend 25% \u00b7 volume 20% \u00b7 mean_rev 15% \u00b7 regime_fit 15%"
     }
   ],
   "inception_date": "2026-08-11"
