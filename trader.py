@@ -8,7 +8,7 @@ has produced the best recent closed-trade P&L.
 
 from pathlib import Path
 from datetime import date, datetime, timedelta
-import json, math, sys
+import json, math, sys, re as _re, urllib.request
 
 try:
     import yfinance as yf
@@ -24,87 +24,119 @@ MAX_POSITIONS = 10
 MIN_CASH_PCT  = 0.05   # always keep 5% cash
 
 # ── Universe ──────────────────────────────────────────────────────────────────
-# Grouped by regime affinity: "risk_on", "risk_off", "any"
-UNIVERSE = {
-    # ── US Mega-cap tech / growth
-    "AAPL":  "risk_on",  "MSFT": "risk_on",  "NVDA": "risk_on",
-    "GOOGL": "risk_on",  "AMZN": "risk_on",  "META": "risk_on",
-    "TSLA":  "risk_on",  "AVGO": "risk_on",  "ORCL": "risk_on",
-    "CRM":   "risk_on",  "ADBE": "risk_on",  "AMD":  "risk_on",
-    "INTC":  "risk_on",  "QCOM": "risk_on",  "MU":   "risk_on",
-    "SHOP":  "risk_on",  "SNOW": "risk_on",  "PLTR": "risk_on",
-    "UBER":  "risk_on",  "ABNB": "risk_on",
-
-    # ── US Large-cap financials / industrials / energy / consumer
-    "JPM":   "risk_on",  "BAC":  "risk_on",  "GS":   "risk_on",
-    "BRK-B": "any",      "V":    "risk_on",  "MA":   "risk_on",
-    "XOM":   "any",      "CVX":  "any",      "COP":  "any",
-    "CAT":   "risk_on",  "DE":   "risk_on",  "HON":  "any",
-    "UNH":   "any",      "JNJ":  "any",      "LLY":  "risk_on",
-    "PG":    "risk_off", "KO":   "risk_off", "WMT":  "risk_off",
-    "COST":  "risk_on",  "HD":   "risk_on",  "MCD":  "risk_off",
-
-    # ── US Broad market & factor ETFs
-    "SPY":   "risk_on",  "QQQ":  "risk_on",  "IWM":  "risk_on",
-    "VTV":   "risk_on",  "VUG":  "risk_on",  "IJR":  "risk_on",
-    "MTUM":  "risk_on",  "QUAL": "risk_on",  "VLUE": "any",
-
-    # ── US Sector ETFs (all 11 GICS sectors)
-    "XLK":   "risk_on",  "XLF":  "risk_on",  "XLE":  "any",
-    "XLV":   "any",      "XLI":  "risk_on",  "XLY":  "risk_on",
-    "XLP":   "risk_off", "XLU":  "risk_off", "XLRE": "any",
-    "XLB":   "any",      "XLC":  "risk_on",
-
-    # ── Thematic / high-growth ETFs
-    "ARKK":  "risk_on",  "ARKG": "risk_on",  "ARKW": "risk_on",
-    "BOTZ":  "risk_on",  "ROBO": "risk_on",  "SOXX": "risk_on",
-    "CIBR":  "risk_on",  "CLOU": "risk_on",  "HACK": "risk_on",
-    "WCLD":  "risk_on",  "FINX": "risk_on",  "IBB":  "any",
-    "XBI":   "risk_on",  "JETS": "risk_on",  "DRIV": "risk_on",
-
-    # ── International equity ETFs
-    "EFA":   "risk_on",  "EEM":  "risk_on",  "VEA":  "risk_on",
-    "VWO":   "risk_on",  "FXI":  "risk_on",  "EWJ":  "any",
-    "EWZ":   "risk_on",  "INDA": "risk_on",  "EWY":  "risk_on",
-    "IEMG":  "risk_on",  "ACWI": "risk_on",
-
-    # ── Leveraged long ETFs (risk_on only)
-    "TQQQ":  "risk_on",  "UPRO": "risk_on",  "SOXL": "risk_on",
-    "TECL":  "risk_on",  "FNGU": "risk_on",  "LABU": "risk_on",
-    "WEBL":  "risk_on",  "CURE": "risk_on",
-
-    # ── Inverse / short ETFs (risk_off)
-    "SQQQ":  "risk_off", "SH":   "risk_off", "SDS":  "risk_off",
-    "SPXS":  "risk_off", "SOXS": "risk_off", "TECS": "risk_off",
-    "PSQ":   "risk_off", "RWM":  "risk_off",
-
-    # ── Fixed income
-    "TLT":   "risk_off", "IEF":  "risk_off", "SHY":  "risk_off",
-    "BND":   "risk_off", "AGG":  "risk_off", "LQD":  "any",
-    "HYG":   "risk_on",  "JNK":  "risk_on",  "BKLN": "any",
-    "TIP":   "any",      "VTIP": "any",
-
-    # ── Commodities
-    "GLD":   "any",      "SLV":  "any",      "IAU":  "any",
-    "GDX":   "any",      "GDXJ": "risk_on",  "RING": "any",
-    "USO":   "any",      "UNG":  "any",      "BNO":  "any",
-    "DBC":   "any",      "PDBC": "any",      "CORN": "any",
-    "WEAT":  "any",      "SOYB": "any",      "CPER": "any",
-    "PALL":  "any",      "PPLT": "any",
-
-    # ── Real estate
-    "VNQ":   "any",      "IYR":  "any",      "REM":  "any",
-    "O":     "risk_off", "AMT":  "any",      "PLD":  "any",
-
-    # ── Crypto ETFs
-    "IBIT":  "risk_on",  "FBTC": "risk_on",  "BITB": "risk_on",
-    "ETHA":  "risk_on",  "CETH": "risk_on",
-
-    # ── Volatility
-    "UVXY":  "risk_off", "VXX":  "risk_off", "VIXY": "risk_off",
+# GICS sector → regime affinity mapping
+_SECTOR_AFFINITY = {
+    "Information Technology":    "risk_on",
+    "Communication Services":    "risk_on",
+    "Consumer Discretionary":    "risk_on",
+    "Financials":                "risk_on",
+    "Industrials":               "risk_on",
+    "Materials":                 "any",
+    "Energy":                    "any",
+    "Real Estate":               "any",
+    "Health Care":               "any",
+    "Consumer Staples":          "risk_off",
+    "Utilities":                 "risk_off",
 }
 
+# Supplemental non-stock assets (ETFs, crypto, leveraged, commodities)
+_SUPPLEMENT = {
+    # Broad market & factor
+    "SPY": "risk_on", "QQQ": "risk_on", "IWM": "risk_on",
+    "VTV": "risk_on", "VUG": "risk_on", "IJR": "risk_on",
+    "MTUM": "risk_on", "QUAL": "risk_on", "VLUE": "any",
+    # Sector ETFs
+    "XLK": "risk_on", "XLF": "risk_on", "XLE": "any",
+    "XLV": "any", "XLI": "risk_on", "XLY": "risk_on",
+    "XLP": "risk_off", "XLU": "risk_off", "XLRE": "any",
+    "XLB": "any", "XLC": "risk_on",
+    # Thematic
+    "ARKK": "risk_on", "ARKG": "risk_on", "ARKW": "risk_on",
+    "BOTZ": "risk_on", "SOXX": "risk_on", "CIBR": "risk_on",
+    "CLOU": "risk_on", "XBI": "risk_on", "JETS": "risk_on",
+    "IBB": "any",
+    # International
+    "EFA": "risk_on", "EEM": "risk_on", "VEA": "risk_on",
+    "VWO": "risk_on", "FXI": "risk_on", "EWJ": "any",
+    "EWZ": "risk_on", "INDA": "risk_on", "IEMG": "risk_on",
+    # Leveraged long
+    "TQQQ": "risk_on", "UPRO": "risk_on", "SOXL": "risk_on",
+    "TECL": "risk_on", "FNGU": "risk_on",
+    # Inverse / short
+    "SQQQ": "risk_off", "SH": "risk_off", "SDS": "risk_off",
+    "SPXS": "risk_off", "SOXS": "risk_off", "PSQ": "risk_off",
+    # Fixed income
+    "TLT": "risk_off", "IEF": "risk_off", "SHY": "risk_off",
+    "BND": "risk_off", "AGG": "risk_off", "LQD": "any",
+    "HYG": "risk_on", "JNK": "risk_on", "TIP": "any",
+    # Commodities
+    "GLD": "any", "SLV": "any", "IAU": "any",
+    "GDX": "any", "GDXJ": "risk_on",
+    "USO": "any", "UNG": "any", "DBC": "any",
+    "CORN": "any", "WEAT": "any", "CPER": "any",
+    # Real estate
+    "VNQ": "any", "IYR": "any",
+    # Crypto ETFs
+    "IBIT": "risk_on", "FBTC": "risk_on", "ETHA": "risk_on",
+    # Volatility
+    "UVXY": "risk_off", "VXX": "risk_off", "VIXY": "risk_off",
+}
+
+_SP500_CACHE_FILE = BASE_DIR / "sp500_tickers.json"
+
+
+def _fetch_sp500() -> dict:
+    """Fetch S&P 500 constituents from Wikipedia. Returns {ticker: affinity}."""
+    try:
+        import urllib.request
+        url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        html = urllib.request.urlopen(req, timeout=15).read().decode("utf-8")
+        # Parse ticker + GICS sector from the first wikitable
+        rows = _re.findall(
+            r'<td[^>]*>\s*<a[^>]*>([A-Z]{1,5}(?:\.[A-Z])?)</a>\s*</td>'
+            r'(?:.*?<td[^>]*>.*?</td>){2}.*?<td[^>]*>(.*?)</td>',
+            html, _re.DOTALL)
+        result = {}
+        for ticker, sector_raw in rows:
+            sector = _re.sub(r'<[^>]+>', '', sector_raw).strip()
+            affinity = _SECTOR_AFFINITY.get(sector, "any")
+            # yfinance uses hyphens not dots for BRK.B etc.
+            ticker = ticker.replace(".", "-")
+            result[ticker] = affinity
+        if len(result) > 400:  # sanity check
+            return result
+    except Exception as e:
+        print(f"  Warning: S&P 500 fetch failed ({e}) — using cache")
+    return {}
+
+
+def build_universe() -> dict:
+    """Return full investible universe: S&P 500 + supplement ETFs/crypto/commodities."""
+    # Try live fetch first
+    sp500 = _fetch_sp500()
+
+    if sp500:
+        # Cache for fallback
+        _SP500_CACHE_FILE.write_text(json.dumps(sp500))
+        print(f"  S&P 500: {len(sp500)} tickers fetched")
+    else:
+        # Use cache
+        if _SP500_CACHE_FILE.exists():
+            sp500 = json.loads(_SP500_CACHE_FILE.read_text())
+            print(f"  S&P 500: {len(sp500)} tickers from cache")
+        else:
+            print("  S&P 500: no data, supplement only")
+
+    universe = {**sp500, **_SUPPLEMENT}  # supplement overrides (correct affinities for ETFs)
+    print(f"  Universe: {len(universe)} total tickers")
+    return universe
+
+
 REGIME_TICKERS = ["SPY", "QQQ", "TLT", "GLD", "^VIX"]
+
+# Module-level universe — populated at runtime by build_universe()
+UNIVERSE = _SUPPLEMENT  # fallback until first run
 
 # ── Strategy modes ────────────────────────────────────────────────────────────
 # Each mode is a fixed weighting of the 5 signals.
@@ -886,9 +918,13 @@ def build_report(state: dict, prices: pd.DataFrame,
 def run_close():
     """Run at market close (4pm ET). Score universe, decide entries/exits, queue
     pending_orders. Does NOT execute any trades — actual fills happen at open."""
+    global UNIVERSE
     today_str = date.today().isoformat()
     state = load_state()
     print(f"[Autonomous Trader — CLOSE] {today_str}")
+
+    # Build universe fresh (S&P 500 + supplement)
+    UNIVERSE = build_universe()
 
     # Fetch close prices
     all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
@@ -1012,9 +1048,13 @@ def run_close():
 
 def run_open():
     """Run 9:35am ET. Fill pending_orders at today's open price, then rebuild report."""
+    global UNIVERSE
     today_str = date.today().isoformat()
     state = load_state()
     print(f"[Autonomous Trader — OPEN] {today_str}")
+
+    # Rebuild universe (uses cache if Wikipedia fetch fails)
+    UNIVERSE = build_universe()
 
     pending = state.get("pending_orders", [])
     if not pending:
