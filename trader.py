@@ -1,8 +1,9 @@
 """
 Autonomous Trader — $10,000 paper portfolio.
 No fixed strategy. Detects market regime daily, scores a broad universe
-across asset classes, adapts signal weights based on recent performance,
-and writes a plain-English thesis each day.
+across asset classes, and switches between named strategy modes
+(momentum, mean_reversion, trend_following, defensive) based on which
+has produced the best recent closed-trade P&L.
 """
 
 from pathlib import Path
@@ -51,6 +52,46 @@ UNIVERSE = {
 
 REGIME_TICKERS = ["SPY", "QQQ", "TLT", "GLD", "^VIX"]
 
+# ── Strategy modes ────────────────────────────────────────────────────────────
+# Each mode is a fixed weighting of the 5 signals.
+# The bot selects the active mode nightly based on which produced the best
+# avg P&L on trades opened under that mode (last 10 closed trades).
+STRATEGY_MODES = {
+    "momentum": {
+        "momentum":   0.50,
+        "volume":     0.25,
+        "trend":      0.15,
+        "mean_rev":   0.05,
+        "regime_fit": 0.05,
+        "description": "Chase price strength and volume breakouts",
+    },
+    "trend_following": {
+        "momentum":   0.20,
+        "volume":     0.10,
+        "trend":      0.50,
+        "mean_rev":   0.05,
+        "regime_fit": 0.15,
+        "description": "Follow SMA alignment and regime-matched assets",
+    },
+    "mean_reversion": {
+        "momentum":   0.05,
+        "volume":     0.15,
+        "trend":      0.10,
+        "mean_rev":   0.55,
+        "regime_fit": 0.15,
+        "description": "Buy oversold dips in trending markets",
+    },
+    "defensive": {
+        "momentum":   0.10,
+        "volume":     0.05,
+        "trend":      0.20,
+        "mean_rev":   0.10,
+        "regime_fit": 0.55,
+        "description": "Prioritize regime-fit safe-haven assets",
+    },
+}
+MODE_SIGNAL_KEYS = ["momentum", "volume", "trend", "mean_rev", "regime_fit"]
+
 
 # ── State ─────────────────────────────────────────────────────────────────────
 
@@ -58,22 +99,25 @@ def load_state() -> dict:
     if STATE_FILE.exists():
         s = json.loads(STATE_FILE.read_text())
         s.setdefault("pending_orders", [])
+        s.setdefault("active_mode", "momentum")
+        s.setdefault("mode_history", {})
+        s.setdefault("mode_pnl", {m: [] for m in STRATEGY_MODES})
+        # Ensure all modes present in mode_pnl
+        for m in STRATEGY_MODES:
+            s["mode_pnl"].setdefault(m, [])
         return s
     return {
         "capital":        STARTING_CAP,
-        "positions":      {},   # {ticker: {shares, cost_per_share, cost, entry_date, thesis}}
+        "positions":      {},
         "closed":         [],
         "nav_history":    {},
-        "signal_weights": {     # adaptive weights, start equal
-            "momentum":   0.25,
-            "volume":     0.20,
-            "trend":      0.25,
-            "mean_rev":   0.15,
-            "regime_fit": 0.15,
-        },
-        "regime_history": {},   # {date: regime}
+        "signal_weights": dict(STRATEGY_MODES["momentum"]),  # start in momentum mode
+        "active_mode":    "momentum",
+        "mode_history":   {},   # {date: mode}
+        "mode_pnl":       {m: [] for m in STRATEGY_MODES},  # recent pnl_pct per mode
+        "regime_history": {},
         "daily_log":      [],
-        "pending_orders": [],   # queued at close, filled at next open
+        "pending_orders": [],
         "inception_date": date.today().isoformat(),
     }
 
@@ -275,33 +319,48 @@ def score_ticker(tk: str, prices: pd.DataFrame, volumes: pd.DataFrame,
     }
 
 
-# ── Adaptive weight update ─────────────────────────────────────────────────────
+# ── Strategy mode selection ────────────────────────────────────────────────────
 
-def update_weights(state: dict, closed_today: list) -> dict:
-    """Nudge signal weights based on which signals were highest for winning trades."""
-    weights = state["signal_weights"].copy()
-    if not closed_today:
-        return weights
+def record_mode_pnl(state: dict, closed_today: list):
+    """Append each closed trade's pnl_pct to the mode it was entered under."""
+    for t in closed_today:
+        entry_mode = t.get("entry_mode", state.get("active_mode", "momentum"))
+        if entry_mode in state["mode_pnl"]:
+            state["mode_pnl"][entry_mode].append(t["pnl_pct"])
+            # Keep only last 20 trades per mode to stay recent
+            state["mode_pnl"][entry_mode] = state["mode_pnl"][entry_mode][-20:]
 
-    wins  = [t for t in closed_today if t["pnl"] > 0]
-    losses = [t for t in closed_today if t["pnl"] <= 0]
 
-    lr = 0.03  # learning rate — small nudges
+def select_mode(state: dict, regime: str) -> tuple[str, dict]:
+    """
+    Pick the strategy mode with the best avg pnl_pct on recent trades.
+    In bear regime, bias toward 'defensive' unless another mode is clearly better.
+    Requires at least 2 trades of data before switching away from current mode.
+    Returns (mode_name, weights_dict).
+    """
+    current = state.get("active_mode", "momentum")
+    mode_pnl = state.get("mode_pnl", {})
 
-    for trade in wins:
-        sig = trade.get("top_signal")
-        if sig and sig in weights:
-            weights[sig] = min(0.50, weights[sig] + lr)
+    scores = {}
+    for mode in STRATEGY_MODES:
+        trades = mode_pnl.get(mode, [])
+        if len(trades) >= 2:
+            scores[mode] = sum(trades) / len(trades)
+        elif mode == current:
+            scores[mode] = 0.0  # current mode gets a neutral score if no data yet
 
-    for trade in losses:
-        sig = trade.get("top_signal")
-        if sig and sig in weights:
-            weights[sig] = max(0.05, weights[sig] - lr)
+    if not scores:
+        # No data yet — in bear start defensive, otherwise momentum
+        best = "defensive" if regime == "bear" else "momentum"
+    else:
+        # Bear regime: give defensive a +1% bonus so it wins ties
+        if regime == "bear" and "defensive" in scores:
+            scores["defensive"] = scores.get("defensive", 0.0) + 1.0
 
-    # Renormalize
-    total = sum(weights.values())
-    weights = {k: round(v / total, 4) for k, v in weights.items()}
-    return weights
+        best = max(scores, key=scores.get)
+
+    weights = {k: v for k, v in STRATEGY_MODES[best].items() if k in MODE_SIGNAL_KEYS}
+    return best, weights
 
 
 # ── Position sizing ───────────────────────────────────────────────────────────
@@ -410,11 +469,18 @@ def portfolio_value(capital: float, positions: dict, prices: pd.DataFrame) -> fl
 
 def build_thesis(regime: str, regime_details: dict,
                  buys: list, exits: list,
-                 scores_top: list, weights: dict) -> str:
+                 scores_top: list, weights: dict,
+                 active_mode: str = "momentum",
+                 prev_mode: str = "") -> str:
     lines = []
     lines.append(f"Regime: {regime.upper()}")
     if "vix" in regime_details:
         lines.append(f"VIX {regime_details['vix']} · SPY trend {regime_details.get('spy_trend','?')} · risk appetite {regime_details.get('risk_appetite','?')}")
+
+    if prev_mode and prev_mode != active_mode:
+        lines.append(f"Strategy mode switched: {prev_mode} → {active_mode} ({STRATEGY_MODES[active_mode]['description']})")
+    else:
+        lines.append(f"Strategy mode: {active_mode} — {STRATEGY_MODES[active_mode]['description']}")
 
     if exits:
         lines.append(f"Exited {len(exits)} position(s): " +
@@ -532,7 +598,7 @@ def build_report(state: dict, prices: pd.DataFrame,
           <polyline points="{spark_pts}" fill="none" stroke="{col_s}" stroke-width="2"/>
         </svg>"""
 
-    # Signal weight bars
+    # Signal weight bars for active mode
     weight_bars = ""
     for sig, w in sorted(state["signal_weights"].items(), key=lambda x: x[1], reverse=True):
         pct = int(w * 100)
@@ -542,6 +608,39 @@ def build_report(state: dict, prices: pd.DataFrame,
             <div style="width:{pct}%;height:8px;background:#7c4dff;border-radius:4px"></div>
           </div>
           <span style="width:32px;font-size:11px;color:#ccc;text-align:right">{pct}%</span>
+        </div>"""
+
+    # Mode scorecard
+    active_mode = state.get("active_mode", "momentum")
+    mode_pnl    = state.get("mode_pnl", {})
+    mode_history = state.get("mode_history", {})
+    mode_cards = ""
+    mode_colors = {
+        "momentum":       "#ff9800",
+        "trend_following":"#00bcd4",
+        "mean_reversion": "#ab47bc",
+        "defensive":      "#66bb6a",
+    }
+    for m, cfg in STRATEGY_MODES.items():
+        trades = mode_pnl.get(m, [])
+        avg_pnl = sum(trades) / len(trades) if trades else None
+        wins = sum(1 for p in trades if p > 0)
+        total_t = len(trades)
+        is_active = (m == active_mode)
+        border = f"2px solid {mode_colors.get(m,'#555')}" if is_active else "1px solid #1e1e1e"
+        label = "● ACTIVE" if is_active else f"{total_t} trades"
+        avg_str = f"{avg_pnl:+.1f}%" if avg_pnl is not None else "no data"
+        wr_str  = f"{wins}/{total_t} wins" if total_t else "—"
+        mode_cards += f"""<div style="background:#111;border-radius:8px;padding:12px 14px;border:{border}">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:{mode_colors.get(m,'#ccc')};font-size:13px">{m.replace('_',' ').title()}</span>
+            <span style="font-size:10px;color:{'#00e676' if is_active else '#555'};font-weight:600">{label}</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:6px">{cfg['description']}</div>
+          <div style="display:flex;gap:16px">
+            <span style="font-size:12px;color:{'#00e676' if avg_pnl and avg_pnl>0 else '#ff5252' if avg_pnl and avg_pnl<0 else '#888'}">avg {avg_str}</span>
+            <span style="font-size:12px;color:#666">{wr_str}</span>
+          </div>
         </div>"""
 
     # Recent log entries
@@ -595,7 +694,11 @@ def build_report(state: dict, prices: pd.DataFrame,
       <h1>&#9889; Autonomous Trader</h1>
       <div style="font-size:12px;color:#555;margin-top:2px">{today_fmt} · $10k paper portfolio</div>
     </div>
-    <span class="regime-badge regime-{regime}">{regime}</span>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px">Mode</span>
+      <span style="font-size:13px;font-weight:700;color:{mode_colors.get(active_mode,'#ccc')}">{active_mode.replace('_',' ').title()}</span>
+      <span class="regime-badge regime-{regime}" style="margin-left:8px">{regime}</span>
+    </div>
   </div>
 
   <div class="stats-row">
@@ -631,9 +734,14 @@ def build_report(state: dict, prices: pd.DataFrame,
       <div style="font-size:11px;color:#444">{len(nav_dates)} trading days tracked</div>
     </div>
     <div class="card">
-      <h2>Signal Weights (adaptive)</h2>
+      <h2>Active Mode · Signal Weights</h2>
       <div style="margin-top:8px">{weight_bars}</div>
     </div>
+  </div>
+
+  <h2>Strategy Mode Scorecard</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+    {mode_cards}
   </div>
 
   <h2>Open Positions</h2>
@@ -693,6 +801,17 @@ def run_close():
     print(f"  Regime: {regime} | {regime_details}")
     state["regime_history"][today_str] = regime
 
+    # Select active strategy mode based on recent performance
+    new_mode, new_weights = select_mode(state, regime)
+    prev_mode = state.get("active_mode", "momentum")
+    state["active_mode"] = new_mode
+    state["signal_weights"] = new_weights
+    state["mode_history"][today_str] = new_mode
+    if new_mode != prev_mode:
+        print(f"  Mode switch: {prev_mode} → {new_mode}")
+    else:
+        print(f"  Mode: {new_mode} (unchanged)")
+
     # Identify exits (flagged here; filled at tomorrow's open)
     pending_exits = []
     for tk, pos in state["positions"].items():
@@ -719,7 +838,7 @@ def run_close():
         if reason:
             pending_exits.append({"ticker": tk, "reason": reason})
 
-    # Score universe for entries
+    # Score universe using active mode's weights
     weights = state["signal_weights"]
     all_scores = []
     for tk in UNIVERSE:
@@ -737,7 +856,7 @@ def run_close():
     freed_capital = 0.0
     for e in pending_exits:
         pos = state["positions"][e["ticker"]]
-        freed_capital += pos["cost"]  # rough — will be recalculated at open
+        freed_capital += pos["cost"]
 
     est_capital = state["capital"] + freed_capital
     est_open_positions = len(state["positions"]) - len(pending_exits)
@@ -752,21 +871,23 @@ def run_close():
     for b in buys:
         top_signal = max(b["scores"], key=b["scores"].get)
         pending_orders.append({
-            "action":     "entry",
-            "ticker":     b["ticker"],
-            "shares":     b["shares"],
+            "action":      "entry",
+            "ticker":      b["ticker"],
+            "shares":      b["shares"],
             "close_price": b["price"],
-            "score":      b["total"],
-            "scores":     b["scores"],
-            "top_signal": top_signal,
+            "score":       b["total"],
+            "scores":      b["scores"],
+            "top_signal":  top_signal,
+            "entry_mode":  new_mode,
         })
 
     state["pending_orders"] = pending_orders
     print(f"  Queued exits: {[e['ticker'] for e in pending_exits]}")
     print(f"  Queued entries: {[b['ticker'] for b in buys]}")
 
-    # Build thesis using close-day scores (entries show close price)
-    thesis = build_thesis(regime, regime_details, buys, [], all_scores[:10], state["signal_weights"])
+    # Build thesis
+    thesis = build_thesis(regime, regime_details, buys, [], all_scores[:10],
+                          state["signal_weights"], new_mode, prev_mode)
     state["daily_log"].append({"date": today_str, "thesis": f"[CLOSE PLAN]\n{thesis}"})
 
     # Save and build interim report (no actual trade fills yet)
@@ -856,14 +977,13 @@ def run_open():
             continue
         tk = order["ticker"]
         if tk in state["positions"]:
-            continue  # already held (shouldn't happen, but safe)
+            continue
 
         fill_price = open_prices.get(tk)
         if fill_price is None:
             print(f"  SKIP entry {tk} — no open price")
             continue
 
-        # Recalculate shares at actual open price
         shares = math.floor(order["shares"] * order["close_price"] / fill_price)
         if shares < 1:
             print(f"  SKIP entry {tk} — 0 shares at open ${fill_price:.2f}")
@@ -875,23 +995,30 @@ def run_open():
             continue
 
         top_signal = order.get("top_signal", "momentum")
+        entry_mode = order.get("entry_mode", state.get("active_mode", "momentum"))
         state["positions"][tk] = {
             "shares":          shares,
             "cost_per_share":  round(fill_price, 4),
             "cost":            cost,
             "entry_date":      today_str,
             "top_signal":      top_signal,
-            "thesis":          f"score {order['score']:+.3f} · led by {top_signal}",
+            "entry_mode":      entry_mode,
+            "thesis":          f"score {order['score']:+.3f} · led by {top_signal} · mode {entry_mode}",
         }
         state["capital"] = round(state["capital"] - cost, 2)
         filled_entries.append({"ticker": tk, "price": fill_price, "shares": shares,
                                 "cost": cost, "total": order["score"],
                                 "scores": order.get("scores", {}),
                                 "top_signal": top_signal})
-        print(f"  ENTRY {tk} @ ${fill_price:.2f}  × {shares} shares  ${cost:.0f}")
+        print(f"  ENTRY {tk} @ ${fill_price:.2f}  × {shares} shares  ${cost:.0f}  [{entry_mode}]")
 
-    # 3. Update adaptive weights from today's exits
-    state["signal_weights"] = update_weights(state, closed_today)
+    # 3. Record mode P&L and re-select mode for next session
+    record_mode_pnl(state, closed_today)
+    # Tag closed trades with their entry mode (for mode_pnl tracking)
+    for t in closed_today:
+        pos_record = next((o for o in state["closed"] if o is t), None)
+        if pos_record and "entry_mode" not in pos_record:
+            pos_record["entry_mode"] = state.get("active_mode", "momentum")
 
     # 4. Update NAV
     port_val = portfolio_value(state["capital"], state["positions"], prices)
@@ -899,8 +1026,9 @@ def run_open():
     print(f"  Portfolio (post-fill): ${port_val:,.2f}")
 
     # 5. Update thesis with actual fills
+    active_mode = state.get("active_mode", "momentum")
     thesis = build_thesis(regime, regime_details, filled_entries, closed_today,
-                          [], state["signal_weights"])
+                          [], state["signal_weights"], active_mode)
     # Update or replace today's log entry
     today_logs = [e for e in state["daily_log"] if e["date"] == today_str]
     if today_logs:
