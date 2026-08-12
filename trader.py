@@ -102,7 +102,7 @@ def load_state() -> dict:
         s.setdefault("active_mode", "momentum")
         s.setdefault("mode_history", {})
         s.setdefault("mode_pnl", {m: [] for m in STRATEGY_MODES})
-        # Ensure all modes present in mode_pnl
+        s.setdefault("last_backtest", [])
         for m in STRATEGY_MODES:
             s["mode_pnl"].setdefault(m, [])
         return s
@@ -111,10 +111,11 @@ def load_state() -> dict:
         "positions":      {},
         "closed":         [],
         "nav_history":    {},
-        "signal_weights": dict(STRATEGY_MODES["momentum"]),  # start in momentum mode
+        "signal_weights": {k: v for k, v in STRATEGY_MODES["momentum"].items() if k in MODE_SIGNAL_KEYS},
         "active_mode":    "momentum",
-        "mode_history":   {},   # {date: mode}
-        "mode_pnl":       {m: [] for m in STRATEGY_MODES},  # recent pnl_pct per mode
+        "mode_history":   {},
+        "mode_pnl":       {m: [] for m in STRATEGY_MODES},
+        "last_backtest":  [],
         "regime_history": {},
         "daily_log":      [],
         "pending_orders": [],
@@ -321,46 +322,84 @@ def score_ticker(tk: str, prices: pd.DataFrame, volumes: pd.DataFrame,
 
 # ── Strategy mode selection ────────────────────────────────────────────────────
 
+def backtest_mode(mode_name: str, prices: pd.DataFrame, volumes: pd.DataFrame,
+                  regime: str, lookback: int = 5, top_n: int = 5) -> dict:
+    """
+    Paper-backtest a mode by:
+      1. Score the universe using that mode's weights at prices[:-lookback]
+      2. Take the top_n picks
+      3. Measure their actual return over the last `lookback` days
+    Returns {"mode": ..., "avg_return": ..., "picks": [...], "raw": [...]}
+    """
+    weights = {k: v for k, v in STRATEGY_MODES[mode_name].items() if k in MODE_SIGNAL_KEYS}
+
+    if len(prices) < lookback + 21:
+        return {"mode": mode_name, "avg_return": 0.0, "picks": [], "raw": []}
+
+    # Prices at decision point (lookback days ago)
+    past_prices  = prices.iloc[:-(lookback)]
+    past_volumes = volumes.iloc[:-(lookback)] if not volumes.empty else volumes
+
+    candidates = []
+    for tk in UNIVERSE:
+        s = score_ticker(tk, past_prices, past_volumes, regime, weights)
+        if s and s["total"] > 0:
+            candidates.append(s)
+
+    candidates.sort(key=lambda x: x["total"], reverse=True)
+    picks = candidates[:top_n]
+
+    returns = []
+    for p in picks:
+        tk = p["ticker"]
+        if tk not in prices.columns:
+            continue
+        col = prices[tk].dropna()
+        # price at decision point vs today
+        decision_idx = len(col) - lookback - 1
+        if decision_idx < 0:
+            continue
+        p_then = float(col.iloc[decision_idx])
+        p_now  = float(col.iloc[-1])
+        if p_then > 0:
+            ret = (p_now - p_then) / p_then * 100
+            returns.append({"ticker": tk, "return": round(ret, 2), "score": p["total"]})
+
+    avg_ret = sum(r["return"] for r in returns) / len(returns) if returns else 0.0
+    return {
+        "mode":       mode_name,
+        "avg_return": round(avg_ret, 3),
+        "picks":      [r["ticker"] for r in returns],
+        "raw":        returns,
+    }
+
+
+def select_mode(prices: pd.DataFrame, volumes: pd.DataFrame,
+                regime: str, state: dict) -> tuple[str, dict, list]:
+    """
+    Nightly paper backtest: score each mode's top picks against actual recent
+    market returns. The mode whose hypothetical picks performed best over the
+    last 5 days wins. No portfolio trade history needed — evaluated fresh nightly.
+    Returns (mode_name, weights_dict, backtest_results).
+    """
+    results = []
+    for mode_name in STRATEGY_MODES:
+        r = backtest_mode(mode_name, prices, volumes, regime, lookback=5, top_n=5)
+        results.append(r)
+
+    results.sort(key=lambda x: x["avg_return"], reverse=True)
+    best = results[0]["mode"]
+    weights = {k: v for k, v in STRATEGY_MODES[best].items() if k in MODE_SIGNAL_KEYS}
+    return best, weights, results
+
+
 def record_mode_pnl(state: dict, closed_today: list):
-    """Append each closed trade's pnl_pct to the mode it was entered under."""
+    """Keep a record of closed trade P&L per mode (for display in scorecard)."""
     for t in closed_today:
         entry_mode = t.get("entry_mode", state.get("active_mode", "momentum"))
         if entry_mode in state["mode_pnl"]:
             state["mode_pnl"][entry_mode].append(t["pnl_pct"])
-            # Keep only last 20 trades per mode to stay recent
             state["mode_pnl"][entry_mode] = state["mode_pnl"][entry_mode][-20:]
-
-
-def select_mode(state: dict, regime: str) -> tuple[str, dict]:
-    """
-    Pick the strategy mode with the best avg pnl_pct on recent trades.
-    In bear regime, bias toward 'defensive' unless another mode is clearly better.
-    Requires at least 2 trades of data before switching away from current mode.
-    Returns (mode_name, weights_dict).
-    """
-    current = state.get("active_mode", "momentum")
-    mode_pnl = state.get("mode_pnl", {})
-
-    scores = {}
-    for mode in STRATEGY_MODES:
-        trades = mode_pnl.get(mode, [])
-        if len(trades) >= 2:
-            scores[mode] = sum(trades) / len(trades)
-        elif mode == current:
-            scores[mode] = 0.0  # current mode gets a neutral score if no data yet
-
-    if not scores:
-        # No data yet — in bear start defensive, otherwise momentum
-        best = "defensive" if regime == "bear" else "momentum"
-    else:
-        # Bear regime: give defensive a +1% bonus so it wins ties
-        if regime == "bear" and "defensive" in scores:
-            scores["defensive"] = scores.get("defensive", 0.0) + 1.0
-
-        best = max(scores, key=scores.get)
-
-    weights = {k: v for k, v in STRATEGY_MODES[best].items() if k in MODE_SIGNAL_KEYS}
-    return best, weights
 
 
 # ── Position sizing ───────────────────────────────────────────────────────────
@@ -471,16 +510,21 @@ def build_thesis(regime: str, regime_details: dict,
                  buys: list, exits: list,
                  scores_top: list, weights: dict,
                  active_mode: str = "momentum",
-                 prev_mode: str = "") -> str:
+                 prev_mode: str = "", **kwargs) -> str:
     lines = []
     lines.append(f"Regime: {regime.upper()}")
     if "vix" in regime_details:
         lines.append(f"VIX {regime_details['vix']} · SPY trend {regime_details.get('spy_trend','?')} · risk appetite {regime_details.get('risk_appetite','?')}")
 
+    bt = kwargs.get("backtest_results", [])
     if prev_mode and prev_mode != active_mode:
         lines.append(f"Strategy mode switched: {prev_mode} → {active_mode} ({STRATEGY_MODES[active_mode]['description']})")
     else:
         lines.append(f"Strategy mode: {active_mode} — {STRATEGY_MODES[active_mode]['description']}")
+    if bt:
+        bt_line = "Backtest (5d): " + "  |  ".join(
+            f"{r['mode'].replace('_',' ')} {r['avg_return']:+.2f}%" for r in bt)
+        lines.append(bt_line)
 
     if exits:
         lines.append(f"Exited {len(exits)} position(s): " +
@@ -610,37 +654,44 @@ def build_report(state: dict, prices: pd.DataFrame,
           <span style="width:32px;font-size:11px;color:#ccc;text-align:right">{pct}%</span>
         </div>"""
 
-    # Mode scorecard
+    # Mode scorecard — show last backtest results
     active_mode = state.get("active_mode", "momentum")
     mode_pnl    = state.get("mode_pnl", {})
-    mode_history = state.get("mode_history", {})
-    mode_cards = ""
+    last_backtest = state.get("last_backtest", [])
+    bt_by_mode = {r["mode"]: r for r in last_backtest}
     mode_colors = {
-        "momentum":       "#ff9800",
-        "trend_following":"#00bcd4",
-        "mean_reversion": "#ab47bc",
-        "defensive":      "#66bb6a",
+        "momentum":        "#ff9800",
+        "trend_following": "#00bcd4",
+        "mean_reversion":  "#ab47bc",
+        "defensive":       "#66bb6a",
     }
+    mode_cards = ""
     for m, cfg in STRATEGY_MODES.items():
+        bt = bt_by_mode.get(m, {})
+        bt_ret = bt.get("avg_return")
+        bt_picks = ", ".join(bt.get("picks", [])[:3])
+        # Portfolio trade record for this mode
         trades = mode_pnl.get(m, [])
-        avg_pnl = sum(trades) / len(trades) if trades else None
-        wins = sum(1 for p in trades if p > 0)
-        total_t = len(trades)
+        port_wins = sum(1 for p in trades if p > 0)
+        port_total = len(trades)
         is_active = (m == active_mode)
         border = f"2px solid {mode_colors.get(m,'#555')}" if is_active else "1px solid #1e1e1e"
-        label = "● ACTIVE" if is_active else f"{total_t} trades"
-        avg_str = f"{avg_pnl:+.1f}%" if avg_pnl is not None else "no data"
-        wr_str  = f"{wins}/{total_t} wins" if total_t else "—"
+        label = "● ACTIVE" if is_active else ""
+        bt_str = f"{bt_ret:+.2f}%" if bt_ret is not None else "—"
+        bt_col = "#00e676" if bt_ret and bt_ret > 0 else "#ff5252" if bt_ret and bt_ret < 0 else "#888"
+        port_str = f"{port_wins}/{port_total} trades" if port_total else "no trades yet"
         mode_cards += f"""<div style="background:#111;border-radius:8px;padding:12px 14px;border:{border}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
             <span style="font-weight:700;color:{mode_colors.get(m,'#ccc')};font-size:13px">{m.replace('_',' ').title()}</span>
-            <span style="font-size:10px;color:{'#00e676' if is_active else '#555'};font-weight:600">{label}</span>
+            <span style="font-size:10px;color:{'#00e676' if is_active else '#444'};font-weight:600">{label}</span>
           </div>
-          <div style="font-size:11px;color:#555;margin-bottom:6px">{cfg['description']}</div>
-          <div style="display:flex;gap:16px">
-            <span style="font-size:12px;color:{'#00e676' if avg_pnl and avg_pnl>0 else '#ff5252' if avg_pnl and avg_pnl<0 else '#888'}">avg {avg_str}</span>
-            <span style="font-size:12px;color:#666">{wr_str}</span>
+          <div style="font-size:11px;color:#555;margin-bottom:8px">{cfg['description']}</div>
+          <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
+          <div style="display:flex;gap:12px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:700;color:{bt_col}">{bt_str}</span>
+            <span style="font-size:11px;color:#555;align-self:flex-end">{bt_picks or '—'}</span>
           </div>
+          <div style="font-size:11px;color:#444">{port_str}</div>
         </div>"""
 
     # Recent log entries
@@ -801,16 +852,17 @@ def run_close():
     print(f"  Regime: {regime} | {regime_details}")
     state["regime_history"][today_str] = regime
 
-    # Select active strategy mode based on recent performance
-    new_mode, new_weights = select_mode(state, regime)
+    # Select active strategy mode via nightly paper backtest
     prev_mode = state.get("active_mode", "momentum")
+    new_mode, new_weights, backtest_results = select_mode(prices, volumes, regime, state)
     state["active_mode"] = new_mode
     state["signal_weights"] = new_weights
     state["mode_history"][today_str] = new_mode
+    state["last_backtest"] = backtest_results
     if new_mode != prev_mode:
-        print(f"  Mode switch: {prev_mode} → {new_mode}")
+        print(f"  Mode switch: {prev_mode} → {new_mode}  (backtest top: {backtest_results[0]['avg_return']:+.2f}%)")
     else:
-        print(f"  Mode: {new_mode} (unchanged)")
+        print(f"  Mode: {new_mode}  (backtest avg: {backtest_results[0]['avg_return']:+.2f}%)")
 
     # Identify exits (flagged here; filled at tomorrow's open)
     pending_exits = []
@@ -887,7 +939,8 @@ def run_close():
 
     # Build thesis
     thesis = build_thesis(regime, regime_details, buys, [], all_scores[:10],
-                          state["signal_weights"], new_mode, prev_mode)
+                          state["signal_weights"], new_mode, prev_mode,
+                          backtest_results=backtest_results)
     state["daily_log"].append({"date": today_str, "thesis": f"[CLOSE PLAN]\n{thesis}"})
 
     # Save and build interim report (no actual trade fills yet)
