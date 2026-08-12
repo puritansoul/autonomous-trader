@@ -89,6 +89,10 @@
     {
       "date": "2026-08-12",
       "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.9 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: MSFT +0.566, SLV +0.503, XOM +0.490\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
+    },
+    {
+      "date": "2026-08-12",
+      "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.8 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +0.25%  |  trend following +0.10%  |  defensive +0.10%  |  mean reversion -1.94%\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: MSFT +0.568, SLV +0.505, XOM +0.493\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
     }
   ],
   "inception_date": "2026-08-11",
@@ -102,5 +106,159 @@
     "trend_following": [],
     "mean_reversion": [],
     "defensive": []
-  }
+  },
+  "last_backtest": [
+    {
+      "mode": "momentum",
+      "avg_return": 0.252,
+      "picks": [
+        "UPRO",
+        "AMZN",
+        "MSFT",
+        "NVDA",
+        "ETHA"
+      ],
+      "raw": [
+        {
+          "ticker": "UPRO",
+          "return": 0.68,
+          "score": 0.704
+        },
+        {
+          "ticker": "AMZN",
+          "return": -1.34,
+          "score": 0.6772
+        },
+        {
+          "ticker": "MSFT",
+          "return": 1.2,
+          "score": 0.655
+        },
+        {
+          "ticker": "NVDA",
+          "return": 2.17,
+          "score": 0.6131
+        },
+        {
+          "ticker": "ETHA",
+          "return": -1.45,
+          "score": 0.6046
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": 0.096,
+      "picks": [
+        "UPRO",
+        "AMZN",
+        "MSFT",
+        "ETHA",
+        "JPM"
+      ],
+      "raw": [
+        {
+          "ticker": "UPRO",
+          "return": 0.68,
+          "score": 0.8453
+        },
+        {
+          "ticker": "AMZN",
+          "return": -1.34,
+          "score": 0.8339
+        },
+        {
+          "ticker": "MSFT",
+          "return": 1.2,
+          "score": 0.8157
+        },
+        {
+          "ticker": "ETHA",
+          "return": -1.45,
+          "score": 0.8089
+        },
+        {
+          "ticker": "JPM",
+          "return": 1.39,
+          "score": 0.763
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": 0.096,
+      "picks": [
+        "UPRO",
+        "AMZN",
+        "ETHA",
+        "MSFT",
+        "JPM"
+      ],
+      "raw": [
+        {
+          "ticker": "UPRO",
+          "return": 0.68,
+          "score": 0.8319
+        },
+        {
+          "ticker": "AMZN",
+          "return": -1.34,
+          "score": 0.8244
+        },
+        {
+          "ticker": "ETHA",
+          "return": -1.45,
+          "score": 0.8221
+        },
+        {
+          "ticker": "MSFT",
+          "return": 1.2,
+          "score": 0.792
+        },
+        {
+          "ticker": "JPM",
+          "return": 1.39,
+          "score": 0.7823
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": -1.936,
+      "picks": [
+        "META",
+        "TSLA",
+        "AAPL",
+        "ETHA",
+        "GOOGL"
+      ],
+      "raw": [
+        {
+          "ticker": "META",
+          "return": -0.55,
+          "score": 0.3061
+        },
+        {
+          "ticker": "TSLA",
+          "return": 0.95,
+          "score": 0.2385
+        },
+        {
+          "ticker": "AAPL",
+          "return": -3.0,
+          "score": 0.2362
+        },
+        {
+          "ticker": "ETHA",
+          "return": -1.45,
+          "score": 0.2356
+        },
+        {
+          "ticker": "GOOGL",
+          "return": -5.63,
+          "score": 0.2138
+        }
+      ]
+    }
+  ]
 }
