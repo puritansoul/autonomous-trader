@@ -915,20 +915,21 @@ def build_report(state: dict, prices: pd.DataFrame,
 
 # ── Phase 1: Close (4pm ET) — score universe, queue orders ───────────────────
 
-def run_close():
-    """Run at market close (4pm ET). Score universe, decide entries/exits, queue
-    pending_orders. Does NOT execute any trades — actual fills happen at open."""
+def run():
+    """Run at 9:35am ET each trading day.
+    Uses yesterday's close prices for signals, fills at today's open price.
+    """
     global UNIVERSE
     today_str = date.today().isoformat()
     state = load_state()
-    print(f"[Autonomous Trader — CLOSE] {today_str}")
+    print(f"[Autonomous Trader] {today_str}")
 
     # Build universe fresh (S&P 500 + supplement)
     UNIVERSE = build_universe()
 
-    # Fetch close prices
+    # 1. Fetch yesterday's close prices for signals (6mo history)
     all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
-    print(f"  Fetching {len(all_tickers)} tickers…")
+    print(f"  Fetching close prices for {len(all_tickers)} tickers…")
     prices  = fetch_prices(all_tickers, period="6mo")
     volumes = fetch_volume(list(UNIVERSE.keys()), period="6mo")
     print(f"  Got {len(prices.columns)} price series, {len(prices)} bars")
@@ -937,12 +938,12 @@ def run_close():
         print("  No data — aborting")
         return
 
-    # Detect regime
+    # 2. Detect regime from yesterday's close
     regime, regime_details = detect_regime(prices)
     print(f"  Regime: {regime} | {regime_details}")
     state["regime_history"][today_str] = regime
 
-    # Select active strategy mode via nightly paper backtest
+    # 3. Select strategy mode via paper backtest on yesterday's close prices
     prev_mode = state.get("active_mode", "momentum")
     new_mode, new_weights, backtest_results = select_mode(prices, volumes, regime, state)
     state["active_mode"] = new_mode
@@ -950,20 +951,30 @@ def run_close():
     state["mode_history"][today_str] = new_mode
     state["last_backtest"] = backtest_results
     if new_mode != prev_mode:
-        print(f"  Mode switch: {prev_mode} → {new_mode}  (backtest top: {backtest_results[0]['avg_return']:+.2f}%)")
+        print(f"  Mode switch: {prev_mode} → {new_mode}  (backtest: {backtest_results[0]['avg_return']:+.2f}%)")
     else:
-        print(f"  Mode: {new_mode}  (backtest avg: {backtest_results[0]['avg_return']:+.2f}%)")
+        print(f"  Mode: {new_mode}  (backtest: {backtest_results[0]['avg_return']:+.2f}%)")
 
-    # Identify exits (flagged here; filled at tomorrow's open)
-    pending_exits = []
+    # 4. Fetch today's open prices for actual trade fills
+    held_tickers = list(state["positions"].keys())
+    # Score universe first to know what we want to buy
+    weights = state["signal_weights"]
+    all_scores = []
+    for tk in UNIVERSE:
+        s = score_ticker(tk, prices, volumes, regime, weights)
+        if s:
+            all_scores.append(s)
+    all_scores.sort(key=lambda x: x["total"], reverse=True)
+
+    # Identify exits based on yesterday's close
+    exits_flagged = []
     for tk, pos in state["positions"].items():
         if tk not in prices.columns:
             continue
         cur = float(prices[tk].dropna().iloc[-1])
         cost_ps = pos["cost_per_share"]
         pnl_pct = (cur - cost_ps) / cost_ps
-        entry_date = date.fromisoformat(pos["entry_date"])
-        hold_days = (date.today() - entry_date).days
+        hold_days = (date.today() - date.fromisoformat(pos["entry_date"])).days
 
         reason = None
         if pnl_pct <= -0.08:
@@ -976,239 +987,112 @@ def run_close():
             reason = "regime flip → bear"
         elif UNIVERSE.get(tk, "any") == "risk_off" and regime == "bull":
             reason = "regime flip → bull"
-
         if reason:
-            pending_exits.append({"ticker": tk, "reason": reason})
+            exits_flagged.append({"ticker": tk, "reason": reason})
 
-    # Score universe using active mode's weights
-    weights = state["signal_weights"]
-    all_scores = []
-    for tk in UNIVERSE:
-        s = score_ticker(tk, prices, volumes, regime, weights)
-        if s:
-            all_scores.append(s)
-    all_scores.sort(key=lambda x: x["total"], reverse=True)
-
-    # Exclude held and to-be-exited tickers from entry candidates
-    exiting = {e["ticker"] for e in pending_exits}
+    exiting = {e["ticker"] for e in exits_flagged}
     held = set(state["positions"].keys()) - exiting
     candidates = [s for s in all_scores if s["ticker"] not in held and s["ticker"] not in exiting]
 
-    # Estimate available capital after exits (using close prices as proxy)
-    freed_capital = 0.0
-    for e in pending_exits:
-        pos = state["positions"][e["ticker"]]
-        freed_capital += pos["cost"]
-
+    freed_capital = sum(state["positions"][e["ticker"]]["cost"] for e in exits_flagged)
     est_capital = state["capital"] + freed_capital
-    est_open_positions = len(state["positions"]) - len(pending_exits)
+    buys_planned = size_positions(candidates, est_capital, len(state["positions"]) - len(exits_flagged))
 
-    # Size entries (using close prices as signal — actual fill at open)
-    buys = size_positions(candidates, est_capital, est_open_positions)
-
-    # Write pending orders (exits first, then entries)
-    pending_orders = []
-    for e in pending_exits:
-        pending_orders.append({"action": "exit", "ticker": e["ticker"], "reason": e["reason"]})
-    for b in buys:
-        top_signal = max(b["scores"], key=b["scores"].get)
-        pending_orders.append({
-            "action":      "entry",
-            "ticker":      b["ticker"],
-            "shares":      b["shares"],
-            "close_price": b["price"],
-            "score":       b["total"],
-            "scores":      b["scores"],
-            "top_signal":  top_signal,
-            "entry_mode":  new_mode,
-        })
-
-    state["pending_orders"] = pending_orders
-    print(f"  Queued exits: {[e['ticker'] for e in pending_exits]}")
-    print(f"  Queued entries: {[b['ticker'] for b in buys]}")
-
-    # Build thesis
-    thesis = build_thesis(regime, regime_details, buys, [], all_scores[:10],
-                          state["signal_weights"], new_mode, prev_mode,
-                          backtest_results=backtest_results)
-    state["daily_log"].append({"date": today_str, "thesis": f"[CLOSE PLAN]\n{thesis}"})
-
-    # Save and build interim report (no actual trade fills yet)
-    save_state(state)
-    port_val = portfolio_value(state["capital"], state["positions"], prices)
-    html = build_report(state, prices, regime, regime_details, thesis, today_str)
-    report_path = BASE_DIR / "reports" / f"autonomous_{today_str}.html"
-    report_path.parent.mkdir(exist_ok=True)
-    report_path.write_text(html)
-    (BASE_DIR / "index.html").write_text(html)
-    print(f"  Portfolio (pre-fill): ${port_val:,.2f}  Report → {report_path}")
-
-
-# ── Phase 2: Open (9:35am ET) — fill pending orders at today's open ──────────
-
-def run_open():
-    """Run 9:35am ET. Fill pending_orders at today's open price, then rebuild report."""
-    global UNIVERSE
-    today_str = date.today().isoformat()
-    state = load_state()
-    print(f"[Autonomous Trader — OPEN] {today_str}")
-
-    # Rebuild universe (uses cache if Wikipedia fetch fails)
-    UNIVERSE = build_universe()
-
-    pending = state.get("pending_orders", [])
-    if not pending:
-        print("  No pending orders — nothing to fill")
-        return
-
-    # Tickers we need open prices for
-    exit_tickers  = [o["ticker"] for o in pending if o["action"] == "exit"]
-    entry_tickers = [o["ticker"] for o in pending if o["action"] == "entry"]
-    all_fill_tickers = list(dict.fromkeys(exit_tickers + entry_tickers))
-
-    print(f"  Fetching opens for {all_fill_tickers}…")
-    open_prices = fetch_opens(all_fill_tickers)
+    # Fetch today's open prices for everything we plan to touch
+    fill_tickers = list(dict.fromkeys(
+        [e["ticker"] for e in exits_flagged] + [b["ticker"] for b in buys_planned]
+    ))
+    print(f"  Fetching today's open for {len(fill_tickers)} tickers…")
+    open_prices = fetch_opens(fill_tickers)
     print(f"  Got {len(open_prices)} open prices")
 
-    # Also fetch closes for NAV valuation
-    all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
-    prices  = fetch_prices(all_tickers, period="6mo")
-    volumes = fetch_volume(list(UNIVERSE.keys()), period="6mo")
-
-    regime, regime_details = detect_regime(prices)
-
+    # 5. Execute exits at today's open
     closed_today = []
-
-    # 1. Fill exits at open
-    for order in pending:
-        if order["action"] != "exit":
+    for e in exits_flagged:
+        tk = e["ticker"]
+        pos = state["positions"].get(tk)
+        if not pos:
             continue
-        tk = order["ticker"]
-        if tk not in state["positions"]:
-            continue
-        pos = state["positions"][tk]
-        fill_price = open_prices.get(tk)
-        if fill_price is None:
-            # Fall back to last close
-            if tk in prices.columns:
-                fill_price = round(float(prices[tk].dropna().iloc[-1]), 4)
-            else:
-                fill_price = pos["cost_per_share"]
-
-        pnl = round((fill_price - pos["cost_per_share"]) * pos["shares"], 2)
-        pnl_pct = (fill_price - pos["cost_per_share"]) / pos["cost_per_share"]
+        fill = open_prices.get(tk) or round(float(prices[tk].dropna().iloc[-1]), 4)
+        pnl = round((fill - pos["cost_per_share"]) * pos["shares"], 2)
+        pnl_pct = (fill - pos["cost_per_share"]) / pos["cost_per_share"]
         closed_today.append({
             "ticker":      tk,
             "entry_date":  pos["entry_date"],
             "exit_date":   today_str,
             "entry_price": pos["cost_per_share"],
-            "exit_price":  round(fill_price, 4),
+            "exit_price":  round(fill, 4),
             "shares":      pos["shares"],
             "cost":        pos["cost"],
             "pnl":         pnl,
             "pnl_pct":    round(pnl_pct * 100, 2),
-            "reason":      order["reason"],
+            "reason":      e["reason"],
             "top_signal":  pos.get("top_signal"),
+            "entry_mode":  pos.get("entry_mode", new_mode),
         })
-        proceeds = round(fill_price * pos["shares"], 2)
-        state["capital"] = round(state["capital"] + proceeds, 2)
+        state["capital"] = round(state["capital"] + fill * pos["shares"], 2)
         del state["positions"][tk]
-        print(f"  EXIT  {tk} @ ${fill_price:.2f}  P&L {pnl:+.2f}  ({order['reason']})")
+        print(f"  EXIT  {tk} @ ${fill:.2f}  P&L {pnl:+.2f}  ({e['reason']})")
 
     state["closed"].extend(closed_today)
 
-    # 2. Fill entries at open
+    # 6. Execute entries at today's open
     filled_entries = []
-    for order in pending:
-        if order["action"] != "entry":
-            continue
-        tk = order["ticker"]
+    for b in buys_planned:
+        tk = b["ticker"]
         if tk in state["positions"]:
             continue
-
-        fill_price = open_prices.get(tk)
-        if fill_price is None:
-            print(f"  SKIP entry {tk} — no open price")
+        fill = open_prices.get(tk)
+        if not fill:
+            print(f"  SKIP {tk} — no open price")
             continue
-
-        shares = math.floor(order["shares"] * order["close_price"] / fill_price)
+        shares = math.floor(b["shares"] * b["price"] / fill)
         if shares < 1:
-            print(f"  SKIP entry {tk} — 0 shares at open ${fill_price:.2f}")
             continue
-
-        cost = round(fill_price * shares, 2)
+        cost = round(fill * shares, 2)
         if cost > state["capital"] * 0.95:
-            print(f"  SKIP entry {tk} — insufficient capital (${state['capital']:.0f})")
+            print(f"  SKIP {tk} — insufficient capital")
             continue
-
-        top_signal = order.get("top_signal", "momentum")
-        entry_mode = order.get("entry_mode", state.get("active_mode", "momentum"))
+        top_signal = max(b["scores"], key=b["scores"].get)
         state["positions"][tk] = {
-            "shares":          shares,
-            "cost_per_share":  round(fill_price, 4),
-            "cost":            cost,
-            "entry_date":      today_str,
-            "top_signal":      top_signal,
-            "entry_mode":      entry_mode,
-            "thesis":          f"score {order['score']:+.3f} · led by {top_signal} · mode {entry_mode}",
+            "shares":         shares,
+            "cost_per_share": round(fill, 4),
+            "cost":           cost,
+            "entry_date":     today_str,
+            "top_signal":     top_signal,
+            "entry_mode":     new_mode,
+            "thesis":         f"score {b['total']:+.3f} · led by {top_signal} · mode {new_mode}",
         }
         state["capital"] = round(state["capital"] - cost, 2)
-        filled_entries.append({"ticker": tk, "price": fill_price, "shares": shares,
-                                "cost": cost, "total": order["score"],
-                                "scores": order.get("scores", {}),
+        filled_entries.append({**b, "price": fill, "shares": shares, "cost": cost,
                                 "top_signal": top_signal})
-        print(f"  ENTRY {tk} @ ${fill_price:.2f}  × {shares} shares  ${cost:.0f}  [{entry_mode}]")
+        print(f"  ENTRY {tk} @ ${fill:.2f}  × {shares} shares  ${cost:.0f}  [{new_mode}]")
 
-    # 3. Record mode P&L and re-select mode for next session
+    # 7. Record mode P&L, update NAV
     record_mode_pnl(state, closed_today)
-    # Tag closed trades with their entry mode (for mode_pnl tracking)
-    for t in closed_today:
-        pos_record = next((o for o in state["closed"] if o is t), None)
-        if pos_record and "entry_mode" not in pos_record:
-            pos_record["entry_mode"] = state.get("active_mode", "momentum")
-
-    # 4. Update NAV
     port_val = portfolio_value(state["capital"], state["positions"], prices)
     state["nav_history"][today_str] = round(port_val, 2)
-    print(f"  Portfolio (post-fill): ${port_val:,.2f}")
+    print(f"  Portfolio: ${port_val:,.2f}")
 
-    # 5. Update thesis with actual fills
-    active_mode = state.get("active_mode", "momentum")
+    # 8. Build thesis and log
     thesis = build_thesis(regime, regime_details, filled_entries, closed_today,
-                          [], state["signal_weights"], active_mode)
-    # Update or replace today's log entry
-    today_logs = [e for e in state["daily_log"] if e["date"] == today_str]
-    if today_logs:
-        today_logs[-1]["thesis"] = thesis
-    else:
-        state["daily_log"].append({"date": today_str, "thesis": thesis})
-
-    # 6. Clear pending orders
+                          all_scores[:10], state["signal_weights"], new_mode, prev_mode,
+                          backtest_results=backtest_results)
+    state["daily_log"].append({"date": today_str, "thesis": thesis})
     state["pending_orders"] = []
 
+    # 9. Save state and write report
     save_state(state)
-
-    # 7. Rebuild report with actual fills
     html = build_report(state, prices, regime, regime_details, thesis, today_str)
     report_path = BASE_DIR / "reports" / f"autonomous_{today_str}.html"
     report_path.parent.mkdir(exist_ok=True)
     report_path.write_text(html)
     (BASE_DIR / "index.html").write_text(html)
     print(f"  Report → {report_path}")
+    print(f"  Report → {report_path}")
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 
-def main():
-    phase = "close"
-    if len(sys.argv) > 1:
-        phase = sys.argv[1].lower()
-
-    if phase == "open":
-        run_open()
-    else:
-        run_close()
-
-
 if __name__ == "__main__":
-    main()
+    run()
