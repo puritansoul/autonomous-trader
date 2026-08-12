@@ -93,10 +93,63 @@
     {
       "date": "2026-08-12",
       "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.8 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +0.25%  |  trend following +0.10%  |  defensive +0.10%  |  mean reversion -1.94%\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: MSFT +0.568, SLV +0.505, XOM +0.493\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
+    },
+    {
+      "date": "2026-08-12",
+      "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.8 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +9.63%  |  trend following +6.54%  |  defensive +5.81%  |  mean reversion +4.62%\nEntered 3 position(s):\n  ABNB $180.62 \u00d7 1 shares (score +0.597, led by momentum)\n  PLTR $170.01 \u00d7 1 shares (score +0.596, led by momentum)\n  ARKG $44.59 \u00d7 5 shares (score +0.595, led by trend)\nTop candidates screened: ABNB +0.597, PLTR +0.596, ARKG +0.595\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
     }
   ],
   "inception_date": "2026-08-11",
-  "pending_orders": [],
+  "pending_orders": [
+    {
+      "action": "entry",
+      "ticker": "ABNB",
+      "shares": 1,
+      "close_price": 180.6199951171875,
+      "score": 0.5971,
+      "scores": {
+        "momentum": 1.0,
+        "volume": -0.28,
+        "trend": 1.0,
+        "mean_rev": -0.657,
+        "regime_fit": 1.0
+      },
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "action": "entry",
+      "ticker": "PLTR",
+      "shares": 1,
+      "close_price": 170.01010131835938,
+      "score": 0.5961,
+      "scores": {
+        "momentum": 1.0,
+        "volume": -0.316,
+        "trend": 1.0,
+        "mean_rev": -0.498,
+        "regime_fit": 1.0
+      },
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "action": "entry",
+      "ticker": "ARKG",
+      "shares": 5,
+      "close_price": 44.59000015258789,
+      "score": 0.5948,
+      "scores": {
+        "momentum": 0.886,
+        "volume": -0.09,
+        "trend": 1.0,
+        "mean_rev": -0.509,
+        "regime_fit": 1.0
+      },
+      "top_signal": "trend",
+      "entry_mode": "momentum"
+    }
+  ],
   "active_mode": "momentum",
   "mode_history": {
     "2026-08-12": "momentum"
@@ -110,153 +163,153 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 0.252,
+      "avg_return": 9.634,
       "picks": [
-        "UPRO",
-        "AMZN",
-        "MSFT",
-        "NVDA",
-        "ETHA"
+        "SHOP",
+        "CLOU",
+        "PLTR",
+        "GDX",
+        "GDXJ"
       ],
       "raw": [
         {
-          "ticker": "UPRO",
-          "return": 0.68,
-          "score": 0.704
+          "ticker": "SHOP",
+          "return": 21.58,
+          "score": 0.937
         },
         {
-          "ticker": "AMZN",
-          "return": -1.34,
-          "score": 0.6772
+          "ticker": "CLOU",
+          "return": 3.84,
+          "score": 0.8175
         },
         {
-          "ticker": "MSFT",
-          "return": 1.2,
-          "score": 0.655
+          "ticker": "PLTR",
+          "return": 4.52,
+          "score": 0.748
         },
         {
-          "ticker": "NVDA",
-          "return": 2.17,
-          "score": 0.6131
+          "ticker": "GDX",
+          "return": 8.96,
+          "score": 0.7347
         },
         {
-          "ticker": "ETHA",
-          "return": -1.45,
-          "score": 0.6046
+          "ticker": "GDXJ",
+          "return": 9.27,
+          "score": 0.7292
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 0.096,
+      "avg_return": 6.542,
       "picks": [
+        "SHOP",
+        "CLOU",
+        "PLTR",
         "UPRO",
-        "AMZN",
-        "MSFT",
-        "ETHA",
-        "JPM"
+        "WEBL"
       ],
       "raw": [
         {
+          "ticker": "SHOP",
+          "return": 21.58,
+          "score": 0.937
+        },
+        {
+          "ticker": "CLOU",
+          "return": 3.84,
+          "score": 0.8847
+        },
+        {
+          "ticker": "PLTR",
+          "return": 4.52,
+          "score": 0.8601
+        },
+        {
           "ticker": "UPRO",
-          "return": 0.68,
+          "return": 0.63,
           "score": 0.8453
         },
         {
-          "ticker": "AMZN",
-          "return": -1.34,
-          "score": 0.8339
-        },
-        {
-          "ticker": "MSFT",
-          "return": 1.2,
-          "score": 0.8157
-        },
-        {
-          "ticker": "ETHA",
-          "return": -1.45,
-          "score": 0.8089
-        },
-        {
-          "ticker": "JPM",
-          "return": 1.39,
-          "score": 0.763
+          "ticker": "WEBL",
+          "return": 2.14,
+          "score": 0.8395
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": 0.096,
+      "avg_return": 5.814,
       "picks": [
+        "SHOP",
+        "CLOU",
+        "PLTR",
         "UPRO",
-        "AMZN",
-        "ETHA",
-        "MSFT",
-        "JPM"
+        "AMZN"
       ],
       "raw": [
         {
+          "ticker": "SHOP",
+          "return": 21.58,
+          "score": 0.874
+        },
+        {
+          "ticker": "CLOU",
+          "return": 3.84,
+          "score": 0.8365
+        },
+        {
+          "ticker": "PLTR",
+          "return": 4.52,
+          "score": 0.8323
+        },
+        {
           "ticker": "UPRO",
-          "return": 0.68,
+          "return": 0.63,
           "score": 0.8319
         },
         {
           "ticker": "AMZN",
-          "return": -1.34,
+          "return": -1.5,
           "score": 0.8244
-        },
-        {
-          "ticker": "ETHA",
-          "return": -1.45,
-          "score": 0.8221
-        },
-        {
-          "ticker": "MSFT",
-          "return": 1.2,
-          "score": 0.792
-        },
-        {
-          "ticker": "JPM",
-          "return": 1.39,
-          "score": 0.7823
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -1.936,
+      "avg_return": 4.616,
       "picks": [
+        "UBER",
+        "PLD",
+        "SHOP",
         "META",
-        "TSLA",
-        "AAPL",
-        "ETHA",
-        "GOOGL"
+        "XLC"
       ],
       "raw": [
         {
+          "ticker": "UBER",
+          "return": 4.99,
+          "score": 0.3312
+        },
+        {
+          "ticker": "PLD",
+          "return": -0.85,
+          "score": 0.3179
+        },
+        {
+          "ticker": "SHOP",
+          "return": 21.58,
+          "score": 0.3068
+        },
+        {
           "ticker": "META",
-          "return": -0.55,
+          "return": -0.95,
           "score": 0.3061
         },
         {
-          "ticker": "TSLA",
-          "return": 0.95,
-          "score": 0.2385
-        },
-        {
-          "ticker": "AAPL",
-          "return": -3.0,
-          "score": 0.2362
-        },
-        {
-          "ticker": "ETHA",
-          "return": -1.45,
-          "score": 0.2356
-        },
-        {
-          "ticker": "GOOGL",
-          "return": -5.63,
-          "score": 0.2138
+          "ticker": "XLC",
+          "return": -1.69,
+          "score": 0.245
         }
       ]
     }
