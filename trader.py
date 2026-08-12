@@ -20,34 +20,88 @@ except ImportError:
 BASE_DIR      = Path(__file__).parent
 STATE_FILE    = BASE_DIR / "state.json"
 STARTING_CAP  = 10_000.0
-MAX_POSITIONS = 6
+MAX_POSITIONS = 10
 MIN_CASH_PCT  = 0.05   # always keep 5% cash
 
 # ── Universe ──────────────────────────────────────────────────────────────────
 # Grouped by regime affinity: "risk_on", "risk_off", "any"
 UNIVERSE = {
-    # Mega-cap / large-cap equities
+    # ── US Mega-cap tech / growth
     "AAPL":  "risk_on",  "MSFT": "risk_on",  "NVDA": "risk_on",
     "GOOGL": "risk_on",  "AMZN": "risk_on",  "META": "risk_on",
-    "TSLA":  "risk_on",  "JPM":  "risk_on",  "XOM":  "any",
-    # Broad market ETFs
+    "TSLA":  "risk_on",  "AVGO": "risk_on",  "ORCL": "risk_on",
+    "CRM":   "risk_on",  "ADBE": "risk_on",  "AMD":  "risk_on",
+    "INTC":  "risk_on",  "QCOM": "risk_on",  "MU":   "risk_on",
+    "SHOP":  "risk_on",  "SNOW": "risk_on",  "PLTR": "risk_on",
+    "UBER":  "risk_on",  "ABNB": "risk_on",
+
+    # ── US Large-cap financials / industrials / energy / consumer
+    "JPM":   "risk_on",  "BAC":  "risk_on",  "GS":   "risk_on",
+    "BRK-B": "any",      "V":    "risk_on",  "MA":   "risk_on",
+    "XOM":   "any",      "CVX":  "any",      "COP":  "any",
+    "CAT":   "risk_on",  "DE":   "risk_on",  "HON":  "any",
+    "UNH":   "any",      "JNJ":  "any",      "LLY":  "risk_on",
+    "PG":    "risk_off", "KO":   "risk_off", "WMT":  "risk_off",
+    "COST":  "risk_on",  "HD":   "risk_on",  "MCD":  "risk_off",
+
+    # ── US Broad market & factor ETFs
     "SPY":   "risk_on",  "QQQ":  "risk_on",  "IWM":  "risk_on",
-    "VTV":   "risk_on",
-    # Leveraged ETFs (regime-gated)
-    "TQQQ":  "risk_on",  "UPRO": "risk_on",
-    "SQQQ":  "risk_off", "SH":   "risk_off",
-    # Sectors
+    "VTV":   "risk_on",  "VUG":  "risk_on",  "IJR":  "risk_on",
+    "MTUM":  "risk_on",  "QUAL": "risk_on",  "VLUE": "any",
+
+    # ── US Sector ETFs (all 11 GICS sectors)
     "XLK":   "risk_on",  "XLF":  "risk_on",  "XLE":  "any",
-    "XLV":   "any",      "XLU":  "risk_off", "XLP":  "risk_off",
-    # Fixed income / safe haven
+    "XLV":   "any",      "XLI":  "risk_on",  "XLY":  "risk_on",
+    "XLP":   "risk_off", "XLU":  "risk_off", "XLRE": "any",
+    "XLB":   "any",      "XLC":  "risk_on",
+
+    # ── Thematic / high-growth ETFs
+    "ARKK":  "risk_on",  "ARKG": "risk_on",  "ARKW": "risk_on",
+    "BOTZ":  "risk_on",  "ROBO": "risk_on",  "SOXX": "risk_on",
+    "CIBR":  "risk_on",  "CLOU": "risk_on",  "HACK": "risk_on",
+    "WCLD":  "risk_on",  "FINX": "risk_on",  "IBB":  "any",
+    "XBI":   "risk_on",  "JETS": "risk_on",  "DRIV": "risk_on",
+
+    # ── International equity ETFs
+    "EFA":   "risk_on",  "EEM":  "risk_on",  "VEA":  "risk_on",
+    "VWO":   "risk_on",  "FXI":  "risk_on",  "EWJ":  "any",
+    "EWZ":   "risk_on",  "INDA": "risk_on",  "EWY":  "risk_on",
+    "IEMG":  "risk_on",  "ACWI": "risk_on",
+
+    # ── Leveraged long ETFs (risk_on only)
+    "TQQQ":  "risk_on",  "UPRO": "risk_on",  "SOXL": "risk_on",
+    "TECL":  "risk_on",  "FNGU": "risk_on",  "LABU": "risk_on",
+    "WEBL":  "risk_on",  "CURE": "risk_on",
+
+    # ── Inverse / short ETFs (risk_off)
+    "SQQQ":  "risk_off", "SH":   "risk_off", "SDS":  "risk_off",
+    "SPXS":  "risk_off", "SOXS": "risk_off", "TECS": "risk_off",
+    "PSQ":   "risk_off", "RWM":  "risk_off",
+
+    # ── Fixed income
     "TLT":   "risk_off", "IEF":  "risk_off", "SHY":  "risk_off",
-    "GLD":   "any",      "SLV":  "any",
-    # Commodities
-    "USO":   "any",      "DBC":  "any",      "PDBC": "any",
-    # Crypto (via ETFs)
-    "IBIT":  "risk_on",  "FBTC": "risk_on",  "ETHA": "risk_on",
-    # Volatility
-    "UVXY":  "risk_off",
+    "BND":   "risk_off", "AGG":  "risk_off", "LQD":  "any",
+    "HYG":   "risk_on",  "JNK":  "risk_on",  "BKLN": "any",
+    "TIP":   "any",      "VTIP": "any",
+
+    # ── Commodities
+    "GLD":   "any",      "SLV":  "any",      "IAU":  "any",
+    "GDX":   "any",      "GDXJ": "risk_on",  "RING": "any",
+    "USO":   "any",      "UNG":  "any",      "BNO":  "any",
+    "DBC":   "any",      "PDBC": "any",      "CORN": "any",
+    "WEAT":  "any",      "SOYB": "any",      "CPER": "any",
+    "PALL":  "any",      "PPLT": "any",
+
+    # ── Real estate
+    "VNQ":   "any",      "IYR":  "any",      "REM":  "any",
+    "O":     "risk_off", "AMT":  "any",      "PLD":  "any",
+
+    # ── Crypto ETFs
+    "IBIT":  "risk_on",  "FBTC": "risk_on",  "BITB": "risk_on",
+    "ETHA":  "risk_on",  "CETH": "risk_on",
+
+    # ── Volatility
+    "UVXY":  "risk_off", "VXX":  "risk_off", "VIXY": "risk_off",
 }
 
 REGIME_TICKERS = ["SPY", "QQQ", "TLT", "GLD", "^VIX"]
@@ -839,8 +893,8 @@ def run_close():
     # Fetch close prices
     all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
     print(f"  Fetching {len(all_tickers)} tickers…")
-    prices  = fetch_prices(all_tickers, period="3mo")
-    volumes = fetch_volume(list(UNIVERSE.keys()), period="3mo")
+    prices  = fetch_prices(all_tickers, period="6mo")
+    volumes = fetch_volume(list(UNIVERSE.keys()), period="6mo")
     print(f"  Got {len(prices.columns)} price series, {len(prices)} bars")
 
     if prices.empty:
@@ -978,8 +1032,8 @@ def run_open():
 
     # Also fetch closes for NAV valuation
     all_tickers = list(dict.fromkeys(list(UNIVERSE.keys()) + REGIME_TICKERS))
-    prices  = fetch_prices(all_tickers, period="3mo")
-    volumes = fetch_volume(list(UNIVERSE.keys()), period="3mo")
+    prices  = fetch_prices(all_tickers, period="6mo")
+    volumes = fetch_volume(list(UNIVERSE.keys()), period="6mo")
 
     regime, regime_details = detect_regime(prices)
 
