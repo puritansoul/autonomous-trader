@@ -42,25 +42,29 @@
       <h1>&#9889; Autonomous Trader</h1>
       <div style="font-size:12px;color:#555;margin-top:2px">Aug 12, 2026 · $10k paper portfolio</div>
     </div>
-    <span class="regime-badge regime-bull">bull</span>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px">Mode</span>
+      <span style="font-size:13px;font-weight:700;color:#ff9800">Momentum</span>
+      <span class="regime-badge regime-bull" style="margin-left:8px">bull</span>
+    </div>
   </div>
 
   <div class="stats-row">
     <div class="stat-card">
       <div class="stat-label">Portfolio</div>
-      <div class="stat-val" id="port-value">$9,992</div>
+      <div class="stat-val" id="port-value">$9,979</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Today</div>
-      <div class="stat-val" id="day-pnl" data-pnl="-8.33" style="color:#ff5252">-$8<br>
-        <span style="font-size:14px">-0.08%</span>
+      <div class="stat-val" id="day-pnl" data-pnl="-20.78" style="color:#ff5252">-$21<br>
+        <span style="font-size:14px">-0.21%</span>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-label">All-time</div>
       <div class="stat-val" style="color:#ff5252">
-        -0.08%<br>
-        <span style="font-size:14px">$8</span>
+        -0.21%<br>
+        <span style="font-size:14px">$21</span>
       </div>
     </div>
     <div class="stat-card">
@@ -78,9 +82,15 @@
       <div style="font-size:11px;color:#444">1 trading days tracked</div>
     </div>
     <div class="card">
-      <h2>Signal Weights (adaptive)</h2>
+      <h2>Active Mode · Signal Weights</h2>
       <div style="margin-top:8px"><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
           <span style="width:90px;font-size:11px;color:#aaa">momentum</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:50%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">50%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">volume</span>
           <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
             <div style="width:25%;height:8px;background:#7c4dff;border-radius:4px"></div>
           </div>
@@ -88,29 +98,68 @@
         </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
           <span style="width:90px;font-size:11px;color:#aaa">trend</span>
           <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
-            <div style="width:25%;height:8px;background:#7c4dff;border-radius:4px"></div>
+            <div style="width:15%;height:8px;background:#7c4dff;border-radius:4px"></div>
           </div>
-          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">25%</span>
-        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
-          <span style="width:90px;font-size:11px;color:#aaa">volume</span>
-          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
-            <div style="width:20%;height:8px;background:#7c4dff;border-radius:4px"></div>
-          </div>
-          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">20%</span>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">15%</span>
         </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
           <span style="width:90px;font-size:11px;color:#aaa">mean_rev</span>
           <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
-            <div style="width:15%;height:8px;background:#7c4dff;border-radius:4px"></div>
+            <div style="width:5%;height:8px;background:#7c4dff;border-radius:4px"></div>
           </div>
-          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">15%</span>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">5%</span>
         </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
           <span style="width:90px;font-size:11px;color:#aaa">regime_fit</span>
           <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
-            <div style="width:15%;height:8px;background:#7c4dff;border-radius:4px"></div>
+            <div style="width:5%;height:8px;background:#7c4dff;border-radius:4px"></div>
           </div>
-          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">15%</span>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">5%</span>
         </div></div>
     </div>
+  </div>
+
+  <h2>Strategy Mode Scorecard</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+    <div style="background:#111;border-radius:8px;padding:12px 14px;border:2px solid #ff9800">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#ff9800;font-size:13px">Momentum</span>
+            <span style="font-size:10px;color:#00e676;font-weight:600">● ACTIVE</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:6px">Chase price strength and volume breakouts</div>
+          <div style="display:flex;gap:16px">
+            <span style="font-size:12px;color:#888">avg no data</span>
+            <span style="font-size:12px;color:#666">—</span>
+          </div>
+        </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#00bcd4;font-size:13px">Trend Following</span>
+            <span style="font-size:10px;color:#555;font-weight:600">0 trades</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:6px">Follow SMA alignment and regime-matched assets</div>
+          <div style="display:flex;gap:16px">
+            <span style="font-size:12px;color:#888">avg no data</span>
+            <span style="font-size:12px;color:#666">—</span>
+          </div>
+        </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#ab47bc;font-size:13px">Mean Reversion</span>
+            <span style="font-size:10px;color:#555;font-weight:600">0 trades</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:6px">Buy oversold dips in trending markets</div>
+          <div style="display:flex;gap:16px">
+            <span style="font-size:12px;color:#888">avg no data</span>
+            <span style="font-size:12px;color:#666">—</span>
+          </div>
+        </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#66bb6a;font-size:13px">Defensive</span>
+            <span style="font-size:10px;color:#555;font-weight:600">0 trades</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:6px">Prioritize regime-fit safe-haven assets</div>
+          <div style="display:flex;gap:16px">
+            <span style="font-size:12px;color:#888">avg no data</span>
+            <span style="font-size:12px;color:#666">—</span>
+          </div>
+        </div>
   </div>
 
   <h2>Open Positions</h2>
@@ -125,60 +174,60 @@
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$272.27</td>
-          <td>$269.26</td>
+          <td>$269.13</td>
           <td>6</td>
           <td>$1,634</td>
-          <td style="color:#ff5252">-18 (-1.1%)</td>
+          <td style="color:#ff5252">-19 (-1.2%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr><tr>
           <td class="tk">MSFT</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$503.81</td>
-          <td>$495.37</td>
+          <td>$493.70</td>
           <td>3</td>
           <td>$1,511</td>
-          <td style="color:#ff5252">-25 (-1.7%)</td>
+          <td style="color:#ff5252">-30 (-2.0%)</td>
           <td style="font-size:11px;color:#aaa">momentum</td>
         </tr><tr>
           <td class="tk">NVDA</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$217.50</td>
-          <td>$224.47</td>
+          <td>$223.61</td>
           <td>6</td>
           <td>$1,305</td>
-          <td style="color:#00e676">+42 (+3.2%)</td>
+          <td style="color:#00e676">+37 (+2.8%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr><tr>
           <td class="tk">UPRO</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$153.47</td>
-          <td>$154.69</td>
+          <td>$154.28</td>
           <td>9</td>
           <td>$1,381</td>
-          <td style="color:#00e676">+11 (+0.8%)</td>
+          <td style="color:#00e676">+7 (+0.5%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr><tr>
           <td class="tk">USO</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$127.59</td>
-          <td>$126.81</td>
+          <td>$127.04</td>
           <td>13</td>
           <td>$1,659</td>
-          <td style="color:#ff5252">-10 (-0.6%)</td>
+          <td style="color:#ff5252">-7 (-0.4%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr><tr>
           <td class="tk">XOM</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$159.80</td>
-          <td>$158.95</td>
+          <td>$158.86</td>
           <td>9</td>
           <td>$1,438</td>
-          <td style="color:#ff5252">-8 (-0.5%)</td>
+          <td style="color:#ff5252">-8 (-0.6%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr></tbody>
     </table>
@@ -197,6 +246,12 @@
 
   <h2>Daily Thesis Log</h2>
   <div style="margin-bottom:16px"><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-12</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">[CLOSE PLAN]
+Regime: BULL
+VIX 14.9 · SPY trend up · risk appetite up
+Strategy mode: momentum — Chase price strength and volume breakouts
+No trades today — holding or waiting for better setups.
+Top candidates screened: MSFT +0.566, SLV +0.503, XOM +0.490
+Signal weights: momentum 50% · volume 25% · trend 15% · mean_rev 5% · regime_fit 5%</pre></div><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-12</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">[CLOSE PLAN]
 Regime: BULL
 VIX 14.8 · SPY trend up · risk appetite up
 No trades today — holding or waiting for better setups.

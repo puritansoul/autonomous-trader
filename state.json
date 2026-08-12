@@ -55,11 +55,11 @@
     "2026-08-11": 10000.0
   },
   "signal_weights": {
-    "momentum": 0.25,
-    "volume": 0.2,
-    "trend": 0.25,
-    "mean_rev": 0.15,
-    "regime_fit": 0.15
+    "momentum": 0.5,
+    "volume": 0.25,
+    "trend": 0.15,
+    "mean_rev": 0.05,
+    "regime_fit": 0.05
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -85,8 +85,22 @@
     {
       "date": "2026-08-12",
       "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.8 \u00b7 SPY trend up \u00b7 risk appetite up\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: MSFT +0.456, NVDA +0.414, XOM +0.414\nSignal weights: momentum 25% \u00b7 trend 25% \u00b7 volume 20% \u00b7 mean_rev 15% \u00b7 regime_fit 15%"
+    },
+    {
+      "date": "2026-08-12",
+      "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.9 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: MSFT +0.566, SLV +0.503, XOM +0.490\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
     }
   ],
   "inception_date": "2026-08-11",
-  "pending_orders": []
+  "pending_orders": [],
+  "active_mode": "momentum",
+  "mode_history": {
+    "2026-08-12": "momentum"
+  },
+  "mode_pnl": {
+    "momentum": [],
+    "trend_following": [],
+    "mean_reversion": [],
+    "defensive": []
+  }
 }
