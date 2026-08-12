@@ -664,7 +664,7 @@ def build_report(state: dict, prices: pd.DataFrame,
     day_col  = "#00e676" if day_pnl >= 0 else "#ff5252"
     ret_col  = "#00e676" if total_ret >= 0 else "#ff5252"
 
-    # Positions table
+    # Positions table — embed data attributes for live JS price updates
     pos_rows = ""
     for tk, pos in sorted(positions.items()):
         cur = float(prices[tk].dropna().iloc[-1]) if tk in prices.columns else pos["cost_per_share"]
@@ -672,15 +672,15 @@ def build_report(state: dict, prices: pd.DataFrame,
         upnl_pct = (cur - pos["cost_per_share"]) / pos["cost_per_share"] * 100
         col  = "#00e676" if upnl >= 0 else "#ff5252"
         hold = (date.today() - date.fromisoformat(pos["entry_date"])).days
-        pos_rows += f"""<tr>
+        pos_rows += f"""<tr data-ticker="{tk}" data-cost="{pos['cost_per_share']:.4f}" data-shares="{pos['shares']}">
           <td class="tk">{tk}</td>
           <td>{pos['entry_date']}</td>
           <td>{hold}d</td>
           <td>${pos['cost_per_share']:.2f}</td>
-          <td>${cur:.2f}</td>
+          <td class="live-price">${cur:.2f}</td>
           <td>{pos['shares']}</td>
           <td>${pos['cost']:,.0f}</td>
-          <td style="color:{col}">{'+' if upnl>=0 else ''}{upnl:,.0f} ({upnl_pct:+.1f}%)</td>
+          <td class="live-upnl" style="color:{col}">{'+' if upnl>=0 else ''}{upnl:,.0f} ({upnl_pct:+.1f}%)</td>
           <td style="font-size:11px;color:#aaa">{pos.get('top_signal','—')}</td>
         </tr>"""
 
@@ -779,6 +779,12 @@ def build_report(state: dict, prices: pd.DataFrame,
           </div>
           <div style="font-size:11px;color:#444">{port_str}</div>
         </div>"""
+
+    # JS positions array for live price updates
+    pos_js = json.dumps([
+        {"ticker": tk, "cost": pos["cost_per_share"], "shares": pos["shares"]}
+        for tk, pos in sorted(positions.items())
+    ])
 
     # Recent log entries
     log_html = ""
@@ -881,7 +887,11 @@ def build_report(state: dict, prices: pd.DataFrame,
     {mode_cards}
   </div>
 
-  <h2>Open Positions</h2>
+  <div style="display:flex;align-items:center;gap:10px;margin:20px 0 8px">
+    <h2 style="margin:0">Open Positions</h2>
+    <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222">fetching…</span>
+    <span id="live-port" style="font-size:12px;color:#888;margin-left:auto"></span>
+  </div>
   <div class="card" style="margin-bottom:16px">
     <table>
       <thead><tr>
@@ -907,6 +917,113 @@ def build_report(state: dict, prices: pd.DataFrame,
   <div style="margin-bottom:16px">{log_html or '<div style="color:#333;font-size:12px;padding:12px">No entries yet.</div>'}</div>
 
 </div>
+
+<script>
+(function() {{
+  // Tickers with open positions — baked in at report generation time
+  const POSITIONS = {pos_js};
+  const CASH = {capital:.2f};
+
+  if (!POSITIONS.length) return;
+
+  function isMarketHours() {{
+    const et = new Date(new Date().toLocaleString('en-US', {{timeZone: 'America/New_York'}}));
+    const d = et.getDay(), m = et.getHours() * 60 + et.getMinutes();
+    return d >= 1 && d <= 5 && m >= 570 && m < 960;
+  }}
+
+  function fmt(n, prefix) {{
+    const s = prefix + '$' + Math.abs(n).toLocaleString('en-US', {{minimumFractionDigits:0, maximumFractionDigits:0}});
+    return s;
+  }}
+
+  function setStatus(msg, col) {{
+    const b = document.getElementById('live-badge');
+    if (b) {{ b.textContent = msg; b.style.color = col || '#555'; b.style.borderColor = col || '#222'; }}
+  }}
+
+  async function fetchQuotes() {{
+    const symbols = POSITIONS.map(p => p.ticker).join(',');
+    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${{encodeURIComponent(symbols)}}&fields=regularMarketPrice,regularMarketChangePercent`;
+    try {{
+      const res = await fetch(url, {{headers: {{'Accept': 'application/json'}}}});
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      const quotes = data?.quoteResponse?.result || [];
+      const priceMap = {{}};
+      quotes.forEach(q => {{ priceMap[q.symbol] = q.regularMarketPrice; }});
+      return priceMap;
+    }} catch(e) {{
+      // Yahoo CORS blocks direct fetch in some browsers — try corsproxy fallback
+      try {{
+        const proxy = `https://corsproxy.io/?${{encodeURIComponent(url)}}`;
+        const res2 = await fetch(proxy);
+        if (!res2.ok) throw new Error(res2.status);
+        const data2 = await res2.json();
+        const quotes2 = data2?.quoteResponse?.result || [];
+        const priceMap2 = {{}};
+        quotes2.forEach(q => {{ priceMap2[q.symbol] = q.regularMarketPrice; }});
+        return priceMap2;
+      }} catch(e2) {{
+        setStatus('price unavailable', '#555');
+        return null;
+      }}
+    }}
+  }}
+
+  async function update() {{
+    setStatus('fetching…', '#555');
+    const prices = await fetchQuotes();
+    if (!prices) return;
+
+    let totalLive = CASH;
+    let totalUnreal = 0;
+
+    POSITIONS.forEach(pos => {{
+      const price = prices[pos.ticker];
+      if (price == null) return;
+      const row = document.querySelector(`tr[data-ticker="${{pos.ticker}}"]`);
+      if (!row) return;
+
+      const upnl = (price - pos.cost) * pos.shares;
+      const upnlPct = (price - pos.cost) / pos.cost * 100;
+      const col = upnl >= 0 ? '#00e676' : '#ff5252';
+      const sign = upnl >= 0 ? '+' : '';
+
+      const priceCell = row.querySelector('.live-price');
+      const upnlCell  = row.querySelector('.live-upnl');
+      if (priceCell) priceCell.textContent = '$' + price.toFixed(2);
+      if (upnlCell) {{
+        upnlCell.textContent = sign + '$' + Math.abs(upnl).toLocaleString('en-US', {{maximumFractionDigits:0}}) +
+          ' (' + sign + upnlPct.toFixed(1) + '%)';
+        upnlCell.style.color = col;
+      }}
+
+      totalLive  += price * pos.shares;
+      totalUnreal += upnl;
+    }});
+
+    // Update portfolio value card
+    const pv = document.getElementById('port-value');
+    if (pv) pv.textContent = '$' + Math.round(totalLive).toLocaleString('en-US');
+
+    // Update live portfolio line
+    const lp = document.getElementById('live-port');
+    if (lp) {{
+      const sign = totalUnreal >= 0 ? '+' : '';
+      lp.textContent = 'Unrealized: ' + sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {{maximumFractionDigits:0}});
+      lp.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
+    }}
+
+    const now = new Date().toLocaleTimeString('en-US', {{hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'}});
+    setStatus('live · ' + now + ' ET', '#00e676');
+  }}
+
+  // Run immediately, then every 5 minutes during market hours
+  update();
+  setInterval(() => {{ if (isMarketHours()) update(); }}, 5 * 60 * 1000);
+}})();
+</script>
 </body>
 </html>"""
 
