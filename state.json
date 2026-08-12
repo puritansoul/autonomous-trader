@@ -1,5 +1,5 @@
 {
-  "capital": 1071.85,
+  "capital": 621.45,
   "positions": {
     "USO": {
       "shares": 13,
@@ -48,11 +48,30 @@
       "entry_date": "2026-08-11",
       "top_signal": "trend",
       "thesis": "score +0.429 \u00b7 led by trend"
+    },
+    "SMCI": {
+      "shares": 7,
+      "cost_per_share": 34.99,
+      "cost": 244.93,
+      "entry_date": "2026-08-12",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.705 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "ANET": {
+      "shares": 1,
+      "cost_per_share": 205.47,
+      "cost": 205.47,
+      "entry_date": "2026-08-12",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.591 \u00b7 led by momentum \u00b7 mode momentum"
     }
   },
   "closed": [],
   "nav_history": {
-    "2026-08-11": 10000.0
+    "2026-08-11": 10000.0,
+    "2026-08-12": 10006.43
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -101,59 +120,14 @@
     {
       "date": "2026-08-12",
       "thesis": "[CLOSE PLAN]\nRegime: BULL\nVIX 14.8 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +2.28%  |  mean reversion +1.93%  |  trend following +0.63%  |  defensive -0.04%\nEntered 3 position(s):\n  SMCI $36.22 \u00d7 7 shares (score +0.675, led by momentum)\n  GDXJ $119.56 \u00d7 1 shares (score +0.580, led by momentum)\n  BR $168.07 \u00d7 1 shares (score +0.579, led by momentum)\nTop candidates screened: SMCI +0.675, LITE +0.635, GDXJ +0.580\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
+    },
+    {
+      "date": "2026-08-12",
+      "thesis": "Regime: BULL\nVIX 14.7 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +2.59%  |  mean reversion +1.68%  |  trend following +0.94%  |  defensive -0.07%\nEntered 2 position(s):\n  SMCI $34.99 \u00d7 7 shares (score +0.705, led by momentum)\n  ANET $205.47 \u00d7 1 shares (score +0.591, led by momentum)\nTop candidates screened: SMCI +0.705, LITE +0.663, ANET +0.591\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
     }
   ],
   "inception_date": "2026-08-11",
-  "pending_orders": [
-    {
-      "action": "entry",
-      "ticker": "SMCI",
-      "shares": 7,
-      "close_price": 36.2239990234375,
-      "score": 0.675,
-      "scores": {
-        "momentum": 1.0,
-        "volume": 0.389,
-        "trend": 0.5,
-        "mean_rev": -0.243,
-        "regime_fit": 0.3
-      },
-      "top_signal": "momentum",
-      "entry_mode": "momentum"
-    },
-    {
-      "action": "entry",
-      "ticker": "GDXJ",
-      "shares": 1,
-      "close_price": 119.55500030517578,
-      "score": 0.5797,
-      "scores": {
-        "momentum": 1.0,
-        "volume": -0.365,
-        "trend": 1.0,
-        "mean_rev": -0.581,
-        "regime_fit": 1.0
-      },
-      "top_signal": "momentum",
-      "entry_mode": "momentum"
-    },
-    {
-      "action": "entry",
-      "ticker": "BR",
-      "shares": 1,
-      "close_price": 168.06739807128906,
-      "score": 0.5792,
-      "scores": {
-        "momentum": 1.0,
-        "volume": -0.282,
-        "trend": 1.0,
-        "mean_rev": -0.307,
-        "regime_fit": 0.3
-      },
-      "top_signal": "momentum",
-      "entry_mode": "momentum"
-    }
-  ],
+  "pending_orders": [],
   "active_mode": "momentum",
   "mode_history": {
     "2026-08-12": "momentum"
@@ -167,7 +141,7 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 2.28,
+      "avg_return": 2.59,
       "picks": [
         "ANET",
         "MOS",
@@ -178,72 +152,72 @@
       "raw": [
         {
           "ticker": "ANET",
-          "return": 4.72,
+          "return": 5.64,
           "score": 0.8466
         },
         {
           "ticker": "MOS",
-          "return": -4.27,
+          "return": -3.8,
           "score": 0.8181
         },
         {
           "ticker": "CLOU",
-          "return": 3.48,
+          "return": 3.32,
           "score": 0.8175
         },
         {
           "ticker": "ZBH",
-          "return": -2.23,
+          "return": -2.06,
           "score": 0.7906
         },
         {
           "ticker": "CRL",
-          "return": 9.7,
+          "return": 9.85,
           "score": 0.785
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": 1.93,
+      "avg_return": 1.68,
       "picks": [
         "DVA",
         "ROL",
-        "APTV",
         "PODD",
+        "APTV",
         "RSG"
       ],
       "raw": [
         {
           "ticker": "DVA",
-          "return": -5.34,
+          "return": -4.85,
           "score": 0.4153
         },
         {
           "ticker": "ROL",
-          "return": -1.96,
+          "return": -1.61,
           "score": 0.345
         },
         {
-          "ticker": "APTV",
-          "return": 4.25,
-          "score": 0.3395
-        },
-        {
           "ticker": "PODD",
-          "return": 7.8,
+          "return": 7.57,
           "score": 0.3366
         },
         {
+          "ticker": "APTV",
+          "return": 2.87,
+          "score": 0.3348
+        },
+        {
           "ticker": "RSG",
-          "return": 4.9,
+          "return": 4.42,
           "score": 0.3267
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 0.634,
+      "avg_return": 0.938,
       "picks": [
         "CLOU",
         "UPRO",
@@ -254,34 +228,34 @@
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 3.48,
+          "return": 3.32,
           "score": 0.8847
         },
         {
           "ticker": "UPRO",
-          "return": 0.69,
+          "return": 1.12,
           "score": 0.8453
         },
         {
           "ticker": "ETHA",
-          "return": -1.45,
+          "return": -1.59,
           "score": 0.8089
         },
         {
           "ticker": "ANET",
-          "return": 4.72,
+          "return": 5.64,
           "score": 0.8046
         },
         {
           "ticker": "MOS",
-          "return": -4.27,
+          "return": -3.8,
           "score": 0.8021
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -0.04,
+      "avg_return": -0.074,
       "picks": [
         "CLOU",
         "UPRO",
@@ -292,27 +266,27 @@
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 3.48,
+          "return": 3.32,
           "score": 0.8365
         },
         {
           "ticker": "UPRO",
-          "return": 0.69,
+          "return": 1.12,
           "score": 0.8319
         },
         {
           "ticker": "ETHA",
-          "return": -1.45,
+          "return": -1.59,
           "score": 0.8221
         },
         {
           "ticker": "CIBR",
-          "return": 2.87,
+          "return": 2.42,
           "score": 0.7935
         },
         {
           "ticker": "JETS",
-          "return": -5.79,
+          "return": -5.64,
           "score": 0.7935
         }
       ]

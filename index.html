@@ -52,25 +52,25 @@
   <div class="stats-row">
     <div class="stat-card">
       <div class="stat-label">Portfolio</div>
-      <div class="stat-val" id="port-value">$9,978</div>
+      <div class="stat-val" id="port-value">$10,006</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Today</div>
-      <div class="stat-val" id="day-pnl" data-pnl="-21.62" style="color:#ff5252">-$22<br>
-        <span style="font-size:14px">-0.22%</span>
+      <div class="stat-val" id="day-pnl" data-pnl="6.43" style="color:#00e676">+$6<br>
+        <span style="font-size:14px">+0.06%</span>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-label">All-time</div>
-      <div class="stat-val" style="color:#ff5252">
-        -0.22%<br>
-        <span style="font-size:14px">$22</span>
+      <div class="stat-val" style="color:#00e676">
+        +0.06%<br>
+        <span style="font-size:14px">+$6</span>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Cash</div>
-      <div class="stat-val">$1,072
-        <span style="font-size:14px;color:#666"> / 11%</span>
+      <div class="stat-val">$621
+        <span style="font-size:14px;color:#666"> / 6%</span>
       </div>
     </div>
   </div>
@@ -78,8 +78,11 @@
   <div class="two-col">
     <div class="card">
       <h2>Equity Curve</h2>
-      <div class="spark-wrap"><div style="color:#333;font-size:12px">Accumulating history…</div></div>
-      <div style="font-size:11px;color:#444">1 trading days tracked</div>
+      <div class="spark-wrap"><svg width="300" height="60" viewBox="0 0 300 60" style="display:block">
+          <polygon points="0,60 0.0,56.0 300.0,4.0 300,60" fill="#00e67618"/>
+          <polyline points="0.0,56.0 300.0,4.0" fill="none" stroke="#00e676" stroke-width="2"/>
+        </svg></div>
+      <div style="font-size:11px;color:#444">2 trading days tracked</div>
     </div>
     <div class="card">
       <h2>Active Mode · Signal Weights</h2>
@@ -127,7 +130,7 @@
           <div style="font-size:11px;color:#555;margin-bottom:8px">Chase price strength and volume breakouts</div>
           <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
           <div style="display:flex;gap:12px;margin-bottom:4px">
-            <span style="font-size:13px;font-weight:700;color:#00e676">+2.28%</span>
+            <span style="font-size:13px;font-weight:700;color:#00e676">+2.59%</span>
             <span style="font-size:11px;color:#555;align-self:flex-end">ANET, MOS, CLOU</span>
           </div>
           <div style="font-size:11px;color:#444">no trades yet</div>
@@ -139,7 +142,7 @@
           <div style="font-size:11px;color:#555;margin-bottom:8px">Follow SMA alignment and regime-matched assets</div>
           <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
           <div style="display:flex;gap:12px;margin-bottom:4px">
-            <span style="font-size:13px;font-weight:700;color:#00e676">+0.63%</span>
+            <span style="font-size:13px;font-weight:700;color:#00e676">+0.94%</span>
             <span style="font-size:11px;color:#555;align-self:flex-end">CLOU, UPRO, ETHA</span>
           </div>
           <div style="font-size:11px;color:#444">no trades yet</div>
@@ -151,8 +154,8 @@
           <div style="font-size:11px;color:#555;margin-bottom:8px">Buy oversold dips in trending markets</div>
           <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
           <div style="display:flex;gap:12px;margin-bottom:4px">
-            <span style="font-size:13px;font-weight:700;color:#00e676">+1.93%</span>
-            <span style="font-size:11px;color:#555;align-self:flex-end">DVA, ROL, APTV</span>
+            <span style="font-size:13px;font-weight:700;color:#00e676">+1.68%</span>
+            <span style="font-size:11px;color:#555;align-self:flex-end">DVA, ROL, PODD</span>
           </div>
           <div style="font-size:11px;color:#444">no trades yet</div>
         </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
@@ -163,7 +166,7 @@
           <div style="font-size:11px;color:#555;margin-bottom:8px">Prioritize regime-fit safe-haven assets</div>
           <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
           <div style="display:flex;gap:12px;margin-bottom:4px">
-            <span style="font-size:13px;font-weight:700;color:#ff5252">-0.04%</span>
+            <span style="font-size:13px;font-weight:700;color:#ff5252">-0.07%</span>
             <span style="font-size:11px;color:#555;align-self:flex-end">CLOU, UPRO, ETHA</span>
           </div>
           <div style="font-size:11px;color:#444">no trades yet</div>
@@ -182,57 +185,77 @@
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$272.27</td>
-          <td>$268.36</td>
+          <td>$269.23</td>
           <td>6</td>
           <td>$1,634</td>
-          <td style="color:#ff5252">-23 (-1.4%)</td>
+          <td style="color:#ff5252">-18 (-1.1%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr>
+          <td class="tk">ANET</td>
+          <td>2026-08-12</td>
+          <td>0d</td>
+          <td>$205.47</td>
+          <td>$208.45</td>
+          <td>1</td>
+          <td>$205</td>
+          <td style="color:#00e676">+3 (+1.4%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
         </tr><tr>
           <td class="tk">MSFT</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$503.81</td>
-          <td>$493.06</td>
+          <td>$494.07</td>
           <td>3</td>
           <td>$1,511</td>
-          <td style="color:#ff5252">-32 (-2.1%)</td>
+          <td style="color:#ff5252">-29 (-1.9%)</td>
           <td style="font-size:11px;color:#aaa">momentum</td>
         </tr><tr>
           <td class="tk">NVDA</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$217.50</td>
-          <td>$223.38</td>
+          <td>$223.91</td>
           <td>6</td>
           <td>$1,305</td>
-          <td style="color:#00e676">+35 (+2.7%)</td>
+          <td style="color:#00e676">+38 (+2.9%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr>
+          <td class="tk">SMCI</td>
+          <td>2026-08-12</td>
+          <td>0d</td>
+          <td>$34.99</td>
+          <td>$36.65</td>
+          <td>7</td>
+          <td>$245</td>
+          <td style="color:#00e676">+12 (+4.7%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
         </tr><tr>
           <td class="tk">UPRO</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$153.47</td>
-          <td>$154.30</td>
+          <td>$154.96</td>
           <td>9</td>
           <td>$1,381</td>
-          <td style="color:#00e676">+7 (+0.5%)</td>
+          <td style="color:#00e676">+13 (+1.0%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr><tr>
           <td class="tk">USO</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$127.59</td>
-          <td>$127.36</td>
+          <td>$127.10</td>
           <td>13</td>
           <td>$1,659</td>
-          <td style="color:#ff5252">-3 (-0.2%)</td>
+          <td style="color:#ff5252">-6 (-0.4%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr><tr>
           <td class="tk">XOM</td>
           <td>2026-08-11</td>
           <td>1d</td>
           <td>$159.80</td>
-          <td>$159.17</td>
+          <td>$159.12</td>
           <td>9</td>
           <td>$1,438</td>
           <td style="color:#ff5252">-6 (-0.4%)</td>
@@ -253,7 +276,15 @@
   </div>
 
   <h2>Daily Thesis Log</h2>
-  <div style="margin-bottom:16px"><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-12</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">[CLOSE PLAN]
+  <div style="margin-bottom:16px"><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-12</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">Regime: BULL
+VIX 14.7 · SPY trend up · risk appetite up
+Strategy mode: momentum — Chase price strength and volume breakouts
+Backtest (5d): momentum +2.59%  |  mean reversion +1.68%  |  trend following +0.94%  |  defensive -0.07%
+Entered 2 position(s):
+  SMCI $34.99 × 7 shares (score +0.705, led by momentum)
+  ANET $205.47 × 1 shares (score +0.591, led by momentum)
+Top candidates screened: SMCI +0.705, LITE +0.663, ANET +0.591
+Signal weights: momentum 50% · volume 25% · trend 15% · mean_rev 5% · regime_fit 5%</pre></div><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-12</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">[CLOSE PLAN]
 Regime: BULL
 VIX 14.8 · SPY trend up · risk appetite up
 Strategy mode: momentum — Chase price strength and volume breakouts
@@ -296,11 +327,6 @@ Regime: BULL
 VIX 15.3 · SPY trend up · risk appetite up
 No trades today — holding or waiting for better setups.
 Top candidates screened: USO +0.505, MSFT +0.495, AMZN +0.493
-Signal weights: momentum 25% · trend 25% · volume 20% · mean_rev 15% · regime_fit 15%</pre></div><div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">2026-08-11</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">[CLOSE PLAN]
-Regime: BULL
-VIX 15.3 · SPY trend up · risk appetite up
-No trades today — holding or waiting for better setups.
-Top candidates screened: USO +0.505, AMZN +0.493, MSFT +0.489
 Signal weights: momentum 25% · trend 25% · volume 20% · mean_rev 15% · regime_fit 15%</pre></div></div>
 
 </div>
