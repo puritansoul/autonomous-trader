@@ -1,5 +1,5 @@
 {
-  "capital": 621.45,
+  "capital": 118.38,
   "positions": {
     "USO": {
       "shares": 13,
@@ -66,12 +66,31 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.591 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "CLOU": {
+      "shares": 9,
+      "cost_per_share": 29.25,
+      "cost": 263.25,
+      "entry_date": "2026-08-14",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.624 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "FNGU": {
+      "shares": 7,
+      "cost_per_share": 34.26,
+      "cost": 239.82,
+      "entry_date": "2026-08-14",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.589 \u00b7 led by momentum \u00b7 mode momentum"
     }
   },
   "closed": [],
   "nav_history": {
     "2026-08-11": 10000.0,
-    "2026-08-12": 10006.43
+    "2026-08-12": 10006.43,
+    "2026-08-14": 10006.18
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -82,7 +101,8 @@
   },
   "regime_history": {
     "2026-08-11": "bull",
-    "2026-08-12": "bull"
+    "2026-08-12": "bull",
+    "2026-08-14": "bull"
   },
   "daily_log": [
     {
@@ -124,13 +144,18 @@
     {
       "date": "2026-08-12",
       "thesis": "Regime: BULL\nVIX 14.7 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +2.59%  |  mean reversion +1.68%  |  trend following +0.94%  |  defensive -0.07%\nEntered 2 position(s):\n  SMCI $34.99 \u00d7 7 shares (score +0.705, led by momentum)\n  ANET $205.47 \u00d7 1 shares (score +0.591, led by momentum)\nTop candidates screened: SMCI +0.705, LITE +0.663, ANET +0.591\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
+    },
+    {
+      "date": "2026-08-14",
+      "thesis": "Regime: BULL\nVIX 14.6 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +2.37%  |  trend following +2.33%  |  mean reversion +0.62%  |  defensive -0.11%\nEntered 2 position(s):\n  CLOU $29.25 \u00d7 9 shares (score +0.624, led by momentum)\n  FNGU $34.26 \u00d7 7 shares (score +0.589, led by momentum)\nTop candidates screened: CLOU +0.624, FNGU +0.589, GDXJ +0.580\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
   "active_mode": "momentum",
   "mode_history": {
-    "2026-08-12": "momentum"
+    "2026-08-12": "momentum",
+    "2026-08-14": "momentum"
   },
   "mode_pnl": {
     "momentum": [],
@@ -141,153 +166,153 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 2.59,
+      "avg_return": 2.368,
       "picks": [
-        "ANET",
-        "MOS",
+        "ABNB",
+        "GEN",
         "CLOU",
-        "ZBH",
-        "CRL"
+        "BR",
+        "GDXJ"
       ],
       "raw": [
         {
-          "ticker": "ANET",
-          "return": 5.64,
-          "score": 0.8466
+          "ticker": "ABNB",
+          "return": 4.57,
+          "score": 0.8854
         },
         {
-          "ticker": "MOS",
-          "return": -3.8,
-          "score": 0.8181
+          "ticker": "GEN",
+          "return": -1.49,
+          "score": 0.8652
         },
         {
           "ticker": "CLOU",
-          "return": 3.32,
-          "score": 0.8175
+          "return": 4.18,
+          "score": 0.8105
         },
         {
-          "ticker": "ZBH",
-          "return": -2.06,
-          "score": 0.7906
+          "ticker": "BR",
+          "return": 3.13,
+          "score": 0.7707
         },
         {
-          "ticker": "CRL",
-          "return": 9.85,
-          "score": 0.785
-        }
-      ]
-    },
-    {
-      "mode": "mean_reversion",
-      "avg_return": 1.68,
-      "picks": [
-        "DVA",
-        "ROL",
-        "PODD",
-        "APTV",
-        "RSG"
-      ],
-      "raw": [
-        {
-          "ticker": "DVA",
-          "return": -4.85,
-          "score": 0.4153
-        },
-        {
-          "ticker": "ROL",
-          "return": -1.61,
-          "score": 0.345
-        },
-        {
-          "ticker": "PODD",
-          "return": 7.57,
-          "score": 0.3366
-        },
-        {
-          "ticker": "APTV",
-          "return": 2.87,
-          "score": 0.3348
-        },
-        {
-          "ticker": "RSG",
-          "return": 4.42,
-          "score": 0.3267
+          "ticker": "GDXJ",
+          "return": 1.45,
+          "score": 0.7473
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 0.938,
+      "avg_return": 2.33,
       "picks": [
         "CLOU",
-        "UPRO",
-        "ETHA",
-        "ANET",
-        "MOS"
+        "GEN",
+        "ABNB",
+        "BR",
+        "UPRO"
       ],
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 3.32,
-          "score": 0.8847
+          "return": 4.18,
+          "score": 0.8826
+        },
+        {
+          "ticker": "GEN",
+          "return": -1.49,
+          "score": 0.8163
+        },
+        {
+          "ticker": "ABNB",
+          "return": 4.57,
+          "score": 0.8154
+        },
+        {
+          "ticker": "BR",
+          "return": 3.13,
+          "score": 0.777
         },
         {
           "ticker": "UPRO",
-          "return": 1.12,
-          "score": 0.8453
+          "return": 1.26,
+          "score": 0.7677
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": 0.62,
+      "picks": [
+        "JNK",
+        "DVA",
+        "SRE",
+        "TTD",
+        "IBIT"
+      ],
+      "raw": [
+        {
+          "ticker": "JNK",
+          "return": 0.2,
+          "score": 0.4625
         },
         {
-          "ticker": "ETHA",
-          "return": -1.59,
-          "score": 0.8089
+          "ticker": "DVA",
+          "return": -0.99,
+          "score": 0.2969
         },
         {
-          "ticker": "ANET",
-          "return": 5.64,
-          "score": 0.8046
+          "ticker": "SRE",
+          "return": 3.71,
+          "score": 0.2823
         },
         {
-          "ticker": "MOS",
-          "return": -3.8,
-          "score": 0.8021
+          "ticker": "TTD",
+          "return": 3.74,
+          "score": 0.2661
+        },
+        {
+          "ticker": "IBIT",
+          "return": -3.56,
+          "score": 0.2652
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -0.074,
+      "avg_return": -0.11,
       "picks": [
         "CLOU",
-        "UPRO",
+        "JNK",
         "ETHA",
-        "CIBR",
-        "JETS"
+        "UPRO",
+        "IBIT"
       ],
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 3.32,
-          "score": 0.8365
+          "return": 4.18,
+          "score": 0.8373
         },
         {
-          "ticker": "UPRO",
-          "return": 1.12,
-          "score": 0.8319
+          "ticker": "JNK",
+          "return": 0.2,
+          "score": 0.81
         },
         {
           "ticker": "ETHA",
-          "return": -1.59,
-          "score": 0.8221
+          "return": -2.63,
+          "score": 0.8026
         },
         {
-          "ticker": "CIBR",
-          "return": 2.42,
-          "score": 0.7935
+          "ticker": "UPRO",
+          "return": 1.26,
+          "score": 0.7806
         },
         {
-          "ticker": "JETS",
-          "return": -5.64,
-          "score": 0.7935
+          "ticker": "IBIT",
+          "return": -3.56,
+          "score": 0.7706
         }
       ]
     }
