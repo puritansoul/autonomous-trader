@@ -637,6 +637,166 @@ def build_thesis(regime: str, regime_details: dict,
     return "\n".join(lines)
 
 
+def build_briefing_html(regime: str, regime_details: dict,
+                        buys: list, exits: list,
+                        scores_top: list, active_mode: str,
+                        prev_mode: str, backtest_results: list) -> str:
+    """Render a human-readable 'Today's Briefing' card for the dashboard."""
+    mode_colors = {
+        "momentum":        "#ff9800",
+        "trend_following": "#00bcd4",
+        "mean_reversion":  "#ab47bc",
+        "defensive":       "#66bb6a",
+    }
+    regime_col = {"bull": "#00e676", "bear": "#ff5252", "neutral": "#ffd740"}.get(regime, "#888")
+
+    # ── Market view section ───────────────────────────────────────────────────
+    vix      = regime_details.get("vix", "?")
+    spy_trend = regime_details.get("spy_trend", "?")
+    risk_app = regime_details.get("risk_appetite", "?")
+    market_html = (
+        f'<span style="color:{regime_col};font-weight:700">{regime.upper()}</span> market · '
+        f'VIX <strong>{vix}</strong> · '
+        f'SPY trend <strong>{spy_trend}</strong> · '
+        f'risk appetite <strong>{risk_app}</strong>'
+    )
+
+    # ── Strategy decision section ─────────────────────────────────────────────
+    mc = mode_colors.get(active_mode, "#ccc")
+    mode_label = active_mode.replace("_", " ").title()
+    mode_desc  = STRATEGY_MODES[active_mode]["description"]
+    if prev_mode and prev_mode != active_mode:
+        prev_label = prev_mode.replace("_", " ").title()
+        prev_mc    = mode_colors.get(prev_mode, "#888")
+        strategy_html = (
+            f'Switched from '
+            f'<span style="color:{prev_mc};font-weight:700">{prev_label}</span> → '
+            f'<span style="color:{mc};font-weight:700">{mode_label}</span>. '
+            f'{mode_desc}.'
+        )
+    else:
+        strategy_html = (
+            f'Staying in <span style="color:{mc};font-weight:700">{mode_label}</span> mode. '
+            f'{mode_desc}.'
+        )
+
+    # Backtest rationale — show all 4 modes ranked
+    bt_rows = ""
+    for r in sorted(backtest_results, key=lambda x: x["avg_return"], reverse=True):
+        is_winner = r["mode"] == active_mode
+        mc2  = mode_colors.get(r["mode"], "#888")
+        col  = "#00e676" if r["avg_return"] > 0 else "#ff5252" if r["avg_return"] < 0 else "#888"
+        picks_str = ", ".join(r.get("picks", [])[:3])
+        winner_mark = ' <span style="color:#ffd740;font-size:10px">▲ selected</span>' if is_winner else ""
+        bt_rows += (
+            f'<div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;'
+            f'border-bottom:1px solid #1a1a1a">'
+            f'<span style="width:130px;font-size:12px;color:{mc2};font-weight:{"700" if is_winner else "400"}">'
+            f'{r["mode"].replace("_"," ").title()}{winner_mark}</span>'
+            f'<span style="width:56px;font-size:13px;font-weight:700;color:{col}">'
+            f'{r["avg_return"]:+.2f}%</span>'
+            f'<span style="font-size:11px;color:#444">{picks_str}</span>'
+            f'</div>'
+        )
+
+    # ── Actions section ───────────────────────────────────────────────────────
+    actions_html = ""
+    if exits:
+        exit_items = ""
+        for t in exits:
+            pnl_col = "#00e676" if t["pnl"] >= 0 else "#ff5252"
+            exit_items += (
+                f'<div style="padding:4px 0;border-bottom:1px solid #1a1a1a">'
+                f'<span style="color:#7c4dff;font-weight:700">{t["ticker"]}</span> '
+                f'sold · P&L <span style="color:{pnl_col};font-weight:700">'
+                f'{"+$" if t["pnl"]>=0 else "-$"}{abs(t["pnl"]):,.0f}</span> '
+                f'<span style="font-size:11px;color:#555">({t["reason"]})</span>'
+                f'</div>'
+            )
+        actions_html += (
+            f'<div style="margin-bottom:8px">'
+            f'<div style="font-size:11px;color:#666;text-transform:uppercase;'
+            f'letter-spacing:.5px;margin-bottom:4px">Exits</div>{exit_items}</div>'
+        )
+
+    if buys:
+        buy_items = ""
+        for b in buys:
+            top_sig = max(b["scores"], key=b["scores"].get) if b.get("scores") else "—"
+            buy_items += (
+                f'<div style="padding:4px 0;border-bottom:1px solid #1a1a1a">'
+                f'<span style="color:#7c4dff;font-weight:700">{b["ticker"]}</span> '
+                f'@ <strong>${b["price"]:.2f}</strong> × {b["shares"]} shares · '
+                f'score <span style="color:#ffd740">{b["total"]:+.3f}</span> · '
+                f'led by <span style="font-size:11px;color:#aaa">{top_sig}</span>'
+                f'</div>'
+            )
+        actions_html += (
+            f'<div style="margin-bottom:8px">'
+            f'<div style="font-size:11px;color:#666;text-transform:uppercase;'
+            f'letter-spacing:.5px;margin-bottom:4px">Entries</div>{buy_items}</div>'
+        )
+
+    if not exits and not buys:
+        actions_html = (
+            '<div style="color:#555;font-size:12px">'
+            'No trades today — all positions held, no better setups found.</div>'
+        )
+
+    # ── Top screened candidates ───────────────────────────────────────────────
+    top5 = sorted(scores_top, key=lambda x: x["total"], reverse=True)[:5]
+    cand_items = ""
+    for c in top5:
+        cand_items += (
+            f'<span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;'
+            f'font-size:11px;color:#aaa">'
+            f'<span style="color:#7c4dff;font-weight:700">{c["ticker"]}</span> '
+            f'{c["total"]:+.3f}</span>'
+        )
+
+    html = f"""<div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:16px">
+  <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;
+    display:flex;align-items:center;gap:8px">
+    &#128203; Today's Briefing
+    <span style="font-size:10px;font-weight:400;color:#444;margin-left:auto">
+      generated at market open · signals from yesterday's close
+    </span>
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc">{market_html}</div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">{strategy_html}</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px">{bt_rows}</div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    {actions_html}
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">{cand_items}</div>
+  </div>
+</div>"""
+    return html
+
+
 # ── HTML report ───────────────────────────────────────────────────────────────
 
 def build_report(state: dict, prices: pd.DataFrame,
@@ -780,16 +940,29 @@ def build_report(state: dict, prices: pd.DataFrame,
           <div style="font-size:11px;color:#444">{port_str}</div>
         </div>"""
 
+    # Today's briefing card — pull last log entry's context data
+    last_log = state["daily_log"][-1] if state["daily_log"] else {}
+    briefing_html = build_briefing_html(
+        regime       = regime,
+        regime_details = regime_details,
+        buys         = last_log.get("buys", []),
+        exits        = last_log.get("exits", []),
+        scores_top   = last_log.get("scores_top", []),
+        active_mode  = active_mode,
+        prev_mode    = last_log.get("prev_mode", ""),
+        backtest_results = state.get("last_backtest", []),
+    )
+
     # JS positions array for live price updates
     pos_js = json.dumps([
         {"ticker": tk, "cost": pos["cost_per_share"], "shares": pos["shares"]}
         for tk, pos in sorted(positions.items())
     ])
 
-    # Recent log entries
+    # Recent log entries (last 7 days, collapsed at bottom)
     log_html = ""
     for entry in reversed(state["daily_log"][-7:]):
-        log_html += f'<div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #7c4dff"><div style="font-size:11px;color:#666;margin-bottom:4px">{entry["date"]}</div><pre style="font-size:12px;color:#ccc;white-space:pre-wrap;margin:0">{entry["thesis"]}</pre></div>'
+        log_html += f'<div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #333"><div style="font-size:11px;color:#555;margin-bottom:4px">{entry["date"]}</div><pre style="font-size:11px;color:#666;white-space:pre-wrap;margin:0">{entry["thesis"]}</pre></div>'
 
     today_fmt = date.fromisoformat(today_str).strftime("%b %-d, %Y")
 
@@ -869,6 +1042,8 @@ def build_report(state: dict, prices: pd.DataFrame,
       </div>
     </div>
   </div>
+
+  {briefing_html}
 
   <div class="two-col">
     <div class="card">
@@ -1234,7 +1409,14 @@ def run():
     thesis = build_thesis(regime, regime_details, filled_entries, closed_today,
                           all_scores[:10], state["signal_weights"], new_mode, prev_mode,
                           backtest_results=backtest_results)
-    state["daily_log"].append({"date": today_str, "thesis": thesis})
+    state["daily_log"].append({
+        "date":       today_str,
+        "thesis":     thesis,
+        "buys":       filled_entries,
+        "exits":      closed_today,
+        "scores_top": all_scores[:10],
+        "prev_mode":  prev_mode,
+    })
     state["pending_orders"] = []
 
     # 9. Save state and write report
