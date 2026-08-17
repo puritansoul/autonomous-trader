@@ -90,7 +90,8 @@
   "nav_history": {
     "2026-08-11": 10000.0,
     "2026-08-12": 10006.43,
-    "2026-08-14": 10006.18
+    "2026-08-14": 10006.18,
+    "2026-08-17": 9945.71
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -102,7 +103,8 @@
   "regime_history": {
     "2026-08-11": "bull",
     "2026-08-12": "bull",
-    "2026-08-14": "bull"
+    "2026-08-14": "bull",
+    "2026-08-17": "bull"
   },
   "daily_log": [
     {
@@ -148,6 +150,10 @@
     {
       "date": "2026-08-14",
       "thesis": "Regime: BULL\nVIX 14.6 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +2.37%  |  trend following +2.33%  |  mean reversion +0.62%  |  defensive -0.11%\nEntered 2 position(s):\n  CLOU $29.25 \u00d7 9 shares (score +0.624, led by momentum)\n  FNGU $34.26 \u00d7 7 shares (score +0.589, led by momentum)\nTop candidates screened: CLOU +0.624, FNGU +0.589, GDXJ +0.580\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
+    },
+    {
+      "date": "2026-08-17",
+      "thesis": "Regime: BULL\nVIX 15.1 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +0.59%  |  mean reversion -0.51%  |  trend following -0.75%  |  defensive -0.75%\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: CLOU +0.571, FNGU +0.571, ARKG +0.565\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%"
     }
   ],
   "inception_date": "2026-08-11",
@@ -155,7 +161,8 @@
   "active_mode": "momentum",
   "mode_history": {
     "2026-08-12": "momentum",
-    "2026-08-14": "momentum"
+    "2026-08-14": "momentum",
+    "2026-08-17": "momentum"
   },
   "mode_pnl": {
     "momentum": [],
@@ -166,153 +173,153 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 2.368,
-      "picks": [
-        "ABNB",
-        "GEN",
-        "CLOU",
-        "BR",
-        "GDXJ"
-      ],
-      "raw": [
-        {
-          "ticker": "ABNB",
-          "return": 4.57,
-          "score": 0.8854
-        },
-        {
-          "ticker": "GEN",
-          "return": -1.49,
-          "score": 0.8652
-        },
-        {
-          "ticker": "CLOU",
-          "return": 4.18,
-          "score": 0.8105
-        },
-        {
-          "ticker": "BR",
-          "return": 3.13,
-          "score": 0.7707
-        },
-        {
-          "ticker": "GDXJ",
-          "return": 1.45,
-          "score": 0.7473
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": 2.33,
+      "avg_return": 0.59,
       "picks": [
         "CLOU",
-        "GEN",
         "ABNB",
-        "BR",
-        "UPRO"
+        "VRTX",
+        "TSCO",
+        "NTAP"
       ],
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 4.18,
-          "score": 0.8826
-        },
-        {
-          "ticker": "GEN",
-          "return": -1.49,
-          "score": 0.8163
+          "return": 2.2,
+          "score": 0.9241
         },
         {
           "ticker": "ABNB",
-          "return": 4.57,
-          "score": 0.8154
+          "return": -1.32,
+          "score": 0.7973
         },
         {
-          "ticker": "BR",
-          "return": 3.13,
-          "score": 0.777
+          "ticker": "VRTX",
+          "return": -2.61,
+          "score": 0.756
         },
         {
-          "ticker": "UPRO",
-          "return": 1.26,
-          "score": 0.7677
+          "ticker": "TSCO",
+          "return": 1.62,
+          "score": 0.7371
+        },
+        {
+          "ticker": "NTAP",
+          "return": 3.06,
+          "score": 0.7192
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": 0.62,
+      "avg_return": -0.506,
       "picks": [
-        "JNK",
+        "REG",
+        "KIM",
         "DVA",
-        "SRE",
-        "TTD",
-        "IBIT"
+        "CVS",
+        "O"
       ],
       "raw": [
         {
-          "ticker": "JNK",
-          "return": 0.2,
-          "score": 0.4625
+          "ticker": "REG",
+          "return": 0.04,
+          "score": 0.3178
+        },
+        {
+          "ticker": "KIM",
+          "return": 0.54,
+          "score": 0.3035
         },
         {
           "ticker": "DVA",
-          "return": -0.99,
-          "score": 0.2969
+          "return": -3.4,
+          "score": 0.2983
         },
         {
-          "ticker": "SRE",
-          "return": 3.71,
-          "score": 0.2823
+          "ticker": "CVS",
+          "return": -0.4,
+          "score": 0.2858
         },
         {
-          "ticker": "TTD",
-          "return": 3.74,
-          "score": 0.2661
+          "ticker": "O",
+          "return": 0.69,
+          "score": 0.2831
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -0.754,
+      "picks": [
+        "CLOU",
+        "ARKG",
+        "CIBR",
+        "FNGU",
+        "UPRO"
+      ],
+      "raw": [
+        {
+          "ticker": "CLOU",
+          "return": 2.2,
+          "score": 0.9241
         },
         {
-          "ticker": "IBIT",
-          "return": -3.56,
-          "score": 0.2652
+          "ticker": "ARKG",
+          "return": -1.72,
+          "score": 0.8382
+        },
+        {
+          "ticker": "CIBR",
+          "return": -2.13,
+          "score": 0.8322
+        },
+        {
+          "ticker": "FNGU",
+          "return": -2.7,
+          "score": 0.8242
+        },
+        {
+          "ticker": "UPRO",
+          "return": 0.58,
+          "score": 0.7827
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -0.11,
+      "avg_return": -0.754,
       "picks": [
         "CLOU",
-        "JNK",
-        "ETHA",
-        "UPRO",
-        "IBIT"
+        "ARKG",
+        "FNGU",
+        "CIBR",
+        "UPRO"
       ],
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 4.18,
-          "score": 0.8373
+          "return": 2.2,
+          "score": 0.8481
         },
         {
-          "ticker": "JNK",
-          "return": 0.2,
-          "score": 0.81
+          "ticker": "ARKG",
+          "return": -1.72,
+          "score": 0.8137
         },
         {
-          "ticker": "ETHA",
-          "return": -2.63,
-          "score": 0.8026
+          "ticker": "FNGU",
+          "return": -2.7,
+          "score": 0.8109
+        },
+        {
+          "ticker": "CIBR",
+          "return": -2.13,
+          "score": 0.8032
         },
         {
           "ticker": "UPRO",
-          "return": 1.26,
-          "score": 0.7806
-        },
-        {
-          "ticker": "IBIT",
-          "return": -3.56,
-          "score": 0.7706
+          "return": 0.58,
+          "score": 0.7923
         }
       ]
     }
