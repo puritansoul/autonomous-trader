@@ -755,13 +755,9 @@ def build_briefing_html(regime: str, regime_details: dict,
         )
 
     html = f"""<div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
-  padding:20px;margin-bottom:16px">
-  <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;
-    display:flex;align-items:center;gap:8px">
-    &#128203; Today's Briefing
-    <span style="font-size:10px;font-weight:400;color:#444;margin-left:auto">
-      generated at market open · signals from yesterday's close
-    </span>
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
   </div>
 
   <!-- Market -->
@@ -1073,7 +1069,10 @@ def build_report(state: dict, prices: pd.DataFrame,
     </div>
   </div>
 
-  {briefing_html}
+  <details open>
+    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Today's Briefing</summary>
+    <div style="margin-top:10px">{briefing_html}</div>
+  </details>
 
   <details open>
     <summary class="section-toggle"><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
