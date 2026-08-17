@@ -1020,15 +1020,17 @@ def build_report(state: dict, prices: pd.DataFrame,
     .tk {{ font-weight:700; color:#7c4dff; }}
     .spark-wrap {{ margin: 4px 0 12px; }}
     details {{ margin-bottom: 4px; }}
+    details > summary {{ list-style: none; }}
+    details > summary::-webkit-details-marker {{ display: none; }}
     .section-toggle {{
-      cursor: pointer; list-style: none; padding: 10px 4px; margin: 12px 0 0;
+      cursor: pointer; padding: 10px 4px; margin: 12px 0 0;
       font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase;
       letter-spacing: 1px; border-bottom: 1px solid #1e1e1e; user-select: none;
       display: flex; align-items: center; gap: 6px;
     }}
-    .section-toggle::-webkit-details-marker {{ display: none; }}
-    details[open] .section-toggle::before {{ content: "▾"; color: #7c4dff; }}
-    details:not([open]) .section-toggle::before {{ content: "▸"; color: #555; }}
+    .section-toggle .toggle-arrow {{ color: #555; transition: transform .15s; font-style: normal; display:inline-block; }}
+    details[open] > .section-toggle .toggle-arrow {{ color: #7c4dff; transform: rotate(90deg); }}
+    details[open] > summary.section-toggle {{ color: #ccc; border-bottom-color: #333; }}
   </style>
 </head>
 <body>
@@ -1074,7 +1076,7 @@ def build_report(state: dict, prices: pd.DataFrame,
   {briefing_html}
 
   <details open>
-    <summary class="section-toggle">Equity &amp; Mode</summary>
+    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
     <div class="two-col" style="margin-top:10px">
       <div class="card">
         <h2>Equity Curve</h2>
@@ -1089,17 +1091,17 @@ def build_report(state: dict, prices: pd.DataFrame,
   </details>
 
   <details open>
-    <summary class="section-toggle">Strategy Mode Scorecard</summary>
+    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Strategy Mode Scorecard</summary>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 16px">
       {mode_cards}
     </div>
   </details>
 
   <details open>
-    <summary class="section-toggle" style="display:flex;align-items:center;gap:10px">
-      Open Positions
-      <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222">fetching…</span>
-      <span id="live-port" style="font-size:12px;color:#888;margin-left:auto"></span>
+    <summary class="section-toggle">
+      <i class="toggle-arrow">▶</i> Open Positions
+      <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222;font-weight:400;text-transform:none;letter-spacing:0">fetching…</span>
+      <span id="live-port" style="font-size:12px;color:#888;margin-left:auto;font-weight:400;text-transform:none;letter-spacing:0"></span>
     </summary>
     <div class="card" style="margin:10px 0 16px">
       <table>
@@ -1113,7 +1115,7 @@ def build_report(state: dict, prices: pd.DataFrame,
   </details>
 
   <details>
-    <summary class="section-toggle">Closed Trades</summary>
+    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Closed Trades</summary>
     <div class="card" style="margin:10px 0 16px">
       <table>
         <thead><tr>
@@ -1126,7 +1128,7 @@ def build_report(state: dict, prices: pd.DataFrame,
   </details>
 
   <details open>
-    <summary class="section-toggle">Daily Thesis Log</summary>
+    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Daily Thesis Log</summary>
     <div style="margin:10px 0 16px">{log_html or '<div style="color:#333;font-size:12px;padding:12px">No entries yet.</div>'}</div>
   </details>
 
