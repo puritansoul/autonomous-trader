@@ -959,10 +959,28 @@ def build_report(state: dict, prices: pd.DataFrame,
         for tk, pos in sorted(positions.items())
     ])
 
-    # Recent log entries (last 7 days, collapsed at bottom)
+    # Recent log entries (last 7 days) — each day uses the briefing card if it has rich data,
+    # otherwise falls back to the raw thesis text
     log_html = ""
     for entry in reversed(state["daily_log"][-7:]):
-        log_html += f'<div style="margin:8px 0;padding:10px;background:#111;border-radius:6px;border-left:3px solid #333"><div style="font-size:11px;color:#555;margin-bottom:4px">{entry["date"]}</div><pre style="font-size:11px;color:#666;white-space:pre-wrap;margin:0">{entry["thesis"]}</pre></div>'
+        entry_date = entry["date"]
+        is_today   = entry_date == today_str
+        if entry.get("buys") is not None:
+            # Rich entry — render full briefing card (dimmed if historical)
+            entry_briefing = build_briefing_html(
+                regime           = state["regime_history"].get(entry_date, regime),
+                regime_details   = regime_details if is_today else {},
+                buys             = entry.get("buys", []),
+                exits            = entry.get("exits", []),
+                scores_top       = entry.get("scores_top", []),
+                active_mode      = state["mode_history"].get(entry_date, active_mode),
+                prev_mode        = entry.get("prev_mode", ""),
+                backtest_results = state.get("last_backtest", []) if is_today else [],
+            )
+            log_html += f'<details {"open" if is_today else ""}><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> {entry_date}</summary>{entry_briefing}</details>'
+        else:
+            # Legacy plain-text entry
+            log_html += f'<details {"open" if is_today else ""}><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#555;user-select:none"><span style="color:#555">▸</span> {entry_date}</summary><div style="padding:10px;background:#111;border-radius:6px;border-left:3px solid #222"><pre style="font-size:11px;color:#666;white-space:pre-wrap;margin:0">{entry["thesis"]}</pre></div></details>'
 
     today_fmt = date.fromisoformat(today_str).strftime("%b %-d, %Y")
 
@@ -1001,6 +1019,16 @@ def build_report(state: dict, prices: pd.DataFrame,
     tr:last-child td {{ border-bottom:none; }}
     .tk {{ font-weight:700; color:#7c4dff; }}
     .spark-wrap {{ margin: 4px 0 12px; }}
+    details {{ margin-bottom: 4px; }}
+    .section-toggle {{
+      cursor: pointer; list-style: none; padding: 10px 4px; margin: 12px 0 0;
+      font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase;
+      letter-spacing: 1px; border-bottom: 1px solid #1e1e1e; user-select: none;
+      display: flex; align-items: center; gap: 6px;
+    }}
+    .section-toggle::-webkit-details-marker {{ display: none; }}
+    details[open] .section-toggle::before {{ content: "▾"; color: #7c4dff; }}
+    details:not([open]) .section-toggle::before {{ content: "▸"; color: #555; }}
   </style>
 </head>
 <body>
@@ -1045,51 +1073,62 @@ def build_report(state: dict, prices: pd.DataFrame,
 
   {briefing_html}
 
-  <div class="two-col">
-    <div class="card">
-      <h2>Equity Curve</h2>
-      <div class="spark-wrap">{spark_svg or '<div style="color:#333;font-size:12px">Accumulating history…</div>'}</div>
-      <div style="font-size:11px;color:#444">{len(nav_dates)} trading days tracked</div>
+  <details open>
+    <summary class="section-toggle">Equity &amp; Mode</summary>
+    <div class="two-col" style="margin-top:10px">
+      <div class="card">
+        <h2>Equity Curve</h2>
+        <div class="spark-wrap">{spark_svg or '<div style="color:#333;font-size:12px">Accumulating history…</div>'}</div>
+        <div style="font-size:11px;color:#444">{len(nav_dates)} trading days tracked</div>
+      </div>
+      <div class="card">
+        <h2>Active Mode · Signal Weights</h2>
+        <div style="margin-top:8px">{weight_bars}</div>
+      </div>
     </div>
-    <div class="card">
-      <h2>Active Mode · Signal Weights</h2>
-      <div style="margin-top:8px">{weight_bars}</div>
+  </details>
+
+  <details open>
+    <summary class="section-toggle">Strategy Mode Scorecard</summary>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 16px">
+      {mode_cards}
     </div>
-  </div>
+  </details>
 
-  <h2>Strategy Mode Scorecard</h2>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
-    {mode_cards}
-  </div>
+  <details open>
+    <summary class="section-toggle" style="display:flex;align-items:center;gap:10px">
+      Open Positions
+      <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222">fetching…</span>
+      <span id="live-port" style="font-size:12px;color:#888;margin-left:auto"></span>
+    </summary>
+    <div class="card" style="margin:10px 0 16px">
+      <table>
+        <thead><tr>
+          <th>Ticker</th><th>Entry</th><th>Hold</th><th>Cost/sh</th>
+          <th>Now</th><th>Shares</th><th>Invested</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
+        </tr></thead>
+        <tbody>{pos_rows}</tbody>
+      </table>
+    </div>
+  </details>
 
-  <div style="display:flex;align-items:center;gap:10px;margin:20px 0 8px">
-    <h2 style="margin:0">Open Positions</h2>
-    <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222">fetching…</span>
-    <span id="live-port" style="font-size:12px;color:#888;margin-left:auto"></span>
-  </div>
-  <div class="card" style="margin-bottom:16px">
-    <table>
-      <thead><tr>
-        <th>Ticker</th><th>Entry</th><th>Hold</th><th>Cost/sh</th>
-        <th>Now</th><th>Shares</th><th>Invested</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
-      </tr></thead>
-      <tbody>{pos_rows}</tbody>
-    </table>
-  </div>
+  <details>
+    <summary class="section-toggle">Closed Trades</summary>
+    <div class="card" style="margin:10px 0 16px">
+      <table>
+        <thead><tr>
+          <th>Ticker</th><th>Entry</th><th>Exit</th><th>Entry $</th>
+          <th>Exit $</th><th>Shares</th><th>P&amp;L</th><th>Reason</th>
+        </tr></thead>
+        <tbody>{closed_rows}</tbody>
+      </table>
+    </div>
+  </details>
 
-  <h2>Closed Trades</h2>
-  <div class="card" style="margin-bottom:16px">
-    <table>
-      <thead><tr>
-        <th>Ticker</th><th>Entry</th><th>Exit</th><th>Entry $</th>
-        <th>Exit $</th><th>Shares</th><th>P&amp;L</th><th>Reason</th>
-      </tr></thead>
-      <tbody>{closed_rows}</tbody>
-    </table>
-  </div>
-
-  <h2>Daily Thesis Log</h2>
-  <div style="margin-bottom:16px">{log_html or '<div style="color:#333;font-size:12px;padding:12px">No entries yet.</div>'}</div>
+  <details open>
+    <summary class="section-toggle">Daily Thesis Log</summary>
+    <div style="margin:10px 0 16px">{log_html or '<div style="color:#333;font-size:12px;padding:12px">No entries yet.</div>'}</div>
+  </details>
 
 </div>
 
