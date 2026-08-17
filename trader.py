@@ -1111,6 +1111,45 @@ def run():
     held = set(state["positions"].keys()) - exiting
     candidates = [s for s in all_scores if s["ticker"] not in held and s["ticker"] not in exiting]
 
+    # ── Portfolio rotation: swap weak held positions for better candidates ─────
+    # Build a score lookup for currently held tickers
+    ROTATION_THRESHOLD = 0.20   # candidate must beat held score by this much
+    MAX_ROTATIONS      = 2      # cap daily rotation swaps to limit churn
+
+    score_map = {s["ticker"]: s["total"] for s in all_scores}
+    held_scored = sorted(
+        [(tk, score_map.get(tk, 0.0)) for tk in held],
+        key=lambda x: x[1]          # weakest first
+    )
+
+    rotation_count = 0
+    claimed_by_rotation = set()
+    for held_tk, held_score in held_scored:
+        if rotation_count >= MAX_ROTATIONS:
+            break
+        # Best candidate not already claimed by an earlier rotation swap this run
+        top_candidate = next(
+            (c for c in candidates if c["ticker"] not in claimed_by_rotation), None
+        )
+        if top_candidate is None:
+            break
+        gain = top_candidate["total"] - held_score
+        if gain >= ROTATION_THRESHOLD:
+            exits_flagged.append({
+                "ticker": held_tk,
+                "reason": f"rotation → {top_candidate['ticker']} (score +{gain:.2f})",
+            })
+            exiting.add(held_tk)
+            held.discard(held_tk)
+            claimed_by_rotation.add(top_candidate["ticker"])
+            rotation_count += 1
+            print(f"  ROTATE {held_tk} → {top_candidate['ticker']}  "
+                  f"(held score {held_score:.3f} vs candidate {top_candidate['total']:.3f})")
+    # ──────────────────────────────────────────────────────────────────────────
+
+    # Rebuild candidates after rotation may have expanded exiting set
+    candidates = [s for s in all_scores if s["ticker"] not in held and s["ticker"] not in exiting]
+
     freed_capital = sum(state["positions"][e["ticker"]]["cost"] for e in exits_flagged)
     est_capital = state["capital"] + freed_capital
     buys_planned = size_positions(candidates, est_capital, len(state["positions"]) - len(exits_flagged))
