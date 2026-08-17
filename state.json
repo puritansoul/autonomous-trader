@@ -122,7 +122,7 @@
     "2026-08-11": 10000.0,
     "2026-08-12": 10006.43,
     "2026-08-14": 10006.18,
-    "2026-08-17": 9954.49
+    "2026-08-17": 9947.85
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -636,6 +636,155 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-08-17",
+      "thesis": "Regime: BULL\nVIX 15.3 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +0.53%  |  mean reversion -0.79%  |  trend following -1.12%  |  defensive -1.12%\nNo trades today \u2014 holding or waiting for better setups.\nTop candidates screened: KKR +0.623, IQV +0.613, ARKG +0.610\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%",
+      "buys": [],
+      "exits": [],
+      "scores_top": [
+        {
+          "ticker": "KKR",
+          "price": 109.8499984741211,
+          "total": 0.6229,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.127,
+            "trend": 1.0,
+            "mean_rev": -0.205,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.5,
+          "ret5": 5.8
+        },
+        {
+          "ticker": "IQV",
+          "price": 240.11000061035156,
+          "total": 0.6132,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.217,
+            "trend": 1.0,
+            "mean_rev": 0.049,
+            "regime_fit": 0.3
+          },
+          "ret20": 17.76,
+          "ret5": -0.78
+        },
+        {
+          "ticker": "ARKG",
+          "price": 44.0,
+          "total": 0.6104,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.256,
+            "trend": 1.0,
+            "mean_rev": -0.512,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.94,
+          "ret5": -0.7
+        },
+        {
+          "ticker": "CLOU",
+          "price": 27.899999618530273,
+          "total": 0.6059,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.278,
+            "trend": 1.0,
+            "mean_rev": -0.49,
+            "regime_fit": 1.0
+          },
+          "ret20": 15.58,
+          "ret5": 2.27
+        },
+        {
+          "ticker": "FNGU",
+          "price": 32.150001525878906,
+          "total": 0.5996,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.317,
+            "trend": 1.0,
+            "mean_rev": -0.424,
+            "regime_fit": 1.0
+          },
+          "ret20": 18.85,
+          "ret5": -4.6
+        },
+        {
+          "ticker": "DELL",
+          "price": 478.0,
+          "total": 0.5968,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.206,
+            "trend": 1.0,
+            "mean_rev": -0.334,
+            "regime_fit": 0.3
+          },
+          "ret20": 25.38,
+          "ret5": 4.39
+        },
+        {
+          "ticker": "SMCI",
+          "price": 37.88999938964844,
+          "total": 0.593,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.207,
+            "trend": 1.0,
+            "mean_rev": -0.402,
+            "regime_fit": 0.3
+          },
+          "ret20": 59.0,
+          "ret5": 20.44
+        },
+        {
+          "ticker": "IT",
+          "price": 177.31500244140625,
+          "total": 0.5927,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.243,
+            "trend": 1.0,
+            "mean_rev": -0.23,
+            "regime_fit": 0.3
+          },
+          "ret20": 25.7,
+          "ret5": -8.21
+        },
+        {
+          "ticker": "LH",
+          "price": 324.3399963378906,
+          "total": 0.5913,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.255,
+            "trend": 1.0,
+            "mean_rev": -0.197,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.23,
+          "ret5": 0.94
+        },
+        {
+          "ticker": "PSX",
+          "price": 239.2050018310547,
+          "total": 0.5895,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.18,
+            "trend": 1.0,
+            "mean_rev": -0.608,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.56,
+          "ret5": 10.99
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
@@ -658,7 +807,7 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 0.596,
+      "avg_return": 0.532,
       "picks": [
         "CLOU",
         "ABNB",
@@ -669,34 +818,34 @@
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 2.38,
+          "return": 2.27,
           "score": 0.9241
         },
         {
           "ticker": "ABNB",
-          "return": -2.38,
+          "return": -2.72,
           "score": 0.7973
         },
         {
           "ticker": "VRTX",
-          "return": -1.58,
+          "return": -1.37,
           "score": 0.756
         },
         {
           "ticker": "TSCO",
-          "return": 0.51,
+          "return": 0.77,
           "score": 0.7371
         },
         {
           "ticker": "NTAP",
-          "return": 4.05,
+          "return": 3.71,
           "score": 0.7192
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -0.724,
+      "avg_return": -0.79,
       "picks": [
         "REG",
         "KIM",
@@ -707,34 +856,34 @@
       "raw": [
         {
           "ticker": "REG",
-          "return": 0.07,
+          "return": 0.09,
           "score": 0.3178
         },
         {
           "ticker": "KIM",
-          "return": 0.39,
+          "return": 0.46,
           "score": 0.3035
         },
         {
           "ticker": "DVA",
-          "return": -3.23,
+          "return": -3.45,
           "score": 0.2983
         },
         {
           "ticker": "CVS",
-          "return": -1.67,
+          "return": -1.93,
           "score": 0.2858
         },
         {
           "ticker": "O",
-          "return": 0.82,
+          "return": 0.88,
           "score": 0.2831
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -0.996,
+      "avg_return": -1.124,
       "picks": [
         "CLOU",
         "ARKG",
@@ -745,34 +894,34 @@
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 2.38,
+          "return": 2.27,
           "score": 0.9241
         },
         {
           "ticker": "ARKG",
-          "return": -0.51,
+          "return": -0.7,
           "score": 0.8382
         },
         {
           "ticker": "CIBR",
-          "return": -2.45,
+          "return": -2.5,
           "score": 0.8322
         },
         {
           "ticker": "FNGU",
-          "return": -4.42,
+          "return": -4.6,
           "score": 0.8242
         },
         {
           "ticker": "UPRO",
-          "return": 0.02,
+          "return": -0.09,
           "score": 0.7827
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -0.996,
+      "avg_return": -1.124,
       "picks": [
         "CLOU",
         "ARKG",
@@ -783,27 +932,27 @@
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 2.38,
+          "return": 2.27,
           "score": 0.8481
         },
         {
           "ticker": "ARKG",
-          "return": -0.51,
+          "return": -0.7,
           "score": 0.8137
         },
         {
           "ticker": "FNGU",
-          "return": -4.42,
+          "return": -4.6,
           "score": 0.8109
         },
         {
           "ticker": "CIBR",
-          "return": -2.45,
+          "return": -2.5,
           "score": 0.8032
         },
         {
           "ticker": "UPRO",
-          "return": 0.02,
+          "return": -0.09,
           "score": 0.7923
         }
       ]
