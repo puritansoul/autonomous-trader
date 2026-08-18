@@ -1,22 +1,6 @@
 {
-  "capital": 777.23,
+  "capital": 294.7,
   "positions": {
-    "MSFT": {
-      "shares": 3,
-      "cost_per_share": 503.81,
-      "cost": 1511.43,
-      "entry_date": "2026-08-11",
-      "top_signal": "momentum",
-      "thesis": "score +0.489 \u00b7 led by momentum"
-    },
-    "XOM": {
-      "shares": 9,
-      "cost_per_share": 159.8,
-      "cost": 1438.2,
-      "entry_date": "2026-08-11",
-      "top_signal": "trend",
-      "thesis": "score +0.447 \u00b7 led by trend"
-    },
     "UPRO": {
       "shares": 9,
       "cost_per_share": 153.47,
@@ -60,15 +44,6 @@
       "entry_mode": "momentum",
       "thesis": "score +0.624 \u00b7 led by momentum \u00b7 mode momentum"
     },
-    "FNGU": {
-      "shares": 7,
-      "cost_per_share": 34.26,
-      "cost": 239.82,
-      "entry_date": "2026-08-14",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.589 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "ARKG": {
       "shares": 37,
       "cost_per_share": 43.115,
@@ -86,6 +61,33 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.588 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "BALL": {
+      "shares": 20,
+      "cost_per_share": 61.73,
+      "cost": 1234.6,
+      "entry_date": "2026-08-18",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.331 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
+    },
+    "MNST": {
+      "shares": 26,
+      "cost_per_share": 45.93,
+      "cost": 1194.18,
+      "entry_date": "2026-08-18",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.311 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
+    },
+    "ACGL": {
+      "shares": 12,
+      "cost_per_share": 99.37,
+      "cost": 1192.44,
+      "entry_date": "2026-08-18",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.308 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -116,26 +118,70 @@
       "reason": "rotation \u2192 DELL (score +0.44)",
       "top_signal": "trend",
       "entry_mode": "momentum"
+    },
+    {
+      "ticker": "FNGU",
+      "entry_date": "2026-08-14",
+      "exit_date": "2026-08-18",
+      "entry_price": 34.26,
+      "exit_price": 31.26,
+      "shares": 7,
+      "cost": 239.82,
+      "pnl": -21.0,
+      "pnl_pct": -8.76,
+      "reason": "stop loss (-9.4%)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "MSFT",
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-18",
+      "entry_price": 503.81,
+      "exit_price": 480.24,
+      "shares": 3,
+      "cost": 1511.43,
+      "pnl": -70.71,
+      "pnl_pct": -4.68,
+      "reason": "rotation \u2192 BALL (score +0.49)",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "XOM",
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-18",
+      "entry_price": 159.8,
+      "exit_price": 164.35,
+      "shares": 9,
+      "cost": 1438.2,
+      "pnl": 40.95,
+      "pnl_pct": 2.85,
+      "reason": "rotation \u2192 MNST (score +0.41)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
     "2026-08-11": 10000.0,
     "2026-08-12": 10006.43,
     "2026-08-14": 10006.18,
-    "2026-08-17": 9947.85
+    "2026-08-17": 9947.85,
+    "2026-08-18": 9894.32
   },
   "signal_weights": {
-    "momentum": 0.5,
-    "volume": 0.25,
-    "trend": 0.15,
-    "mean_rev": 0.05,
-    "regime_fit": 0.05
+    "momentum": 0.05,
+    "volume": 0.15,
+    "trend": 0.1,
+    "mean_rev": 0.55,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
     "2026-08-12": "bull",
     "2026-08-14": "bull",
-    "2026-08-17": "bull"
+    "2026-08-17": "bull",
+    "2026-08-18": "bull"
   },
   "daily_log": [
     {
@@ -785,175 +831,424 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-08-18",
+      "thesis": "Regime: BULL\nVIX 15.8 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: momentum \u2192 mean_reversion (Buy oversold dips in trending markets)\nBacktest (5d): mean reversion -0.15%  |  momentum -1.01%  |  defensive -2.60%  |  trend following -4.35%\nExited 3 position(s): FNGU -21 (stop loss (-9.4%)), MSFT -71 (rotation \u2192 BALL (score +0.49)), XOM +41 (rotation \u2192 MNST (score +0.41))\nEntered 3 position(s):\n  BALL $61.73 \u00d7 20 shares (score +0.331, led by mean_rev)\n  MNST $45.93 \u00d7 26 shares (score +0.311, led by mean_rev)\n  ACGL $99.37 \u00d7 12 shares (score +0.308, led by trend)\nTop candidates screened: BALL +0.331, MNST +0.311, ACGL +0.308\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "BALL",
+          "price": 61.73,
+          "total": 0.3307,
+          "scores": {
+            "momentum": -0.13,
+            "volume": -0.472,
+            "trend": -0.5,
+            "mean_rev": 0.751,
+            "regime_fit": 0.3
+          },
+          "ret20": -1.17,
+          "ret5": -1.69,
+          "shares": 20,
+          "cost": 1234.6,
+          "top_signal": "mean_rev"
+        },
+        {
+          "ticker": "MNST",
+          "price": 45.93,
+          "total": 0.3106,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.403,
+            "trend": -1.0,
+            "mean_rev": 0.865,
+            "regime_fit": 0.3
+          },
+          "ret20": -50.91,
+          "ret5": 2.91,
+          "shares": 26,
+          "cost": 1194.18,
+          "top_signal": "mean_rev"
+        },
+        {
+          "ticker": "ACGL",
+          "price": 99.37,
+          "total": 0.3082,
+          "scores": {
+            "momentum": -0.036,
+            "volume": -0.449,
+            "trend": 1.0,
+            "mean_rev": 0.423,
+            "regime_fit": 0.3
+          },
+          "ret20": -1.26,
+          "ret5": 2.34,
+          "shares": 12,
+          "cost": 1192.44,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "FNGU",
+          "entry_date": "2026-08-14",
+          "exit_date": "2026-08-18",
+          "entry_price": 34.26,
+          "exit_price": 31.26,
+          "shares": 7,
+          "cost": 239.82,
+          "pnl": -21.0,
+          "pnl_pct": -8.76,
+          "reason": "stop loss (-9.4%)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "MSFT",
+          "entry_date": "2026-08-11",
+          "exit_date": "2026-08-18",
+          "entry_price": 503.81,
+          "exit_price": 480.24,
+          "shares": 3,
+          "cost": 1511.43,
+          "pnl": -70.71,
+          "pnl_pct": -4.68,
+          "reason": "rotation \u2192 BALL (score +0.49)",
+          "top_signal": "momentum",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "XOM",
+          "entry_date": "2026-08-11",
+          "exit_date": "2026-08-18",
+          "entry_price": 159.8,
+          "exit_price": 164.35,
+          "shares": 9,
+          "cost": 1438.2,
+          "pnl": 40.95,
+          "pnl_pct": 2.85,
+          "reason": "rotation \u2192 MNST (score +0.41)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "BALL",
+          "price": 61.52000045776367,
+          "total": 0.3307,
+          "scores": {
+            "momentum": -0.13,
+            "volume": -0.472,
+            "trend": -0.5,
+            "mean_rev": 0.751,
+            "regime_fit": 0.3
+          },
+          "ret20": -1.17,
+          "ret5": -1.69
+        },
+        {
+          "ticker": "MNST",
+          "price": 46.85499954223633,
+          "total": 0.3106,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.403,
+            "trend": -1.0,
+            "mean_rev": 0.865,
+            "regime_fit": 0.3
+          },
+          "ret20": -50.91,
+          "ret5": 2.91
+        },
+        {
+          "ticker": "ACGL",
+          "price": 100.54499816894531,
+          "total": 0.3082,
+          "scores": {
+            "momentum": -0.036,
+            "volume": -0.449,
+            "trend": 1.0,
+            "mean_rev": 0.423,
+            "regime_fit": 0.3
+          },
+          "ret20": -1.26,
+          "ret5": 2.34
+        },
+        {
+          "ticker": "L",
+          "price": 113.69499969482422,
+          "total": 0.2848,
+          "scores": {
+            "momentum": -0.061,
+            "volume": -0.476,
+            "trend": -0.5,
+            "mean_rev": 0.662,
+            "regime_fit": 0.3
+          },
+          "ret20": -0.78,
+          "ret5": -0.09
+        },
+        {
+          "ticker": "AON",
+          "price": 348.885009765625,
+          "total": 0.261,
+          "scores": {
+            "momentum": -0.327,
+            "volume": -0.468,
+            "trend": -0.5,
+            "mean_rev": 0.641,
+            "regime_fit": 0.3
+          },
+          "ret20": -3.61,
+          "ret5": -2.26
+        },
+        {
+          "ticker": "ETHA",
+          "price": 14.305000305175781,
+          "total": 0.2371,
+          "scores": {
+            "momentum": 0.016,
+            "volume": -0.406,
+            "trend": 1.0,
+            "mean_rev": 0.086,
+            "regime_fit": 1.0
+          },
+          "ret20": -0.17,
+          "ret5": 1.17
+        },
+        {
+          "ticker": "DVA",
+          "price": 178.94000244140625,
+          "total": 0.2369,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.485,
+            "trend": -1.0,
+            "mean_rev": 0.754,
+            "regime_fit": 0.3
+          },
+          "ret20": -23.56,
+          "ret5": -2.59
+        },
+        {
+          "ticker": "VRSK",
+          "price": 181.02999877929688,
+          "total": 0.2294,
+          "scores": {
+            "momentum": -0.774,
+            "volume": -0.458,
+            "trend": -0.5,
+            "mean_rev": 0.621,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.29,
+          "ret5": -0.08
+        },
+        {
+          "ticker": "INCY",
+          "price": 124.47000122070312,
+          "total": 0.2265,
+          "scores": {
+            "momentum": 0.632,
+            "volume": -0.476,
+            "trend": 1.0,
+            "mean_rev": 0.221,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.63,
+          "ret5": 2.4
+        },
+        {
+          "ticker": "BRO",
+          "price": 70.70500183105469,
+          "total": 0.226,
+          "scores": {
+            "momentum": 0.184,
+            "volume": -0.473,
+            "trend": 1.0,
+            "mean_rev": 0.26,
+            "regime_fit": 0.3
+          },
+          "ret20": 2.8,
+          "ret5": -1.02
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "momentum",
+  "active_mode": "mean_reversion",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
-    "2026-08-17": "momentum"
+    "2026-08-17": "momentum",
+    "2026-08-18": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
       -0.24,
-      -2.51
+      -2.51,
+      -8.76
     ],
     "trend_following": [],
-    "mean_reversion": [],
+    "mean_reversion": [
+      -4.68,
+      2.85
+    ],
     "defensive": []
   },
   "last_backtest": [
     {
-      "mode": "momentum",
-      "avg_return": 0.532,
-      "picks": [
-        "CLOU",
-        "ABNB",
-        "VRTX",
-        "TSCO",
-        "NTAP"
-      ],
-      "raw": [
-        {
-          "ticker": "CLOU",
-          "return": 2.27,
-          "score": 0.9241
-        },
-        {
-          "ticker": "ABNB",
-          "return": -2.72,
-          "score": 0.7973
-        },
-        {
-          "ticker": "VRTX",
-          "return": -1.37,
-          "score": 0.756
-        },
-        {
-          "ticker": "TSCO",
-          "return": 0.77,
-          "score": 0.7371
-        },
-        {
-          "ticker": "NTAP",
-          "return": 3.71,
-          "score": 0.7192
-        }
-      ]
-    },
-    {
       "mode": "mean_reversion",
-      "avg_return": -0.79,
+      "avg_return": -0.15,
       "picks": [
+        "EWZ",
+        "MNST",
         "REG",
-        "KIM",
         "DVA",
-        "CVS",
-        "O"
+        "KIM"
       ],
       "raw": [
+        {
+          "ticker": "EWZ",
+          "return": -2.69,
+          "score": 0.3953
+        },
+        {
+          "ticker": "MNST",
+          "return": 2.91,
+          "score": 0.3725
+        },
         {
           "ticker": "REG",
-          "return": 0.09,
-          "score": 0.3178
-        },
-        {
-          "ticker": "KIM",
-          "return": 0.46,
-          "score": 0.3035
+          "return": 0.44,
+          "score": 0.3256
         },
         {
           "ticker": "DVA",
-          "return": -3.45,
-          "score": 0.2983
+          "return": -2.59,
+          "score": 0.3229
         },
         {
-          "ticker": "CVS",
-          "return": -1.93,
-          "score": 0.2858
-        },
-        {
-          "ticker": "O",
-          "return": 0.88,
-          "score": 0.2831
+          "ticker": "KIM",
+          "return": 1.18,
+          "score": 0.2908
         }
       ]
     },
     {
-      "mode": "trend_following",
-      "avg_return": -1.124,
+      "mode": "momentum",
+      "avg_return": -1.01,
       "picks": [
         "CLOU",
-        "ARKG",
-        "CIBR",
-        "FNGU",
-        "UPRO"
+        "KKR",
+        "TPR",
+        "TSCO",
+        "AXON"
       ],
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 2.27,
+          "return": 2.79,
           "score": 0.9241
         },
         {
-          "ticker": "ARKG",
-          "return": -0.7,
-          "score": 0.8382
+          "ticker": "KKR",
+          "return": 3.89,
+          "score": 0.7527
         },
         {
-          "ticker": "CIBR",
-          "return": -2.5,
-          "score": 0.8322
+          "ticker": "TPR",
+          "return": -18.28,
+          "score": 0.7492
         },
         {
-          "ticker": "FNGU",
-          "return": -4.6,
-          "score": 0.8242
+          "ticker": "TSCO",
+          "return": 2.93,
+          "score": 0.7423
         },
         {
-          "ticker": "UPRO",
-          "return": -0.09,
-          "score": 0.7827
+          "ticker": "AXON",
+          "return": 3.62,
+          "score": 0.73
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -1.124,
+      "avg_return": -2.604,
       "picks": [
         "CLOU",
-        "ARKG",
         "FNGU",
-        "CIBR",
-        "UPRO"
+        "ARKG",
+        "UPRO",
+        "FXI"
       ],
       "raw": [
         {
           "ticker": "CLOU",
-          "return": 2.27,
+          "return": 2.79,
           "score": 0.8481
         },
         {
-          "ticker": "ARKG",
-          "return": -0.7,
-          "score": 0.8137
-        },
-        {
           "ticker": "FNGU",
-          "return": -4.6,
-          "score": 0.8109
+          "return": -7.89,
+          "score": 0.804
         },
         {
-          "ticker": "CIBR",
-          "return": -2.5,
-          "score": 0.8032
+          "ticker": "ARKG",
+          "return": -2.28,
+          "score": 0.7948
         },
         {
           "ticker": "UPRO",
-          "return": -0.09,
-          "score": 0.7923
+          "return": -2.06,
+          "score": 0.7608
+        },
+        {
+          "ticker": "FXI",
+          "return": -3.58,
+          "score": 0.7604
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -4.354,
+      "picks": [
+        "CLOU",
+        "ARKG",
+        "FNGU",
+        "KKR",
+        "TPR"
+      ],
+      "raw": [
+        {
+          "ticker": "CLOU",
+          "return": 2.79,
+          "score": 0.9241
+        },
+        {
+          "ticker": "ARKG",
+          "return": -2.28,
+          "score": 0.8157
+        },
+        {
+          "ticker": "FNGU",
+          "return": -7.89,
+          "score": 0.8089
+        },
+        {
+          "ticker": "KKR",
+          "return": 3.89,
+          "score": 0.7659
+        },
+        {
+          "ticker": "TPR",
+          "return": -18.28,
+          "score": 0.7649
         }
       ]
     }
