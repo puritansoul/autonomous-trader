@@ -42,7 +42,9 @@ jobs:
           find reports -name 'autonomous_*.html' 2>/dev/null | xargs -r git add -f
           git diff --cached --quiet && echo "No changes" || \
             git commit -m "trade: $(date -u '+%Y-%m-%d %H:%M') [skip ci]"
+          git stash 2>/dev/null || true
           for i in 1 2 3; do
             git pull --rebase -X theirs origin main && git push && break
             sleep 5
           done
+          git stash pop 2>/dev/null || true

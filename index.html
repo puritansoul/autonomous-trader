@@ -691,33 +691,24 @@ Signal weights: momentum 50% · volume 25% · trend 15% · mean_rev 5% · regime
     if (b) { b.textContent = msg; b.style.color = col || '#555'; b.style.borderColor = col || '#222'; }
   }
 
+  const FINNHUB_TOKEN = 'd93d6v1r01qgqnua64j0d93d6v1r01qgqnua64jg';
+
+  async function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
   async function fetchQuotes() {
-    const symbols = POSITIONS.map(p => p.ticker).join(',');
-    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(symbols)}&fields=regularMarketPrice,regularMarketChangePercent`;
-    try {
-      const res = await fetch(url, {headers: {'Accept': 'application/json'}});
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
-      const quotes = data?.quoteResponse?.result || [];
-      const priceMap = {};
-      quotes.forEach(q => { priceMap[q.symbol] = q.regularMarketPrice; });
-      return priceMap;
-    } catch(e) {
-      // Yahoo CORS blocks direct fetch in some browsers — try corsproxy fallback
+    const priceMap = {};
+    for (const pos of POSITIONS) {
       try {
-        const proxy = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-        const res2 = await fetch(proxy);
-        if (!res2.ok) throw new Error(res2.status);
-        const data2 = await res2.json();
-        const quotes2 = data2?.quoteResponse?.result || [];
-        const priceMap2 = {};
-        quotes2.forEach(q => { priceMap2[q.symbol] = q.regularMarketPrice; });
-        return priceMap2;
-      } catch(e2) {
-        setStatus('price unavailable', '#555');
-        return null;
-      }
+        const q = await fetch(`https://finnhub.io/api/v1/quote?symbol=${pos.ticker}&token=${FINNHUB_TOKEN}`).then(r => r.json());
+        if (q && q.c) priceMap[pos.ticker] = q.c;
+      } catch(e) {}
+      await delay(1100);
     }
+    if (!Object.keys(priceMap).length) {
+      setStatus('price unavailable', '#555');
+      return null;
+    }
+    return priceMap;
   }
 
   async function update() {
