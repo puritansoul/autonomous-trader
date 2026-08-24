@@ -18,11 +18,15 @@
     .regime-bull   { background:#003300; color:#00e676; border:1px solid #00e676; }
     .regime-bear   { background:#330000; color:#ff5252; border:1px solid #ff5252; }
     .regime-neutral{ background:#1a1a1a; color:#ffd740; border:1px solid #ffd740; }
-    .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+    .stats-row { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:16px; }
     .stat-card { background:#111; border-radius:10px; padding:14px 16px;
                   border: 1px solid #1e1e1e; }
     .stat-label { font-size:11px; color:#666; text-transform:uppercase; letter-spacing:.5px; }
     .stat-val   { font-size:22px; font-weight:700; margin-top:4px; }
+    .drag-handle { color:#2a2a2a; cursor:grab; margin-right:6px; font-size:16px; user-select:none; }
+    .drag-handle:active { cursor:grabbing; }
+    .section-toggle:hover .drag-handle { color:#555; }
+    .sortable-ghost { opacity:0.3; background:#1a1a1a; }
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
     .card { background:#111; border-radius:10px; padding:16px;
              border:1px solid #1e1e1e; overflow-x:auto; }
@@ -46,6 +50,7 @@
     details[open] > .section-toggle .toggle-arrow { color: #7c4dff; transform: rotate(90deg); }
     details[open] > summary.section-toggle { color: #ccc; border-bottom-color: #333; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 </head>
 <body>
 <div class="page">
@@ -73,11 +78,16 @@
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">All-time</div>
+      <div class="stat-label">Since Inception</div>
       <div class="stat-val" style="color:#00e676">
         +0.56%<br>
         <span style="font-size:14px">+$56</span>
       </div>
+      <div style="font-size:10px;color:#333;margin-top:5px">Aug 11, 2026</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unrealized P&amp;L</div>
+      <div class="stat-val" id="unreal-pnl" style="color:#00e676">+$172</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Cash</div>
@@ -87,8 +97,10 @@
     </div>
   </div>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Today's Briefing</summary>
+  <div id="sections-container">
+
+  <details open data-section="briefing">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Today's Briefing</summary>
     <div style="margin-top:10px"><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
   padding:20px;margin-bottom:4px">
   <div style="font-size:10px;color:#444;margin-bottom:14px">
@@ -127,8 +139,8 @@
 </div></div>
   </details>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
+  <details open data-section="equity">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
     <div class="two-col" style="margin-top:10px">
       <div class="card">
         <h2>Equity Curve</h2>
@@ -175,8 +187,8 @@
     </div>
   </details>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Strategy Mode Scorecard</summary>
+  <details open data-section="scorecard">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Strategy Mode Scorecard</summary>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 16px">
       <div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
@@ -230,9 +242,9 @@
     </div>
   </details>
 
-  <details open>
+  <details open data-section="positions">
     <summary class="section-toggle">
-      <i class="toggle-arrow">▶</i> Open Positions
+      <span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Open Positions
       <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222;font-weight:400;text-transform:none;letter-spacing:0">fetching…</span>
       <span id="live-port" style="font-size:12px;color:#888;margin-left:auto;font-weight:400;text-transform:none;letter-spacing:0"></span>
     </summary>
@@ -347,8 +359,8 @@
     </div>
   </details>
 
-  <details>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Closed Trades</summary>
+  <details data-section="closed">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Closed Trades</summary>
     <div class="card" style="margin:10px 0 16px">
       <table>
         <thead><tr>
@@ -495,9 +507,9 @@
     </div>
   </details>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Daily Thesis Log</summary>
-    <div style="margin:10px 0 16px"><details open><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-08-24</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  <details open data-section="log">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Daily Thesis Log</summary>
+    <div style="margin:10px 0 16px"><details open><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-08-19</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
   padding:20px;margin-bottom:4px">
   <div style="font-size:10px;color:#444;margin-bottom:14px">
     generated at market open · signals from yesterday's close
@@ -745,6 +757,8 @@
 </div></details></div>
   </details>
 
+  </div>
+
 </div>
 
 <script>
@@ -844,6 +858,14 @@
       lp.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
     }
 
+    // Update unrealized P&L stat card
+    const up = document.getElementById('unreal-pnl');
+    if (up) {
+      const sign = totalUnreal >= 0 ? '+' : '';
+      up.textContent = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {maximumFractionDigits:0});
+      up.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
+    }
+
     const now = new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'});
     setStatus('live · ' + now + ' ET', '#00e676');
   }
@@ -851,6 +873,36 @@
   // Run immediately, then every 5 minutes during market hours
   update();
   setInterval(() => { if (isMarketHours()) update(); }, 5 * 60 * 1000);
+})();
+
+// Drag-to-reorder sections
+(function() {
+  const LAYOUT_KEY = 'at-layout-v1';
+  const container  = document.getElementById('sections-container');
+  if (!container || typeof Sortable === 'undefined') return;
+
+  function saveLayout() {
+    const ids = Array.from(container.children).map(el => el.dataset.section);
+    localStorage.setItem(LAYOUT_KEY, JSON.stringify(ids));
+  }
+
+  function restoreLayout() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || '[]');
+      if (!saved.length) return;
+      const map = {};
+      Array.from(container.children).forEach(el => { map[el.dataset.section] = el; });
+      saved.forEach(id => { if (map[id]) container.appendChild(map[id]); });
+    } catch(e) {}
+  }
+
+  restoreLayout();
+  Sortable.create(container, {
+    handle: '.drag-handle',
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    onEnd: saveLayout
+  });
 })();
 </script>
 </body>

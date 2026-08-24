@@ -820,6 +820,21 @@ def build_report(state: dict, prices: pd.DataFrame,
     day_col  = "#00e676" if day_pnl >= 0 else "#ff5252"
     ret_col  = "#00e676" if total_ret >= 0 else "#ff5252"
 
+    # Unrealized P&L across all open positions
+    total_upnl = sum(
+        (float(prices[tk].dropna().iloc[-1]) if tk in prices.columns else pos["cost_per_share"]) * pos["shares"] - pos["cost"]
+        for tk, pos in positions.items()
+    )
+    upnl_col  = "#00e676" if total_upnl >= 0 else "#ff5252"
+    upnl_sign = "+" if total_upnl >= 0 else ""
+
+    inception_date = state.get("inception_date", nav_dates[0] if nav_dates else today_str)
+    try:
+        _d = date.fromisoformat(inception_date)
+        inception_fmt = f"{_d.strftime('%b')} {_d.day}, {_d.year}"
+    except Exception:
+        inception_fmt = inception_date
+
     # Positions table — embed data attributes for live JS price updates
     pos_rows = ""
     for tk, pos in sorted(positions.items()):
@@ -1000,11 +1015,15 @@ def build_report(state: dict, prices: pd.DataFrame,
     .regime-bull   {{ background:#003300; color:#00e676; border:1px solid #00e676; }}
     .regime-bear   {{ background:#330000; color:#ff5252; border:1px solid #ff5252; }}
     .regime-neutral{{ background:#1a1a1a; color:#ffd740; border:1px solid #ffd740; }}
-    .stats-row {{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }}
+    .stats-row {{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:16px; }}
     .stat-card {{ background:#111; border-radius:10px; padding:14px 16px;
                   border: 1px solid #1e1e1e; }}
     .stat-label {{ font-size:11px; color:#666; text-transform:uppercase; letter-spacing:.5px; }}
     .stat-val   {{ font-size:22px; font-weight:700; margin-top:4px; }}
+    .drag-handle {{ color:#2a2a2a; cursor:grab; margin-right:6px; font-size:16px; user-select:none; }}
+    .drag-handle:active {{ cursor:grabbing; }}
+    .section-toggle:hover .drag-handle {{ color:#555; }}
+    .sortable-ghost {{ opacity:0.3; background:#1a1a1a; }}
     .two-col {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }}
     .card {{ background:#111; border-radius:10px; padding:16px;
              border:1px solid #1e1e1e; overflow-x:auto; }}
@@ -1028,6 +1047,7 @@ def build_report(state: dict, prices: pd.DataFrame,
     details[open] > .section-toggle .toggle-arrow {{ color: #7c4dff; transform: rotate(90deg); }}
     details[open] > summary.section-toggle {{ color: #ccc; border-bottom-color: #333; }}
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 </head>
 <body>
 <div class="page">
@@ -1055,11 +1075,16 @@ def build_report(state: dict, prices: pd.DataFrame,
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">All-time</div>
+      <div class="stat-label">Since Inception</div>
       <div class="stat-val" style="color:{ret_col}">
         {'+' if total_ret>=0 else ''}{total_ret:.2f}%<br>
         <span style="font-size:14px">{'+' if (port_val-STARTING_CAP)>=0 else ''}${abs(port_val-STARTING_CAP):,.0f}</span>
       </div>
+      <div style="font-size:10px;color:#333;margin-top:5px">{inception_fmt}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unrealized P&amp;L</div>
+      <div class="stat-val" id="unreal-pnl" style="color:{upnl_col}">{upnl_sign}${abs(total_upnl):,.0f}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Cash</div>
@@ -1069,13 +1094,15 @@ def build_report(state: dict, prices: pd.DataFrame,
     </div>
   </div>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Today's Briefing</summary>
+  <div id="sections-container">
+
+  <details open data-section="briefing">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Today's Briefing</summary>
     <div style="margin-top:10px">{briefing_html}</div>
   </details>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
+  <details open data-section="equity">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
     <div class="two-col" style="margin-top:10px">
       <div class="card">
         <h2>Equity Curve</h2>
@@ -1089,16 +1116,16 @@ def build_report(state: dict, prices: pd.DataFrame,
     </div>
   </details>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Strategy Mode Scorecard</summary>
+  <details open data-section="scorecard">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Strategy Mode Scorecard</summary>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 16px">
       {mode_cards}
     </div>
   </details>
 
-  <details open>
+  <details open data-section="positions">
     <summary class="section-toggle">
-      <i class="toggle-arrow">▶</i> Open Positions
+      <span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Open Positions
       <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222;font-weight:400;text-transform:none;letter-spacing:0">fetching…</span>
       <span id="live-port" style="font-size:12px;color:#888;margin-left:auto;font-weight:400;text-transform:none;letter-spacing:0"></span>
     </summary>
@@ -1113,8 +1140,8 @@ def build_report(state: dict, prices: pd.DataFrame,
     </div>
   </details>
 
-  <details>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Closed Trades</summary>
+  <details data-section="closed">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Closed Trades</summary>
     <div class="card" style="margin:10px 0 16px">
       <table>
         <thead><tr>
@@ -1126,10 +1153,12 @@ def build_report(state: dict, prices: pd.DataFrame,
     </div>
   </details>
 
-  <details open>
-    <summary class="section-toggle"><i class="toggle-arrow">▶</i> Daily Thesis Log</summary>
+  <details open data-section="log">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Daily Thesis Log</summary>
     <div style="margin:10px 0 16px">{log_html or '<div style="color:#333;font-size:12px;padding:12px">No entries yet.</div>'}</div>
   </details>
+
+  </div>
 
 </div>
 
@@ -1157,33 +1186,24 @@ def build_report(state: dict, prices: pd.DataFrame,
     if (b) {{ b.textContent = msg; b.style.color = col || '#555'; b.style.borderColor = col || '#222'; }}
   }}
 
+  const FINNHUB_TOKEN = 'd93d6v1r01qgqnua64j0d93d6v1r01qgqnua64jg';
+
+  async function delay(ms) {{ return new Promise(r => setTimeout(r, ms)); }}
+
   async function fetchQuotes() {{
-    const symbols = POSITIONS.map(p => p.ticker).join(',');
-    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${{encodeURIComponent(symbols)}}&fields=regularMarketPrice,regularMarketChangePercent`;
-    try {{
-      const res = await fetch(url, {{headers: {{'Accept': 'application/json'}}}});
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
-      const quotes = data?.quoteResponse?.result || [];
-      const priceMap = {{}};
-      quotes.forEach(q => {{ priceMap[q.symbol] = q.regularMarketPrice; }});
-      return priceMap;
-    }} catch(e) {{
-      // Yahoo CORS blocks direct fetch in some browsers — try corsproxy fallback
+    const priceMap = {{}};
+    for (const pos of POSITIONS) {{
       try {{
-        const proxy = `https://corsproxy.io/?${{encodeURIComponent(url)}}`;
-        const res2 = await fetch(proxy);
-        if (!res2.ok) throw new Error(res2.status);
-        const data2 = await res2.json();
-        const quotes2 = data2?.quoteResponse?.result || [];
-        const priceMap2 = {{}};
-        quotes2.forEach(q => {{ priceMap2[q.symbol] = q.regularMarketPrice; }});
-        return priceMap2;
-      }} catch(e2) {{
-        setStatus('price unavailable', '#555');
-        return null;
-      }}
+        const q = await fetch(`https://finnhub.io/api/v1/quote?symbol=${{pos.ticker}}&token=${{FINNHUB_TOKEN}}`).then(r => r.json());
+        if (q && q.c) priceMap[pos.ticker] = q.c;
+      }} catch(e) {{}}
+      await delay(1100);
     }}
+    if (!Object.keys(priceMap).length) {{
+      setStatus('price unavailable', '#555');
+      return null;
+    }}
+    return priceMap;
   }}
 
   async function update() {{
@@ -1230,6 +1250,14 @@ def build_report(state: dict, prices: pd.DataFrame,
       lp.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
     }}
 
+    // Update unrealized P&L stat card
+    const up = document.getElementById('unreal-pnl');
+    if (up) {{
+      const sign = totalUnreal >= 0 ? '+' : '';
+      up.textContent = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {{maximumFractionDigits:0}});
+      up.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
+    }}
+
     const now = new Date().toLocaleTimeString('en-US', {{hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'}});
     setStatus('live · ' + now + ' ET', '#00e676');
   }}
@@ -1237,6 +1265,36 @@ def build_report(state: dict, prices: pd.DataFrame,
   // Run immediately, then every 5 minutes during market hours
   update();
   setInterval(() => {{ if (isMarketHours()) update(); }}, 5 * 60 * 1000);
+}})();
+
+// Drag-to-reorder sections
+(function() {{
+  const LAYOUT_KEY = 'at-layout-v1';
+  const container  = document.getElementById('sections-container');
+  if (!container || typeof Sortable === 'undefined') return;
+
+  function saveLayout() {{
+    const ids = Array.from(container.children).map(el => el.dataset.section);
+    localStorage.setItem(LAYOUT_KEY, JSON.stringify(ids));
+  }}
+
+  function restoreLayout() {{
+    try {{
+      const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || '[]');
+      if (!saved.length) return;
+      const map = {{}};
+      Array.from(container.children).forEach(el => {{ map[el.dataset.section] = el; }});
+      saved.forEach(id => {{ if (map[id]) container.appendChild(map[id]); }});
+    }} catch(e) {{}}
+  }}
+
+  restoreLayout();
+  Sortable.create(container, {{
+    handle: '.drag-handle',
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    onEnd: saveLayout
+  }});
 }})();
 </script>
 </body>
