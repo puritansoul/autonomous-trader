@@ -355,6 +355,14 @@
           <td class="live-upnl" style="color:#00e676">+9 (+0.9%)</td>
           <td style="font-size:11px;color:#aaa">trend</td>
         </tr></tbody>
+        <tfoot>
+          <tr style="border-top:1px solid #2a2a2a;font-weight:600">
+            <td colspan="6" style="text-align:right;font-size:11px;color:#444;padding-right:8px">Total</td>
+            <td>$9,220</td>
+            <td id="tfoot-upnl" style="color:#00e676">+$172</td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </details>
@@ -858,13 +866,14 @@
       lp.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
     }
 
-    // Update unrealized P&L stat card
+    // Update unrealized P&L stat card and table footer
+    const sign = totalUnreal >= 0 ? '+' : '';
+    const unrFmt = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {maximumFractionDigits:0});
+    const unrCol = totalUnreal >= 0 ? '#00e676' : '#ff5252';
     const up = document.getElementById('unreal-pnl');
-    if (up) {
-      const sign = totalUnreal >= 0 ? '+' : '';
-      up.textContent = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {maximumFractionDigits:0});
-      up.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
-    }
+    if (up) { up.textContent = unrFmt; up.style.color = unrCol; }
+    const tf = document.getElementById('tfoot-upnl');
+    if (tf) { tf.textContent = unrFmt; tf.style.color = unrCol; }
 
     const now = new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'});
     setStatus('live · ' + now + ' ET', '#00e676');

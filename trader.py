@@ -837,12 +837,14 @@ def build_report(state: dict, prices: pd.DataFrame,
 
     # Positions table — embed data attributes for live JS price updates
     pos_rows = ""
+    total_invested = 0.0
     for tk, pos in sorted(positions.items()):
         cur = float(prices[tk].dropna().iloc[-1]) if tk in prices.columns else pos["cost_per_share"]
         upnl = (cur - pos["cost_per_share"]) * pos["shares"]
         upnl_pct = (cur - pos["cost_per_share"]) / pos["cost_per_share"] * 100
         col  = "#00e676" if upnl >= 0 else "#ff5252"
         hold = (date.today() - date.fromisoformat(pos["entry_date"])).days
+        total_invested += pos["cost"]
         pos_rows += f"""<tr data-ticker="{tk}" data-cost="{pos['cost_per_share']:.4f}" data-shares="{pos['shares']}">
           <td class="tk">{tk}</td>
           <td>{pos['entry_date']}</td>
@@ -857,6 +859,15 @@ def build_report(state: dict, prices: pd.DataFrame,
 
     if not pos_rows:
         pos_rows = '<tr><td colspan="9" style="color:#666;text-align:center">No open positions</td></tr>'
+
+    pos_tfoot = f"""<tfoot>
+      <tr style="border-top:1px solid #2a2a2a;font-weight:600">
+        <td colspan="6" style="text-align:right;font-size:11px;color:#444;padding-right:8px">Total</td>
+        <td>${total_invested:,.0f}</td>
+        <td id="tfoot-upnl" style="color:{upnl_col}">{upnl_sign}${abs(total_upnl):,.0f}</td>
+        <td></td>
+      </tr>
+    </tfoot>""" if positions else ""
 
     # Closed trades (last 20)
     closed_rows = ""
@@ -1136,6 +1147,7 @@ def build_report(state: dict, prices: pd.DataFrame,
           <th>Now</th><th>Shares</th><th>Invested</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
         </tr></thead>
         <tbody>{pos_rows}</tbody>
+        {pos_tfoot}
       </table>
     </div>
   </details>
@@ -1250,13 +1262,14 @@ def build_report(state: dict, prices: pd.DataFrame,
       lp.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
     }}
 
-    // Update unrealized P&L stat card
+    // Update unrealized P&L stat card and table footer
+    const sign = totalUnreal >= 0 ? '+' : '';
+    const unrFmt = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {{maximumFractionDigits:0}});
+    const unrCol = totalUnreal >= 0 ? '#00e676' : '#ff5252';
     const up = document.getElementById('unreal-pnl');
-    if (up) {{
-      const sign = totalUnreal >= 0 ? '+' : '';
-      up.textContent = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {{maximumFractionDigits:0}});
-      up.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
-    }}
+    if (up) {{ up.textContent = unrFmt; up.style.color = unrCol; }}
+    const tf = document.getElementById('tfoot-upnl');
+    if (tf) {{ tf.textContent = unrFmt; tf.style.color = unrCol; }}
 
     const now = new Date().toLocaleTimeString('en-US', {{hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'}});
     setStatus('live · ' + now + ' ET', '#00e676');
