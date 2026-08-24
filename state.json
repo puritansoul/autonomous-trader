@@ -1,22 +1,6 @@
 {
-  "capital": 227.47,
+  "capital": 666.78,
   "positions": {
-    "UPRO": {
-      "shares": 9,
-      "cost_per_share": 153.47,
-      "cost": 1381.23,
-      "entry_date": "2026-08-11",
-      "top_signal": "trend",
-      "thesis": "score +0.445 \u00b7 led by trend"
-    },
-    "NVDA": {
-      "shares": 6,
-      "cost_per_share": 217.5,
-      "cost": 1305.0,
-      "entry_date": "2026-08-11",
-      "top_signal": "trend",
-      "thesis": "score +0.429 \u00b7 led by trend"
-    },
     "SMCI": {
       "shares": 7,
       "cost_per_share": 34.99,
@@ -88,6 +72,24 @@
       "top_signal": "momentum",
       "entry_mode": "defensive",
       "thesis": "score +0.788 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "DBC": {
+      "shares": 43,
+      "cost_per_share": 31.18,
+      "cost": 1340.74,
+      "entry_date": "2026-08-24",
+      "top_signal": "trend",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.766 \u00b7 led by trend \u00b7 mode trend_following"
+    },
+    "GLD": {
+      "shares": 2,
+      "cost_per_share": 428.55,
+      "cost": 857.1,
+      "entry_date": "2026-08-24",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.756 \u00b7 led by momentum \u00b7 mode trend_following"
     }
   },
   "closed": [
@@ -272,6 +274,34 @@
       "reason": "rotation \u2192 ARKW (score +0.72)",
       "top_signal": "mean_rev",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "UPRO",
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-24",
+      "entry_price": 153.47,
+      "exit_price": 149.43,
+      "shares": 9,
+      "cost": 1381.23,
+      "pnl": -36.36,
+      "pnl_pct": -2.63,
+      "reason": "rotation \u2192 DBC (score +0.90)",
+      "top_signal": "trend",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "NVDA",
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-24",
+      "entry_price": 217.5,
+      "exit_price": 215.38,
+      "shares": 6,
+      "cost": 1305.0,
+      "pnl": -12.72,
+      "pnl_pct": -0.97,
+      "reason": "rotation \u2192 GLD (score +0.89)",
+      "top_signal": "trend",
+      "entry_mode": "trend_following"
     }
   ],
   "nav_history": {
@@ -282,14 +312,15 @@
     "2026-08-18": 9894.32,
     "2026-08-19": 10050.78,
     "2026-08-20": 10051.42,
-    "2026-08-21": 10143.72
+    "2026-08-21": 10143.72,
+    "2026-08-24": 10055.95
   },
   "signal_weights": {
-    "momentum": 0.1,
-    "volume": 0.05,
-    "trend": 0.2,
-    "mean_rev": 0.1,
-    "regime_fit": 0.55
+    "momentum": 0.2,
+    "volume": 0.1,
+    "trend": 0.5,
+    "mean_rev": 0.05,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -299,7 +330,8 @@
     "2026-08-18": "bull",
     "2026-08-19": "bull",
     "2026-08-20": "bull",
-    "2026-08-21": "bull"
+    "2026-08-21": "bull",
+    "2026-08-24": "neutral"
   },
   "daily_log": [
     {
@@ -1894,11 +1926,224 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-08-24",
+      "thesis": "Regime: NEUTRAL\nVIX 15.9 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode switched: defensive \u2192 trend_following (Follow SMA alignment and regime-matched assets)\nBacktest (5d): trend following +4.68%  |  momentum +3.49%  |  defensive +2.42%  |  mean reversion +0.76%\nExited 2 position(s): UPRO -36 (rotation \u2192 DBC (score +0.90)), NVDA -13 (rotation \u2192 GLD (score +0.89))\nEntered 2 position(s):\n  DBC $31.18 \u00d7 43 shares (score +0.766, led by trend)\n  GLD $428.55 \u00d7 2 shares (score +0.756, led by momentum)\nTop candidates screened: DBC +0.766, GLD +0.756, ULTA +0.752\nSignal weights: trend 50% \u00b7 momentum 20% \u00b7 regime_fit 15% \u00b7 volume 10% \u00b7 mean_rev 5%",
+      "buys": [
+        {
+          "ticker": "DBC",
+          "price": 31.18,
+          "total": 0.7664,
+          "scores": {
+            "momentum": 0.567,
+            "volume": 0.924,
+            "trend": 1.0,
+            "mean_rev": 0.312,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.03,
+          "ret5": 1.6,
+          "shares": 43,
+          "cost": 1340.74,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "GLD",
+          "price": 428.55,
+          "total": 0.756,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.064,
+            "trend": 1.0,
+            "mean_rev": 0.349,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.29,
+          "ret5": 5.6,
+          "shares": 2,
+          "cost": 857.1,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "UPRO",
+          "entry_date": "2026-08-11",
+          "exit_date": "2026-08-24",
+          "entry_price": 153.47,
+          "exit_price": 149.43,
+          "shares": 9,
+          "cost": 1381.23,
+          "pnl": -36.36,
+          "pnl_pct": -2.63,
+          "reason": "rotation \u2192 DBC (score +0.90)",
+          "top_signal": "trend",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "NVDA",
+          "entry_date": "2026-08-11",
+          "exit_date": "2026-08-24",
+          "entry_price": 217.5,
+          "exit_price": 215.38,
+          "shares": 6,
+          "cost": 1305.0,
+          "pnl": -12.72,
+          "pnl_pct": -0.97,
+          "reason": "rotation \u2192 GLD (score +0.89)",
+          "top_signal": "trend",
+          "entry_mode": "trend_following"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "DBC",
+          "price": 31.04840087890625,
+          "total": 0.7664,
+          "scores": {
+            "momentum": 0.567,
+            "volume": 0.924,
+            "trend": 1.0,
+            "mean_rev": 0.312,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.03,
+          "ret5": 1.6
+        },
+        {
+          "ticker": "GLD",
+          "price": 428.17999267578125,
+          "total": 0.756,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.064,
+            "trend": 1.0,
+            "mean_rev": 0.349,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.29,
+          "ret5": 5.6
+        },
+        {
+          "ticker": "ULTA",
+          "price": 539.1649780273438,
+          "total": 0.7517,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.419,
+            "trend": 1.0,
+            "mean_rev": 0.973,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.21,
+          "ret5": 9.29
+        },
+        {
+          "ticker": "ACN",
+          "price": 186.66000366210938,
+          "total": 0.7508,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.24,
+            "trend": 1.0,
+            "mean_rev": 0.596,
+            "regime_fit": 0.3
+          },
+          "ret20": 21.16,
+          "ret5": 9.81
+        },
+        {
+          "ticker": "AXON",
+          "price": 619.1199951171875,
+          "total": 0.7485,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.449,
+            "trend": 1.0,
+            "mean_rev": 0.967,
+            "regime_fit": 0.3
+          },
+          "ret20": 17.82,
+          "ret5": 2.45
+        },
+        {
+          "ticker": "NWS",
+          "price": 34.75,
+          "total": 0.7475,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.301,
+            "trend": 1.0,
+            "mean_rev": 0.653,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.39,
+          "ret5": 6.33
+        },
+        {
+          "ticker": "MRNA",
+          "price": 131.95339965820312,
+          "total": 0.7472,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.285,
+            "trend": 1.0,
+            "mean_rev": 0.612,
+            "regime_fit": 0.3
+          },
+          "ret20": 137.2,
+          "ret5": 104.71
+        },
+        {
+          "ticker": "ZBRA",
+          "price": 366.07501220703125,
+          "total": 0.7469,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.461,
+            "trend": 1.0,
+            "mean_rev": 0.961,
+            "regime_fit": 0.3
+          },
+          "ret20": 38.36,
+          "ret5": -1.4
+        },
+        {
+          "ticker": "SMCI",
+          "price": 34.665000915527344,
+          "total": 0.7468,
+          "scores": {
+            "momentum": 0.985,
+            "volume": -0.376,
+            "trend": 1.0,
+            "mean_rev": 0.847,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.29,
+          "ret5": -9.44
+        },
+        {
+          "ticker": "SLV",
+          "price": 62.29499816894531,
+          "total": 0.7456,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.253,
+            "trend": 1.0,
+            "mean_rev": 0.518,
+            "regime_fit": 0.3
+          },
+          "ret20": 17.69,
+          "ret5": 4.57
+        }
+      ],
+      "prev_mode": "defensive"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "defensive",
+  "active_mode": "trend_following",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -1906,7 +2151,8 @@
     "2026-08-18": "mean_reversion",
     "2026-08-19": "trend_following",
     "2026-08-20": "mean_reversion",
-    "2026-08-21": "defensive"
+    "2026-08-21": "defensive",
+    "2026-08-24": "trend_following"
   },
   "mode_pnl": {
     "momentum": [
@@ -1918,7 +2164,9 @@
     ],
     "trend_following": [
       3.93,
-      2.66
+      2.66,
+      -2.63,
+      -0.97
     ],
     "mean_reversion": [
       -4.68,
@@ -1932,154 +2180,154 @@
   },
   "last_backtest": [
     {
-      "mode": "defensive",
-      "avg_return": 2.156,
-      "picks": [
-        "GDXJ",
-        "FNGU",
-        "CLOU",
-        "UPRO",
-        "ARKG"
-      ],
-      "raw": [
-        {
-          "ticker": "GDXJ",
-          "return": 11.8,
-          "score": 0.8006
-        },
-        {
-          "ticker": "FNGU",
-          "return": -6.16,
-          "score": 0.7955
-        },
-        {
-          "ticker": "CLOU",
-          "return": -2.57,
-          "score": 0.7919
-        },
-        {
-          "ticker": "UPRO",
-          "return": -4.4,
-          "score": 0.7915
-        },
-        {
-          "ticker": "ARKG",
-          "return": 12.11,
-          "score": 0.7619
-        }
-      ]
-    },
-    {
-      "mode": "mean_reversion",
-      "avg_return": -0.238,
-      "picks": [
-        "L",
-        "KIM",
-        "ATO",
-        "EWZ",
-        "FRT"
-      ],
-      "raw": [
-        {
-          "ticker": "L",
-          "return": -1.56,
-          "score": 0.3305
-        },
-        {
-          "ticker": "KIM",
-          "return": -1.17,
-          "score": 0.3108
-        },
-        {
-          "ticker": "ATO",
-          "return": -0.18,
-          "score": 0.3042
-        },
-        {
-          "ticker": "EWZ",
-          "return": 2.89,
-          "score": 0.2992
-        },
-        {
-          "ticker": "FRT",
-          "return": -1.17,
-          "score": 0.2676
-        }
-      ]
-    },
-    {
       "mode": "trend_following",
-      "avg_return": -0.274,
+      "avg_return": 4.68,
       "picks": [
-        "CLOU",
-        "GDXJ",
-        "FNGU",
-        "UPRO",
-        "WDAY"
+        "KKR",
+        "IT",
+        "EXPE",
+        "IQV",
+        "APO"
       ],
       "raw": [
         {
-          "ticker": "CLOU",
-          "return": -2.57,
-          "score": 0.8223
+          "ticker": "KKR",
+          "return": 0.07,
+          "score": 0.8088
         },
         {
-          "ticker": "GDXJ",
-          "return": 11.8,
-          "score": 0.8191
+          "ticker": "IT",
+          "return": 11.58,
+          "score": 0.806
         },
         {
-          "ticker": "FNGU",
-          "return": -6.16,
-          "score": 0.8083
+          "ticker": "EXPE",
+          "return": 4.62,
+          "score": 0.802
         },
         {
-          "ticker": "UPRO",
-          "return": -4.4,
-          "score": 0.8059
+          "ticker": "IQV",
+          "return": 7.99,
+          "score": 0.795
         },
         {
-          "ticker": "WDAY",
-          "return": -0.04,
-          "score": 0.7516
+          "ticker": "APO",
+          "return": -0.86,
+          "score": 0.7934
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -1.68,
+      "avg_return": 3.488,
       "picks": [
-        "WDAY",
-        "FOXA",
-        "CLOU",
         "KKR",
-        "WAB"
+        "IT",
+        "EXPE",
+        "PSX",
+        "FOXA"
       ],
       "raw": [
         {
-          "ticker": "WDAY",
-          "return": -0.04,
-          "score": 0.7175
+          "ticker": "KKR",
+          "return": 0.07,
+          "score": 0.7623
+        },
+        {
+          "ticker": "IT",
+          "return": 11.58,
+          "score": 0.7616
+        },
+        {
+          "ticker": "EXPE",
+          "return": 4.62,
+          "score": 0.7495
+        },
+        {
+          "ticker": "PSX",
+          "return": 1.34,
+          "score": 0.7428
         },
         {
           "ticker": "FOXA",
-          "return": -0.12,
-          "score": 0.711
+          "return": -0.17,
+          "score": 0.7376
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": 2.422,
+      "picks": [
+        "IQV",
+        "ALLE",
+        "KKR",
+        "WAB",
+        "T"
+      ],
+      "raw": [
+        {
+          "ticker": "IQV",
+          "return": 7.99,
+          "score": 0.5628
         },
         {
-          "ticker": "CLOU",
-          "return": -2.57,
-          "score": 0.6751
+          "ticker": "ALLE",
+          "return": 1.4,
+          "score": 0.5597
         },
         {
           "ticker": "KKR",
-          "return": -3.94,
-          "score": 0.6737
+          "return": 0.07,
+          "score": 0.559
         },
         {
           "ticker": "WAB",
-          "return": -1.73,
-          "score": 0.6637
+          "return": -0.71,
+          "score": 0.5554
+        },
+        {
+          "ticker": "T",
+          "return": 3.36,
+          "score": 0.5531
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": 0.76,
+      "picks": [
+        "SOLV",
+        "GE",
+        "IQV",
+        "ALLE",
+        "FITB"
+      ],
+      "raw": [
+        {
+          "ticker": "SOLV",
+          "return": 4.31,
+          "score": 0.7342
+        },
+        {
+          "ticker": "GE",
+          "return": -6.38,
+          "score": 0.734
+        },
+        {
+          "ticker": "IQV",
+          "return": 7.99,
+          "score": 0.7312
+        },
+        {
+          "ticker": "ALLE",
+          "return": 1.4,
+          "score": 0.7218
+        },
+        {
+          "ticker": "FITB",
+          "return": -3.52,
+          "score": 0.7121
         }
       ]
     }
