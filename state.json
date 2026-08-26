@@ -1,5 +1,5 @@
 {
-  "capital": 104.37,
+  "capital": 274.26,
   "positions": {
     "SMCI": {
       "shares": 7,
@@ -46,24 +46,6 @@
       "entry_mode": "trend_following",
       "thesis": "score +0.775 \u00b7 led by trend \u00b7 mode trend_following"
     },
-    "EWZ": {
-      "shares": 31,
-      "cost_per_share": 34.17,
-      "cost": 1059.27,
-      "entry_date": "2026-08-20",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.353 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "XLY": {
-      "shares": 9,
-      "cost_per_share": 117.44,
-      "cost": 1056.96,
-      "entry_date": "2026-08-21",
-      "top_signal": "trend",
-      "entry_mode": "defensive",
-      "thesis": "score +0.788 \u00b7 led by trend \u00b7 mode defensive"
-    },
     "ARKW": {
       "shares": 7,
       "cost_per_share": 153.76,
@@ -90,6 +72,24 @@
       "top_signal": "momentum",
       "entry_mode": "trend_following",
       "thesis": "score +0.790 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "ORCL": {
+      "shares": 7,
+      "cost_per_share": 147.0,
+      "cost": 1029.0,
+      "entry_date": "2026-08-26",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.610 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "MSFT": {
+      "shares": 2,
+      "cost_per_share": 487.85,
+      "cost": 975.7,
+      "entry_date": "2026-08-26",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.610 \u00b7 led by momentum \u00b7 mode momentum"
     }
   },
   "closed": [
@@ -316,6 +316,34 @@
       "reason": "rotation \u2192 IBIT (score +0.21)",
       "top_signal": "trend",
       "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "XLY",
+      "entry_date": "2026-08-21",
+      "exit_date": "2026-08-26",
+      "entry_price": 117.44,
+      "exit_price": 117.69,
+      "shares": 9,
+      "cost": 1056.96,
+      "pnl": 2.25,
+      "pnl_pct": 0.21,
+      "reason": "rotation \u2192 ORCL (score +0.56)",
+      "top_signal": "trend",
+      "entry_mode": "defensive"
+    },
+    {
+      "ticker": "EWZ",
+      "entry_date": "2026-08-20",
+      "exit_date": "2026-08-26",
+      "entry_price": 34.17,
+      "exit_price": 35.98,
+      "shares": 31,
+      "cost": 1059.27,
+      "pnl": 56.11,
+      "pnl_pct": 5.3,
+      "reason": "rotation \u2192 MSFT (score +0.40)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -328,14 +356,15 @@
     "2026-08-20": 10051.42,
     "2026-08-21": 10143.72,
     "2026-08-24": 10055.95,
-    "2026-08-25": 10186.86
+    "2026-08-25": 10186.86,
+    "2026-08-26": 10195.23
   },
   "signal_weights": {
-    "momentum": 0.2,
-    "volume": 0.1,
-    "trend": 0.5,
+    "momentum": 0.5,
+    "volume": 0.25,
+    "trend": 0.15,
     "mean_rev": 0.05,
-    "regime_fit": 0.15
+    "regime_fit": 0.05
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -347,7 +376,8 @@
     "2026-08-20": "bull",
     "2026-08-21": "bull",
     "2026-08-24": "neutral",
-    "2026-08-25": "bull"
+    "2026-08-25": "bull",
+    "2026-08-26": "neutral"
   },
   "daily_log": [
     {
@@ -2337,11 +2367,224 @@
         }
       ],
       "prev_mode": "trend_following"
+    },
+    {
+      "date": "2026-08-26",
+      "thesis": "Regime: NEUTRAL\nVIX 15.4 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode switched: trend_following \u2192 momentum (Chase price strength and volume breakouts)\nBacktest (5d): momentum +6.09%  |  defensive +2.94%  |  mean reversion +1.60%  |  trend following -0.41%\nExited 2 position(s): XLY +2 (rotation \u2192 ORCL (score +0.56)), EWZ +56 (rotation \u2192 MSFT (score +0.40))\nEntered 2 position(s):\n  ORCL $147.00 \u00d7 7 shares (score +0.610, led by momentum)\n  MSFT $487.85 \u00d7 2 shares (score +0.610, led by momentum)\nTop candidates screened: ORCL +0.610, MSFT +0.610, MOS +0.610\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%",
+      "buys": [
+        {
+          "ticker": "ORCL",
+          "price": 147.0,
+          "total": 0.6104,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.4,
+            "trend": 1.0,
+            "mean_rev": 0.908,
+            "regime_fit": 0.3
+          },
+          "ret20": 26.13,
+          "ret5": 3.26,
+          "shares": 7,
+          "cost": 1029.0,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "MSFT",
+          "price": 487.85,
+          "total": 0.6096,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.411,
+            "trend": 1.0,
+            "mean_rev": 0.946,
+            "regime_fit": 0.3
+          },
+          "ret20": 27.14,
+          "ret5": 2.52,
+          "shares": 2,
+          "cost": 975.7,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "XLY",
+          "entry_date": "2026-08-21",
+          "exit_date": "2026-08-26",
+          "entry_price": 117.44,
+          "exit_price": 117.69,
+          "shares": 9,
+          "cost": 1056.96,
+          "pnl": 2.25,
+          "pnl_pct": 0.21,
+          "reason": "rotation \u2192 ORCL (score +0.56)",
+          "top_signal": "trend",
+          "entry_mode": "defensive"
+        },
+        {
+          "ticker": "EWZ",
+          "entry_date": "2026-08-20",
+          "exit_date": "2026-08-26",
+          "entry_price": 34.17,
+          "exit_price": 35.98,
+          "shares": 31,
+          "cost": 1059.27,
+          "pnl": 56.11,
+          "pnl_pct": 5.3,
+          "reason": "rotation \u2192 MSFT (score +0.40)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "ORCL",
+          "price": 148.5,
+          "total": 0.6104,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.4,
+            "trend": 1.0,
+            "mean_rev": 0.908,
+            "regime_fit": 0.3
+          },
+          "ret20": 26.13,
+          "ret5": 3.26
+        },
+        {
+          "ticker": "MSFT",
+          "price": 495.6000061035156,
+          "total": 0.6096,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.411,
+            "trend": 1.0,
+            "mean_rev": 0.946,
+            "regime_fit": 0.3
+          },
+          "ret20": 27.14,
+          "ret5": 2.52
+        },
+        {
+          "ticker": "MOS",
+          "price": 24.989999771118164,
+          "total": 0.6096,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.383,
+            "trend": 1.0,
+            "mean_rev": 0.804,
+            "regime_fit": 0.3
+          },
+          "ret20": 10.48,
+          "ret5": 12.42
+        },
+        {
+          "ticker": "LITE",
+          "price": 894.3499755859375,
+          "total": 0.6075,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.414,
+            "trend": 1.0,
+            "mean_rev": 0.919,
+            "regime_fit": 0.3
+          },
+          "ret20": 48.48,
+          "ret5": 8.07
+        },
+        {
+          "ticker": "DELL",
+          "price": 462.95001220703125,
+          "total": 0.6054,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.413,
+            "trend": 1.0,
+            "mean_rev": 0.871,
+            "regime_fit": 0.3
+          },
+          "ret20": 25.24,
+          "ret5": 5.81
+        },
+        {
+          "ticker": "FCX",
+          "price": 79.48999786376953,
+          "total": 0.6032,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.357,
+            "trend": 1.0,
+            "mean_rev": 0.548,
+            "regime_fit": 0.3
+          },
+          "ret20": 32.51,
+          "ret5": 15.05
+        },
+        {
+          "ticker": "MRNA",
+          "price": 149.88999938964844,
+          "total": 0.6028,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.358,
+            "trend": 1.0,
+            "mean_rev": 0.547,
+            "regime_fit": 0.3
+          },
+          "ret20": 175.08,
+          "ret5": -14.04
+        },
+        {
+          "ticker": "ANET",
+          "price": 195.898193359375,
+          "total": 0.6,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.45,
+            "trend": 1.0,
+            "mean_rev": 0.95,
+            "regime_fit": 0.3
+          },
+          "ret20": 24.01,
+          "ret5": 5.07
+        },
+        {
+          "ticker": "WDAY",
+          "price": 192.85000610351562,
+          "total": 0.5986,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.415,
+            "trend": 1.0,
+            "mean_rev": 0.745,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.78,
+          "ret5": -2.81
+        },
+        {
+          "ticker": "LDOS",
+          "price": 137.4499969482422,
+          "total": 0.597,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.457,
+            "trend": 1.0,
+            "mean_rev": 0.927,
+            "regime_fit": 0.3
+          },
+          "ret20": 20.18,
+          "ret5": -6.06
+        }
+      ],
+      "prev_mode": "trend_following"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "trend_following",
+  "active_mode": "momentum",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -2351,7 +2594,8 @@
     "2026-08-20": "mean_reversion",
     "2026-08-21": "defensive",
     "2026-08-24": "trend_following",
-    "2026-08-25": "trend_following"
+    "2026-08-25": "trend_following",
+    "2026-08-26": "momentum"
   },
   "mode_pnl": {
     "momentum": [
@@ -2374,160 +2618,163 @@
       2.93,
       0.58,
       0.39,
-      -0.46
+      -0.46,
+      5.3
     ],
-    "defensive": []
+    "defensive": [
+      0.21
+    ]
   },
   "last_backtest": [
     {
-      "mode": "trend_following",
-      "avg_return": 6.366,
+      "mode": "momentum",
+      "avg_return": 6.086,
       "picks": [
-        "GDXJ",
-        "CLOU",
-        "CPRT",
-        "MSI",
-        "BR"
+        "CHTR",
+        "EL",
+        "ETHA",
+        "MRK",
+        "ARKG"
       ],
       "raw": [
         {
-          "ticker": "GDXJ",
-          "return": 15.24,
-          "score": 0.8263
+          "ticker": "CHTR",
+          "return": 1.44,
+          "score": 0.9565
         },
         {
-          "ticker": "CLOU",
-          "return": -0.4,
-          "score": 0.8109
+          "ticker": "EL",
+          "return": 6.99,
+          "score": 0.941
         },
         {
-          "ticker": "CPRT",
-          "return": 4.28,
-          "score": 0.7657
+          "ticker": "ETHA",
+          "return": 16.85,
+          "score": 0.9287
         },
         {
-          "ticker": "MSI",
-          "return": 3.4,
-          "score": 0.7502
+          "ticker": "MRK",
+          "return": 1.24,
+          "score": 0.9275
         },
         {
-          "ticker": "BR",
-          "return": 9.31,
-          "score": 0.7486
+          "ticker": "ARKG",
+          "return": 3.91,
+          "score": 0.9225
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": 5.282,
+      "avg_return": 2.936,
       "picks": [
-        "GDXJ",
-        "CLOU",
-        "FNGU",
-        "CIBR",
-        "ARKG"
+        "CHTR",
+        "JKHY",
+        "GRMN",
+        "EL",
+        "WTW"
       ],
       "raw": [
         {
-          "ticker": "GDXJ",
-          "return": 15.24,
-          "score": 0.8044
+          "ticker": "CHTR",
+          "return": 1.44,
+          "score": 0.5981
         },
         {
-          "ticker": "CLOU",
-          "return": -0.4,
-          "score": 0.8006
+          "ticker": "JKHY",
+          "return": 6.13,
+          "score": 0.5699
         },
         {
-          "ticker": "FNGU",
-          "return": 0.44,
-          "score": 0.7655
+          "ticker": "GRMN",
+          "return": -3.06,
+          "score": 0.5674
         },
         {
-          "ticker": "CIBR",
-          "return": -4.4,
-          "score": 0.7622
+          "ticker": "EL",
+          "return": 6.99,
+          "score": 0.5671
         },
         {
-          "ticker": "ARKG",
-          "return": 15.53,
-          "score": 0.7606
-        }
-      ]
-    },
-    {
-      "mode": "momentum",
-      "avg_return": 4.376,
-      "picks": [
-        "CPRT",
-        "DASH",
-        "MSI",
-        "TRGP",
-        "BR"
-      ],
-      "raw": [
-        {
-          "ticker": "CPRT",
-          "return": 4.28,
-          "score": 0.7244
-        },
-        {
-          "ticker": "DASH",
-          "return": 7.17,
-          "score": 0.7048
-        },
-        {
-          "ticker": "MSI",
-          "return": 3.4,
-          "score": 0.7035
-        },
-        {
-          "ticker": "TRGP",
-          "return": -2.28,
-          "score": 0.6979
-        },
-        {
-          "ticker": "BR",
-          "return": 9.31,
-          "score": 0.6906
+          "ticker": "WTW",
+          "return": 3.18,
+          "score": 0.5582
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": 2.172,
+      "avg_return": 1.602,
       "picks": [
-        "L",
-        "ROST",
-        "BALL",
-        "AON",
-        "CTAS"
+        "CHTR",
+        "KVUE",
+        "GRMN",
+        "CME",
+        "WTW"
       ],
       "raw": [
         {
-          "ticker": "L",
-          "return": -1.02,
-          "score": 0.4108
+          "ticker": "CHTR",
+          "return": 1.44,
+          "score": 0.8018
         },
         {
-          "ticker": "ROST",
-          "return": 0.74,
-          "score": 0.3205
+          "ticker": "KVUE",
+          "return": 1.44,
+          "score": 0.7499
         },
         {
-          "ticker": "BALL",
-          "return": 3.92,
-          "score": 0.3152
+          "ticker": "GRMN",
+          "return": -3.06,
+          "score": 0.7437
         },
         {
-          "ticker": "AON",
-          "return": 4.16,
-          "score": 0.3115
+          "ticker": "CME",
+          "return": 5.01,
+          "score": 0.736
         },
         {
-          "ticker": "CTAS",
-          "return": 3.06,
-          "score": 0.3005
+          "ticker": "WTW",
+          "return": 3.18,
+          "score": 0.7212
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -0.414,
+      "picks": [
+        "CHTR",
+        "EL",
+        "MRK",
+        "MRNA",
+        "TGT"
+      ],
+      "raw": [
+        {
+          "ticker": "CHTR",
+          "return": 1.44,
+          "score": 0.8865
+        },
+        {
+          "ticker": "EL",
+          "return": 6.99,
+          "score": 0.871
+        },
+        {
+          "ticker": "MRK",
+          "return": 1.24,
+          "score": 0.8575
+        },
+        {
+          "ticker": "MRNA",
+          "return": -14.04,
+          "score": 0.8511
+        },
+        {
+          "ticker": "TGT",
+          "return": 2.3,
+          "score": 0.8435
         }
       ]
     }
