@@ -1,15 +1,6 @@
 {
-  "capital": 1340.29,
+  "capital": 1300.66,
   "positions": {
-    "ARKG": {
-      "shares": 37,
-      "cost_per_share": 43.115,
-      "cost": 1595.26,
-      "entry_date": "2026-08-17",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.594 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "FNGU": {
       "shares": 29,
       "cost_per_share": 30.95,
@@ -46,15 +37,6 @@
       "entry_mode": "trend_following",
       "thesis": "score +0.756 \u00b7 led by momentum \u00b7 mode trend_following"
     },
-    "ORCL": {
-      "shares": 7,
-      "cost_per_share": 147.0,
-      "cost": 1029.0,
-      "entry_date": "2026-08-26",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.610 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "MSFT": {
       "shares": 2,
       "cost_per_share": 487.85,
@@ -64,23 +46,50 @@
       "entry_mode": "momentum",
       "thesis": "score +0.610 \u00b7 led by momentum \u00b7 mode momentum"
     },
-    "GDXJ": {
-      "shares": 3,
-      "cost_per_share": 135.76,
-      "cost": 407.28,
-      "entry_date": "2026-08-28",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.857 \u00b7 led by momentum \u00b7 mode trend_following"
+    "MDT": {
+      "shares": 10,
+      "cost_per_share": 94.0,
+      "cost": 940.0,
+      "entry_date": "2026-09-01",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.696 \u00b7 led by trend \u00b7 mode mean_reversion"
     },
-    "DELL": {
+    "CRWD": {
+      "shares": 3,
+      "cost_per_share": 228.1875,
+      "cost": 684.56,
+      "entry_date": "2026-09-01",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.681 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "CLOU": {
+      "shares": 35,
+      "cost_per_share": 28.45,
+      "cost": 995.75,
+      "entry_date": "2026-09-01",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.680 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "CRL": {
       "shares": 2,
-      "cost_per_share": 459.85,
-      "cost": 919.7,
-      "entry_date": "2026-08-31",
+      "cost_per_share": 289.26,
+      "cost": 578.52,
+      "entry_date": "2026-09-01",
       "top_signal": "momentum",
       "entry_mode": "mean_reversion",
-      "thesis": "score +0.719 \u00b7 led by momentum \u00b7 mode mean_reversion"
+      "thesis": "score +0.678 \u00b7 led by momentum \u00b7 mode mean_reversion"
+    },
+    "MCK": {
+      "shares": 1,
+      "cost_per_share": 887.7,
+      "cost": 887.7,
+      "entry_date": "2026-09-01",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.663 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -391,6 +400,62 @@
       "reason": "rotation \u2192 CRWD (score +0.47)",
       "top_signal": "momentum",
       "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "ARKG",
+      "entry_date": "2026-08-17",
+      "exit_date": "2026-09-01",
+      "entry_price": 43.115,
+      "exit_price": 46.97,
+      "shares": 37,
+      "cost": 1595.26,
+      "pnl": 142.63,
+      "pnl_pct": 8.94,
+      "reason": "max hold 15d",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "GDXJ",
+      "entry_date": "2026-08-28",
+      "exit_date": "2026-09-01",
+      "entry_price": 135.76,
+      "exit_price": 123.46,
+      "shares": 3,
+      "cost": 407.28,
+      "pnl": -36.9,
+      "pnl_pct": -9.06,
+      "reason": "stop loss (-8.5%)",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "DELL",
+      "entry_date": "2026-08-31",
+      "exit_date": "2026-09-01",
+      "entry_price": 459.85,
+      "exit_price": 455.69,
+      "shares": 2,
+      "cost": 919.7,
+      "pnl": -8.32,
+      "pnl_pct": -0.9,
+      "reason": "rotation \u2192 MDT (score +0.36)",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "ORCL",
+      "entry_date": "2026-08-26",
+      "exit_date": "2026-09-01",
+      "entry_price": 147.0,
+      "exit_price": 146.75,
+      "shares": 7,
+      "cost": 1029.0,
+      "pnl": -1.75,
+      "pnl_pct": -0.17,
+      "reason": "rotation \u2192 CRWD (score +0.32)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -407,7 +472,8 @@
     "2026-08-26": 10195.23,
     "2026-08-27": 10390.12,
     "2026-08-28": 10173.53,
-    "2026-08-31": 10142.15
+    "2026-08-31": 10142.15,
+    "2026-09-01": 9949.4
   },
   "signal_weights": {
     "momentum": 0.05,
@@ -430,7 +496,8 @@
     "2026-08-26": "neutral",
     "2026-08-27": "bull",
     "2026-08-28": "bull",
-    "2026-08-31": "neutral"
+    "2026-08-31": "neutral",
+    "2026-09-01": "neutral"
   },
   "daily_log": [
     {
@@ -3193,6 +3260,298 @@
         }
       ],
       "prev_mode": "trend_following"
+    },
+    {
+      "date": "2026-09-01",
+      "thesis": "Regime: NEUTRAL\nVIX 16.1 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode: mean_reversion \u2014 Buy oversold dips in trending markets\nBacktest (5d): mean reversion -1.67%  |  defensive -3.20%  |  momentum -3.96%  |  trend following -4.34%\nExited 4 position(s): ARKG +143 (max hold 15d), GDXJ -37 (stop loss (-8.5%)), DELL -8 (rotation \u2192 MDT (score +0.36)), ORCL -2 (rotation \u2192 CRWD (score +0.32))\nEntered 5 position(s):\n  MDT $94.00 \u00d7 10 shares (score +0.696, led by trend)\n  CRWD $228.19 \u00d7 3 shares (score +0.681, led by trend)\n  CLOU $28.45 \u00d7 35 shares (score +0.680, led by trend)\n  CRL $289.26 \u00d7 2 shares (score +0.678, led by momentum)\n  MCK $887.70 \u00d7 1 shares (score +0.663, led by trend)\nTop candidates screened: MDT +0.696, CRWD +0.681, CLOU +0.680\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "MDT",
+          "price": 94.0,
+          "total": 0.6963,
+          "scores": {
+            "momentum": 0.514,
+            "volume": 0.301,
+            "trend": 1.0,
+            "mean_rev": 0.874,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.93,
+          "ret5": -0.23,
+          "shares": 10,
+          "cost": 940.0,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "CRWD",
+          "price": 228.1875,
+          "total": 0.6807,
+          "scores": {
+            "momentum": 0.509,
+            "volume": -0.057,
+            "trend": 1.0,
+            "mean_rev": 0.943,
+            "regime_fit": 0.3
+          },
+          "ret20": 1.55,
+          "ret5": 15.71,
+          "shares": 3,
+          "cost": 684.56,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "CLOU",
+          "price": 28.45,
+          "total": 0.6803,
+          "scores": {
+            "momentum": 0.641,
+            "volume": -0.006,
+            "trend": 1.0,
+            "mean_rev": 0.998,
+            "regime_fit": 0.0
+          },
+          "ret20": 8.25,
+          "ret5": 0.9,
+          "shares": 35,
+          "cost": 995.75,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "CRL",
+          "price": 289.26,
+          "total": 0.6776,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.404,
+            "trend": 1.0,
+            "mean_rev": 0.988,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.46,
+          "ret5": -5.31,
+          "shares": 2,
+          "cost": 578.52,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "MCK",
+          "price": 887.7,
+          "total": 0.6631,
+          "scores": {
+            "momentum": 0.853,
+            "volume": -0.361,
+            "trend": 1.0,
+            "mean_rev": 0.963,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.99,
+          "ret5": 4.12,
+          "shares": 1,
+          "cost": 887.7,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "ARKG",
+          "entry_date": "2026-08-17",
+          "exit_date": "2026-09-01",
+          "entry_price": 43.115,
+          "exit_price": 46.97,
+          "shares": 37,
+          "cost": 1595.26,
+          "pnl": 142.63,
+          "pnl_pct": 8.94,
+          "reason": "max hold 15d",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "GDXJ",
+          "entry_date": "2026-08-28",
+          "exit_date": "2026-09-01",
+          "entry_price": 135.76,
+          "exit_price": 123.46,
+          "shares": 3,
+          "cost": 407.28,
+          "pnl": -36.9,
+          "pnl_pct": -9.06,
+          "reason": "stop loss (-8.5%)",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "DELL",
+          "entry_date": "2026-08-31",
+          "exit_date": "2026-09-01",
+          "entry_price": 459.85,
+          "exit_price": 455.69,
+          "shares": 2,
+          "cost": 919.7,
+          "pnl": -8.32,
+          "pnl_pct": -0.9,
+          "reason": "rotation \u2192 MDT (score +0.36)",
+          "top_signal": "momentum",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "ORCL",
+          "entry_date": "2026-08-26",
+          "exit_date": "2026-09-01",
+          "entry_price": 147.0,
+          "exit_price": 146.75,
+          "shares": 7,
+          "cost": 1029.0,
+          "pnl": -1.75,
+          "pnl_pct": -0.17,
+          "reason": "rotation \u2192 CRWD (score +0.32)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "MDT",
+          "price": 92.69000244140625,
+          "total": 0.6963,
+          "scores": {
+            "momentum": 0.514,
+            "volume": 0.301,
+            "trend": 1.0,
+            "mean_rev": 0.874,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.93,
+          "ret5": -0.23
+        },
+        {
+          "ticker": "CRWD",
+          "price": 214.5,
+          "total": 0.6807,
+          "scores": {
+            "momentum": 0.509,
+            "volume": -0.057,
+            "trend": 1.0,
+            "mean_rev": 0.943,
+            "regime_fit": 0.3
+          },
+          "ret20": 1.55,
+          "ret5": 15.71
+        },
+        {
+          "ticker": "CLOU",
+          "price": 27.950000762939453,
+          "total": 0.6803,
+          "scores": {
+            "momentum": 0.641,
+            "volume": -0.006,
+            "trend": 1.0,
+            "mean_rev": 0.998,
+            "regime_fit": 0.0
+          },
+          "ret20": 8.25,
+          "ret5": 0.9
+        },
+        {
+          "ticker": "CRL",
+          "price": 282.7300109863281,
+          "total": 0.6776,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.404,
+            "trend": 1.0,
+            "mean_rev": 0.988,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.46,
+          "ret5": -5.31
+        },
+        {
+          "ticker": "MCK",
+          "price": 909.8049926757812,
+          "total": 0.6631,
+          "scores": {
+            "momentum": 0.853,
+            "volume": -0.361,
+            "trend": 1.0,
+            "mean_rev": 0.963,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.99,
+          "ret5": 4.12
+        },
+        {
+          "ticker": "CEG",
+          "price": 278.69000244140625,
+          "total": 0.6592,
+          "scores": {
+            "momentum": 0.196,
+            "volume": -0.247,
+            "trend": 1.0,
+            "mean_rev": 0.985,
+            "regime_fit": 0.3
+          },
+          "ret20": 1.98,
+          "ret5": 1.92
+        },
+        {
+          "ticker": "TSCO",
+          "price": 34.915000915527344,
+          "total": 0.6568,
+          "scores": {
+            "momentum": 0.642,
+            "volume": -0.396,
+            "trend": 1.0,
+            "mean_rev": 0.98,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.49,
+          "ret5": -2.8
+        },
+        {
+          "ticker": "FTNT",
+          "price": 161.66510009765625,
+          "total": 0.6563,
+          "scores": {
+            "momentum": 0.088,
+            "volume": -0.274,
+            "trend": 1.0,
+            "mean_rev": 0.996,
+            "regime_fit": 0.3
+          },
+          "ret20": -0.95,
+          "ret5": 6.37
+        },
+        {
+          "ticker": "ABNB",
+          "price": 182.9600067138672,
+          "total": 0.6557,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.348,
+            "trend": 1.0,
+            "mean_rev": 0.933,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.04,
+          "ret5": -3.96
+        },
+        {
+          "ticker": "ULTA",
+          "price": 546.5599975585938,
+          "total": 0.6533,
+          "scores": {
+            "momentum": 0.207,
+            "volume": -0.212,
+            "trend": 1.0,
+            "mean_rev": 0.963,
+            "regime_fit": 0.3
+          },
+          "ret20": 2.27,
+          "ret5": 1.45
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
@@ -3211,7 +3570,8 @@
     "2026-08-26": "momentum",
     "2026-08-27": "trend_following",
     "2026-08-28": "trend_following",
-    "2026-08-31": "mean_reversion"
+    "2026-08-31": "mean_reversion",
+    "2026-09-01": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -3221,7 +3581,9 @@
       -5.08,
       -5.78,
       10.55,
-      -2.05
+      -2.05,
+      8.94,
+      -0.17
     ],
     "trend_following": [
       3.93,
@@ -3230,7 +3592,8 @@
       -0.97,
       -2.44,
       2.37,
-      -0.84
+      -0.84,
+      -9.06
     ],
     "mean_reversion": [
       -4.68,
@@ -3239,7 +3602,8 @@
       0.58,
       0.39,
       -0.46,
-      5.3
+      5.3,
+      -0.9
     ],
     "defensive": [
       0.21
@@ -3248,153 +3612,153 @@
   "last_backtest": [
     {
       "mode": "mean_reversion",
-      "avg_return": 0.958,
+      "avg_return": -1.674,
       "picks": [
-        "CHTR",
         "ULTA",
-        "LULU",
+        "HPE",
         "CPER",
-        "CHD"
+        "ARES",
+        "IFF"
       ],
       "raw": [
         {
-          "ticker": "CHTR",
-          "return": 0.65,
-          "score": 0.7358
-        },
-        {
           "ticker": "ULTA",
-          "return": 3.13,
-          "score": 0.7344
+          "return": 1.45,
+          "score": 0.7371
         },
         {
-          "ticker": "LULU",
-          "return": 0.09,
-          "score": 0.718
+          "ticker": "HPE",
+          "return": -5.91,
+          "score": 0.7148
         },
         {
           "ticker": "CPER",
-          "return": -0.13,
-          "score": 0.7165
+          "return": -3.35,
+          "score": 0.7126
         },
         {
-          "ticker": "CHD",
-          "return": 1.05,
-          "score": 0.7077
+          "ticker": "ARES",
+          "return": -0.57,
+          "score": 0.7112
+        },
+        {
+          "ticker": "IFF",
+          "return": 0.01,
+          "score": 0.7101
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -0.13,
+      "avg_return": -3.2,
       "picks": [
-        "CHTR",
-        "ULTA",
-        "AXON",
-        "ZBRA",
-        "CVNA"
+        "INTU",
+        "MSFT",
+        "HPE",
+        "IT",
+        "ARES"
       ],
       "raw": [
         {
-          "ticker": "CHTR",
-          "return": 0.65,
-          "score": 0.566
+          "ticker": "INTU",
+          "return": -6.0,
+          "score": 0.5634
         },
         {
-          "ticker": "ULTA",
-          "return": 3.13,
-          "score": 0.5639
+          "ticker": "MSFT",
+          "return": 1.88,
+          "score": 0.5576
         },
         {
-          "ticker": "AXON",
-          "return": -4.7,
-          "score": 0.5546
+          "ticker": "HPE",
+          "return": -5.91,
+          "score": 0.5559
         },
         {
-          "ticker": "ZBRA",
-          "return": -4.18,
-          "score": 0.5503
+          "ticker": "IT",
+          "return": -5.4,
+          "score": 0.5556
         },
         {
-          "ticker": "CVNA",
-          "return": 4.45,
-          "score": 0.5491
+          "ticker": "ARES",
+          "return": -0.57,
+          "score": 0.5534
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -0.648,
+      "avg_return": -3.964,
       "picks": [
-        "A",
-        "GLD",
-        "IBIT",
-        "FCX",
-        "ETHA"
+        "INTU",
+        "MRNA",
+        "TGT",
+        "ARKG",
+        "JKHY"
       ],
       "raw": [
         {
-          "ticker": "A",
-          "return": -3.18,
-          "score": 0.815
+          "ticker": "INTU",
+          "return": -6.0,
+          "score": 0.8208
         },
         {
-          "ticker": "GLD",
-          "return": -3.72,
-          "score": 0.8027
+          "ticker": "MRNA",
+          "return": -5.77,
+          "score": 0.8078
         },
         {
-          "ticker": "IBIT",
-          "return": 2.61,
-          "score": 0.7927
+          "ticker": "TGT",
+          "return": -4.33,
+          "score": 0.7744
         },
         {
-          "ticker": "FCX",
-          "return": -1.72,
-          "score": 0.7678
+          "ticker": "ARKG",
+          "return": -2.03,
+          "score": 0.7641
         },
         {
-          "ticker": "ETHA",
-          "return": 2.77,
-          "score": 0.7602
+          "ticker": "JKHY",
+          "return": -1.69,
+          "score": 0.737
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -0.968,
+      "avg_return": -4.344,
       "picks": [
-        "A",
-        "GLD",
-        "CHTR",
-        "FCX",
-        "ULTA"
+        "INTU",
+        "MRNA",
+        "TGT",
+        "IT",
+        "RMD"
       ],
       "raw": [
         {
-          "ticker": "A",
-          "return": -3.18,
-          "score": 0.8206
+          "ticker": "INTU",
+          "return": -6.0,
+          "score": 0.8297
         },
         {
-          "ticker": "GLD",
-          "return": -3.72,
-          "score": 0.8107
+          "ticker": "MRNA",
+          "return": -5.77,
+          "score": 0.8171
         },
         {
-          "ticker": "CHTR",
-          "return": 0.65,
-          "score": 0.8045
+          "ticker": "TGT",
+          "return": -4.33,
+          "score": 0.8065
         },
         {
-          "ticker": "FCX",
-          "return": -1.72,
-          "score": 0.8039
+          "ticker": "IT",
+          "return": -5.4,
+          "score": 0.7989
         },
         {
-          "ticker": "ULTA",
-          "return": 3.13,
-          "score": 0.7972
+          "ticker": "RMD",
+          "return": -0.22,
+          "score": 0.7914
         }
       ]
     }
