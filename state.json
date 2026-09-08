@@ -1,5 +1,5 @@
 {
-  "capital": 1035.48,
+  "capital": 839.0,
   "positions": {
     "MDT": {
       "shares": 10,
@@ -46,15 +46,6 @@
       "entry_mode": "momentum",
       "thesis": "score +0.690 \u00b7 led by momentum \u00b7 mode momentum"
     },
-    "IBIT": {
-      "shares": 24,
-      "cost_per_share": 44.425,
-      "cost": 1066.2,
-      "entry_date": "2026-09-03",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.665 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "FBTC": {
       "shares": 15,
       "cost_per_share": 69.02,
@@ -64,15 +55,6 @@
       "entry_mode": "trend_following",
       "thesis": "score +0.800 \u00b7 led by momentum \u00b7 mode trend_following"
     },
-    "ETHA": {
-      "shares": 57,
-      "cost_per_share": 18.48,
-      "cost": 1053.36,
-      "entry_date": "2026-09-04",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.796 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
     "GDXJ": {
       "shares": 6,
       "cost_per_share": 128.46,
@@ -81,6 +63,33 @@
       "top_signal": "trend",
       "entry_mode": "trend_following",
       "thesis": "score +0.772 \u00b7 led by trend \u00b7 mode trend_following"
+    },
+    "STX": {
+      "shares": 1,
+      "cost_per_share": 880.65,
+      "cost": 880.65,
+      "entry_date": "2026-09-08",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.697 \u00b7 led by momentum \u00b7 mode mean_reversion"
+    },
+    "JNJ": {
+      "shares": 2,
+      "cost_per_share": 271.28,
+      "cost": 542.56,
+      "entry_date": "2026-09-08",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.668 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "BBY": {
+      "shares": 10,
+      "cost_per_share": 89.8,
+      "cost": 898.0,
+      "entry_date": "2026-09-08",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.662 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -587,6 +596,34 @@
       "reason": "rotation \u2192 GDXJ (score +0.87)",
       "top_signal": "momentum",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "ETHA",
+      "entry_date": "2026-09-04",
+      "exit_date": "2026-09-08",
+      "entry_price": 18.48,
+      "exit_price": 18.615,
+      "shares": 57,
+      "cost": 1053.36,
+      "pnl": 7.69,
+      "pnl_pct": 0.73,
+      "reason": "rotation \u2192 STX (score +0.33)",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "IBIT",
+      "entry_date": "2026-09-03",
+      "exit_date": "2026-09-08",
+      "entry_price": 44.425,
+      "exit_price": 44.32,
+      "shares": 24,
+      "cost": 1066.2,
+      "pnl": -2.52,
+      "pnl_pct": -0.24,
+      "reason": "rotation \u2192 JNJ (score +0.26)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -608,13 +645,14 @@
     "2026-09-02": 10001.04,
     "2026-09-03": 10362.57,
     "2026-09-04": 10335.7,
-    "2026-09-07": 10316.21
+    "2026-09-07": 10316.21,
+    "2026-09-08": 10191.96
   },
   "signal_weights": {
-    "momentum": 0.2,
-    "volume": 0.1,
-    "trend": 0.5,
-    "mean_rev": 0.05,
+    "momentum": 0.05,
+    "volume": 0.15,
+    "trend": 0.1,
+    "mean_rev": 0.55,
     "regime_fit": 0.15
   },
   "regime_history": {
@@ -636,7 +674,8 @@
     "2026-09-02": "neutral",
     "2026-09-03": "bull",
     "2026-09-04": "bull",
-    "2026-09-07": "bull"
+    "2026-09-07": "bull",
+    "2026-09-08": "neutral"
   },
   "daily_log": [
     {
@@ -4588,11 +4627,241 @@
         }
       ],
       "prev_mode": "trend_following"
+    },
+    {
+      "date": "2026-09-08",
+      "thesis": "Regime: NEUTRAL\nStrategy mode switched: trend_following \u2192 mean_reversion (Buy oversold dips in trending markets)\nBacktest (5d): mean reversion -3.51%  |  momentum -4.31%  |  trend following -4.31%  |  defensive -5.91%\nExited 2 position(s): ETHA +8 (rotation \u2192 STX (score +0.33)), IBIT -3 (rotation \u2192 JNJ (score +0.26))\nEntered 3 position(s):\n  STX $880.65 \u00d7 1 shares (score +0.697, led by momentum)\n  JNJ $271.28 \u00d7 2 shares (score +0.668, led by trend)\n  BBY $89.80 \u00d7 10 shares (score +0.662, led by trend)\nTop candidates screened: STX +0.697, JNJ +0.668, BBY +0.662\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "STX",
+          "price": 880.65,
+          "total": 0.6969,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.162,
+            "trend": 1.0,
+            "mean_rev": 0.957,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.8,
+          "ret5": 11.0,
+          "shares": 1,
+          "cost": 880.65,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "JNJ",
+          "price": 271.28,
+          "total": 0.6679,
+          "scores": {
+            "momentum": 0.277,
+            "volume": -0.221,
+            "trend": 1.0,
+            "mean_rev": 0.986,
+            "regime_fit": 0.3
+          },
+          "ret20": 3.29,
+          "ret5": 1.22,
+          "shares": 2,
+          "cost": 542.56,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "BBY",
+          "price": 89.8,
+          "total": 0.6625,
+          "scores": {
+            "momentum": 0.835,
+            "volume": -0.326,
+            "trend": 1.0,
+            "mean_rev": 0.954,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.58,
+          "ret5": 10.64,
+          "shares": 10,
+          "cost": 898.0,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "ETHA",
+          "entry_date": "2026-09-04",
+          "exit_date": "2026-09-08",
+          "entry_price": 18.48,
+          "exit_price": 18.615,
+          "shares": 57,
+          "cost": 1053.36,
+          "pnl": 7.69,
+          "pnl_pct": 0.73,
+          "reason": "rotation \u2192 STX (score +0.33)",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "IBIT",
+          "entry_date": "2026-09-03",
+          "exit_date": "2026-09-08",
+          "entry_price": 44.425,
+          "exit_price": 44.32,
+          "shares": 24,
+          "cost": 1066.2,
+          "pnl": -2.52,
+          "pnl_pct": -0.24,
+          "reason": "rotation \u2192 JNJ (score +0.26)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "STX",
+          "price": 919.5,
+          "total": 0.6969,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.162,
+            "trend": 1.0,
+            "mean_rev": 0.957,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.8,
+          "ret5": 11.0
+        },
+        {
+          "ticker": "JNJ",
+          "price": 269.0849914550781,
+          "total": 0.6679,
+          "scores": {
+            "momentum": 0.277,
+            "volume": -0.221,
+            "trend": 1.0,
+            "mean_rev": 0.986,
+            "regime_fit": 0.3
+          },
+          "ret20": 3.29,
+          "ret5": 1.22
+        },
+        {
+          "ticker": "BBY",
+          "price": 88.68000030517578,
+          "total": 0.6625,
+          "scores": {
+            "momentum": 0.835,
+            "volume": -0.326,
+            "trend": 1.0,
+            "mean_rev": 0.954,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.58,
+          "ret5": 10.64
+        },
+        {
+          "ticker": "HPE",
+          "price": 55.125,
+          "total": 0.6592,
+          "scores": {
+            "momentum": 0.199,
+            "volume": -0.205,
+            "trend": 1.0,
+            "mean_rev": 0.973,
+            "regime_fit": 0.3
+          },
+          "ret20": 0.81,
+          "ret5": 5.52
+        },
+        {
+          "ticker": "WMB",
+          "price": 74.91999816894531,
+          "total": 0.6554,
+          "scores": {
+            "momentum": 0.316,
+            "volume": -0.309,
+            "trend": 1.0,
+            "mean_rev": 0.984,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.27,
+          "ret5": -0.17
+        },
+        {
+          "ticker": "BNY",
+          "price": 163.99000549316406,
+          "total": 0.6546,
+          "scores": {
+            "momentum": 0.257,
+            "volume": -0.345,
+            "trend": 1.0,
+            "mean_rev": 0.997,
+            "regime_fit": 0.3
+          },
+          "ret20": 2.86,
+          "ret5": 1.68
+        },
+        {
+          "ticker": "C",
+          "price": 137.5500030517578,
+          "total": 0.6544,
+          "scores": {
+            "momentum": 0.242,
+            "volume": -0.334,
+            "trend": 1.0,
+            "mean_rev": 0.995,
+            "regime_fit": 0.3
+          },
+          "ret20": 1.72,
+          "ret5": 4.51
+        },
+        {
+          "ticker": "LYB",
+          "price": 64.94999694824219,
+          "total": 0.6544,
+          "scores": {
+            "momentum": 0.351,
+            "volume": -0.322,
+            "trend": 1.0,
+            "mean_rev": 0.982,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.74,
+          "ret5": -0.2
+        },
+        {
+          "ticker": "OKE",
+          "price": 96.6500015258789,
+          "total": 0.6543,
+          "scores": {
+            "momentum": 0.541,
+            "volume": -0.328,
+            "trend": 1.0,
+            "mean_rev": 0.966,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.98,
+          "ret5": 0.67
+        },
+        {
+          "ticker": "MRVL",
+          "price": 229.63499450683594,
+          "total": 0.6538,
+          "scores": {
+            "momentum": 0.97,
+            "volume": -0.226,
+            "trend": 1.0,
+            "mean_rev": 0.899,
+            "regime_fit": 0.3
+          },
+          "ret20": 10.11,
+          "ret5": 8.49
+        }
+      ],
+      "prev_mode": "trend_following"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "trend_following",
+  "active_mode": "mean_reversion",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -4611,7 +4880,8 @@
     "2026-09-02": "mean_reversion",
     "2026-09-03": "momentum",
     "2026-09-04": "trend_following",
-    "2026-09-07": "trend_following"
+    "2026-09-07": "trend_following",
+    "2026-09-08": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -4624,7 +4894,8 @@
       -2.05,
       8.94,
       -0.17,
-      2.93
+      2.93,
+      -0.24
     ],
     "trend_following": [
       3.93,
@@ -4637,7 +4908,8 @@
       -9.06,
       3.13,
       -0.29,
-      -5.57
+      -5.57,
+      0.73
     ],
     "mean_reversion": [
       -4.68,
@@ -4661,154 +4933,154 @@
   },
   "last_backtest": [
     {
-      "mode": "trend_following",
-      "avg_return": 0.34,
+      "mode": "mean_reversion",
+      "avg_return": -3.514,
       "picks": [
-        "FNGU",
-        "GDXJ",
-        "ARKG",
-        "ARKW",
-        "ARKK"
+        "CSGP",
+        "BNY",
+        "TRMB",
+        "PANW",
+        "MDT"
       ],
       "raw": [
         {
-          "ticker": "FNGU",
-          "return": -1.76,
-          "score": 0.8832
+          "ticker": "CSGP",
+          "return": -6.33,
+          "score": 0.8234
         },
         {
-          "ticker": "GDXJ",
-          "return": 0.18,
-          "score": 0.8576
+          "ticker": "BNY",
+          "return": 1.68,
+          "score": 0.8022
         },
         {
-          "ticker": "ARKG",
-          "return": -1.05,
-          "score": 0.8561
+          "ticker": "TRMB",
+          "return": -3.03,
+          "score": 0.7842
         },
         {
-          "ticker": "ARKW",
-          "return": 2.4,
-          "score": 0.8473
+          "ticker": "PANW",
+          "return": -12.02,
+          "score": 0.7817
         },
         {
-          "ticker": "ARKK",
-          "return": 1.93,
-          "score": 0.8406
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": -0.774,
-      "picks": [
-        "FNGU",
-        "ARKG",
-        "GDXJ",
-        "CLOU",
-        "ARKW"
-      ],
-      "raw": [
-        {
-          "ticker": "FNGU",
-          "return": -1.76,
-          "score": 0.8633
-        },
-        {
-          "ticker": "ARKG",
-          "return": -1.05,
-          "score": 0.8408
-        },
-        {
-          "ticker": "GDXJ",
-          "return": 0.18,
-          "score": 0.8387
-        },
-        {
-          "ticker": "CLOU",
-          "return": -3.64,
-          "score": 0.833
-        },
-        {
-          "ticker": "ARKW",
-          "return": 2.4,
-          "score": 0.8308
+          "ticker": "MDT",
+          "return": 2.13,
+          "score": 0.7776
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -2.116,
+      "avg_return": -4.308,
       "picks": [
-        "CRM",
-        "SLV",
-        "FNGU",
+        "TYL",
+        "SLB",
         "WEAT",
-        "WDAY"
+        "NEM",
+        "CRWD"
       ],
       "raw": [
         {
-          "ticker": "CRM",
-          "return": 1.26,
-          "score": 0.8147
+          "ticker": "TYL",
+          "return": -6.34,
+          "score": 0.9403
         },
         {
-          "ticker": "SLV",
-          "return": -0.33,
-          "score": 0.8141
-        },
-        {
-          "ticker": "FNGU",
-          "return": -1.76,
-          "score": 0.7862
+          "ticker": "SLB",
+          "return": -4.53,
+          "score": 0.9391
         },
         {
           "ticker": "WEAT",
-          "return": -5.39,
-          "score": 0.7619
+          "return": -3.81,
+          "score": 0.9251
         },
         {
-          "ticker": "WDAY",
-          "return": -4.36,
-          "score": 0.7601
+          "ticker": "NEM",
+          "return": 2.05,
+          "score": 0.8456
+        },
+        {
+          "ticker": "CRWD",
+          "return": -8.91,
+          "score": 0.8317
         }
       ]
     },
     {
-      "mode": "mean_reversion",
-      "avg_return": -3.484,
+      "mode": "trend_following",
+      "avg_return": -4.308,
       "picks": [
-        "XLI",
-        "BA",
-        "PCG",
-        "RL",
-        "GRMN"
+        "TYL",
+        "SLB",
+        "WEAT",
+        "NEM",
+        "CRWD"
       ],
       "raw": [
         {
-          "ticker": "XLI",
-          "return": -1.06,
-          "score": 0.4462
+          "ticker": "TYL",
+          "return": -6.34,
+          "score": 0.8703
         },
         {
-          "ticker": "BA",
-          "return": 1.16,
-          "score": 0.3853
+          "ticker": "SLB",
+          "return": -4.53,
+          "score": 0.8691
         },
         {
-          "ticker": "PCG",
-          "return": -13.86,
-          "score": 0.3759
+          "ticker": "WEAT",
+          "return": -3.81,
+          "score": 0.8551
         },
         {
-          "ticker": "RL",
-          "return": -0.8,
-          "score": 0.3693
+          "ticker": "NEM",
+          "return": 2.05,
+          "score": 0.8413
         },
         {
-          "ticker": "GRMN",
-          "return": -2.86,
-          "score": 0.3449
+          "ticker": "CRWD",
+          "return": -8.91,
+          "score": 0.8392
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": -5.91,
+      "picks": [
+        "CRWD",
+        "PANW",
+        "NEM",
+        "ABNB",
+        "TYL"
+      ],
+      "raw": [
+        {
+          "ticker": "CRWD",
+          "return": -8.91,
+          "score": 0.581
+        },
+        {
+          "ticker": "PANW",
+          "return": -12.02,
+          "score": 0.5764
+        },
+        {
+          "ticker": "NEM",
+          "return": 2.05,
+          "score": 0.5732
+        },
+        {
+          "ticker": "ABNB",
+          "return": -4.33,
+          "score": 0.5701
+        },
+        {
+          "ticker": "TYL",
+          "return": -6.34,
+          "score": 0.5656
         }
       ]
     }
