@@ -1,15 +1,6 @@
 {
-  "capital": 383.76,
+  "capital": 1122.47,
   "positions": {
-    "MDT": {
-      "shares": 10,
-      "cost_per_share": 94.0,
-      "cost": 940.0,
-      "entry_date": "2026-09-01",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.696 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "DELL": {
       "shares": 2,
       "cost_per_share": 462.05,
@@ -46,15 +37,6 @@
       "entry_mode": "trend_following",
       "thesis": "score +0.800 \u00b7 led by momentum \u00b7 mode trend_following"
     },
-    "GDXJ": {
-      "shares": 6,
-      "cost_per_share": 128.46,
-      "cost": 770.76,
-      "entry_date": "2026-09-07",
-      "top_signal": "trend",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.772 \u00b7 led by trend \u00b7 mode trend_following"
-    },
     "STX": {
       "shares": 1,
       "cost_per_share": 880.65,
@@ -90,6 +72,15 @@
       "top_signal": "momentum",
       "entry_mode": "trend_following",
       "thesis": "score +0.761 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "OXY": {
+      "shares": 15,
+      "cost_per_share": 62.09,
+      "cost": 931.35,
+      "entry_date": "2026-09-10",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.678 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -652,6 +643,34 @@
       "reason": "rotation \u2192 USO (score +0.91)",
       "top_signal": "trend",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "GDXJ",
+      "entry_date": "2026-09-07",
+      "exit_date": "2026-09-10",
+      "entry_price": 128.46,
+      "exit_price": 125.01,
+      "shares": 6,
+      "cost": 770.76,
+      "pnl": -20.7,
+      "pnl_pct": -2.69,
+      "reason": "rotation \u2192 MU (score +0.26)",
+      "top_signal": "trend",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "MDT",
+      "entry_date": "2026-09-01",
+      "exit_date": "2026-09-10",
+      "entry_price": 94.0,
+      "exit_price": 92.0,
+      "shares": 10,
+      "cost": 940.0,
+      "pnl": -20.0,
+      "pnl_pct": -2.13,
+      "reason": "rotation \u2192 OXY (score +0.22)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -675,13 +694,14 @@
     "2026-09-04": 10335.7,
     "2026-09-07": 10316.21,
     "2026-09-08": 10191.96,
-    "2026-09-09": 10232.45
+    "2026-09-09": 10232.45,
+    "2026-09-10": 10039.53
   },
   "signal_weights": {
-    "momentum": 0.2,
-    "volume": 0.1,
-    "trend": 0.5,
-    "mean_rev": 0.05,
+    "momentum": 0.05,
+    "volume": 0.15,
+    "trend": 0.1,
+    "mean_rev": 0.55,
     "regime_fit": 0.15
   },
   "regime_history": {
@@ -705,7 +725,8 @@
     "2026-09-04": "bull",
     "2026-09-07": "bull",
     "2026-09-08": "neutral",
-    "2026-09-09": "neutral"
+    "2026-09-09": "neutral",
+    "2026-09-10": "neutral"
   },
   "daily_log": [
     {
@@ -5100,11 +5121,207 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-09-10",
+      "thesis": "Regime: NEUTRAL\nVIX 17.3 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode switched: trend_following \u2192 mean_reversion (Buy oversold dips in trending markets)\nBacktest (5d): mean reversion +0.94%  |  trend following +0.80%  |  defensive +0.18%  |  momentum -3.01%\nExited 2 position(s): GDXJ -21 (rotation \u2192 MU (score +0.26)), MDT -20 (rotation \u2192 OXY (score +0.22))\nEntered 1 position(s):\n  OXY $62.09 \u00d7 15 shares (score +0.678, led by trend)\nTop candidates screened: MU +0.685, OXY +0.678, APA +0.677\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "OXY",
+          "price": 62.09,
+          "total": 0.6779,
+          "scores": {
+            "momentum": 0.367,
+            "volume": -0.133,
+            "trend": 1.0,
+            "mean_rev": 0.972,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.69,
+          "ret5": 0.63,
+          "shares": 15,
+          "cost": 931.35,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "GDXJ",
+          "entry_date": "2026-09-07",
+          "exit_date": "2026-09-10",
+          "entry_price": 128.46,
+          "exit_price": 125.01,
+          "shares": 6,
+          "cost": 770.76,
+          "pnl": -20.7,
+          "pnl_pct": -2.69,
+          "reason": "rotation \u2192 MU (score +0.26)",
+          "top_signal": "trend",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "MDT",
+          "entry_date": "2026-09-01",
+          "exit_date": "2026-09-10",
+          "entry_price": 94.0,
+          "exit_price": 92.0,
+          "shares": 10,
+          "cost": 940.0,
+          "pnl": -20.0,
+          "pnl_pct": -2.13,
+          "reason": "rotation \u2192 OXY (score +0.22)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "MU",
+          "price": 983.0858764648438,
+          "total": 0.6847,
+          "scores": {
+            "momentum": 0.662,
+            "volume": -0.189,
+            "trend": 1.0,
+            "mean_rev": 0.973,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.88,
+          "ret5": 2.82
+        },
+        {
+          "ticker": "OXY",
+          "price": 61.29499816894531,
+          "total": 0.6779,
+          "scores": {
+            "momentum": 0.367,
+            "volume": -0.133,
+            "trend": 1.0,
+            "mean_rev": 0.972,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.69,
+          "ret5": 0.63
+        },
+        {
+          "ticker": "APA",
+          "price": 44.89500045776367,
+          "total": 0.6766,
+          "scores": {
+            "momentum": 0.935,
+            "volume": -0.262,
+            "trend": 1.0,
+            "mean_rev": 0.953,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.32,
+          "ret5": 0.44
+        },
+        {
+          "ticker": "MRNA",
+          "price": 134.76499938964844,
+          "total": 0.672,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.431,
+            "trend": 1.0,
+            "mean_rev": 0.985,
+            "regime_fit": 0.3
+          },
+          "ret20": 111.66,
+          "ret5": -10.64
+        },
+        {
+          "ticker": "NEM",
+          "price": 126.58499908447266,
+          "total": 0.6698,
+          "scores": {
+            "momentum": 0.607,
+            "volume": -0.291,
+            "trend": 1.0,
+            "mean_rev": 0.978,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.64,
+          "ret5": 1.35
+        },
+        {
+          "ticker": "DVN",
+          "price": 49.849998474121094,
+          "total": 0.6673,
+          "scores": {
+            "momentum": 0.876,
+            "volume": -0.207,
+            "trend": 1.0,
+            "mean_rev": 0.926,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.12,
+          "ret5": 1.67
+        },
+        {
+          "ticker": "XOM",
+          "price": 165.44000244140625,
+          "total": 0.6614,
+          "scores": {
+            "momentum": 0.337,
+            "volume": -0.246,
+            "trend": 1.0,
+            "mean_rev": 0.975,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.23,
+          "ret5": 0.79
+        },
+        {
+          "ticker": "IQV",
+          "price": 257.860107421875,
+          "total": 0.6581,
+          "scores": {
+            "momentum": 0.444,
+            "volume": -0.231,
+            "trend": 1.0,
+            "mean_rev": 0.956,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.68,
+          "ret5": -2.27
+        },
+        {
+          "ticker": "KDP",
+          "price": 31.8799991607666,
+          "total": 0.6485,
+          "scores": {
+            "momentum": 0.534,
+            "volume": -0.322,
+            "trend": 1.0,
+            "mean_rev": 0.955,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.85,
+          "ret5": -2.18
+        },
+        {
+          "ticker": "HAL",
+          "price": 36.099998474121094,
+          "total": 0.6454,
+          "scores": {
+            "momentum": 0.569,
+            "volume": -0.262,
+            "trend": 1.0,
+            "mean_rev": 0.93,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.94,
+          "ret5": -4.07
+        }
+      ],
+      "prev_mode": "trend_following"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "trend_following",
+  "active_mode": "mean_reversion",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -5125,7 +5342,8 @@
     "2026-09-04": "trend_following",
     "2026-09-07": "trend_following",
     "2026-09-08": "mean_reversion",
-    "2026-09-09": "trend_following"
+    "2026-09-09": "trend_following",
+    "2026-09-10": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -5153,7 +5371,8 @@
       3.13,
       -0.29,
       -5.57,
-      0.73
+      0.73,
+      -2.69
     ],
     "mean_reversion": [
       -4.68,
@@ -5170,7 +5389,8 @@
       2.64,
       -0.34,
       -7.68,
-      -1.02
+      -1.02,
+      -2.13
     ],
     "defensive": [
       0.21,
@@ -5179,154 +5399,154 @@
   },
   "last_backtest": [
     {
-      "mode": "trend_following",
-      "avg_return": 5.05,
+      "mode": "mean_reversion",
+      "avg_return": 0.936,
       "picks": [
-        "DBC",
-        "CORN",
-        "RVTY",
-        "DE",
-        "DELL"
+        "DELL",
+        "BBY",
+        "WFC",
+        "F",
+        "RJF"
       ],
       "raw": [
         {
-          "ticker": "DBC",
-          "return": 2.36,
-          "score": 0.8688
-        },
-        {
-          "ticker": "CORN",
-          "return": -1.87,
-          "score": 0.8324
-        },
-        {
-          "ticker": "RVTY",
-          "return": -2.95,
-          "score": 0.826
-        },
-        {
-          "ticker": "DE",
-          "return": -0.03,
-          "score": 0.8225
-        },
-        {
           "ticker": "DELL",
-          "return": 27.74,
-          "score": 0.8182
+          "return": 4.98,
+          "score": 0.8387
+        },
+        {
+          "ticker": "BBY",
+          "return": 2.52,
+          "score": 0.7818
+        },
+        {
+          "ticker": "WFC",
+          "return": -0.44,
+          "score": 0.7488
+        },
+        {
+          "ticker": "F",
+          "return": -1.56,
+          "score": 0.7469
+        },
+        {
+          "ticker": "RJF",
+          "return": -0.82,
+          "score": 0.738
         }
       ]
     },
     {
-      "mode": "mean_reversion",
-      "avg_return": 3.686,
+      "mode": "trend_following",
+      "avg_return": 0.796,
       "picks": [
         "DELL",
-        "MDT",
-        "GDDY",
-        "BNY",
-        "SNPS"
+        "DE",
+        "CF",
+        "BBY",
+        "BG"
       ],
       "raw": [
         {
           "ticker": "DELL",
-          "return": 27.74,
-          "score": 0.8672
+          "return": 4.98,
+          "score": 0.8899
         },
         {
-          "ticker": "MDT",
-          "return": 0.34,
-          "score": 0.7996
+          "ticker": "DE",
+          "return": -3.34,
+          "score": 0.806
         },
         {
-          "ticker": "GDDY",
-          "return": -6.7,
-          "score": 0.7256
+          "ticker": "CF",
+          "return": -2.84,
+          "score": 0.8032
         },
         {
-          "ticker": "BNY",
-          "return": 1.72,
-          "score": 0.7163
+          "ticker": "BBY",
+          "return": 2.52,
+          "score": 0.8009
         },
         {
-          "ticker": "SNPS",
-          "return": -4.67,
-          "score": 0.715
+          "ticker": "BG",
+          "return": 2.66,
+          "score": 0.7976
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": 3.662,
+      "avg_return": 0.178,
       "picks": [
         "DELL",
-        "DBC",
-        "GDDY",
-        "HPQ",
-        "ABNB"
+        "BBY",
+        "PLTR",
+        "ABNB",
+        "BG"
       ],
       "raw": [
         {
           "ticker": "DELL",
-          "return": 27.74,
-          "score": 0.5758
+          "return": 4.98,
+          "score": 0.6048
         },
         {
-          "ticker": "DBC",
-          "return": 2.36,
-          "score": 0.5627
+          "ticker": "BBY",
+          "return": 2.52,
+          "score": 0.5652
         },
         {
-          "ticker": "GDDY",
-          "return": -6.7,
-          "score": 0.5616
-        },
-        {
-          "ticker": "HPQ",
-          "return": 1.2,
-          "score": 0.5579
+          "ticker": "PLTR",
+          "return": -1.77,
+          "score": 0.5537
         },
         {
           "ticker": "ABNB",
-          "return": -6.29,
-          "score": 0.5537
+          "return": -7.5,
+          "score": 0.5516
+        },
+        {
+          "ticker": "BG",
+          "return": 2.66,
+          "score": 0.5481
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": 0.486,
+      "avg_return": -3.01,
       "picks": [
-        "DBC",
-        "CORN",
-        "RVTY",
+        "DELL",
+        "CF",
         "DE",
-        "USO"
+        "VRTX",
+        "RVTY"
       ],
       "raw": [
         {
-          "ticker": "DBC",
-          "return": 2.36,
-          "score": 0.9388
+          "ticker": "DELL",
+          "return": 4.98,
+          "score": 0.9599
         },
         {
-          "ticker": "CORN",
-          "return": -1.87,
-          "score": 0.8663
-        },
-        {
-          "ticker": "RVTY",
-          "return": -2.95,
-          "score": 0.8253
+          "ticker": "CF",
+          "return": -2.84,
+          "score": 0.7802
         },
         {
           "ticker": "DE",
-          "return": -0.03,
-          "score": 0.8145
+          "return": -3.34,
+          "score": 0.7732
         },
         {
-          "ticker": "USO",
-          "return": 4.92,
-          "score": 0.7874
+          "ticker": "VRTX",
+          "return": -7.04,
+          "score": 0.7573
+        },
+        {
+          "ticker": "RVTY",
+          "return": -6.81,
+          "score": 0.7414
         }
       ]
     }
