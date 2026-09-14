@@ -1,5 +1,5 @@
 {
-  "capital": 700.09,
+  "capital": 306.52,
   "positions": {
     "DELL": {
       "shares": 2,
@@ -37,15 +37,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.662 \u00b7 led by trend \u00b7 mode mean_reversion"
     },
-    "MRVL": {
-      "shares": 5,
-      "cost_per_share": 223.745,
-      "cost": 1118.72,
-      "entry_date": "2026-09-09",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.774 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
     "USO": {
       "shares": 6,
       "cost_per_share": 148.8,
@@ -64,15 +55,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.678 \u00b7 led by trend \u00b7 mode mean_reversion"
     },
-    "ORCL": {
-      "shares": 5,
-      "cost_per_share": 164.43,
-      "cost": 822.15,
-      "entry_date": "2026-09-11",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.729 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "MRNA": {
       "shares": 6,
       "cost_per_share": 138.093,
@@ -90,6 +72,24 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.670 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "CRWD": {
+      "shares": 5,
+      "cost_per_share": 219.0,
+      "cost": 1095.0,
+      "entry_date": "2026-09-14",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.556 \u00b7 led by trend \u00b7 mode defensive"
+    },
+    "COIN": {
+      "shares": 6,
+      "cost_per_share": 180.98,
+      "cost": 1085.88,
+      "entry_date": "2026-09-14",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.555 \u00b7 led by momentum \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -708,6 +708,34 @@
       "reason": "rotation \u2192 MRNA (score +0.23)",
       "top_signal": "momentum",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "ORCL",
+      "entry_date": "2026-09-11",
+      "exit_date": "2026-09-14",
+      "entry_price": 164.43,
+      "exit_price": 141.42,
+      "shares": 5,
+      "cost": 822.15,
+      "pnl": -115.05,
+      "pnl_pct": -13.99,
+      "reason": "stop loss (-12.6%)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "MRVL",
+      "entry_date": "2026-09-09",
+      "exit_date": "2026-09-14",
+      "entry_price": 223.745,
+      "exit_price": 216.042,
+      "shares": 5,
+      "cost": 1118.72,
+      "pnl": -38.52,
+      "pnl_pct": -3.44,
+      "reason": "rotation \u2192 CRWD (score +0.41)",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
     }
   ],
   "nav_history": {
@@ -733,14 +761,15 @@
     "2026-09-08": 10191.96,
     "2026-09-09": 10232.45,
     "2026-09-10": 10039.53,
-    "2026-09-11": 10174.55
+    "2026-09-11": 10174.55,
+    "2026-09-14": 10171.42
   },
   "signal_weights": {
-    "momentum": 0.05,
-    "volume": 0.15,
-    "trend": 0.1,
-    "mean_rev": 0.55,
-    "regime_fit": 0.15
+    "momentum": 0.1,
+    "volume": 0.05,
+    "trend": 0.2,
+    "mean_rev": 0.1,
+    "regime_fit": 0.55
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -765,7 +794,8 @@
     "2026-09-08": "neutral",
     "2026-09-09": "neutral",
     "2026-09-10": "neutral",
-    "2026-09-11": "neutral"
+    "2026-09-11": "neutral",
+    "2026-09-14": "neutral"
   },
   "daily_log": [
     {
@@ -5586,11 +5616,224 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-09-14",
+      "thesis": "Regime: NEUTRAL\nVIX 16.7 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode switched: mean_reversion \u2192 defensive (Prioritize regime-fit safe-haven assets)\nBacktest (5d): defensive +0.05%  |  momentum -3.75%  |  mean reversion -3.93%  |  trend following -5.36%\nExited 2 position(s): ORCL -115 (stop loss (-12.6%)), MRVL -39 (rotation \u2192 CRWD (score +0.41))\nEntered 2 position(s):\n  CRWD $219.00 \u00d7 5 shares (score +0.556, led by trend)\n  COIN $180.98 \u00d7 6 shares (score +0.555, led by momentum)\nTop candidates screened: CRWD +0.556, COIN +0.555, MOS +0.540\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "CRWD",
+          "price": 219.0,
+          "total": 0.5564,
+          "scores": {
+            "momentum": 0.98,
+            "volume": 0.488,
+            "trend": 1.0,
+            "mean_rev": 0.69,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.31,
+          "ret5": 11.28,
+          "shares": 5,
+          "cost": 1095.0,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "COIN",
+          "price": 180.98,
+          "total": 0.5554,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.013,
+            "trend": 1.0,
+            "mean_rev": 0.91,
+            "regime_fit": 0.3
+          },
+          "ret20": 27.69,
+          "ret5": 2.67,
+          "shares": 6,
+          "cost": 1085.88,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "ORCL",
+          "entry_date": "2026-09-11",
+          "exit_date": "2026-09-14",
+          "entry_price": 164.43,
+          "exit_price": 141.42,
+          "shares": 5,
+          "cost": 822.15,
+          "pnl": -115.05,
+          "pnl_pct": -13.99,
+          "reason": "stop loss (-12.6%)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "MRVL",
+          "entry_date": "2026-09-09",
+          "exit_date": "2026-09-14",
+          "entry_price": 223.745,
+          "exit_price": 216.042,
+          "shares": 5,
+          "cost": 1118.72,
+          "pnl": -38.52,
+          "pnl_pct": -3.44,
+          "reason": "rotation \u2192 CRWD (score +0.41)",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "CRWD",
+          "price": 237.14210510253906,
+          "total": 0.5564,
+          "scores": {
+            "momentum": 0.98,
+            "volume": 0.488,
+            "trend": 1.0,
+            "mean_rev": 0.69,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.31,
+          "ret5": 11.28
+        },
+        {
+          "ticker": "COIN",
+          "price": 189.57650756835938,
+          "total": 0.5554,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.013,
+            "trend": 1.0,
+            "mean_rev": 0.91,
+            "regime_fit": 0.3
+          },
+          "ret20": 27.69,
+          "ret5": 2.67
+        },
+        {
+          "ticker": "MOS",
+          "price": 24.6299991607666,
+          "total": 0.5405,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.217,
+            "trend": 1.0,
+            "mean_rev": 0.863,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.94,
+          "ret5": -3.91
+        },
+        {
+          "ticker": "APA",
+          "price": 45.33000183105469,
+          "total": 0.54,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.044,
+            "trend": 1.0,
+            "mean_rev": 0.772,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.01,
+          "ret5": 5.99
+        },
+        {
+          "ticker": "NOW",
+          "price": 142.3966064453125,
+          "total": 0.538,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.132,
+            "trend": 1.0,
+            "mean_rev": 0.796,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.84,
+          "ret5": 0.8
+        },
+        {
+          "ticker": "MRNA",
+          "price": 145.61000061035156,
+          "total": 0.5376,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.392,
+            "trend": 1.0,
+            "mean_rev": 0.922,
+            "regime_fit": 0.3
+          },
+          "ret20": 129.96,
+          "ret5": 0.04
+        },
+        {
+          "ticker": "HOOD",
+          "price": 113.76000213623047,
+          "total": 0.5364,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.204,
+            "trend": 1.0,
+            "mean_rev": 0.816,
+            "regime_fit": 0.3
+          },
+          "ret20": 19.05,
+          "ret5": -6.84
+        },
+        {
+          "ticker": "IQV",
+          "price": 264.739990234375,
+          "total": 0.53,
+          "scores": {
+            "momentum": 0.862,
+            "volume": -0.217,
+            "trend": 1.0,
+            "mean_rev": 0.897,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.87,
+          "ret5": -1.13
+        },
+        {
+          "ticker": "SWKS",
+          "price": 81.12000274658203,
+          "total": 0.5271,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.068,
+            "trend": 1.0,
+            "mean_rev": 0.587,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.52,
+          "ret5": 9.59
+        },
+        {
+          "ticker": "CF",
+          "price": 131.5800018310547,
+          "total": 0.5257,
+          "scores": {
+            "momentum": 0.809,
+            "volume": -0.268,
+            "trend": 1.0,
+            "mean_rev": 0.932,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.23,
+          "ret5": -1.33
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "mean_reversion",
+  "active_mode": "defensive",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -5613,7 +5856,8 @@
     "2026-09-08": "mean_reversion",
     "2026-09-09": "trend_following",
     "2026-09-10": "mean_reversion",
-    "2026-09-11": "mean_reversion"
+    "2026-09-11": "mean_reversion",
+    "2026-09-14": "defensive"
   },
   "mode_pnl": {
     "momentum": [
@@ -5643,7 +5887,8 @@
       -0.29,
       -5.57,
       0.73,
-      -2.69
+      -2.69,
+      -3.44
     ],
     "mean_reversion": [
       -4.68,
@@ -5662,7 +5907,8 @@
       -7.68,
       -1.02,
       -2.13,
-      -1.28
+      -1.28,
+      -13.99
     ],
     "defensive": [
       0.21,
@@ -5671,154 +5917,154 @@
   },
   "last_backtest": [
     {
-      "mode": "mean_reversion",
-      "avg_return": 1.554,
-      "picks": [
-        "DELL",
-        "PFG",
-        "MU",
-        "AMP",
-        "DVN"
-      ],
-      "raw": [
-        {
-          "ticker": "DELL",
-          "return": 8.21,
-          "score": 0.7797
-        },
-        {
-          "ticker": "PFG",
-          "return": -2.37,
-          "score": 0.7379
-        },
-        {
-          "ticker": "MU",
-          "return": 2.22,
-          "score": 0.7264
-        },
-        {
-          "ticker": "AMP",
-          "return": -2.34,
-          "score": 0.712
-        },
-        {
-          "ticker": "DVN",
-          "return": 2.05,
-          "score": 0.7113
-        }
-      ]
-    },
-    {
       "mode": "defensive",
-      "avg_return": -0.918,
+      "avg_return": 0.052,
       "picks": [
-        "DELL",
-        "HOOD",
         "MU",
-        "DVN",
-        "COIN"
+        "DELL",
+        "SMCI",
+        "APA",
+        "BBY"
       ],
       "raw": [
-        {
-          "ticker": "DELL",
-          "return": 8.21,
-          "score": 0.5915
-        },
-        {
-          "ticker": "HOOD",
-          "return": -9.25,
-          "score": 0.5741
-        },
         {
           "ticker": "MU",
-          "return": 2.22,
-          "score": 0.56
+          "return": -8.57,
+          "score": 0.5704
         },
-        {
-          "ticker": "DVN",
-          "return": 2.05,
-          "score": 0.5529
-        },
-        {
-          "ticker": "COIN",
-          "return": -7.82,
-          "score": 0.5505
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": -2.446,
-      "picks": [
-        "DELL",
-        "HOOD",
-        "COIN",
-        "IQV",
-        "CEG"
-      ],
-      "raw": [
         {
           "ticker": "DELL",
-          "return": 8.21,
-          "score": 0.875
+          "return": 4.04,
+          "score": 0.5567
         },
         {
-          "ticker": "HOOD",
-          "return": -9.25,
-          "score": 0.8674
+          "ticker": "SMCI",
+          "return": -5.47,
+          "score": 0.5562
         },
         {
-          "ticker": "COIN",
-          "return": -7.82,
-          "score": 0.8041
+          "ticker": "APA",
+          "return": 5.99,
+          "score": 0.5495
         },
         {
-          "ticker": "IQV",
-          "return": -3.59,
-          "score": 0.7943
-        },
-        {
-          "ticker": "CEG",
-          "return": 0.22,
-          "score": 0.7922
+          "ticker": "BBY",
+          "return": 4.27,
+          "score": 0.5481
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -3.492,
+      "avg_return": -3.752,
       "picks": [
         "DELL",
-        "HOOD",
-        "COIN",
-        "IQV",
-        "IBIT"
+        "MU",
+        "CEG",
+        "HAL",
+        "VLO"
       ],
       "raw": [
         {
           "ticker": "DELL",
-          "return": 8.21,
-          "score": 0.9285
+          "return": 4.04,
+          "score": 0.7542
         },
         {
-          "ticker": "HOOD",
-          "return": -9.25,
-          "score": 0.9231
+          "ticker": "MU",
+          "return": -8.57,
+          "score": 0.7485
         },
         {
-          "ticker": "COIN",
-          "return": -7.82,
-          "score": 0.7569
+          "ticker": "CEG",
+          "return": -10.87,
+          "score": 0.7236
         },
         {
-          "ticker": "IQV",
-          "return": -3.59,
-          "score": 0.7562
+          "ticker": "HAL",
+          "return": -5.95,
+          "score": 0.7236
         },
         {
-          "ticker": "IBIT",
-          "return": -5.01,
-          "score": 0.7386
+          "ticker": "VLO",
+          "return": 2.59,
+          "score": 0.7192
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": -3.93,
+      "picks": [
+        "MU",
+        "OKE",
+        "SMCI",
+        "BNY",
+        "WMB"
+      ],
+      "raw": [
+        {
+          "ticker": "MU",
+          "return": -8.57,
+          "score": 0.7578
+        },
+        {
+          "ticker": "OKE",
+          "return": 1.18,
+          "score": 0.732
+        },
+        {
+          "ticker": "SMCI",
+          "return": -5.47,
+          "score": 0.6969
+        },
+        {
+          "ticker": "BNY",
+          "return": -4.53,
+          "score": 0.6957
+        },
+        {
+          "ticker": "WMB",
+          "return": -2.26,
+          "score": 0.6957
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -5.364,
+      "picks": [
+        "MU",
+        "DELL",
+        "SMCI",
+        "CEG",
+        "HAL"
+      ],
+      "raw": [
+        {
+          "ticker": "MU",
+          "return": -8.57,
+          "score": 0.808
+        },
+        {
+          "ticker": "DELL",
+          "return": 4.04,
+          "score": 0.8053
+        },
+        {
+          "ticker": "SMCI",
+          "return": -5.47,
+          "score": 0.7905
+        },
+        {
+          "ticker": "CEG",
+          "return": -10.87,
+          "score": 0.7895
+        },
+        {
+          "ticker": "HAL",
+          "return": -5.95,
+          "score": 0.7886
         }
       ]
     }
