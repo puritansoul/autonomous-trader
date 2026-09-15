@@ -1,5 +1,5 @@
 {
-  "capital": 306.52,
+  "capital": 203.34,
   "positions": {
     "DELL": {
       "shares": 2,
@@ -37,24 +37,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.662 \u00b7 led by trend \u00b7 mode mean_reversion"
     },
-    "USO": {
-      "shares": 6,
-      "cost_per_share": 148.8,
-      "cost": 892.8,
-      "entry_date": "2026-09-09",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.761 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
-    "OXY": {
-      "shares": 15,
-      "cost_per_share": 62.09,
-      "cost": 931.35,
-      "entry_date": "2026-09-10",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.678 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "MRNA": {
       "shares": 6,
       "cost_per_share": 138.093,
@@ -90,6 +72,24 @@
       "top_signal": "momentum",
       "entry_mode": "defensive",
       "thesis": "score +0.555 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "ARE": {
+      "shares": 19,
+      "cost_per_share": 51.67,
+      "cost": 981.73,
+      "entry_date": "2026-09-15",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.682 \u00b7 led by momentum \u00b7 mode mean_reversion"
+    },
+    "UNG": {
+      "shares": 95,
+      "cost_per_share": 10.56,
+      "cost": 1003.2,
+      "entry_date": "2026-09-15",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.680 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -736,6 +736,34 @@
       "reason": "rotation \u2192 CRWD (score +0.41)",
       "top_signal": "momentum",
       "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "USO",
+      "entry_date": "2026-09-09",
+      "exit_date": "2026-09-15",
+      "entry_price": 148.8,
+      "exit_price": 158.35,
+      "shares": 6,
+      "cost": 892.8,
+      "pnl": 57.3,
+      "pnl_pct": 6.42,
+      "reason": "rotation \u2192 ARE (score +0.39)",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "OXY",
+      "entry_date": "2026-09-10",
+      "exit_date": "2026-09-15",
+      "entry_price": 62.09,
+      "exit_price": 62.11,
+      "shares": 15,
+      "cost": 931.35,
+      "pnl": 0.3,
+      "pnl_pct": 0.03,
+      "reason": "rotation \u2192 UNG (score +0.36)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -762,14 +790,15 @@
     "2026-09-09": 10232.45,
     "2026-09-10": 10039.53,
     "2026-09-11": 10174.55,
-    "2026-09-14": 10171.42
+    "2026-09-14": 10171.42,
+    "2026-09-15": 10095.61
   },
   "signal_weights": {
-    "momentum": 0.1,
-    "volume": 0.05,
-    "trend": 0.2,
-    "mean_rev": 0.1,
-    "regime_fit": 0.55
+    "momentum": 0.05,
+    "volume": 0.15,
+    "trend": 0.1,
+    "mean_rev": 0.55,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -795,7 +824,8 @@
     "2026-09-09": "neutral",
     "2026-09-10": "neutral",
     "2026-09-11": "neutral",
-    "2026-09-14": "neutral"
+    "2026-09-14": "neutral",
+    "2026-09-15": "neutral"
   },
   "daily_log": [
     {
@@ -5829,11 +5859,224 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-09-15",
+      "thesis": "Regime: NEUTRAL\nVIX 17.6 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode switched: defensive \u2192 mean_reversion (Buy oversold dips in trending markets)\nBacktest (5d): mean reversion -3.41%  |  defensive -4.97%  |  momentum -8.32%  |  trend following -8.32%\nExited 2 position(s): USO +57 (rotation \u2192 ARE (score +0.39)), OXY +0 (rotation \u2192 UNG (score +0.36))\nEntered 2 position(s):\n  ARE $51.67 \u00d7 19 shares (score +0.682, led by momentum)\n  UNG $10.56 \u00d7 95 shares (score +0.680, led by trend)\nTop candidates screened: HOOD +0.698, COIN +0.685, ARE +0.682\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "ARE",
+          "price": 51.67,
+          "total": 0.6824,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.358,
+            "trend": 1.0,
+            "mean_rev": 0.984,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.04,
+          "ret5": 4.51,
+          "shares": 19,
+          "cost": 981.73,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "UNG",
+          "price": 10.56,
+          "total": 0.6799,
+          "scores": {
+            "momentum": 0.488,
+            "volume": 0.186,
+            "trend": 1.0,
+            "mean_rev": 0.877,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.49,
+          "ret5": 0.07,
+          "shares": 95,
+          "cost": 1003.2,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "USO",
+          "entry_date": "2026-09-09",
+          "exit_date": "2026-09-15",
+          "entry_price": 148.8,
+          "exit_price": 158.35,
+          "shares": 6,
+          "cost": 892.8,
+          "pnl": 57.3,
+          "pnl_pct": 6.42,
+          "reason": "rotation \u2192 ARE (score +0.39)",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "OXY",
+          "entry_date": "2026-09-10",
+          "exit_date": "2026-09-15",
+          "entry_price": 62.09,
+          "exit_price": 62.11,
+          "shares": 15,
+          "cost": 931.35,
+          "pnl": 0.3,
+          "pnl_pct": 0.03,
+          "reason": "rotation \u2192 UNG (score +0.36)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "HOOD",
+          "price": 110.4800033569336,
+          "total": 0.6981,
+          "scores": {
+            "momentum": 0.963,
+            "volume": -0.184,
+            "trend": 1.0,
+            "mean_rev": 0.968,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.78,
+          "ret5": -5.85
+        },
+        {
+          "ticker": "COIN",
+          "price": 179.02999877929688,
+          "total": 0.6849,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.15,
+            "trend": 1.0,
+            "mean_rev": 0.932,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.92,
+          "ret5": 0.05
+        },
+        {
+          "ticker": "ARE",
+          "price": 53.060001373291016,
+          "total": 0.6824,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.358,
+            "trend": 1.0,
+            "mean_rev": 0.984,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.04,
+          "ret5": 4.51
+        },
+        {
+          "ticker": "UNG",
+          "price": 10.467700004577637,
+          "total": 0.6799,
+          "scores": {
+            "momentum": 0.488,
+            "volume": 0.186,
+            "trend": 1.0,
+            "mean_rev": 0.877,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.49,
+          "ret5": 0.07
+        },
+        {
+          "ticker": "TMO",
+          "price": 636.3599853515625,
+          "total": 0.679,
+          "scores": {
+            "momentum": 0.79,
+            "volume": -0.097,
+            "trend": 1.0,
+            "mean_rev": 0.926,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.68,
+          "ret5": 5.53
+        },
+        {
+          "ticker": "IT",
+          "price": 201.39999389648438,
+          "total": 0.6707,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.256,
+            "trend": 1.0,
+            "mean_rev": 0.935,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.39,
+          "ret5": 16.69
+        },
+        {
+          "ticker": "DGX",
+          "price": 246.86000061035156,
+          "total": 0.6663,
+          "scores": {
+            "momentum": 0.482,
+            "volume": -0.132,
+            "trend": 1.0,
+            "mean_rev": 0.94,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.81,
+          "ret5": 4.82
+        },
+        {
+          "ticker": "CTSH",
+          "price": 64.19999694824219,
+          "total": 0.6631,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.318,
+            "trend": 1.0,
+            "mean_rev": 0.938,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.07,
+          "ret5": 7.14
+        },
+        {
+          "ticker": "PM",
+          "price": 193.13999938964844,
+          "total": 0.6623,
+          "scores": {
+            "momentum": 0.464,
+            "volume": -0.278,
+            "trend": 1.0,
+            "mean_rev": 0.974,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.67,
+          "ret5": 4.55
+        },
+        {
+          "ticker": "ULTA",
+          "price": 540.7899780273438,
+          "total": 0.6594,
+          "scores": {
+            "momentum": 0.683,
+            "volume": -0.362,
+            "trend": 1.0,
+            "mean_rev": 0.972,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.62,
+          "ret5": -1.54
+        }
+      ],
+      "prev_mode": "defensive"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "defensive",
+  "active_mode": "mean_reversion",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -5857,7 +6100,8 @@
     "2026-09-09": "trend_following",
     "2026-09-10": "mean_reversion",
     "2026-09-11": "mean_reversion",
-    "2026-09-14": "defensive"
+    "2026-09-14": "defensive",
+    "2026-09-15": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -5888,7 +6132,8 @@
       -5.57,
       0.73,
       -2.69,
-      -3.44
+      -3.44,
+      6.42
     ],
     "mean_reversion": [
       -4.68,
@@ -5908,7 +6153,8 @@
       -1.02,
       -2.13,
       -1.28,
-      -13.99
+      -13.99,
+      0.03
     ],
     "defensive": [
       0.21,
@@ -5917,154 +6163,154 @@
   },
   "last_backtest": [
     {
-      "mode": "defensive",
-      "avg_return": 0.052,
+      "mode": "mean_reversion",
+      "avg_return": -3.408,
       "picks": [
-        "MU",
-        "DELL",
-        "SMCI",
-        "APA",
+        "STX",
+        "TKO",
+        "WRB",
+        "HPE",
+        "JNJ"
+      ],
+      "raw": [
+        {
+          "ticker": "STX",
+          "return": -15.44,
+          "score": 0.7762
+        },
+        {
+          "ticker": "TKO",
+          "return": -1.52,
+          "score": 0.774
+        },
+        {
+          "ticker": "WRB",
+          "return": 1.36,
+          "score": 0.747
+        },
+        {
+          "ticker": "HPE",
+          "return": 0.08,
+          "score": 0.7266
+        },
+        {
+          "ticker": "JNJ",
+          "return": -1.52,
+          "score": 0.723
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": -4.966,
+      "picks": [
+        "STX",
+        "LITE",
+        "BG",
+        "PSKY",
         "BBY"
       ],
       "raw": [
         {
-          "ticker": "MU",
-          "return": -8.57,
-          "score": 0.5704
+          "ticker": "STX",
+          "return": -15.44,
+          "score": 0.5756
         },
         {
-          "ticker": "DELL",
-          "return": 4.04,
-          "score": 0.5567
+          "ticker": "LITE",
+          "return": -14.26,
+          "score": 0.561
         },
         {
-          "ticker": "SMCI",
-          "return": -5.47,
-          "score": 0.5562
+          "ticker": "BG",
+          "return": -1.46,
+          "score": 0.5608
         },
         {
-          "ticker": "APA",
-          "return": 5.99,
-          "score": 0.5495
+          "ticker": "PSKY",
+          "return": 1.99,
+          "score": 0.5585
         },
         {
           "ticker": "BBY",
-          "return": 4.27,
-          "score": 0.5481
+          "return": 4.34,
+          "score": 0.5438
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -3.752,
+      "avg_return": -8.32,
       "picks": [
-        "DELL",
-        "MU",
+        "BG",
+        "LITE",
+        "STX",
         "CEG",
-        "HAL",
-        "VLO"
+        "PSKY"
       ],
       "raw": [
         {
-          "ticker": "DELL",
-          "return": 4.04,
-          "score": 0.7542
+          "ticker": "BG",
+          "return": -1.46,
+          "score": 0.8177
         },
         {
-          "ticker": "MU",
-          "return": -8.57,
-          "score": 0.7485
+          "ticker": "LITE",
+          "return": -14.26,
+          "score": 0.7803
+        },
+        {
+          "ticker": "STX",
+          "return": -15.44,
+          "score": 0.7687
         },
         {
           "ticker": "CEG",
-          "return": -10.87,
-          "score": 0.7236
+          "return": -12.43,
+          "score": 0.7585
         },
         {
-          "ticker": "HAL",
-          "return": -5.95,
-          "score": 0.7236
-        },
-        {
-          "ticker": "VLO",
-          "return": 2.59,
-          "score": 0.7192
-        }
-      ]
-    },
-    {
-      "mode": "mean_reversion",
-      "avg_return": -3.93,
-      "picks": [
-        "MU",
-        "OKE",
-        "SMCI",
-        "BNY",
-        "WMB"
-      ],
-      "raw": [
-        {
-          "ticker": "MU",
-          "return": -8.57,
-          "score": 0.7578
-        },
-        {
-          "ticker": "OKE",
-          "return": 1.18,
-          "score": 0.732
-        },
-        {
-          "ticker": "SMCI",
-          "return": -5.47,
-          "score": 0.6969
-        },
-        {
-          "ticker": "BNY",
-          "return": -4.53,
-          "score": 0.6957
-        },
-        {
-          "ticker": "WMB",
-          "return": -2.26,
-          "score": 0.6957
+          "ticker": "PSKY",
+          "return": 1.99,
+          "score": 0.7584
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -5.364,
+      "avg_return": -8.32,
       "picks": [
-        "MU",
-        "DELL",
-        "SMCI",
-        "CEG",
-        "HAL"
+        "BG",
+        "STX",
+        "LITE",
+        "PSKY",
+        "CEG"
       ],
       "raw": [
         {
-          "ticker": "MU",
-          "return": -8.57,
-          "score": 0.808
+          "ticker": "BG",
+          "return": -1.46,
+          "score": 0.8279
         },
         {
-          "ticker": "DELL",
-          "return": 4.04,
-          "score": 0.8053
+          "ticker": "STX",
+          "return": -15.44,
+          "score": 0.8164
         },
         {
-          "ticker": "SMCI",
-          "return": -5.47,
-          "score": 0.7905
+          "ticker": "LITE",
+          "return": -14.26,
+          "score": 0.8155
+        },
+        {
+          "ticker": "PSKY",
+          "return": 1.99,
+          "score": 0.8073
         },
         {
           "ticker": "CEG",
-          "return": -10.87,
-          "score": 0.7895
-        },
-        {
-          "ticker": "HAL",
-          "return": -5.95,
-          "score": 0.7886
+          "return": -12.43,
+          "score": 0.7963
         }
       ]
     }
