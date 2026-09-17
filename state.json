@@ -1,15 +1,6 @@
 {
-  "capital": 393.01,
+  "capital": 593.15,
   "positions": {
-    "DELL": {
-      "shares": 2,
-      "cost_per_share": 462.05,
-      "cost": 924.1,
-      "entry_date": "2026-09-02",
-      "top_signal": "volume",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.761 \u00b7 led by volume \u00b7 mode mean_reversion"
-    },
     "HOOD": {
       "shares": 9,
       "cost_per_share": 113.58,
@@ -36,15 +27,6 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.662 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
-    "MRNA": {
-      "shares": 6,
-      "cost_per_share": 138.093,
-      "cost": 828.56,
-      "entry_date": "2026-09-11",
-      "top_signal": "momentum",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.676 \u00b7 led by momentum \u00b7 mode mean_reversion"
     },
     "CRWD": {
       "shares": 5,
@@ -82,11 +64,29 @@
       "entry_mode": "momentum",
       "thesis": "score +0.669 \u00b7 led by momentum \u00b7 mode momentum"
     },
-    "SOXS": {
-      "shares": 19,
-      "cost_per_share": 48.55,
-      "cost": 922.45,
-      "entry_date": "2026-09-16",
+    "SMCI": {
+      "shares": 26,
+      "cost_per_share": 38.09,
+      "cost": 990.34,
+      "entry_date": "2026-09-17",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.750 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "ARKG": {
+      "shares": 18,
+      "cost_per_share": 49.05,
+      "cost": 882.9,
+      "entry_date": "2026-09-17",
+      "top_signal": "trend",
+      "entry_mode": "momentum",
+      "thesis": "score +0.708 \u00b7 led by trend \u00b7 mode momentum"
+    },
+    "FTNT": {
+      "shares": 5,
+      "cost_per_share": 170.2,
+      "cost": 851.0,
+      "entry_date": "2026-09-17",
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.654 \u00b7 led by momentum \u00b7 mode momentum"
@@ -806,6 +806,48 @@
       "reason": "rotation \u2192 USO (score +0.28)",
       "top_signal": "trend",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "DELL",
+      "entry_date": "2026-09-02",
+      "exit_date": "2026-09-17",
+      "entry_price": 462.05,
+      "exit_price": 570.4,
+      "shares": 2,
+      "cost": 924.1,
+      "pnl": 216.7,
+      "pnl_pct": 23.45,
+      "reason": "take profit (+26.7%)",
+      "top_signal": "volume",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "SOXS",
+      "entry_date": "2026-09-16",
+      "exit_date": "2026-09-17",
+      "entry_price": 48.55,
+      "exit_price": 45.715,
+      "shares": 19,
+      "cost": 922.45,
+      "pnl": -53.86,
+      "pnl_pct": -5.84,
+      "reason": "rotation \u2192 SMCI (score +1.02)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "MRNA",
+      "entry_date": "2026-09-11",
+      "exit_date": "2026-09-17",
+      "entry_price": 138.093,
+      "exit_price": 152.5,
+      "shares": 6,
+      "cost": 828.56,
+      "pnl": 86.44,
+      "pnl_pct": 10.43,
+      "reason": "rotation \u2192 ARKG (score +0.81)",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -834,7 +876,8 @@
     "2026-09-11": 10174.55,
     "2026-09-14": 10171.42,
     "2026-09-15": 10095.61,
-    "2026-09-16": 10065.27
+    "2026-09-16": 10065.27,
+    "2026-09-17": 10327.82
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -869,7 +912,8 @@
     "2026-09-11": "neutral",
     "2026-09-14": "neutral",
     "2026-09-15": "neutral",
-    "2026-09-16": "neutral"
+    "2026-09-16": "neutral",
+    "2026-09-17": "neutral"
   },
   "daily_log": [
     {
@@ -6360,6 +6404,250 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-09-17",
+      "thesis": "Regime: NEUTRAL\nVIX 15.7 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +1.72%  |  trend following +1.27%  |  defensive +0.69%  |  mean reversion -1.24%\nExited 3 position(s): DELL +217 (take profit (+26.7%)), SOXS -54 (rotation \u2192 SMCI (score +1.02)), MRNA +86 (rotation \u2192 ARKG (score +0.81))\nEntered 3 position(s):\n  SMCI $38.09 \u00d7 26 shares (score +0.750, led by momentum)\n  ARKG $49.05 \u00d7 18 shares (score +0.708, led by trend)\n  FTNT $170.20 \u00d7 5 shares (score +0.654, led by momentum)\nTop candidates screened: SMCI +0.750, ARKG +0.708, CRWD +0.662\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%",
+      "buys": [
+        {
+          "ticker": "SMCI",
+          "price": 38.09,
+          "total": 0.7497,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.16,
+            "trend": 1.0,
+            "mean_rev": 0.892,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.28,
+          "ret5": 8.9,
+          "shares": 26,
+          "cost": 990.34,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "ARKG",
+          "price": 49.05,
+          "total": 0.7082,
+          "scores": {
+            "momentum": 0.919,
+            "volume": 0.223,
+            "trend": 1.0,
+            "mean_rev": 0.86,
+            "regime_fit": 0.0
+          },
+          "ret20": 7.79,
+          "ret5": 13.38,
+          "shares": 18,
+          "cost": 882.9,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "FTNT",
+          "price": 170.2,
+          "total": 0.6545,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.241,
+            "trend": 1.0,
+            "mean_rev": 0.996,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.18,
+          "ret5": 8.9,
+          "shares": 5,
+          "cost": 851.0,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "DELL",
+          "entry_date": "2026-09-02",
+          "exit_date": "2026-09-17",
+          "entry_price": 462.05,
+          "exit_price": 570.4,
+          "shares": 2,
+          "cost": 924.1,
+          "pnl": 216.7,
+          "pnl_pct": 23.45,
+          "reason": "take profit (+26.7%)",
+          "top_signal": "volume",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "SOXS",
+          "entry_date": "2026-09-16",
+          "exit_date": "2026-09-17",
+          "entry_price": 48.55,
+          "exit_price": 45.715,
+          "shares": 19,
+          "cost": 922.45,
+          "pnl": -53.86,
+          "pnl_pct": -5.84,
+          "reason": "rotation \u2192 SMCI (score +1.02)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "MRNA",
+          "entry_date": "2026-09-11",
+          "exit_date": "2026-09-17",
+          "entry_price": 138.093,
+          "exit_price": 152.5,
+          "shares": 6,
+          "cost": 828.56,
+          "pnl": 86.44,
+          "pnl_pct": 10.43,
+          "reason": "rotation \u2192 ARKG (score +0.81)",
+          "top_signal": "momentum",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "SMCI",
+          "price": 40.70500183105469,
+          "total": 0.7497,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.16,
+            "trend": 1.0,
+            "mean_rev": 0.892,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.28,
+          "ret5": 8.9
+        },
+        {
+          "ticker": "ARKG",
+          "price": 51.45000076293945,
+          "total": 0.7082,
+          "scores": {
+            "momentum": 0.919,
+            "volume": 0.223,
+            "trend": 1.0,
+            "mean_rev": 0.86,
+            "regime_fit": 0.0
+          },
+          "ret20": 7.79,
+          "ret5": 13.38
+        },
+        {
+          "ticker": "CRWD",
+          "price": 246.72000122070312,
+          "total": 0.6618,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.18,
+            "trend": 1.0,
+            "mean_rev": 0.835,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.36,
+          "ret5": 18.13
+        },
+        {
+          "ticker": "RVTY",
+          "price": 148.74000549316406,
+          "total": 0.6555,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.154,
+            "trend": 1.0,
+            "mean_rev": 0.58,
+            "regime_fit": 0.3
+          },
+          "ret20": 24.52,
+          "ret5": 22.99
+        },
+        {
+          "ticker": "FTNT",
+          "price": 172.99000549316406,
+          "total": 0.6545,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.241,
+            "trend": 1.0,
+            "mean_rev": 0.996,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.18,
+          "ret5": 8.9
+        },
+        {
+          "ticker": "DELL",
+          "price": 585.2750244140625,
+          "total": 0.6531,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.179,
+            "trend": 1.0,
+            "mean_rev": 0.658,
+            "regime_fit": 0.3
+          },
+          "ret20": 33.76,
+          "ret5": 15.53
+        },
+        {
+          "ticker": "CRM",
+          "price": 243.50999450683594,
+          "total": 0.6508,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.232,
+            "trend": 1.0,
+            "mean_rev": 0.875,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.16,
+          "ret5": 0.21
+        },
+        {
+          "ticker": "ARE",
+          "price": 56.1599006652832,
+          "total": 0.6488,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.201,
+            "trend": 1.0,
+            "mean_rev": 0.681,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.1,
+          "ret5": 13.32
+        },
+        {
+          "ticker": "USO",
+          "price": 156.3800048828125,
+          "total": 0.6454,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.163,
+            "trend": 1.0,
+            "mean_rev": 0.422,
+            "regime_fit": 0.3
+          },
+          "ret20": 19.46,
+          "ret5": -1.26
+        },
+        {
+          "ticker": "HPE",
+          "price": 61.099998474121094,
+          "total": 0.6418,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.259,
+            "trend": 1.0,
+            "mean_rev": 0.83,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.0,
+          "ret5": 10.65
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
@@ -6390,7 +6678,8 @@
     "2026-09-11": "mean_reversion",
     "2026-09-14": "defensive",
     "2026-09-15": "mean_reversion",
-    "2026-09-16": "momentum"
+    "2026-09-16": "momentum",
+    "2026-09-17": "momentum"
   },
   "mode_pnl": {
     "momentum": [
@@ -6405,7 +6694,8 @@
       -0.17,
       2.93,
       -0.24,
-      -0.9
+      -0.9,
+      -5.84
     ],
     "trend_following": [
       3.93,
@@ -6425,8 +6715,6 @@
       6.42
     ],
     "mean_reversion": [
-      2.85,
-      2.93,
       0.58,
       0.39,
       -0.46,
@@ -6444,7 +6732,9 @@
       -13.99,
       0.03,
       0.0,
-      -1.77
+      -1.77,
+      23.45,
+      10.43
     ],
     "defensive": [
       0.21,
@@ -6455,153 +6745,153 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": -1.956,
+      "avg_return": 1.718,
       "picks": [
-        "META",
-        "HPE",
+        "USO",
+        "SWKS",
+        "DVN",
         "VLO",
-        "BG",
-        "ORCL"
+        "DBC"
       ],
       "raw": [
         {
-          "ticker": "META",
-          "return": 3.29,
-          "score": 0.7524
+          "ticker": "USO",
+          "return": -1.26,
+          "score": 0.8466
         },
         {
-          "ticker": "HPE",
-          "return": -2.82,
-          "score": 0.7478
+          "ticker": "SWKS",
+          "return": 7.37,
+          "score": 0.809
+        },
+        {
+          "ticker": "DVN",
+          "return": -2.54,
+          "score": 0.7489
         },
         {
           "ticker": "VLO",
-          "return": 4.3,
-          "score": 0.7333
+          "return": 6.3,
+          "score": 0.7256
         },
         {
-          "ticker": "BG",
-          "return": -3.11,
-          "score": 0.7208
-        },
-        {
-          "ticker": "ORCL",
-          "return": -11.44,
-          "score": 0.7197
-        }
-      ]
-    },
-    {
-      "mode": "mean_reversion",
-      "avg_return": -2.06,
-      "picks": [
-        "OKE",
-        "MRVL",
-        "SLV",
-        "EL",
-        "WRB"
-      ],
-      "raw": [
-        {
-          "ticker": "OKE",
-          "return": -2.17,
-          "score": 0.7245
-        },
-        {
-          "ticker": "MRVL",
-          "return": -2.78,
-          "score": 0.7223
-        },
-        {
-          "ticker": "SLV",
-          "return": -4.27,
-          "score": 0.7092
-        },
-        {
-          "ticker": "EL",
-          "return": -2.21,
-          "score": 0.7058
-        },
-        {
-          "ticker": "WRB",
-          "return": 1.13,
-          "score": 0.7
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": -2.106,
-      "picks": [
-        "MRVL",
-        "EL",
-        "HPE",
-        "COIN",
-        "HPQ"
-      ],
-      "raw": [
-        {
-          "ticker": "MRVL",
-          "return": -2.78,
-          "score": 0.559
-        },
-        {
-          "ticker": "EL",
-          "return": -2.21,
-          "score": 0.55
-        },
-        {
-          "ticker": "HPE",
-          "return": -2.82,
-          "score": 0.5478
-        },
-        {
-          "ticker": "COIN",
-          "return": -5.53,
-          "score": 0.5435
-        },
-        {
-          "ticker": "HPQ",
-          "return": 2.81,
-          "score": 0.5422
+          "ticker": "DBC",
+          "return": -1.28,
+          "score": 0.7189
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -3.17,
+      "avg_return": 1.266,
       "picks": [
-        "HPE",
+        "USO",
+        "SWKS",
+        "DVN",
         "BG",
-        "ORCL",
-        "MRVL",
         "VLO"
       ],
       "raw": [
         {
-          "ticker": "HPE",
-          "return": -2.82,
-          "score": 0.8002
+          "ticker": "USO",
+          "return": -1.26,
+          "score": 0.8305
+        },
+        {
+          "ticker": "SWKS",
+          "return": 7.37,
+          "score": 0.8125
+        },
+        {
+          "ticker": "DVN",
+          "return": -2.54,
+          "score": 0.8057
         },
         {
           "ticker": "BG",
-          "return": -3.11,
-          "score": 0.7891
-        },
-        {
-          "ticker": "ORCL",
-          "return": -11.44,
-          "score": 0.7867
-        },
-        {
-          "ticker": "MRVL",
-          "return": -2.78,
-          "score": 0.7859
+          "return": -3.54,
+          "score": 0.7839
         },
         {
           "ticker": "VLO",
-          "return": 4.3,
-          "score": 0.7845
+          "return": 6.3,
+          "score": 0.7806
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": 0.688,
+      "picks": [
+        "DVN",
+        "APA",
+        "MRNA",
+        "BG",
+        "SNDK"
+      ],
+      "raw": [
+        {
+          "ticker": "DVN",
+          "return": -2.54,
+          "score": 0.5633
+        },
+        {
+          "ticker": "APA",
+          "return": 1.32,
+          "score": 0.5559
+        },
+        {
+          "ticker": "MRNA",
+          "return": 13.98,
+          "score": 0.5423
+        },
+        {
+          "ticker": "BG",
+          "return": -3.54,
+          "score": 0.5414
+        },
+        {
+          "ticker": "SNDK",
+          "return": -5.78,
+          "score": 0.5402
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": -1.236,
+      "picks": [
+        "APA",
+        "DVN",
+        "OXY",
+        "MU",
+        "XOM"
+      ],
+      "raw": [
+        {
+          "ticker": "APA",
+          "return": 1.32,
+          "score": 0.7529
+        },
+        {
+          "ticker": "DVN",
+          "return": -2.54,
+          "score": 0.738
+        },
+        {
+          "ticker": "OXY",
+          "return": -3.09,
+          "score": 0.7317
+        },
+        {
+          "ticker": "MU",
+          "return": -0.28,
+          "score": 0.7167
+        },
+        {
+          "ticker": "XOM",
+          "return": -1.59,
+          "score": 0.7098
         }
       ]
     }
