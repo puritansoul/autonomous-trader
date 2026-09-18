@@ -1,15 +1,6 @@
 {
-  "capital": 593.15,
+  "capital": 425.62,
   "positions": {
-    "HOOD": {
-      "shares": 9,
-      "cost_per_share": 113.58,
-      "cost": 1022.22,
-      "entry_date": "2026-09-03",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.690 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "FBTC": {
       "shares": 15,
       "cost_per_share": 69.02,
@@ -73,15 +64,6 @@
       "entry_mode": "momentum",
       "thesis": "score +0.750 \u00b7 led by momentum \u00b7 mode momentum"
     },
-    "ARKG": {
-      "shares": 18,
-      "cost_per_share": 49.05,
-      "cost": 882.9,
-      "entry_date": "2026-09-17",
-      "top_signal": "trend",
-      "entry_mode": "momentum",
-      "thesis": "score +0.708 \u00b7 led by trend \u00b7 mode momentum"
-    },
     "FTNT": {
       "shares": 5,
       "cost_per_share": 170.2,
@@ -90,6 +72,24 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.654 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "COIN": {
+      "shares": 6,
+      "cost_per_share": 178.155,
+      "cost": 1068.93,
+      "entry_date": "2026-09-18",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.558 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "HPE": {
+      "shares": 17,
+      "cost_per_share": 61.7,
+      "cost": 1048.9,
+      "entry_date": "2026-09-18",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.524 \u00b7 led by momentum \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -848,6 +848,34 @@
       "reason": "rotation \u2192 ARKG (score +0.81)",
       "top_signal": "momentum",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "HOOD",
+      "entry_date": "2026-09-03",
+      "exit_date": "2026-09-18",
+      "entry_price": 113.58,
+      "exit_price": 113.52,
+      "shares": 9,
+      "cost": 1022.22,
+      "pnl": -0.54,
+      "pnl_pct": -0.05,
+      "reason": "max hold 15d",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "ARKG",
+      "entry_date": "2026-09-17",
+      "exit_date": "2026-09-18",
+      "entry_price": 49.05,
+      "exit_price": 51.59,
+      "shares": 18,
+      "cost": 882.9,
+      "pnl": 45.72,
+      "pnl_pct": 5.18,
+      "reason": "rotation \u2192 COIN (score +0.21)",
+      "top_signal": "trend",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -877,14 +905,15 @@
     "2026-09-14": 10171.42,
     "2026-09-15": 10095.61,
     "2026-09-16": 10065.27,
-    "2026-09-17": 10327.82
+    "2026-09-17": 10327.82,
+    "2026-09-18": 10318.4
   },
   "signal_weights": {
-    "momentum": 0.5,
-    "volume": 0.25,
-    "trend": 0.15,
-    "mean_rev": 0.05,
-    "regime_fit": 0.05
+    "momentum": 0.1,
+    "volume": 0.05,
+    "trend": 0.2,
+    "mean_rev": 0.1,
+    "regime_fit": 0.55
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -913,7 +942,8 @@
     "2026-09-14": "neutral",
     "2026-09-15": "neutral",
     "2026-09-16": "neutral",
-    "2026-09-17": "neutral"
+    "2026-09-17": "neutral",
+    "2026-09-18": "neutral"
   },
   "daily_log": [
     {
@@ -6648,11 +6678,224 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-09-18",
+      "thesis": "Regime: NEUTRAL\nVIX 15.4 \u00b7 SPY trend mixed \u00b7 risk appetite neutral\nStrategy mode switched: momentum \u2192 defensive (Prioritize regime-fit safe-haven assets)\nBacktest (5d): defensive +0.57%  |  mean reversion +0.49%  |  momentum +0.39%  |  trend following +0.39%\nExited 2 position(s): HOOD -1 (max hold 15d), ARKG +46 (rotation \u2192 COIN (score +0.21))\nEntered 2 position(s):\n  COIN $178.16 \u00d7 6 shares (score +0.558, led by momentum)\n  HPE $61.70 \u00d7 17 shares (score +0.524, led by momentum)\nTop candidates screened: COIN +0.558, FTNT +0.548, HOOD +0.540\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "COIN",
+          "price": 178.155,
+          "total": 0.5585,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.098,
+            "trend": 1.0,
+            "mean_rev": 0.886,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.72,
+          "ret5": 10.85,
+          "shares": 6,
+          "cost": 1068.93,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "HPE",
+          "price": 61.7,
+          "total": 0.5241,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.364,
+            "trend": 1.0,
+            "mean_rev": 0.773,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.06,
+          "ret5": -1.99,
+          "shares": 17,
+          "cost": 1048.9,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "HOOD",
+          "entry_date": "2026-09-03",
+          "exit_date": "2026-09-18",
+          "entry_price": 113.58,
+          "exit_price": 113.52,
+          "shares": 9,
+          "cost": 1022.22,
+          "pnl": -0.54,
+          "pnl_pct": -0.05,
+          "reason": "max hold 15d",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "ARKG",
+          "entry_date": "2026-09-17",
+          "exit_date": "2026-09-18",
+          "entry_price": 49.05,
+          "exit_price": 51.59,
+          "shares": 18,
+          "cost": 882.9,
+          "pnl": 45.72,
+          "pnl_pct": 5.18,
+          "reason": "rotation \u2192 COIN (score +0.21)",
+          "top_signal": "trend",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "COIN",
+          "price": 194.27000427246094,
+          "total": 0.5585,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.098,
+            "trend": 1.0,
+            "mean_rev": 0.886,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.72,
+          "ret5": 10.85
+        },
+        {
+          "ticker": "FTNT",
+          "price": 167.9250030517578,
+          "total": 0.5479,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.268,
+            "trend": 1.0,
+            "mean_rev": 0.963,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.36,
+          "ret5": 7.6
+        },
+        {
+          "ticker": "HOOD",
+          "price": 119.45500183105469,
+          "total": 0.54,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.01,
+            "trend": 1.0,
+            "mean_rev": 0.755,
+            "regime_fit": 0.3
+          },
+          "ret20": 25.61,
+          "ret5": 6.12
+        },
+        {
+          "ticker": "CRWD",
+          "price": 237.1750030517578,
+          "total": 0.5362,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.24,
+            "trend": 1.0,
+            "mean_rev": 0.832,
+            "regime_fit": 0.3
+          },
+          "ret20": 24.61,
+          "ret5": 14.72
+        },
+        {
+          "ticker": "HPE",
+          "price": 60.70000076293945,
+          "total": 0.5241,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.364,
+            "trend": 1.0,
+            "mean_rev": 0.773,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.06,
+          "ret5": -1.99
+        },
+        {
+          "ticker": "MRNA",
+          "price": 155.25999450683594,
+          "total": 0.5195,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.386,
+            "trend": 1.0,
+            "mean_rev": 0.739,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.46,
+          "ret5": 7.84
+        },
+        {
+          "ticker": "RVTY",
+          "price": 144.09500122070312,
+          "total": 0.518,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.26,
+            "trend": 1.0,
+            "mean_rev": 0.66,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.08,
+          "ret5": 15.92
+        },
+        {
+          "ticker": "HPQ",
+          "price": 34.45500183105469,
+          "total": 0.5177,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.352,
+            "trend": 1.0,
+            "mean_rev": 0.703,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.05,
+          "ret5": -2.89
+        },
+        {
+          "ticker": "QCOM",
+          "price": 178.22500610351562,
+          "total": 0.5142,
+          "scores": {
+            "momentum": 0.81,
+            "volume": -0.083,
+            "trend": 1.0,
+            "mean_rev": 0.724,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.48,
+          "ret5": -2.06
+        },
+        {
+          "ticker": "SNDK",
+          "price": 1739.75,
+          "total": 0.5118,
+          "scores": {
+            "momentum": 0.815,
+            "volume": -0.062,
+            "trend": 1.0,
+            "mean_rev": 0.684,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.69,
+          "ret5": 6.51
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "momentum",
+  "active_mode": "defensive",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -6679,7 +6922,8 @@
     "2026-09-14": "defensive",
     "2026-09-15": "mean_reversion",
     "2026-09-16": "momentum",
-    "2026-09-17": "momentum"
+    "2026-09-17": "momentum",
+    "2026-09-18": "defensive"
   },
   "mode_pnl": {
     "momentum": [
@@ -6695,7 +6939,9 @@
       2.93,
       -0.24,
       -0.9,
-      -5.84
+      -5.84,
+      -0.05,
+      5.18
     ],
     "trend_following": [
       3.93,
@@ -6744,154 +6990,154 @@
   },
   "last_backtest": [
     {
-      "mode": "momentum",
-      "avg_return": 1.718,
-      "picks": [
-        "USO",
-        "SWKS",
-        "DVN",
-        "VLO",
-        "DBC"
-      ],
-      "raw": [
-        {
-          "ticker": "USO",
-          "return": -1.26,
-          "score": 0.8466
-        },
-        {
-          "ticker": "SWKS",
-          "return": 7.37,
-          "score": 0.809
-        },
-        {
-          "ticker": "DVN",
-          "return": -2.54,
-          "score": 0.7489
-        },
-        {
-          "ticker": "VLO",
-          "return": 6.3,
-          "score": 0.7256
-        },
-        {
-          "ticker": "DBC",
-          "return": -1.28,
-          "score": 0.7189
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": 1.266,
-      "picks": [
-        "USO",
-        "SWKS",
-        "DVN",
-        "BG",
-        "VLO"
-      ],
-      "raw": [
-        {
-          "ticker": "USO",
-          "return": -1.26,
-          "score": 0.8305
-        },
-        {
-          "ticker": "SWKS",
-          "return": 7.37,
-          "score": 0.8125
-        },
-        {
-          "ticker": "DVN",
-          "return": -2.54,
-          "score": 0.8057
-        },
-        {
-          "ticker": "BG",
-          "return": -3.54,
-          "score": 0.7839
-        },
-        {
-          "ticker": "VLO",
-          "return": 6.3,
-          "score": 0.7806
-        }
-      ]
-    },
-    {
       "mode": "defensive",
-      "avg_return": 0.688,
+      "avg_return": 0.568,
       "picks": [
-        "DVN",
-        "APA",
         "MRNA",
-        "BG",
-        "SNDK"
+        "DVN",
+        "CF",
+        "MOS",
+        "DELL"
       ],
       "raw": [
-        {
-          "ticker": "DVN",
-          "return": -2.54,
-          "score": 0.5633
-        },
-        {
-          "ticker": "APA",
-          "return": 1.32,
-          "score": 0.5559
-        },
         {
           "ticker": "MRNA",
-          "return": 13.98,
-          "score": 0.5423
+          "return": 7.84,
+          "score": 0.5501
         },
         {
-          "ticker": "BG",
-          "return": -3.54,
-          "score": 0.5414
+          "ticker": "DVN",
+          "return": -2.71,
+          "score": 0.55
         },
         {
-          "ticker": "SNDK",
-          "return": -5.78,
-          "score": 0.5402
+          "ticker": "CF",
+          "return": -3.09,
+          "score": 0.5499
+        },
+        {
+          "ticker": "MOS",
+          "return": -1.53,
+          "score": 0.5432
+        },
+        {
+          "ticker": "DELL",
+          "return": 2.33,
+          "score": 0.54
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -1.236,
+      "avg_return": 0.494,
       "picks": [
-        "APA",
-        "DVN",
-        "OXY",
-        "MU",
-        "XOM"
+        "ORCL",
+        "BIIB",
+        "MRVL",
+        "KR",
+        "IQV"
       ],
       "raw": [
         {
-          "ticker": "APA",
-          "return": 1.32,
-          "score": 0.7529
+          "ticker": "ORCL",
+          "return": -3.11,
+          "score": 0.7913
         },
         {
-          "ticker": "DVN",
-          "return": -2.54,
-          "score": 0.738
+          "ticker": "BIIB",
+          "return": -0.08,
+          "score": 0.7367
         },
         {
-          "ticker": "OXY",
-          "return": -3.09,
-          "score": 0.7317
+          "ticker": "MRVL",
+          "return": 0.06,
+          "score": 0.7085
         },
         {
-          "ticker": "MU",
-          "return": -0.28,
-          "score": 0.7167
+          "ticker": "KR",
+          "return": 3.88,
+          "score": 0.7051
         },
         {
-          "ticker": "XOM",
-          "return": -1.59,
-          "score": 0.7098
+          "ticker": "IQV",
+          "return": 1.72,
+          "score": 0.7044
+        }
+      ]
+    },
+    {
+      "mode": "momentum",
+      "avg_return": 0.386,
+      "picks": [
+        "ETHA",
+        "SWKS",
+        "HPQ",
+        "DELL",
+        "USO"
+      ],
+      "raw": [
+        {
+          "ticker": "ETHA",
+          "return": 2.09,
+          "score": 0.8348
+        },
+        {
+          "ticker": "SWKS",
+          "return": 0.84,
+          "score": 0.7853
+        },
+        {
+          "ticker": "HPQ",
+          "return": -2.89,
+          "score": 0.7822
+        },
+        {
+          "ticker": "DELL",
+          "return": 2.33,
+          "score": 0.7813
+        },
+        {
+          "ticker": "USO",
+          "return": -0.44,
+          "score": 0.7441
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": 0.386,
+      "picks": [
+        "HPQ",
+        "DELL",
+        "SWKS",
+        "ETHA",
+        "USO"
+      ],
+      "raw": [
+        {
+          "ticker": "HPQ",
+          "return": -2.89,
+          "score": 0.809
+        },
+        {
+          "ticker": "DELL",
+          "return": 2.33,
+          "score": 0.8088
+        },
+        {
+          "ticker": "SWKS",
+          "return": 0.84,
+          "score": 0.8
+        },
+        {
+          "ticker": "ETHA",
+          "return": 2.09,
+          "score": 0.798
+        },
+        {
+          "ticker": "USO",
+          "return": -0.44,
+          "score": 0.7932
         }
       ]
     }
