@@ -1,24 +1,6 @@
 {
-  "capital": 425.62,
+  "capital": 574.53,
   "positions": {
-    "FBTC": {
-      "shares": 15,
-      "cost_per_share": 69.02,
-      "cost": 1035.3,
-      "entry_date": "2026-09-04",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.800 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
-    "BBY": {
-      "shares": 10,
-      "cost_per_share": 89.8,
-      "cost": 898.0,
-      "entry_date": "2026-09-08",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.662 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "CRWD": {
       "shares": 5,
       "cost_per_share": 219.0,
@@ -27,15 +9,6 @@
       "top_signal": "trend",
       "entry_mode": "defensive",
       "thesis": "score +0.556 \u00b7 led by trend \u00b7 mode defensive"
-    },
-    "ARE": {
-      "shares": 19,
-      "cost_per_share": 51.67,
-      "cost": 981.73,
-      "entry_date": "2026-09-15",
-      "top_signal": "momentum",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.682 \u00b7 led by momentum \u00b7 mode mean_reversion"
     },
     "RVTY": {
       "shares": 6,
@@ -90,6 +63,33 @@
       "top_signal": "momentum",
       "entry_mode": "defensive",
       "thesis": "score +0.524 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "IBIT": {
+      "shares": 21,
+      "cost_per_share": 48.085,
+      "cost": 1009.78,
+      "entry_date": "2026-09-21",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.838 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "TECL": {
+      "shares": 4,
+      "cost_per_share": 219.005,
+      "cost": 876.02,
+      "entry_date": "2026-09-21",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.835 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "FNGU": {
+      "shares": 30,
+      "cost_per_share": 33.86,
+      "cost": 1015.8,
+      "entry_date": "2026-09-21",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.832 \u00b7 led by momentum \u00b7 mode trend_following"
     }
   },
   "closed": [
@@ -876,6 +876,48 @@
       "reason": "rotation \u2192 COIN (score +0.21)",
       "top_signal": "trend",
       "entry_mode": "momentum"
+    },
+    {
+      "ticker": "FBTC",
+      "entry_date": "2026-09-04",
+      "exit_date": "2026-09-21",
+      "entry_price": 69.02,
+      "exit_price": 73.9,
+      "shares": 15,
+      "cost": 1035.3,
+      "pnl": 73.2,
+      "pnl_pct": 7.07,
+      "reason": "max hold 17d",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "ARE",
+      "entry_date": "2026-09-15",
+      "exit_date": "2026-09-21",
+      "entry_price": 51.67,
+      "exit_price": 53.39,
+      "shares": 19,
+      "cost": 981.73,
+      "pnl": 32.68,
+      "pnl_pct": 3.33,
+      "reason": "rotation \u2192 IBIT (score +0.30)",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "BBY",
+      "entry_date": "2026-09-08",
+      "exit_date": "2026-09-21",
+      "entry_price": 89.8,
+      "exit_price": 92.76,
+      "shares": 10,
+      "cost": 898.0,
+      "pnl": 29.6,
+      "pnl_pct": 3.3,
+      "reason": "rotation \u2192 TECL (score +0.21)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -906,14 +948,15 @@
     "2026-09-15": 10095.61,
     "2026-09-16": 10065.27,
     "2026-09-17": 10327.82,
-    "2026-09-18": 10318.4
+    "2026-09-18": 10318.4,
+    "2026-09-21": 10639.95
   },
   "signal_weights": {
-    "momentum": 0.1,
-    "volume": 0.05,
-    "trend": 0.2,
-    "mean_rev": 0.1,
-    "regime_fit": 0.55
+    "momentum": 0.2,
+    "volume": 0.1,
+    "trend": 0.5,
+    "mean_rev": 0.05,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -943,7 +986,8 @@
     "2026-09-15": "neutral",
     "2026-09-16": "neutral",
     "2026-09-17": "neutral",
-    "2026-09-18": "neutral"
+    "2026-09-18": "neutral",
+    "2026-09-21": "bull"
   },
   "daily_log": [
     {
@@ -6891,11 +6935,255 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-09-21",
+      "thesis": "Regime: BULL\nVIX 15.0 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: defensive \u2192 trend_following (Follow SMA alignment and regime-matched assets)\nBacktest (5d): trend following +6.64%  |  defensive +6.34%  |  momentum +4.89%  |  mean reversion -0.83%\nExited 3 position(s): FBTC +73 (max hold 17d), ARE +33 (rotation \u2192 IBIT (score +0.30)), BBY +30 (rotation \u2192 TECL (score +0.21))\nEntered 3 position(s):\n  IBIT $48.09 \u00d7 21 shares (score +0.838, led by momentum)\n  TECL $219.00 \u00d7 4 shares (score +0.835, led by momentum)\n  FNGU $33.86 \u00d7 30 shares (score +0.832, led by momentum)\nTop candidates screened: IBIT +0.838, FBTC +0.837, TECL +0.835\nSignal weights: trend 50% \u00b7 momentum 20% \u00b7 regime_fit 15% \u00b7 volume 10% \u00b7 mean_rev 5%",
+      "buys": [
+        {
+          "ticker": "IBIT",
+          "price": 48.085,
+          "total": 0.8379,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.018,
+            "trend": 1.0,
+            "mean_rev": -0.278,
+            "regime_fit": 1.0
+          },
+          "ret20": 11.57,
+          "ret5": 8.93,
+          "shares": 21,
+          "cost": 1009.78,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "TECL",
+          "price": 219.005,
+          "total": 0.8345,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.01,
+            "trend": 1.0,
+            "mean_rev": -0.289,
+            "regime_fit": 1.0
+          },
+          "ret20": 17.55,
+          "ret5": 18.04,
+          "shares": 4,
+          "cost": 876.02,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "FNGU",
+          "price": 33.86,
+          "total": 0.8323,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.064,
+            "trend": 1.0,
+            "mean_rev": -0.226,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.42,
+          "ret5": 10.75,
+          "shares": 30,
+          "cost": 1015.8,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "FBTC",
+          "entry_date": "2026-09-04",
+          "exit_date": "2026-09-21",
+          "entry_price": 69.02,
+          "exit_price": 73.9,
+          "shares": 15,
+          "cost": 1035.3,
+          "pnl": 73.2,
+          "pnl_pct": 7.07,
+          "reason": "max hold 17d",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "ARE",
+          "entry_date": "2026-09-15",
+          "exit_date": "2026-09-21",
+          "entry_price": 51.67,
+          "exit_price": 53.39,
+          "shares": 19,
+          "cost": 981.73,
+          "pnl": 32.68,
+          "pnl_pct": 3.33,
+          "reason": "rotation \u2192 IBIT (score +0.30)",
+          "top_signal": "momentum",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "BBY",
+          "entry_date": "2026-09-08",
+          "exit_date": "2026-09-21",
+          "entry_price": 89.8,
+          "exit_price": 92.76,
+          "shares": 10,
+          "cost": 898.0,
+          "pnl": 29.6,
+          "pnl_pct": 3.3,
+          "reason": "rotation \u2192 TECL (score +0.21)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "IBIT",
+          "price": 48.73500061035156,
+          "total": 0.8379,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.018,
+            "trend": 1.0,
+            "mean_rev": -0.278,
+            "regime_fit": 1.0
+          },
+          "ret20": 11.57,
+          "ret5": 8.93
+        },
+        {
+          "ticker": "FBTC",
+          "price": 74.87000274658203,
+          "total": 0.8365,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.003,
+            "trend": 1.0,
+            "mean_rev": -0.277,
+            "regime_fit": 1.0
+          },
+          "ret20": 11.71,
+          "ret5": 9.0
+        },
+        {
+          "ticker": "TECL",
+          "price": 229.0,
+          "total": 0.8345,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.01,
+            "trend": 1.0,
+            "mean_rev": -0.289,
+            "regime_fit": 1.0
+          },
+          "ret20": 17.55,
+          "ret5": 18.04
+        },
+        {
+          "ticker": "FNGU",
+          "price": 35.95000076293945,
+          "total": 0.8323,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.064,
+            "trend": 1.0,
+            "mean_rev": -0.226,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.42,
+          "ret5": 10.75
+        },
+        {
+          "ticker": "TQQQ",
+          "price": 78.96499633789062,
+          "total": 0.8318,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.042,
+            "trend": 1.0,
+            "mean_rev": -0.281,
+            "regime_fit": 1.0
+          },
+          "ret20": 10.95,
+          "ret5": 14.0
+        },
+        {
+          "ticker": "ETHA",
+          "price": 20.799999237060547,
+          "total": 0.8191,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.155,
+            "trend": 1.0,
+            "mean_rev": -0.307,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.04,
+          "ret5": 8.5
+        },
+        {
+          "ticker": "WBD",
+          "price": 30.799999237060547,
+          "total": 0.7885,
+          "scores": {
+            "momentum": 0.831,
+            "volume": 1.0,
+            "trend": 1.0,
+            "mean_rev": -0.455,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.88,
+          "ret5": 9.61
+        },
+        {
+          "ticker": "ARKW",
+          "price": 165.35000610351562,
+          "total": 0.7772,
+          "scores": {
+            "momentum": 0.583,
+            "volume": 0.212,
+            "trend": 1.0,
+            "mean_rev": -0.211,
+            "regime_fit": 1.0
+          },
+          "ret20": 6.34,
+          "ret5": 4.28
+        },
+        {
+          "ticker": "CIBR",
+          "price": 102.73999786376953,
+          "total": 0.77,
+          "scores": {
+            "momentum": 0.691,
+            "volume": -0.128,
+            "trend": 1.0,
+            "mean_rev": -0.108,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.32,
+          "ret5": 2.69
+        },
+        {
+          "ticker": "EWZ",
+          "price": 38.095001220703125,
+          "total": 0.7578,
+          "scores": {
+            "momentum": 0.674,
+            "volume": -0.109,
+            "trend": 1.0,
+            "mean_rev": -0.322,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.66,
+          "ret5": 0.99
+        }
+      ],
+      "prev_mode": "defensive"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "defensive",
+  "active_mode": "trend_following",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -6923,7 +7211,8 @@
     "2026-09-15": "mean_reversion",
     "2026-09-16": "momentum",
     "2026-09-17": "momentum",
-    "2026-09-18": "defensive"
+    "2026-09-18": "defensive",
+    "2026-09-21": "trend_following"
   },
   "mode_pnl": {
     "momentum": [
@@ -6958,11 +7247,10 @@
       0.73,
       -2.69,
       -3.44,
-      6.42
+      6.42,
+      7.07
     ],
     "mean_reversion": [
-      0.58,
-      0.39,
       -0.46,
       5.3,
       -0.9,
@@ -6980,7 +7268,9 @@
       0.0,
       -1.77,
       23.45,
-      10.43
+      10.43,
+      3.33,
+      3.3
     ],
     "defensive": [
       0.21,
@@ -6990,154 +7280,154 @@
   },
   "last_backtest": [
     {
-      "mode": "defensive",
-      "avg_return": 0.568,
+      "mode": "trend_following",
+      "avg_return": 6.642,
       "picks": [
-        "MRNA",
-        "DVN",
-        "CF",
-        "MOS",
-        "DELL"
+        "FBTC",
+        "IBIT",
+        "ETHA",
+        "EWZ",
+        "CRWD"
       ],
       "raw": [
         {
-          "ticker": "MRNA",
-          "return": 7.84,
-          "score": 0.5501
+          "ticker": "FBTC",
+          "return": 9.0,
+          "score": 0.8392
         },
         {
-          "ticker": "DVN",
-          "return": -2.71,
-          "score": 0.55
+          "ticker": "IBIT",
+          "return": 8.93,
+          "score": 0.8378
         },
         {
-          "ticker": "CF",
-          "return": -3.09,
-          "score": 0.5499
+          "ticker": "ETHA",
+          "return": 8.5,
+          "score": 0.8336
         },
         {
-          "ticker": "MOS",
-          "return": -1.53,
-          "score": 0.5432
+          "ticker": "EWZ",
+          "return": 0.99,
+          "score": 0.7892
         },
         {
-          "ticker": "DELL",
-          "return": 2.33,
-          "score": 0.54
+          "ticker": "CRWD",
+          "return": 5.79,
+          "score": 0.7818
         }
       ]
     },
     {
-      "mode": "mean_reversion",
-      "avg_return": 0.494,
+      "mode": "defensive",
+      "avg_return": 6.34,
       "picks": [
-        "ORCL",
-        "BIIB",
-        "MRVL",
-        "KR",
-        "IQV"
+        "FBTC",
+        "IBIT",
+        "ETHA",
+        "EWZ",
+        "ARKW"
       ],
       "raw": [
         {
-          "ticker": "ORCL",
-          "return": -3.11,
-          "score": 0.7913
+          "ticker": "FBTC",
+          "return": 9.0,
+          "score": 0.844
         },
         {
-          "ticker": "BIIB",
-          "return": -0.08,
-          "score": 0.7367
+          "ticker": "IBIT",
+          "return": 8.93,
+          "score": 0.8432
         },
         {
-          "ticker": "MRVL",
-          "return": 0.06,
-          "score": 0.7085
+          "ticker": "ETHA",
+          "return": 8.5,
+          "score": 0.8329
         },
         {
-          "ticker": "KR",
-          "return": 3.88,
-          "score": 0.7051
+          "ticker": "EWZ",
+          "return": 0.99,
+          "score": 0.7906
         },
         {
-          "ticker": "IQV",
-          "return": 1.72,
-          "score": 0.7044
+          "ticker": "ARKW",
+          "return": 4.28,
+          "score": 0.777
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": 0.386,
+      "avg_return": 4.886,
       "picks": [
-        "ETHA",
+        "CRWD",
+        "VLO",
         "SWKS",
-        "HPQ",
-        "DELL",
-        "USO"
+        "USO",
+        "COIN"
       ],
       "raw": [
         {
-          "ticker": "ETHA",
-          "return": 2.09,
-          "score": 0.8348
+          "ticker": "CRWD",
+          "return": 5.79,
+          "score": 0.7797
+        },
+        {
+          "ticker": "VLO",
+          "return": 5.46,
+          "score": 0.757
         },
         {
           "ticker": "SWKS",
-          "return": 0.84,
-          "score": 0.7853
-        },
-        {
-          "ticker": "HPQ",
-          "return": -2.89,
-          "score": 0.7822
-        },
-        {
-          "ticker": "DELL",
-          "return": 2.33,
-          "score": 0.7813
+          "return": 12.5,
+          "score": 0.7445
         },
         {
           "ticker": "USO",
-          "return": -0.44,
-          "score": 0.7441
+          "return": -5.02,
+          "score": 0.7114
+        },
+        {
+          "ticker": "COIN",
+          "return": 5.7,
+          "score": 0.7026
         }
       ]
     },
     {
-      "mode": "trend_following",
-      "avg_return": 0.386,
+      "mode": "mean_reversion",
+      "avg_return": -0.826,
       "picks": [
-        "HPQ",
-        "DELL",
-        "SWKS",
-        "ETHA",
-        "USO"
+        "NSC",
+        "INVH",
+        "GEHC",
+        "RCL",
+        "COO"
       ],
       "raw": [
         {
-          "ticker": "HPQ",
-          "return": -2.89,
-          "score": 0.809
+          "ticker": "NSC",
+          "return": -3.21,
+          "score": 0.5153
         },
         {
-          "ticker": "DELL",
-          "return": 2.33,
-          "score": 0.8088
+          "ticker": "INVH",
+          "return": -1.83,
+          "score": 0.4647
         },
         {
-          "ticker": "SWKS",
-          "return": 0.84,
-          "score": 0.8
+          "ticker": "GEHC",
+          "return": 0.86,
+          "score": 0.4497
         },
         {
-          "ticker": "ETHA",
-          "return": 2.09,
-          "score": 0.798
+          "ticker": "RCL",
+          "return": -0.87,
+          "score": 0.4311
         },
         {
-          "ticker": "USO",
-          "return": -0.44,
-          "score": 0.7932
+          "ticker": "COO",
+          "return": 0.92,
+          "score": 0.4189
         }
       ]
     }
