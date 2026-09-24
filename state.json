@@ -1,15 +1,6 @@
 {
-  "capital": 174.2,
+  "capital": 444.71,
   "positions": {
-    "CRWD": {
-      "shares": 5,
-      "cost_per_share": 219.0,
-      "cost": 1095.0,
-      "entry_date": "2026-09-14",
-      "top_signal": "trend",
-      "entry_mode": "defensive",
-      "thesis": "score +0.556 \u00b7 led by trend \u00b7 mode defensive"
-    },
     "RVTY": {
       "shares": 6,
       "cost_per_share": 140.88,
@@ -27,15 +18,6 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.750 \u00b7 led by momentum \u00b7 mode momentum"
-    },
-    "FTNT": {
-      "shares": 5,
-      "cost_per_share": 170.2,
-      "cost": 851.0,
-      "entry_date": "2026-09-17",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.654 \u00b7 led by momentum \u00b7 mode momentum"
     },
     "COIN": {
       "shares": 6,
@@ -90,6 +72,24 @@
       "top_signal": "momentum",
       "entry_mode": "trend_following",
       "thesis": "score +0.823 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "FBTC": {
+      "shares": 13,
+      "cost_per_share": 72.9,
+      "cost": 947.7,
+      "entry_date": "2026-09-24",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.806 \u00b7 led by trend \u00b7 mode defensive"
+    },
+    "ETHA": {
+      "shares": 49,
+      "cost_per_share": 20.065,
+      "cost": 983.19,
+      "entry_date": "2026-09-24",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.800 \u00b7 led by trend \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -932,6 +932,34 @@
       "reason": "stop loss (-8.2%)",
       "top_signal": "momentum",
       "entry_mode": "momentum"
+    },
+    {
+      "ticker": "FTNT",
+      "entry_date": "2026-09-17",
+      "exit_date": "2026-09-24",
+      "entry_price": 170.2,
+      "exit_price": 178.505,
+      "shares": 5,
+      "cost": 851.0,
+      "pnl": 41.53,
+      "pnl_pct": 4.88,
+      "reason": "rotation \u2192 FBTC (score +0.42)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "CRWD",
+      "entry_date": "2026-09-14",
+      "exit_date": "2026-09-24",
+      "entry_price": 219.0,
+      "exit_price": 261.775,
+      "shares": 5,
+      "cost": 1095.0,
+      "pnl": 213.87,
+      "pnl_pct": 19.53,
+      "reason": "rotation \u2192 ETHA (score +0.41)",
+      "top_signal": "trend",
+      "entry_mode": "defensive"
     }
   ],
   "nav_history": {
@@ -965,14 +993,15 @@
     "2026-09-18": 10318.4,
     "2026-09-21": 10639.95,
     "2026-09-22": 10638.72,
-    "2026-09-23": 10640.32
+    "2026-09-23": 10640.32,
+    "2026-09-24": 10666.52
   },
   "signal_weights": {
-    "momentum": 0.2,
-    "volume": 0.1,
-    "trend": 0.5,
-    "mean_rev": 0.05,
-    "regime_fit": 0.15
+    "momentum": 0.1,
+    "volume": 0.05,
+    "trend": 0.2,
+    "mean_rev": 0.1,
+    "regime_fit": 0.55
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -1005,7 +1034,8 @@
     "2026-09-18": "neutral",
     "2026-09-21": "bull",
     "2026-09-22": "bull",
-    "2026-09-23": "bull"
+    "2026-09-23": "bull",
+    "2026-09-24": "bull"
   },
   "daily_log": [
     {
@@ -7528,11 +7558,224 @@
         }
       ],
       "prev_mode": "trend_following"
+    },
+    {
+      "date": "2026-09-24",
+      "thesis": "Regime: BULL\nVIX 15.7 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: trend_following \u2192 defensive (Prioritize regime-fit safe-haven assets)\nBacktest (5d): defensive +9.21%  |  trend following +6.07%  |  momentum +5.45%  |  mean reversion -1.38%\nExited 2 position(s): FTNT +42 (rotation \u2192 FBTC (score +0.42)), CRWD +214 (rotation \u2192 ETHA (score +0.41))\nEntered 2 position(s):\n  FBTC $72.90 \u00d7 13 shares (score +0.806, led by trend)\n  ETHA $20.07 \u00d7 49 shares (score +0.800, led by trend)\nTop candidates screened: TQQQ +0.823, FNGU +0.822, IBIT +0.806\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "FBTC",
+          "price": 72.9,
+          "total": 0.8059,
+          "scores": {
+            "momentum": 0.775,
+            "volume": -0.24,
+            "trend": 1.0,
+            "mean_rev": -0.096,
+            "regime_fit": 1.0
+          },
+          "ret20": 7.04,
+          "ret5": 9.9,
+          "shares": 13,
+          "cost": 947.7,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "ETHA",
+          "price": 20.065,
+          "total": 0.8004,
+          "scores": {
+            "momentum": 0.828,
+            "volume": -0.267,
+            "trend": 1.0,
+            "mean_rev": -0.191,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.02,
+          "ret5": 9.07,
+          "shares": 49,
+          "cost": 983.19,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "FTNT",
+          "entry_date": "2026-09-17",
+          "exit_date": "2026-09-24",
+          "entry_price": 170.2,
+          "exit_price": 178.505,
+          "shares": 5,
+          "cost": 851.0,
+          "pnl": 41.53,
+          "pnl_pct": 4.88,
+          "reason": "rotation \u2192 FBTC (score +0.42)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "CRWD",
+          "entry_date": "2026-09-14",
+          "exit_date": "2026-09-24",
+          "entry_price": 219.0,
+          "exit_price": 261.775,
+          "shares": 5,
+          "cost": 1095.0,
+          "pnl": 213.87,
+          "pnl_pct": 19.53,
+          "reason": "rotation \u2192 ETHA (score +0.41)",
+          "top_signal": "trend",
+          "entry_mode": "defensive"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "TQQQ",
+          "price": 78.12999725341797,
+          "total": 0.8229,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.017,
+            "trend": 1.0,
+            "mean_rev": -0.262,
+            "regime_fit": 1.0
+          },
+          "ret20": 11.08,
+          "ret5": 9.67
+        },
+        {
+          "ticker": "FNGU",
+          "price": 35.349998474121094,
+          "total": 0.8217,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.328,
+            "trend": 1.0,
+            "mean_rev": -0.119,
+            "regime_fit": 1.0
+          },
+          "ret20": 12.36,
+          "ret5": 7.28
+        },
+        {
+          "ticker": "IBIT",
+          "price": 47.58000183105469,
+          "total": 0.8063,
+          "scores": {
+            "momentum": 0.773,
+            "volume": -0.229,
+            "trend": 1.0,
+            "mean_rev": -0.096,
+            "regime_fit": 1.0
+          },
+          "ret20": 7.02,
+          "ret5": 9.88
+        },
+        {
+          "ticker": "FBTC",
+          "price": 73.11589813232422,
+          "total": 0.8059,
+          "scores": {
+            "momentum": 0.775,
+            "volume": -0.24,
+            "trend": 1.0,
+            "mean_rev": -0.096,
+            "regime_fit": 1.0
+          },
+          "ret20": 7.04,
+          "ret5": 9.9
+        },
+        {
+          "ticker": "ETHA",
+          "price": 20.145000457763672,
+          "total": 0.8004,
+          "scores": {
+            "momentum": 0.828,
+            "volume": -0.267,
+            "trend": 1.0,
+            "mean_rev": -0.191,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.02,
+          "ret5": 9.07
+        },
+        {
+          "ticker": "TECL",
+          "price": 226.8800048828125,
+          "total": 0.7993,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.234,
+            "trend": 1.0,
+            "mean_rev": -0.39,
+            "regime_fit": 1.0
+          },
+          "ret20": 19.88,
+          "ret5": 17.15
+        },
+        {
+          "ticker": "CIBR",
+          "price": 103.58499908447266,
+          "total": 0.7813,
+          "scores": {
+            "momentum": 0.984,
+            "volume": -0.292,
+            "trend": 1.0,
+            "mean_rev": -0.525,
+            "regime_fit": 1.0
+          },
+          "ret20": 12.03,
+          "ret5": 3.28
+        },
+        {
+          "ticker": "ARKW",
+          "price": 164.77999877929688,
+          "total": 0.7786,
+          "scores": {
+            "momentum": 0.627,
+            "volume": -0.024,
+            "trend": 1.0,
+            "mean_rev": -0.329,
+            "regime_fit": 1.0
+          },
+          "ret20": 5.89,
+          "ret5": 7.44
+        },
+        {
+          "ticker": "XLK",
+          "price": 194.25,
+          "total": 0.7659,
+          "scores": {
+            "momentum": 0.669,
+            "volume": -0.191,
+            "trend": 1.0,
+            "mean_rev": -0.415,
+            "regime_fit": 1.0
+          },
+          "ret20": 7.01,
+          "ret5": 5.73
+        },
+        {
+          "ticker": "ARKK",
+          "price": 90.63500213623047,
+          "total": 0.7658,
+          "scores": {
+            "momentum": 0.594,
+            "volume": -0.162,
+            "trend": 1.0,
+            "mean_rev": -0.355,
+            "regime_fit": 1.0
+          },
+          "ret20": 4.94,
+          "ret5": 8.96
+        }
+      ],
+      "prev_mode": "trend_following"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "trend_following",
+  "active_mode": "defensive",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -7563,7 +7806,8 @@
     "2026-09-18": "defensive",
     "2026-09-21": "trend_following",
     "2026-09-22": "trend_following",
-    "2026-09-23": "trend_following"
+    "2026-09-23": "trend_following",
+    "2026-09-24": "defensive"
   },
   "mode_pnl": {
     "momentum": [
@@ -7582,7 +7826,8 @@
       -5.84,
       -0.05,
       5.18,
-      -8.73
+      -8.73,
+      4.88
     ],
     "trend_following": [
       3.93,
@@ -7627,159 +7872,160 @@
     "defensive": [
       0.21,
       2.73,
-      -4.66
+      -4.66,
+      19.53
     ]
   },
   "last_backtest": [
     {
-      "mode": "trend_following",
-      "avg_return": 4.7,
+      "mode": "defensive",
+      "avg_return": 9.208,
       "picks": [
         "ARKG",
-        "EWZ",
-        "ILMN",
-        "RVTY",
-        "TMO"
+        "CIBR",
+        "ARKK",
+        "TECL",
+        "FNGU"
       ],
       "raw": [
         {
           "ticker": "ARKG",
-          "return": 6.94,
-          "score": 0.8321
+          "return": 9.37,
+          "score": 0.8536
         },
         {
-          "ticker": "EWZ",
-          "return": -0.48,
-          "score": 0.7877
+          "ticker": "CIBR",
+          "return": 3.28,
+          "score": 0.8168
+        },
+        {
+          "ticker": "ARKK",
+          "return": 8.96,
+          "score": 0.8065
+        },
+        {
+          "ticker": "TECL",
+          "return": 17.15,
+          "score": 0.8065
+        },
+        {
+          "ticker": "FNGU",
+          "return": 7.28,
+          "score": 0.7897
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": 6.07,
+      "picks": [
+        "ARKG",
+        "CIBR",
+        "ILMN",
+        "SMCI",
+        "EWZ"
+      ],
+      "raw": [
+        {
+          "ticker": "ARKG",
+          "return": 9.37,
+          "score": 0.8798
+        },
+        {
+          "ticker": "CIBR",
+          "return": 3.28,
+          "score": 0.7893
         },
         {
           "ticker": "ILMN",
-          "return": 13.17,
-          "score": 0.7785
+          "return": 16.68,
+          "score": 0.7749
         },
         {
-          "ticker": "RVTY",
-          "return": 1.14,
-          "score": 0.7694
+          "ticker": "SMCI",
+          "return": 2.5,
+          "score": 0.7701
         },
         {
-          "ticker": "TMO",
-          "return": 2.73,
-          "score": 0.757
+          "ticker": "EWZ",
+          "return": -1.48,
+          "score": 0.767
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": 3.55,
-      "picks": [
-        "RVTY",
-        "ILMN",
-        "TMO",
-        "DELL",
-        "IQV"
-      ],
-      "raw": [
-        {
-          "ticker": "RVTY",
-          "return": 1.14,
-          "score": 0.7578
-        },
-        {
-          "ticker": "ILMN",
-          "return": 13.17,
-          "score": 0.7523
-        },
-        {
-          "ticker": "TMO",
-          "return": 2.73,
-          "score": 0.7047
-        },
-        {
-          "ticker": "DELL",
-          "return": 1.18,
-          "score": 0.7002
-        },
-        {
-          "ticker": "IQV",
-          "return": -0.47,
-          "score": 0.6893
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": 2.344,
+      "avg_return": 5.452,
       "picks": [
         "ARKG",
-        "EWZ",
-        "XLC",
-        "CIBR",
-        "CLOU"
+        "ILMN",
+        "ARE",
+        "SMCI",
+        "TMO"
       ],
       "raw": [
         {
           "ticker": "ARKG",
-          "return": 6.94,
-          "score": 0.8559
+          "return": 9.37,
+          "score": 0.7859
         },
         {
-          "ticker": "EWZ",
-          "return": -0.48,
-          "score": 0.7971
+          "ticker": "ILMN",
+          "return": 16.68,
+          "score": 0.7528
         },
         {
-          "ticker": "XLC",
-          "return": -0.49,
-          "score": 0.7709
+          "ticker": "ARE",
+          "return": -5.08,
+          "score": 0.7424
         },
         {
-          "ticker": "CIBR",
-          "return": 2.56,
-          "score": 0.7704
+          "ticker": "SMCI",
+          "return": 2.5,
+          "score": 0.7348
         },
         {
-          "ticker": "CLOU",
-          "return": 3.19,
-          "score": 0.7483
+          "ticker": "TMO",
+          "return": 3.79,
+          "score": 0.7043
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -1.024,
+      "avg_return": -1.378,
       "picks": [
-        "JNK",
-        "HYG",
-        "UNP",
+        "INVH",
         "GEHC",
-        "O"
+        "UNP",
+        "CLX",
+        "UDR"
       ],
       "raw": [
         {
-          "ticker": "JNK",
-          "return": -0.3,
-          "score": 0.5468
-        },
-        {
-          "ticker": "HYG",
-          "return": -0.29,
-          "score": 0.5137
-        },
-        {
-          "ticker": "UNP",
-          "return": -2.5,
-          "score": 0.4612
+          "ticker": "INVH",
+          "return": -2.57,
+          "score": 0.4289
         },
         {
           "ticker": "GEHC",
-          "return": 3.22,
-          "score": 0.4578
+          "return": 3.43,
+          "score": 0.396
         },
         {
-          "ticker": "O",
-          "return": -5.25,
-          "score": 0.4283
+          "ticker": "UNP",
+          "return": -2.65,
+          "score": 0.3846
+        },
+        {
+          "ticker": "CLX",
+          "return": -2.79,
+          "score": 0.3805
+        },
+        {
+          "ticker": "UDR",
+          "return": -2.31,
+          "score": 0.3768
         }
       ]
     }
