@@ -1,15 +1,6 @@
 {
-  "capital": 462.83,
+  "capital": 644.41,
   "positions": {
-    "RVTY": {
-      "shares": 6,
-      "cost_per_share": 140.88,
-      "cost": 845.28,
-      "entry_date": "2026-09-16",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.685 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "SMCI": {
       "shares": 26,
       "cost_per_share": 38.09,
@@ -18,15 +9,6 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.750 \u00b7 led by momentum \u00b7 mode momentum"
-    },
-    "HPE": {
-      "shares": 17,
-      "cost_per_share": 61.7,
-      "cost": 1048.9,
-      "entry_date": "2026-09-18",
-      "top_signal": "momentum",
-      "entry_mode": "defensive",
-      "thesis": "score +0.524 \u00b7 led by momentum \u00b7 mode defensive"
     },
     "TECL": {
       "shares": 4,
@@ -73,15 +55,6 @@
       "entry_mode": "defensive",
       "thesis": "score +0.800 \u00b7 led by trend \u00b7 mode defensive"
     },
-    "AKAM": {
-      "shares": 9,
-      "cost_per_share": 125.41,
-      "cost": 1128.69,
-      "entry_date": "2026-09-25",
-      "top_signal": "volume",
-      "entry_mode": "momentum",
-      "thesis": "score +0.653 \u00b7 led by volume \u00b7 mode momentum"
-    },
     "USO": {
       "shares": 7,
       "cost_per_share": 149.81,
@@ -90,6 +63,33 @@
       "top_signal": "trend",
       "entry_mode": "momentum",
       "thesis": "score +0.642 \u00b7 led by trend \u00b7 mode momentum"
+    },
+    "HYG": {
+      "shares": 13,
+      "cost_per_share": 77.6,
+      "cost": 1008.8,
+      "entry_date": "2026-09-28",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.469 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
+    },
+    "JNK": {
+      "shares": 10,
+      "cost_per_share": 93.549,
+      "cost": 935.49,
+      "entry_date": "2026-09-28",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.449 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
+    },
+    "DTE": {
+      "shares": 7,
+      "cost_per_share": 121.35,
+      "cost": 849.45,
+      "entry_date": "2026-09-28",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.421 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -988,6 +988,48 @@
       "reason": "rotation \u2192 USO (score +0.29)",
       "top_signal": "momentum",
       "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "AKAM",
+      "entry_date": "2026-09-25",
+      "exit_date": "2026-09-28",
+      "entry_price": 125.41,
+      "exit_price": 112.75,
+      "shares": 9,
+      "cost": 1128.69,
+      "pnl": -113.94,
+      "pnl_pct": -10.09,
+      "reason": "stop loss (-13.1%)",
+      "top_signal": "volume",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "RVTY",
+      "entry_date": "2026-09-16",
+      "exit_date": "2026-09-28",
+      "entry_price": 140.88,
+      "exit_price": 148.97,
+      "shares": 6,
+      "cost": 845.28,
+      "pnl": 48.54,
+      "pnl_pct": 5.74,
+      "reason": "rotation \u2192 HYG (score +0.60)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "HPE",
+      "entry_date": "2026-09-18",
+      "exit_date": "2026-09-28",
+      "entry_price": 61.7,
+      "exit_price": 62.75,
+      "shares": 17,
+      "cost": 1048.9,
+      "pnl": 17.85,
+      "pnl_pct": 1.7,
+      "reason": "rotation \u2192 JNK (score +0.42)",
+      "top_signal": "momentum",
+      "entry_mode": "defensive"
     }
   ],
   "nav_history": {
@@ -1023,14 +1065,15 @@
     "2026-09-22": 10638.72,
     "2026-09-23": 10640.32,
     "2026-09-24": 10666.52,
-    "2026-09-25": 10738.83
+    "2026-09-25": 10738.83,
+    "2026-09-28": 10511.59
   },
   "signal_weights": {
-    "momentum": 0.5,
-    "volume": 0.25,
-    "trend": 0.15,
-    "mean_rev": 0.05,
-    "regime_fit": 0.05
+    "momentum": 0.05,
+    "volume": 0.15,
+    "trend": 0.1,
+    "mean_rev": 0.55,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -1065,7 +1108,8 @@
     "2026-09-22": "bull",
     "2026-09-23": "bull",
     "2026-09-24": "bull",
-    "2026-09-25": "bull"
+    "2026-09-25": "bull",
+    "2026-09-28": "bull"
   },
   "daily_log": [
     {
@@ -8014,11 +8058,255 @@
         }
       ],
       "prev_mode": "defensive"
+    },
+    {
+      "date": "2026-09-28",
+      "thesis": "Regime: BULL\nVIX 16.1 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: momentum \u2192 mean_reversion (Buy oversold dips in trending markets)\nBacktest (5d): mean reversion +0.04%  |  momentum -2.56%  |  trend following -3.00%  |  defensive -3.00%\nExited 3 position(s): AKAM -114 (stop loss (-13.1%)), RVTY +49 (rotation \u2192 HYG (score +0.60)), HPE +18 (rotation \u2192 JNK (score +0.42))\nEntered 3 position(s):\n  HYG $77.60 \u00d7 13 shares (score +0.469, led by regime_fit)\n  JNK $93.55 \u00d7 10 shares (score +0.449, led by regime_fit)\n  DTE $121.35 \u00d7 7 shares (score +0.421, led by mean_rev)\nTop candidates screened: HYG +0.469, JNK +0.449, DTE +0.421\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "HYG",
+          "price": 77.6,
+          "total": 0.469,
+          "scores": {
+            "momentum": -0.204,
+            "volume": 0.593,
+            "trend": -1.0,
+            "mean_rev": 0.619,
+            "regime_fit": 1.0
+          },
+          "ret20": -2.24,
+          "ret5": -1.46,
+          "shares": 13,
+          "cost": 1008.8,
+          "top_signal": "regime_fit"
+        },
+        {
+          "ticker": "JNK",
+          "price": 93.549,
+          "total": 0.4491,
+          "scores": {
+            "momentum": -0.218,
+            "volume": 0.441,
+            "trend": -1.0,
+            "mean_rev": 0.625,
+            "regime_fit": 1.0
+          },
+          "ret20": -2.37,
+          "ret5": -1.62,
+          "shares": 10,
+          "cost": 935.49,
+          "top_signal": "regime_fit"
+        },
+        {
+          "ticker": "DTE",
+          "price": 121.35,
+          "total": 0.4208,
+          "scores": {
+            "momentum": -0.874,
+            "volume": 0.047,
+            "trend": -1.0,
+            "mean_rev": 0.932,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.25,
+          "ret5": -4.21,
+          "shares": 7,
+          "cost": 849.45,
+          "top_signal": "mean_rev"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "AKAM",
+          "entry_date": "2026-09-25",
+          "exit_date": "2026-09-28",
+          "entry_price": 125.41,
+          "exit_price": 112.75,
+          "shares": 9,
+          "cost": 1128.69,
+          "pnl": -113.94,
+          "pnl_pct": -10.09,
+          "reason": "stop loss (-13.1%)",
+          "top_signal": "volume",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "RVTY",
+          "entry_date": "2026-09-16",
+          "exit_date": "2026-09-28",
+          "entry_price": 140.88,
+          "exit_price": 148.97,
+          "shares": 6,
+          "cost": 845.28,
+          "pnl": 48.54,
+          "pnl_pct": 5.74,
+          "reason": "rotation \u2192 HYG (score +0.60)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "HPE",
+          "entry_date": "2026-09-18",
+          "exit_date": "2026-09-28",
+          "entry_price": 61.7,
+          "exit_price": 62.75,
+          "shares": 17,
+          "cost": 1048.9,
+          "pnl": 17.85,
+          "pnl_pct": 1.7,
+          "reason": "rotation \u2192 JNK (score +0.42)",
+          "top_signal": "momentum",
+          "entry_mode": "defensive"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "HYG",
+          "price": 77.52999877929688,
+          "total": 0.469,
+          "scores": {
+            "momentum": -0.204,
+            "volume": 0.593,
+            "trend": -1.0,
+            "mean_rev": 0.619,
+            "regime_fit": 1.0
+          },
+          "ret20": -2.24,
+          "ret5": -1.46
+        },
+        {
+          "ticker": "JNK",
+          "price": 93.17500305175781,
+          "total": 0.4491,
+          "scores": {
+            "momentum": -0.218,
+            "volume": 0.441,
+            "trend": -1.0,
+            "mean_rev": 0.625,
+            "regime_fit": 1.0
+          },
+          "ret20": -2.37,
+          "ret5": -1.62
+        },
+        {
+          "ticker": "DTE",
+          "price": 120.8239974975586,
+          "total": 0.4208,
+          "scores": {
+            "momentum": -0.874,
+            "volume": 0.047,
+            "trend": -1.0,
+            "mean_rev": 0.932,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.25,
+          "ret5": -4.21
+        },
+        {
+          "ticker": "GEN",
+          "price": 20.850000381469727,
+          "total": 0.4008,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.419,
+            "trend": -0.5,
+            "mean_rev": 0.715,
+            "regime_fit": 0.3
+          },
+          "ret20": -32.79,
+          "ret5": -28.47
+        },
+        {
+          "ticker": "O",
+          "price": 55.35499954223633,
+          "total": 0.3995,
+          "scores": {
+            "momentum": -0.829,
+            "volume": -0.009,
+            "trend": -1.0,
+            "mean_rev": 0.904,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.3,
+          "ret5": -2.29
+        },
+        {
+          "ticker": "MGM",
+          "price": 31.854999542236328,
+          "total": 0.3933,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.415,
+            "trend": -1.0,
+            "mean_rev": 0.793,
+            "regime_fit": 0.3
+          },
+          "ret20": -24.66,
+          "ret5": -17.75
+        },
+        {
+          "ticker": "CMS",
+          "price": 62.61000061035156,
+          "total": 0.3916,
+          "scores": {
+            "momentum": -0.697,
+            "volume": 0.018,
+            "trend": -1.0,
+            "mean_rev": 0.87,
+            "regime_fit": 0.3
+          },
+          "ret20": -8.21,
+          "ret5": -3.23
+        },
+        {
+          "ticker": "CMG",
+          "price": 31.85700035095215,
+          "total": 0.3757,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.621,
+            "trend": -0.5,
+            "mean_rev": 0.614,
+            "regime_fit": 0.3
+          },
+          "ret20": -16.23,
+          "ret5": -3.87
+        },
+        {
+          "ticker": "LNT",
+          "price": 63.209999084472656,
+          "total": 0.3732,
+          "scores": {
+            "momentum": -0.599,
+            "volume": 0.342,
+            "trend": -1.0,
+            "mean_rev": 0.74,
+            "regime_fit": 0.3
+          },
+          "ret20": -7.09,
+          "ret5": -2.71
+        },
+        {
+          "ticker": "XLF",
+          "price": 54.20000076293945,
+          "total": 0.3686,
+          "scores": {
+            "momentum": -0.555,
+            "volume": 0.072,
+            "trend": -1.0,
+            "mean_rev": 0.61,
+            "regime_fit": 1.0
+          },
+          "ret20": -6.38,
+          "ret5": -3.04
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "momentum",
+  "active_mode": "mean_reversion",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -8051,7 +8339,8 @@
     "2026-09-22": "trend_following",
     "2026-09-23": "trend_following",
     "2026-09-24": "defensive",
-    "2026-09-25": "momentum"
+    "2026-09-25": "momentum",
+    "2026-09-28": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -8071,7 +8360,9 @@
       -0.05,
       5.18,
       -8.73,
-      4.88
+      4.88,
+      -10.09,
+      5.74
     ],
     "trend_following": [
       3.93,
@@ -8119,159 +8410,160 @@
       2.73,
       -4.66,
       19.53,
-      11.87
+      11.87,
+      1.7
     ]
   },
   "last_backtest": [
     {
-      "mode": "momentum",
-      "avg_return": 3.976,
+      "mode": "mean_reversion",
+      "avg_return": 0.04,
       "picks": [
-        "FTNT",
-        "ILMN",
-        "BE",
-        "SWKS",
-        "PSX"
+        "UNP",
+        "NSC",
+        "GIS",
+        "UDR",
+        "BAX"
       ],
       "raw": [
         {
-          "ticker": "FTNT",
-          "return": 2.86,
-          "score": 0.9044
+          "ticker": "UNP",
+          "return": 1.69,
+          "score": 0.4505
         },
         {
-          "ticker": "ILMN",
-          "return": 14.83,
-          "score": 0.9021
+          "ticker": "NSC",
+          "return": 1.29,
+          "score": 0.3858
         },
         {
-          "ticker": "BE",
-          "return": 8.94,
-          "score": 0.8988
+          "ticker": "GIS",
+          "return": -5.11,
+          "score": 0.3697
         },
         {
-          "ticker": "SWKS",
-          "return": 1.0,
-          "score": 0.8943
+          "ticker": "UDR",
+          "return": -0.16,
+          "score": 0.3662
         },
         {
-          "ticker": "PSX",
-          "return": -7.75,
-          "score": 0.882
+          "ticker": "BAX",
+          "return": 2.49,
+          "score": 0.3659
+        }
+      ]
+    },
+    {
+      "mode": "momentum",
+      "avg_return": -2.562,
+      "picks": [
+        "META",
+        "WBD",
+        "AMD",
+        "INTC",
+        "FBTC"
+      ],
+      "raw": [
+        {
+          "ticker": "META",
+          "return": -3.46,
+          "score": 0.8288
+        },
+        {
+          "ticker": "WBD",
+          "return": 0.32,
+          "score": 0.8079
+        },
+        {
+          "ticker": "AMD",
+          "return": -1.24,
+          "score": 0.8033
+        },
+        {
+          "ticker": "INTC",
+          "return": -4.72,
+          "score": 0.7564
+        },
+        {
+          "ticker": "FBTC",
+          "return": -3.71,
+          "score": 0.7438
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 2.83,
+      "avg_return": -2.998,
       "picks": [
-        "ETHA",
-        "IBIT",
         "FBTC",
-        "ARKG",
-        "FTNT"
+        "TECL",
+        "IBIT",
+        "FNGU",
+        "TQQQ"
       ],
       "raw": [
         {
-          "ticker": "ETHA",
-          "return": 1.76,
-          "score": 0.8657
+          "ticker": "FBTC",
+          "return": -3.71,
+          "score": 0.8588
+        },
+        {
+          "ticker": "TECL",
+          "return": -0.69,
+          "score": 0.8556
         },
         {
           "ticker": "IBIT",
-          "return": 3.09,
-          "score": 0.8629
+          "return": -3.67,
+          "score": 0.8509
         },
         {
-          "ticker": "FBTC",
-          "return": 3.18,
-          "score": 0.8532
+          "ticker": "FNGU",
+          "return": -4.74,
+          "score": 0.8499
         },
         {
-          "ticker": "ARKG",
-          "return": 3.26,
-          "score": 0.8464
-        },
-        {
-          "ticker": "FTNT",
-          "return": 2.86,
-          "score": 0.8384
+          "ticker": "TQQQ",
+          "return": -2.18,
+          "score": 0.8444
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": 2.634,
+      "avg_return": -2.998,
       "picks": [
-        "IBIT",
+        "FNGU",
         "FBTC",
-        "ETHA",
-        "ARKG",
-        "CIBR"
+        "TECL",
+        "IBIT",
+        "TQQQ"
       ],
       "raw": [
         {
-          "ticker": "IBIT",
-          "return": 3.09,
-          "score": 0.8439
+          "ticker": "FNGU",
+          "return": -4.74,
+          "score": 0.8334
         },
         {
           "ticker": "FBTC",
-          "return": 3.18,
-          "score": 0.8393
+          "return": -3.71,
+          "score": 0.8326
         },
         {
-          "ticker": "ETHA",
-          "return": 1.76,
-          "score": 0.8393
+          "ticker": "TECL",
+          "return": -0.69,
+          "score": 0.8306
         },
         {
-          "ticker": "ARKG",
-          "return": 3.26,
-          "score": 0.8157
+          "ticker": "IBIT",
+          "return": -3.67,
+          "score": 0.8286
         },
         {
-          "ticker": "CIBR",
-          "return": 1.88,
-          "score": 0.8087
-        }
-      ]
-    },
-    {
-      "mode": "mean_reversion",
-      "avg_return": -1.612,
-      "picks": [
-        "MKC",
-        "INVH",
-        "PEP",
-        "ROP",
-        "WYNN"
-      ],
-      "raw": [
-        {
-          "ticker": "MKC",
-          "return": -2.12,
-          "score": 0.5778
-        },
-        {
-          "ticker": "INVH",
-          "return": -0.58,
-          "score": 0.5491
-        },
-        {
-          "ticker": "PEP",
-          "return": -1.09,
-          "score": 0.5274
-        },
-        {
-          "ticker": "ROP",
-          "return": -3.62,
-          "score": 0.4788
-        },
-        {
-          "ticker": "WYNN",
-          "return": -0.65,
-          "score": 0.4766
+          "ticker": "TQQQ",
+          "return": -2.18,
+          "score": 0.8262
         }
       ]
     }
