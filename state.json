@@ -1,5 +1,5 @@
 {
-  "capital": 644.41,
+  "capital": 861.14,
   "positions": {
     "SMCI": {
       "shares": 26,
@@ -46,24 +46,6 @@
       "entry_mode": "defensive",
       "thesis": "score +0.806 \u00b7 led by trend \u00b7 mode defensive"
     },
-    "ETHA": {
-      "shares": 49,
-      "cost_per_share": 20.065,
-      "cost": 983.19,
-      "entry_date": "2026-09-24",
-      "top_signal": "trend",
-      "entry_mode": "defensive",
-      "thesis": "score +0.800 \u00b7 led by trend \u00b7 mode defensive"
-    },
-    "USO": {
-      "shares": 7,
-      "cost_per_share": 149.81,
-      "cost": 1048.67,
-      "entry_date": "2026-09-25",
-      "top_signal": "trend",
-      "entry_mode": "momentum",
-      "thesis": "score +0.642 \u00b7 led by trend \u00b7 mode momentum"
-    },
     "HYG": {
       "shares": 13,
       "cost_per_share": 77.6,
@@ -90,6 +72,24 @@
       "top_signal": "mean_rev",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.421 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
+    },
+    "FICO": {
+      "shares": 1,
+      "cost_per_share": 668.08,
+      "cost": 668.08,
+      "entry_date": "2026-09-29",
+      "top_signal": "volume",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.472 \u00b7 led by volume \u00b7 mode mean_reversion"
+    },
+    "GEN": {
+      "shares": 54,
+      "cost_per_share": 21.2,
+      "cost": 1144.8,
+      "entry_date": "2026-09-29",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.387 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -1030,6 +1030,34 @@
       "reason": "rotation \u2192 JNK (score +0.42)",
       "top_signal": "momentum",
       "entry_mode": "defensive"
+    },
+    {
+      "ticker": "ETHA",
+      "entry_date": "2026-09-24",
+      "exit_date": "2026-09-29",
+      "entry_price": 20.065,
+      "exit_price": 20.645,
+      "shares": 49,
+      "cost": 983.19,
+      "pnl": 28.42,
+      "pnl_pct": 2.89,
+      "reason": "rotation \u2192 FICO (score +0.41)",
+      "top_signal": "trend",
+      "entry_mode": "defensive"
+    },
+    {
+      "ticker": "USO",
+      "entry_date": "2026-09-25",
+      "exit_date": "2026-09-29",
+      "entry_price": 149.81,
+      "exit_price": 145.43,
+      "shares": 7,
+      "cost": 1048.67,
+      "pnl": -30.66,
+      "pnl_pct": -2.92,
+      "reason": "rotation \u2192 GEN (score +0.32)",
+      "top_signal": "trend",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -1066,7 +1094,8 @@
     "2026-09-23": 10640.32,
     "2026-09-24": 10666.52,
     "2026-09-25": 10738.83,
-    "2026-09-28": 10511.59
+    "2026-09-28": 10511.59,
+    "2026-09-29": 10454.25
   },
   "signal_weights": {
     "momentum": 0.05,
@@ -1109,7 +1138,8 @@
     "2026-09-23": "bull",
     "2026-09-24": "bull",
     "2026-09-25": "bull",
-    "2026-09-28": "bull"
+    "2026-09-28": "bull",
+    "2026-09-29": "bull"
   },
   "daily_log": [
     {
@@ -8302,6 +8332,219 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-09-29",
+      "thesis": "Regime: BULL\nVIX 16.1 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: mean_reversion \u2014 Buy oversold dips in trending markets\nBacktest (5d): mean reversion +0.16%  |  momentum -0.55%  |  defensive -2.96%  |  trend following -3.20%\nExited 2 position(s): ETHA +28 (rotation \u2192 FICO (score +0.41)), USO -31 (rotation \u2192 GEN (score +0.32))\nEntered 2 position(s):\n  FICO $668.08 \u00d7 1 shares (score +0.472, led by volume)\n  GEN $21.20 \u00d7 54 shares (score +0.387, led by mean_rev)\nTop candidates screened: JNK +0.492, FICO +0.472, HYG +0.456\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "FICO",
+          "price": 668.08,
+          "total": 0.4718,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 1.0,
+            "trend": -1.0,
+            "mean_rev": 0.776,
+            "regime_fit": 0.3
+          },
+          "ret20": -46.22,
+          "ret5": -32.53,
+          "shares": 1,
+          "cost": 668.08,
+          "top_signal": "volume"
+        },
+        {
+          "ticker": "GEN",
+          "price": 21.2,
+          "total": 0.3871,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.33,
+            "trend": -0.5,
+            "mean_rev": 0.714,
+            "regime_fit": 0.3
+          },
+          "ret20": -32.81,
+          "ret5": -23.67,
+          "shares": 54,
+          "cost": 1144.8,
+          "top_signal": "mean_rev"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "ETHA",
+          "entry_date": "2026-09-24",
+          "exit_date": "2026-09-29",
+          "entry_price": 20.065,
+          "exit_price": 20.645,
+          "shares": 49,
+          "cost": 983.19,
+          "pnl": 28.42,
+          "pnl_pct": 2.89,
+          "reason": "rotation \u2192 FICO (score +0.41)",
+          "top_signal": "trend",
+          "entry_mode": "defensive"
+        },
+        {
+          "ticker": "USO",
+          "entry_date": "2026-09-25",
+          "exit_date": "2026-09-29",
+          "entry_price": 149.81,
+          "exit_price": 145.43,
+          "shares": 7,
+          "cost": 1048.67,
+          "pnl": -30.66,
+          "pnl_pct": -2.92,
+          "reason": "rotation \u2192 GEN (score +0.32)",
+          "top_signal": "trend",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "JNK",
+          "price": 92.83499908447266,
+          "total": 0.4917,
+          "scores": {
+            "momentum": -0.261,
+            "volume": 0.671,
+            "trend": -1.0,
+            "mean_rev": 0.644,
+            "regime_fit": 1.0
+          },
+          "ret20": -2.82,
+          "ret5": -1.99
+        },
+        {
+          "ticker": "FICO",
+          "price": 616.9949951171875,
+          "total": 0.4718,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 1.0,
+            "trend": -1.0,
+            "mean_rev": 0.776,
+            "regime_fit": 0.3
+          },
+          "ret20": -46.22,
+          "ret5": -32.53
+        },
+        {
+          "ticker": "HYG",
+          "price": 77.27999877929688,
+          "total": 0.4559,
+          "scores": {
+            "momentum": -0.242,
+            "volume": 0.461,
+            "trend": -1.0,
+            "mean_rev": 0.634,
+            "regime_fit": 1.0
+          },
+          "ret20": -2.64,
+          "ret5": -1.77
+        },
+        {
+          "ticker": "GEN",
+          "price": 20.829999923706055,
+          "total": 0.3871,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.33,
+            "trend": -0.5,
+            "mean_rev": 0.714,
+            "regime_fit": 0.3
+          },
+          "ret20": -32.81,
+          "ret5": -23.67
+        },
+        {
+          "ticker": "O",
+          "price": 55.154998779296875,
+          "total": 0.3681,
+          "scores": {
+            "momentum": -0.81,
+            "volume": -0.18,
+            "trend": -1.0,
+            "mean_rev": 0.892,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.0,
+          "ret5": -2.43
+        },
+        {
+          "ticker": "XLF",
+          "price": 54.04499816894531,
+          "total": 0.3634,
+          "scores": {
+            "momentum": -0.486,
+            "volume": 0.04,
+            "trend": -1.0,
+            "mean_rev": 0.603,
+            "regime_fit": 1.0
+          },
+          "ret20": -6.02,
+          "ret5": -1.38
+        },
+        {
+          "ticker": "HAL",
+          "price": 31.545000076293945,
+          "total": 0.334,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.241,
+            "trend": -0.5,
+            "mean_rev": 0.773,
+            "regime_fit": 0.3
+          },
+          "ret20": -14.0,
+          "ret5": -3.97
+        },
+        {
+          "ticker": "IJR",
+          "price": 136.51499938964844,
+          "total": 0.3319,
+          "scores": {
+            "momentum": -0.447,
+            "volume": -0.08,
+            "trend": -1.0,
+            "mean_rev": 0.575,
+            "regime_fit": 1.0
+          },
+          "ret20": -5.2,
+          "ret5": -2.28
+        },
+        {
+          "ticker": "BNY",
+          "price": 147.4250030517578,
+          "total": 0.3243,
+          "scores": {
+            "momentum": -0.69,
+            "volume": -0.233,
+            "trend": -1.0,
+            "mean_rev": 0.816,
+            "regime_fit": 0.3
+          },
+          "ret20": -8.59,
+          "ret5": -1.83
+        },
+        {
+          "ticker": "CMS",
+          "price": 63.125,
+          "total": 0.3228,
+          "scores": {
+            "momentum": -0.588,
+            "volume": 0.078,
+            "trend": -1.0,
+            "mean_rev": 0.719,
+            "regime_fit": 0.3
+          },
+          "ret20": -7.25,
+          "ret5": -1.78
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
@@ -8340,7 +8583,8 @@
     "2026-09-23": "trend_following",
     "2026-09-24": "defensive",
     "2026-09-25": "momentum",
-    "2026-09-28": "mean_reversion"
+    "2026-09-28": "mean_reversion",
+    "2026-09-29": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -8362,7 +8606,8 @@
       -8.73,
       4.88,
       -10.09,
-      5.74
+      5.74,
+      -2.92
     ],
     "trend_following": [
       3.93,
@@ -8411,159 +8656,160 @@
       -4.66,
       19.53,
       11.87,
-      1.7
+      1.7,
+      2.89
     ]
   },
   "last_backtest": [
     {
       "mode": "mean_reversion",
-      "avg_return": 0.04,
+      "avg_return": 0.164,
       "picks": [
-        "UNP",
-        "NSC",
-        "GIS",
-        "UDR",
-        "BAX"
+        "EXE",
+        "CVS",
+        "RCL",
+        "EQT",
+        "FRT"
       ],
       "raw": [
         {
-          "ticker": "UNP",
-          "return": 1.69,
-          "score": 0.4505
+          "ticker": "EXE",
+          "return": -4.02,
+          "score": 0.4348
         },
         {
-          "ticker": "NSC",
-          "return": 1.29,
-          "score": 0.3858
+          "ticker": "CVS",
+          "return": -0.47,
+          "score": 0.3983
         },
         {
-          "ticker": "GIS",
-          "return": -5.11,
-          "score": 0.3697
+          "ticker": "RCL",
+          "return": 10.9,
+          "score": 0.3695
         },
         {
-          "ticker": "UDR",
-          "return": -0.16,
-          "score": 0.3662
+          "ticker": "EQT",
+          "return": -4.19,
+          "score": 0.3663
         },
         {
-          "ticker": "BAX",
-          "return": 2.49,
-          "score": 0.3659
+          "ticker": "FRT",
+          "return": -1.4,
+          "score": 0.3649
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -2.562,
+      "avg_return": -0.546,
       "picks": [
-        "META",
         "WBD",
-        "AMD",
-        "INTC",
+        "MPWR",
+        "RVTY",
+        "UNG",
         "FBTC"
       ],
       "raw": [
         {
-          "ticker": "META",
-          "return": -3.46,
-          "score": 0.8288
-        },
-        {
           "ticker": "WBD",
-          "return": 0.32,
-          "score": 0.8079
+          "return": 0.05,
+          "score": 0.7921
         },
         {
-          "ticker": "AMD",
-          "return": -1.24,
-          "score": 0.8033
+          "ticker": "MPWR",
+          "return": -1.28,
+          "score": 0.7296
         },
         {
-          "ticker": "INTC",
-          "return": -4.72,
-          "score": 0.7564
+          "ticker": "RVTY",
+          "return": 5.92,
+          "score": 0.7004
+        },
+        {
+          "ticker": "UNG",
+          "return": -4.37,
+          "score": 0.6925
         },
         {
           "ticker": "FBTC",
-          "return": -3.71,
-          "score": 0.7438
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": -2.998,
-      "picks": [
-        "FBTC",
-        "TECL",
-        "IBIT",
-        "FNGU",
-        "TQQQ"
-      ],
-      "raw": [
-        {
-          "ticker": "FBTC",
-          "return": -3.71,
-          "score": 0.8588
-        },
-        {
-          "ticker": "TECL",
-          "return": -0.69,
-          "score": 0.8556
-        },
-        {
-          "ticker": "IBIT",
-          "return": -3.67,
-          "score": 0.8509
-        },
-        {
-          "ticker": "FNGU",
-          "return": -4.74,
-          "score": 0.8499
-        },
-        {
-          "ticker": "TQQQ",
-          "return": -2.18,
-          "score": 0.8444
+          "return": -3.05,
+          "score": 0.6872
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -2.998,
+      "avg_return": -2.962,
       "picks": [
-        "FNGU",
+        "IEMG",
         "FBTC",
-        "TECL",
+        "FNGU",
         "IBIT",
+        "ETHA"
+      ],
+      "raw": [
+        {
+          "ticker": "IEMG",
+          "return": -2.44,
+          "score": 0.8224
+        },
+        {
+          "ticker": "FBTC",
+          "return": -3.05,
+          "score": 0.8153
+        },
+        {
+          "ticker": "FNGU",
+          "return": -4.18,
+          "score": 0.8122
+        },
+        {
+          "ticker": "IBIT",
+          "return": -3.04,
+          "score": 0.809
+        },
+        {
+          "ticker": "ETHA",
+          "return": -2.1,
+          "score": 0.8038
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -3.196,
+      "picks": [
+        "FBTC",
+        "IEMG",
+        "FNGU",
+        "TECL",
         "TQQQ"
       ],
       "raw": [
         {
-          "ticker": "FNGU",
-          "return": -4.74,
-          "score": 0.8334
+          "ticker": "FBTC",
+          "return": -3.05,
+          "score": 0.8341
         },
         {
-          "ticker": "FBTC",
-          "return": -3.71,
-          "score": 0.8326
+          "ticker": "IEMG",
+          "return": -2.44,
+          "score": 0.8267
+        },
+        {
+          "ticker": "FNGU",
+          "return": -4.18,
+          "score": 0.8255
         },
         {
           "ticker": "TECL",
-          "return": -0.69,
-          "score": 0.8306
-        },
-        {
-          "ticker": "IBIT",
-          "return": -3.67,
-          "score": 0.8286
+          "return": -2.55,
+          "score": 0.8241
         },
         {
           "ticker": "TQQQ",
-          "return": -2.18,
-          "score": 0.8262
+          "return": -3.76,
+          "score": 0.8235
         }
       ]
     }
