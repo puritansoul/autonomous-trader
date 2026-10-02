@@ -1,15 +1,6 @@
 {
-  "capital": 890.36,
+  "capital": 961.96,
   "positions": {
-    "SMCI": {
-      "shares": 26,
-      "cost_per_share": 38.09,
-      "cost": 990.34,
-      "entry_date": "2026-09-17",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.750 \u00b7 led by momentum \u00b7 mode momentum"
-    },
     "TQQQ": {
       "shares": 14,
       "cost_per_share": 80.527,
@@ -46,15 +37,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.449 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
-    "DTE": {
-      "shares": 7,
-      "cost_per_share": 121.35,
-      "cost": 849.45,
-      "entry_date": "2026-09-28",
-      "top_signal": "mean_rev",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.421 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
-    },
     "XLF": {
       "shares": 20,
       "cost_per_share": 53.99,
@@ -63,15 +45,6 @@
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.371 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "O": {
-      "shares": 19,
-      "cost_per_share": 55.01,
-      "cost": 1045.19,
-      "entry_date": "2026-09-30",
-      "top_signal": "mean_rev",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.359 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
     },
     "SOXL": {
       "shares": 7,
@@ -90,6 +63,33 @@
       "top_signal": "momentum",
       "entry_mode": "defensive",
       "thesis": "score +0.808 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "TECL": {
+      "shares": 3,
+      "cost_per_share": 250.0,
+      "cost": 750.0,
+      "entry_date": "2026-10-02",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.820 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "ARKG": {
+      "shares": 21,
+      "cost_per_share": 53.89,
+      "cost": 1131.69,
+      "entry_date": "2026-10-02",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.806 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "CIBR": {
+      "shares": 10,
+      "cost_per_share": 105.02,
+      "cost": 1050.2,
+      "entry_date": "2026-10-02",
+      "top_signal": "trend",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.800 \u00b7 led by trend \u00b7 mode trend_following"
     }
   },
   "closed": [
@@ -1128,6 +1128,48 @@
       "reason": "rotation \u2192 SOXX (score +0.86)",
       "top_signal": "mean_rev",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "SMCI",
+      "entry_date": "2026-09-17",
+      "exit_date": "2026-10-02",
+      "entry_price": 38.09,
+      "exit_price": 42.775,
+      "shares": 26,
+      "cost": 990.34,
+      "pnl": 121.81,
+      "pnl_pct": 12.3,
+      "reason": "max hold 15d",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "O",
+      "entry_date": "2026-09-30",
+      "exit_date": "2026-10-02",
+      "entry_price": 55.01,
+      "exit_price": 53.86,
+      "shares": 19,
+      "cost": 1045.19,
+      "pnl": -21.85,
+      "pnl_pct": -2.09,
+      "reason": "rotation \u2192 TECL (score +1.46)",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "DTE",
+      "entry_date": "2026-09-28",
+      "exit_date": "2026-10-02",
+      "entry_price": 121.35,
+      "exit_price": 124.0,
+      "shares": 7,
+      "cost": 849.45,
+      "pnl": 18.55,
+      "pnl_pct": 2.18,
+      "reason": "rotation \u2192 ARKG (score +1.39)",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1167,14 +1209,15 @@
     "2026-09-28": 10511.59,
     "2026-09-29": 10454.25,
     "2026-09-30": 10498.9,
-    "2026-10-01": 10585.73
+    "2026-10-01": 10585.73,
+    "2026-10-02": 10673.09
   },
   "signal_weights": {
-    "momentum": 0.1,
-    "volume": 0.05,
-    "trend": 0.2,
-    "mean_rev": 0.1,
-    "regime_fit": 0.55
+    "momentum": 0.2,
+    "volume": 0.1,
+    "trend": 0.5,
+    "mean_rev": 0.05,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -1213,7 +1256,8 @@
     "2026-09-28": "bull",
     "2026-09-29": "bull",
     "2026-09-30": "bull",
-    "2026-10-01": "bull"
+    "2026-10-01": "bull",
+    "2026-10-02": "bull"
   },
   "daily_log": [
     {
@@ -9076,11 +9120,255 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-10-02",
+      "thesis": "Regime: BULL\nVIX 15.6 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: defensive \u2192 trend_following (Follow SMA alignment and regime-matched assets)\nBacktest (5d): trend following +1.44%  |  defensive +1.17%  |  mean reversion -0.81%  |  momentum -0.89%\nExited 3 position(s): SMCI +122 (max hold 15d), O -22 (rotation \u2192 TECL (score +1.46)), DTE +19 (rotation \u2192 ARKG (score +1.39))\nEntered 3 position(s):\n  TECL $250.00 \u00d7 3 shares (score +0.820, led by momentum)\n  ARKG $53.89 \u00d7 21 shares (score +0.806, led by momentum)\n  CIBR $105.02 \u00d7 10 shares (score +0.800, led by trend)\nTop candidates screened: TECL +0.820, TQQQ +0.817, SOXL +0.809\nSignal weights: trend 50% \u00b7 momentum 20% \u00b7 regime_fit 15% \u00b7 volume 10% \u00b7 mean_rev 5%",
+      "buys": [
+        {
+          "ticker": "TECL",
+          "price": 250.0,
+          "total": 0.8197,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.03,
+            "trend": 1.0,
+            "mean_rev": -0.665,
+            "regime_fit": 1.0
+          },
+          "ret20": 22.46,
+          "ret5": 5.02,
+          "shares": 3,
+          "cost": 750.0,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "ARKG",
+          "price": 53.89,
+          "total": 0.8059,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.184,
+            "trend": 1.0,
+            "mean_rev": -0.513,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.35,
+          "ret5": 0.26,
+          "shares": 21,
+          "cost": 1131.69,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "CIBR",
+          "price": 105.02,
+          "total": 0.8004,
+          "scores": {
+            "momentum": 0.839,
+            "volume": -0.035,
+            "trend": 1.0,
+            "mean_rev": -0.281,
+            "regime_fit": 1.0
+          },
+          "ret20": 9.93,
+          "ret5": 3.79,
+          "shares": 10,
+          "cost": 1050.2,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "SMCI",
+          "entry_date": "2026-09-17",
+          "exit_date": "2026-10-02",
+          "entry_price": 38.09,
+          "exit_price": 42.775,
+          "shares": 26,
+          "cost": 990.34,
+          "pnl": 121.81,
+          "pnl_pct": 12.3,
+          "reason": "max hold 15d",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "O",
+          "entry_date": "2026-09-30",
+          "exit_date": "2026-10-02",
+          "entry_price": 55.01,
+          "exit_price": 53.86,
+          "shares": 19,
+          "cost": 1045.19,
+          "pnl": -21.85,
+          "pnl_pct": -2.09,
+          "reason": "rotation \u2192 TECL (score +1.46)",
+          "top_signal": "mean_rev",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "DTE",
+          "entry_date": "2026-09-28",
+          "exit_date": "2026-10-02",
+          "entry_price": 121.35,
+          "exit_price": 124.0,
+          "shares": 7,
+          "cost": 849.45,
+          "pnl": 18.55,
+          "pnl_pct": 2.18,
+          "reason": "rotation \u2192 ARKG (score +1.39)",
+          "top_signal": "mean_rev",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "TECL",
+          "price": 246.27999877929688,
+          "total": 0.8197,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.03,
+            "trend": 1.0,
+            "mean_rev": -0.665,
+            "regime_fit": 1.0
+          },
+          "ret20": 22.46,
+          "ret5": 5.02
+        },
+        {
+          "ticker": "TQQQ",
+          "price": 80.68000030517578,
+          "total": 0.817,
+          "scores": {
+            "momentum": 0.951,
+            "volume": 0.013,
+            "trend": 1.0,
+            "mean_rev": -0.489,
+            "regime_fit": 1.0
+          },
+          "ret20": 12.23,
+          "ret5": 1.36
+        },
+        {
+          "ticker": "SOXL",
+          "price": 162.93499755859375,
+          "total": 0.8089,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.073,
+            "trend": 1.0,
+            "mean_rev": -0.676,
+            "regime_fit": 1.0
+          },
+          "ret20": 52.75,
+          "ret5": 7.58
+        },
+        {
+          "ticker": "ARKG",
+          "price": 53.5,
+          "total": 0.8059,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.184,
+            "trend": 1.0,
+            "mean_rev": -0.513,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.35,
+          "ret5": 0.26
+        },
+        {
+          "ticker": "SOXX",
+          "price": 587.760009765625,
+          "total": 0.8026,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.122,
+            "trend": 1.0,
+            "mean_rev": -0.705,
+            "regime_fit": 1.0
+          },
+          "ret20": 17.11,
+          "ret5": 2.63
+        },
+        {
+          "ticker": "CIBR",
+          "price": 104.77999877929688,
+          "total": 0.8004,
+          "scores": {
+            "momentum": 0.839,
+            "volume": -0.035,
+            "trend": 1.0,
+            "mean_rev": -0.281,
+            "regime_fit": 1.0
+          },
+          "ret20": 9.93,
+          "ret5": 3.79
+        },
+        {
+          "ticker": "XLK",
+          "price": 199.64999389648438,
+          "total": 0.7294,
+          "scores": {
+            "momentum": 0.604,
+            "volume": -0.08,
+            "trend": 1.0,
+            "mean_rev": -0.668,
+            "regime_fit": 1.0
+          },
+          "ret20": 7.48,
+          "ret5": 1.72
+        },
+        {
+          "ticker": "SMCI",
+          "price": 43.564998626708984,
+          "total": 0.7198,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.042,
+            "trend": 1.0,
+            "mean_rev": -0.421,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.04,
+          "ret5": 0.71
+        },
+        {
+          "ticker": "COHR",
+          "price": 333.9949951171875,
+          "total": 0.7161,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.084,
+            "trend": 1.0,
+            "mean_rev": -0.409,
+            "regime_fit": 0.3
+          },
+          "ret20": 26.32,
+          "ret5": 12.9
+        },
+        {
+          "ticker": "BE",
+          "price": 289.82501220703125,
+          "total": 0.7141,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.209,
+            "trend": 1.0,
+            "mean_rev": -0.201,
+            "regime_fit": 0.3
+          },
+          "ret20": 23.04,
+          "ret5": 0.39
+        }
+      ],
+      "prev_mode": "defensive"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "defensive",
+  "active_mode": "trend_following",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -9117,11 +9405,11 @@
     "2026-09-28": "mean_reversion",
     "2026-09-29": "mean_reversion",
     "2026-09-30": "mean_reversion",
-    "2026-10-01": "defensive"
+    "2026-10-01": "defensive",
+    "2026-10-02": "trend_following"
   },
   "mode_pnl": {
     "momentum": [
-      -0.24,
       -2.51,
       -8.76,
       -5.08,
@@ -9140,7 +9428,8 @@
       4.88,
       -10.09,
       5.74,
-      -2.92
+      -2.92,
+      12.3
     ],
     "trend_following": [
       3.93,
@@ -9164,8 +9453,6 @@
       2.72
     ],
     "mean_reversion": [
-      -6.07,
-      -2.6,
       3.31,
       2.64,
       -0.34,
@@ -9183,7 +9470,9 @@
       3.3,
       -9.89,
       5.61,
-      -2.18
+      -2.18,
+      -2.09,
+      2.18
     ],
     "defensive": [
       0.21,
@@ -9197,154 +9486,154 @@
   },
   "last_backtest": [
     {
-      "mode": "defensive",
-      "avg_return": -0.21,
+      "mode": "trend_following",
+      "avg_return": 1.444,
       "picks": [
+        "TECL",
         "TQQQ",
+        "SOXX",
         "FNGU",
-        "IBIT",
-        "FBTC",
-        "ETHA"
+        "SMCI"
       ],
       "raw": [
         {
+          "ticker": "TECL",
+          "return": 5.02,
+          "score": 0.826
+        },
+        {
           "ticker": "TQQQ",
-          "return": 0.67,
-          "score": 0.8267
+          "return": 1.36,
+          "score": 0.8251
+        },
+        {
+          "ticker": "SOXX",
+          "return": 2.63,
+          "score": 0.7877
         },
         {
           "ticker": "FNGU",
-          "return": -2.8,
-          "score": 0.8233
+          "return": -2.5,
+          "score": 0.7869
         },
         {
-          "ticker": "IBIT",
-          "return": 0.43,
-          "score": 0.814
-        },
-        {
-          "ticker": "FBTC",
-          "return": 0.48,
-          "score": 0.8109
-        },
-        {
-          "ticker": "ETHA",
-          "return": 0.17,
-          "score": 0.8106
+          "ticker": "SMCI",
+          "return": 0.71,
+          "score": 0.7519
         }
       ]
     },
     {
-      "mode": "trend_following",
-      "avg_return": -1.736,
+      "mode": "defensive",
+      "avg_return": 1.166,
       "picks": [
         "TQQQ",
-        "UNG",
         "TECL",
         "FNGU",
-        "ETHA"
+        "SOXX",
+        "IEMG"
       ],
       "raw": [
         {
           "ticker": "TQQQ",
-          "return": 0.67,
-          "score": 0.8465
-        },
-        {
-          "ticker": "UNG",
-          "return": -11.95,
-          "score": 0.8258
+          "return": 1.36,
+          "score": 0.8145
         },
         {
           "ticker": "TECL",
-          "return": 5.23,
-          "score": 0.8187
+          "return": 5.02,
+          "score": 0.8118
         },
         {
           "ticker": "FNGU",
-          "return": -2.8,
-          "score": 0.8184
+          "return": -2.5,
+          "score": 0.7983
         },
         {
-          "ticker": "ETHA",
-          "return": 0.17,
-          "score": 0.8042
-        }
-      ]
-    },
-    {
-      "mode": "momentum",
-      "avg_return": -1.922,
-      "picks": [
-        "UNG",
-        "USO",
-        "P",
-        "TQQQ",
-        "META"
-      ],
-      "raw": [
-        {
-          "ticker": "UNG",
-          "return": -11.95,
-          "score": 0.8958
+          "ticker": "SOXX",
+          "return": 2.63,
+          "score": 0.7933
         },
         {
-          "ticker": "USO",
-          "return": -2.35,
-          "score": 0.7459
-        },
-        {
-          "ticker": "P",
-          "return": 10.51,
-          "score": 0.7238
-        },
-        {
-          "ticker": "TQQQ",
-          "return": 0.67,
-          "score": 0.7127
-        },
-        {
-          "ticker": "META",
-          "return": -6.49,
-          "score": 0.7001
+          "ticker": "IEMG",
+          "return": -0.68,
+          "score": 0.7748
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -3.172,
+      "avg_return": -0.806,
       "picks": [
-        "CAH",
         "GEN",
         "MGM",
+        "CAH",
         "O",
-        "XLF"
+        "JNK"
       ],
       "raw": [
         {
-          "ticker": "CAH",
-          "return": 2.79,
-          "score": 0.5253
-        },
-        {
           "ticker": "GEN",
-          "return": -3.94,
-          "score": 0.4787
+          "return": 2.45,
+          "score": 0.4889
         },
         {
           "ticker": "MGM",
-          "return": -9.99,
-          "score": 0.4567
+          "return": -6.75,
+          "score": 0.4786
+        },
+        {
+          "ticker": "CAH",
+          "return": 3.33,
+          "score": 0.46
         },
         {
           "ticker": "O",
-          "return": -2.48,
-          "score": 0.4446
+          "return": -2.3,
+          "score": 0.4478
         },
         {
-          "ticker": "XLF",
-          "return": -2.24,
-          "score": 0.4297
+          "ticker": "JNK",
+          "return": -0.76,
+          "score": 0.4229
+        }
+      ]
+    },
+    {
+      "mode": "momentum",
+      "avg_return": -0.886,
+      "picks": [
+        "SMCI",
+        "ILMN",
+        "USO",
+        "QCOM",
+        "TECL"
+      ],
+      "raw": [
+        {
+          "ticker": "SMCI",
+          "return": 0.71,
+          "score": 0.6954
+        },
+        {
+          "ticker": "ILMN",
+          "return": -0.92,
+          "score": 0.6808
+        },
+        {
+          "ticker": "USO",
+          "return": -1.02,
+          "score": 0.6718
+        },
+        {
+          "ticker": "QCOM",
+          "return": -8.22,
+          "score": 0.6716
+        },
+        {
+          "ticker": "TECL",
+          "return": 5.02,
+          "score": 0.6661
         }
       ]
     }
