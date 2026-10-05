@@ -1092,9 +1092,9 @@ def build_report(state: dict, prices: pd.DataFrame,
     </div>
     <div class="stat-card">
       <div class="stat-label">Since Inception</div>
-      <div class="stat-val" style="color:{ret_col}">
-        {'+' if total_ret>=0 else ''}{total_ret:.2f}%<br>
-        <span style="font-size:14px">{'+' if (port_val-STARTING_CAP)>=0 else ''}${abs(port_val-STARTING_CAP):,.0f}</span>
+      <div class="stat-val" id="since-inception" data-starting="{STARTING_CAP:.2f}" style="color:{ret_col}">
+        <span id="since-inception-pct">{'+' if total_ret>=0 else ''}{total_ret:.2f}%</span><br>
+        <span id="since-inception-dollar" style="font-size:14px">{'+' if (port_val-STARTING_CAP)>=0 else ''}${abs(port_val-STARTING_CAP):,.0f}</span>
       </div>
       <div style="font-size:10px;color:#333;margin-top:5px">{inception_fmt}</div>
     </div>
@@ -1261,6 +1261,21 @@ def build_report(state: dict, prices: pd.DataFrame,
     // Update portfolio value card
     const pv = document.getElementById('port-value');
     if (pv) pv.textContent = '$' + Math.round(totalLive).toLocaleString('en-US');
+
+    // Update since-inception card
+    const si = document.getElementById('since-inception');
+    const siPct = document.getElementById('since-inception-pct');
+    const siDollar = document.getElementById('since-inception-dollar');
+    if (si && siPct && siDollar) {{
+      const startCap = parseFloat(si.dataset.starting);
+      const gain = totalLive - startCap;
+      const gainPct = gain / startCap * 100;
+      const siCol = gain >= 0 ? '#00e676' : '#ff5252';
+      const siSign = gain >= 0 ? '+' : '';
+      si.style.color = siCol;
+      siPct.textContent = siSign + gainPct.toFixed(2) + '%';
+      siDollar.textContent = siSign + '$' + Math.abs(gain).toLocaleString('en-US', {{maximumFractionDigits:0}});
+    }}
 
     // Update live portfolio line
     const lp = document.getElementById('live-port');
