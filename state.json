@@ -1,5 +1,5 @@
 {
-  "capital": 189.14,
+  "capital": 103.09,
   "positions": {
     "TQQQ": {
       "shares": 14,
@@ -18,15 +18,6 @@
       "top_signal": "trend",
       "entry_mode": "defensive",
       "thesis": "score +0.806 \u00b7 led by trend \u00b7 mode defensive"
-    },
-    "HYG": {
-      "shares": 13,
-      "cost_per_share": 77.6,
-      "cost": 1008.8,
-      "entry_date": "2026-09-28",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.469 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
     "SOXL": {
       "shares": 7,
@@ -90,6 +81,15 @@
       "top_signal": "trend",
       "entry_mode": "defensive",
       "thesis": "score +0.760 \u00b7 led by trend \u00b7 mode defensive"
+    },
+    "FNGU": {
+      "shares": 31,
+      "cost_per_share": 35.02,
+      "cost": 1085.62,
+      "entry_date": "2026-10-05",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.773 \u00b7 led by trend \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -1198,6 +1198,20 @@
       "reason": "rotation \u2192 ETHA (score +0.40)",
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "HYG",
+      "entry_date": "2026-09-28",
+      "exit_date": "2026-10-05",
+      "entry_price": 77.6,
+      "exit_price": 76.89,
+      "shares": 13,
+      "cost": 1008.8,
+      "pnl": -9.23,
+      "pnl_pct": -0.91,
+      "reason": "rotation \u2192 FNGU (score +0.41)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1239,7 +1253,7 @@
     "2026-09-30": 10498.9,
     "2026-10-01": 10585.73,
     "2026-10-02": 10673.09,
-    "2026-10-05": 10763.2
+    "2026-10-05": 10870.67
   },
   "signal_weights": {
     "momentum": 0.1,
@@ -9607,6 +9621,188 @@
         }
       ],
       "prev_mode": "trend_following"
+    },
+    {
+      "date": "2026-10-05",
+      "thesis": "Regime: BULL\nVIX 15.6 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode: defensive \u2014 Prioritize regime-fit safe-haven assets\nBacktest (5d): defensive +6.30%  |  trend following +5.19%  |  momentum +0.60%  |  mean reversion -0.81%\nExited 1 position(s): HYG -9 (rotation \u2192 FNGU (score +0.41))\nEntered 1 position(s):\n  FNGU $35.02 \u00d7 31 shares (score +0.773, led by trend)\nTop candidates screened: EWZ +0.851, CIBR +0.832, ARKG +0.797\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "FNGU",
+          "price": 35.02,
+          "total": 0.7732,
+          "scores": {
+            "momentum": 0.794,
+            "volume": -0.264,
+            "trend": 1.0,
+            "mean_rev": -0.43,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.87,
+          "ret5": 5.15,
+          "shares": 31,
+          "cost": 1085.62,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "HYG",
+          "entry_date": "2026-09-28",
+          "exit_date": "2026-10-05",
+          "entry_price": 77.6,
+          "exit_price": 76.89,
+          "shares": 13,
+          "cost": 1008.8,
+          "pnl": -9.23,
+          "pnl_pct": -0.91,
+          "reason": "rotation \u2192 FNGU (score +0.41)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "EWZ",
+          "price": 42.98500061035156,
+          "total": 0.8507,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 1.0,
+            "trend": 1.0,
+            "mean_rev": -0.493,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.54,
+          "ret5": 18.71
+        },
+        {
+          "ticker": "CIBR",
+          "price": 106.11499786376953,
+          "total": 0.832,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.234,
+            "trend": 1.0,
+            "mean_rev": -0.297,
+            "regime_fit": 1.0
+          },
+          "ret20": 12.19,
+          "ret5": 4.37
+        },
+        {
+          "ticker": "ARKG",
+          "price": 56.875,
+          "total": 0.7974,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.129,
+            "trend": 1.0,
+            "mean_rev": -0.59,
+            "regime_fit": 1.0
+          },
+          "ret20": 20.65,
+          "ret5": 6.61
+        },
+        {
+          "ticker": "TQQQ",
+          "price": 83.30500030517578,
+          "total": 0.7782,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.185,
+            "trend": 1.0,
+            "mean_rev": -0.625,
+            "regime_fit": 1.0
+          },
+          "ret20": 15.33,
+          "ret5": 8.13
+        },
+        {
+          "ticker": "FNGU",
+          "price": 35.95000076293945,
+          "total": 0.7732,
+          "scores": {
+            "momentum": 0.794,
+            "volume": -0.264,
+            "trend": 1.0,
+            "mean_rev": -0.43,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.87,
+          "ret5": 5.15
+        },
+        {
+          "ticker": "SOXL",
+          "price": 164.19000244140625,
+          "total": 0.7704,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.241,
+            "trend": 1.0,
+            "mean_rev": -0.676,
+            "regime_fit": 1.0
+          },
+          "ret20": 40.09,
+          "ret5": 15.39
+        },
+        {
+          "ticker": "ETHA",
+          "price": 20.420000076293945,
+          "total": 0.7699,
+          "scores": {
+            "momentum": 0.803,
+            "volume": -0.283,
+            "trend": 1.0,
+            "mean_rev": -0.462,
+            "regime_fit": 1.0
+          },
+          "ret20": 10.26,
+          "ret5": 1.34
+        },
+        {
+          "ticker": "TECL",
+          "price": 251.7550048828125,
+          "total": 0.7678,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.233,
+            "trend": 1.0,
+            "mean_rev": -0.705,
+            "regime_fit": 1.0
+          },
+          "ret20": 22.73,
+          "ret5": 10.31
+        },
+        {
+          "ticker": "SOXX",
+          "price": 589.47998046875,
+          "total": 0.7666,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.258,
+            "trend": 1.0,
+            "mean_rev": -0.705,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.47,
+          "ret5": 5.12
+        },
+        {
+          "ticker": "CLOU",
+          "price": 29.209999084472656,
+          "total": 0.7644,
+          "scores": {
+            "momentum": 0.482,
+            "volume": -0.256,
+            "trend": 1.0,
+            "mean_rev": -0.21,
+            "regime_fit": 1.0
+          },
+          "ret20": 5.11,
+          "ret5": 3.95
+        }
+      ],
+      "prev_mode": "defensive"
     }
   ],
   "inception_date": "2026-08-11",
@@ -9697,7 +9893,6 @@
       2.72
     ],
     "mean_reversion": [
-      -0.34,
       -7.68,
       -1.02,
       -2.13,
@@ -9716,7 +9911,8 @@
       -2.09,
       2.18,
       -0.91,
-      -1.26
+      -1.26,
+      -0.91
     ],
     "defensive": [
       0.21,
@@ -9731,7 +9927,7 @@
   "last_backtest": [
     {
       "mode": "defensive",
-      "avg_return": 4.994,
+      "avg_return": 6.302,
       "picks": [
         "TECL",
         "SOXX",
@@ -9742,34 +9938,34 @@
       "raw": [
         {
           "ticker": "TECL",
-          "return": 9.15,
+          "return": 10.31,
           "score": 0.8259
         },
         {
           "ticker": "SOXX",
-          "return": 4.68,
+          "return": 5.12,
           "score": 0.808
         },
         {
           "ticker": "ARKG",
-          "return": 4.12,
+          "return": 6.61,
           "score": 0.7906
         },
         {
           "ticker": "TQQQ",
-          "return": 6.57,
+          "return": 8.13,
           "score": 0.7857
         },
         {
           "ticker": "ETHA",
-          "return": 0.45,
+          "return": 1.34,
           "score": 0.7775
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 4.29,
+      "avg_return": 5.192,
       "picks": [
         "TECL",
         "ARKG",
@@ -9780,34 +9976,34 @@
       "raw": [
         {
           "ticker": "TECL",
-          "return": 9.15,
+          "return": 10.31,
           "score": 0.8381
         },
         {
           "ticker": "ARKG",
-          "return": 4.12,
+          "return": 6.61,
           "score": 0.8023
         },
         {
           "ticker": "SOXX",
-          "return": 4.68,
+          "return": 5.12,
           "score": 0.7968
         },
         {
           "ticker": "USO",
-          "return": -3.07,
+          "return": -4.21,
           "score": 0.768
         },
         {
           "ticker": "TQQQ",
-          "return": 6.57,
+          "return": 8.13,
           "score": 0.75
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": 0.786,
+      "avg_return": 0.598,
       "picks": [
         "USO",
         "VTRS",
@@ -9818,34 +10014,34 @@
       "raw": [
         {
           "ticker": "USO",
-          "return": -3.07,
+          "return": -4.21,
           "score": 0.7278
         },
         {
           "ticker": "VTRS",
-          "return": -3.26,
+          "return": -3.37,
           "score": 0.6934
         },
         {
           "ticker": "TECL",
-          "return": 9.15,
+          "return": 10.31,
           "score": 0.6884
         },
         {
           "ticker": "QCOM",
-          "return": -2.66,
+          "return": -3.57,
           "score": 0.675
         },
         {
           "ticker": "META",
-          "return": 3.77,
+          "return": 3.83,
           "score": 0.6745
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -0.356,
+      "avg_return": -0.808,
       "picks": [
         "HYG",
         "JNK",
@@ -9856,27 +10052,27 @@
       "raw": [
         {
           "ticker": "HYG",
-          "return": -0.38,
+          "return": -0.25,
           "score": 0.4792
         },
         {
           "ticker": "JNK",
-          "return": -0.27,
+          "return": -0.14,
           "score": 0.4612
         },
         {
           "ticker": "DTE",
-          "return": 4.25,
+          "return": 3.79,
           "score": 0.4435
         },
         {
           "ticker": "MGM",
-          "return": -3.56,
+          "return": -5.43,
           "score": 0.4373
         },
         {
           "ticker": "O",
-          "return": -1.82,
+          "return": -2.01,
           "score": 0.4242
         }
       ]
