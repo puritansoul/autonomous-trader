@@ -838,13 +838,16 @@ def build_report(state: dict, prices: pd.DataFrame,
     # Positions table — embed data attributes for live JS price updates
     pos_rows = ""
     total_invested = 0.0
+    total_curval = 0.0
     for tk, pos in sorted(positions.items()):
         cur = float(prices[tk].dropna().iloc[-1]) if tk in prices.columns else pos["cost_per_share"]
         upnl = (cur - pos["cost_per_share"]) * pos["shares"]
         upnl_pct = (cur - pos["cost_per_share"]) / pos["cost_per_share"] * 100
         col  = "#00e676" if upnl >= 0 else "#ff5252"
         hold = (date.today() - date.fromisoformat(pos["entry_date"])).days
+        cur_val = cur * pos["shares"]
         total_invested += pos["cost"]
+        total_curval += cur_val
         pos_rows += f"""<tr data-ticker="{tk}" data-cost="{pos['cost_per_share']:.4f}" data-shares="{pos['shares']}">
           <td class="tk">{tk}</td>
           <td>{pos['entry_date']}</td>
@@ -853,17 +856,19 @@ def build_report(state: dict, prices: pd.DataFrame,
           <td class="live-price">${cur:.2f}</td>
           <td>{pos['shares']}</td>
           <td>${pos['cost']:,.0f}</td>
+          <td class="live-curval">${cur_val:,.0f}</td>
           <td class="live-upnl" style="color:{col}">{'+' if upnl>=0 else ''}{upnl:,.0f} ({upnl_pct:+.1f}%)</td>
           <td style="font-size:11px;color:#aaa">{pos.get('top_signal','—')}</td>
         </tr>"""
 
     if not pos_rows:
-        pos_rows = '<tr><td colspan="9" style="color:#666;text-align:center">No open positions</td></tr>'
+        pos_rows = '<tr><td colspan="10" style="color:#666;text-align:center">No open positions</td></tr>'
 
     pos_tfoot = f"""<tfoot>
       <tr style="border-top:1px solid #2a2a2a;font-weight:600">
         <td colspan="6" style="text-align:right;font-size:11px;color:#444;padding-right:8px">Total</td>
         <td>${total_invested:,.0f}</td>
+        <td id="tfoot-curval">${total_curval:,.0f}</td>
         <td id="tfoot-upnl" style="color:{upnl_col}">{upnl_sign}${abs(total_upnl):,.0f}</td>
         <td></td>
       </tr>
@@ -1144,7 +1149,7 @@ def build_report(state: dict, prices: pd.DataFrame,
       <table>
         <thead><tr>
           <th>Ticker</th><th>Entry</th><th>Hold</th><th>Cost/sh</th>
-          <th>Now</th><th>Shares</th><th>Invested</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
+          <th>Now</th><th>Shares</th><th>Cost</th><th>Value</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
         </tr></thead>
         <tbody>{pos_rows}</tbody>
         {pos_tfoot}
@@ -1237,16 +1242,19 @@ def build_report(state: dict, prices: pd.DataFrame,
       const col = upnl >= 0 ? '#00e676' : '#ff5252';
       const sign = upnl >= 0 ? '+' : '';
 
-      const priceCell = row.querySelector('.live-price');
-      const upnlCell  = row.querySelector('.live-upnl');
-      if (priceCell) priceCell.textContent = '$' + price.toFixed(2);
+      const curVal = price * pos.shares;
+      const priceCell  = row.querySelector('.live-price');
+      const curValCell = row.querySelector('.live-curval');
+      const upnlCell   = row.querySelector('.live-upnl');
+      if (priceCell)  priceCell.textContent = '$' + price.toFixed(2);
+      if (curValCell) curValCell.textContent = '$' + Math.round(curVal).toLocaleString('en-US');
       if (upnlCell) {{
         upnlCell.textContent = sign + '$' + Math.abs(upnl).toLocaleString('en-US', {{maximumFractionDigits:0}}) +
           ' (' + sign + upnlPct.toFixed(1) + '%)';
         upnlCell.style.color = col;
       }}
 
-      totalLive  += price * pos.shares;
+      totalLive  += curVal;
       totalUnreal += upnl;
     }});
 
@@ -1270,6 +1278,8 @@ def build_report(state: dict, prices: pd.DataFrame,
     if (up) {{ up.textContent = unrFmt; up.style.color = unrCol; }}
     const tf = document.getElementById('tfoot-upnl');
     if (tf) {{ tf.textContent = unrFmt; tf.style.color = unrCol; }}
+    const tcv = document.getElementById('tfoot-curval');
+    if (tcv) tcv.textContent = '$' + Math.round(totalLive - CASH).toLocaleString('en-US');
 
     const now = new Date().toLocaleTimeString('en-US', {{hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'}});
     setStatus('live · ' + now + ' ET', '#00e676');
