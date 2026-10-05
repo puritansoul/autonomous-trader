@@ -1,5 +1,5 @@
 {
-  "capital": 961.96,
+  "capital": 189.14,
   "positions": {
     "TQQQ": {
       "shares": 14,
@@ -27,24 +27,6 @@
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.469 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "JNK": {
-      "shares": 10,
-      "cost_per_share": 93.549,
-      "cost": 935.49,
-      "entry_date": "2026-09-28",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.449 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "XLF": {
-      "shares": 20,
-      "cost_per_share": 53.99,
-      "cost": 1079.8,
-      "entry_date": "2026-09-30",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.371 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
     "SOXL": {
       "shares": 7,
@@ -90,6 +72,24 @@
       "top_signal": "trend",
       "entry_mode": "trend_following",
       "thesis": "score +0.800 \u00b7 led by trend \u00b7 mode trend_following"
+    },
+    "EWZ": {
+      "shares": 34,
+      "cost_per_share": 42.78,
+      "cost": 1454.52,
+      "entry_date": "2026-10-05",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.849 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "ETHA": {
+      "shares": 64,
+      "cost_per_share": 20.5,
+      "cost": 1312.0,
+      "entry_date": "2026-10-05",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.760 \u00b7 led by trend \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -1170,6 +1170,34 @@
       "reason": "rotation \u2192 ARKG (score +1.39)",
       "top_signal": "mean_rev",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "XLF",
+      "entry_date": "2026-09-30",
+      "exit_date": "2026-10-05",
+      "entry_price": 53.99,
+      "exit_price": 53.5,
+      "shares": 20,
+      "cost": 1079.8,
+      "pnl": -9.8,
+      "pnl_pct": -0.91,
+      "reason": "rotation \u2192 EWZ (score +0.51)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "JNK",
+      "entry_date": "2026-09-28",
+      "exit_date": "2026-10-05",
+      "entry_price": 93.549,
+      "exit_price": 92.37,
+      "shares": 10,
+      "cost": 935.49,
+      "pnl": -11.79,
+      "pnl_pct": -1.26,
+      "reason": "rotation \u2192 ETHA (score +0.40)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1210,14 +1238,15 @@
     "2026-09-29": 10454.25,
     "2026-09-30": 10498.9,
     "2026-10-01": 10585.73,
-    "2026-10-02": 10673.09
+    "2026-10-02": 10673.09,
+    "2026-10-05": 10763.2
   },
   "signal_weights": {
-    "momentum": 0.2,
-    "volume": 0.1,
-    "trend": 0.5,
-    "mean_rev": 0.05,
-    "regime_fit": 0.15
+    "momentum": 0.1,
+    "volume": 0.05,
+    "trend": 0.2,
+    "mean_rev": 0.1,
+    "regime_fit": 0.55
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -1257,7 +1286,8 @@
     "2026-09-29": "bull",
     "2026-09-30": "bull",
     "2026-10-01": "bull",
-    "2026-10-02": "bull"
+    "2026-10-02": "bull",
+    "2026-10-05": "bull"
   },
   "daily_log": [
     {
@@ -9364,11 +9394,224 @@
         }
       ],
       "prev_mode": "defensive"
+    },
+    {
+      "date": "2026-10-05",
+      "thesis": "Regime: BULL\nVIX 15.6 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: trend_following \u2192 defensive (Prioritize regime-fit safe-haven assets)\nBacktest (5d): defensive +4.99%  |  trend following +4.29%  |  momentum +0.79%  |  mean reversion -0.36%\nExited 2 position(s): XLF -10 (rotation \u2192 EWZ (score +0.51)), JNK -12 (rotation \u2192 ETHA (score +0.40))\nEntered 2 position(s):\n  EWZ $42.78 \u00d7 34 shares (score +0.849, led by momentum)\n  ETHA $20.50 \u00d7 64 shares (score +0.760, led by trend)\nTop candidates screened: EWZ +0.849, CIBR +0.820, ARKG +0.781\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "EWZ",
+          "price": 42.78,
+          "total": 0.8489,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 1.0,
+            "trend": 1.0,
+            "mean_rev": -0.511,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.59,
+          "ret5": 19.81,
+          "shares": 34,
+          "cost": 1454.52,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "ETHA",
+          "price": 20.5,
+          "total": 0.7596,
+          "scores": {
+            "momentum": 0.708,
+            "volume": -0.34,
+            "trend": 1.0,
+            "mean_rev": -0.442,
+            "regime_fit": 1.0
+          },
+          "ret20": 9.29,
+          "ret5": 0.45,
+          "shares": 64,
+          "cost": 1312.0,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "XLF",
+          "entry_date": "2026-09-30",
+          "exit_date": "2026-10-05",
+          "entry_price": 53.99,
+          "exit_price": 53.5,
+          "shares": 20,
+          "cost": 1079.8,
+          "pnl": -9.8,
+          "pnl_pct": -0.91,
+          "reason": "rotation \u2192 EWZ (score +0.51)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "JNK",
+          "entry_date": "2026-09-28",
+          "exit_date": "2026-10-05",
+          "entry_price": 93.549,
+          "exit_price": 92.37,
+          "shares": 10,
+          "cost": 935.49,
+          "pnl": -11.79,
+          "pnl_pct": -1.26,
+          "reason": "rotation \u2192 ETHA (score +0.40)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "EWZ",
+          "price": 43.3849983215332,
+          "total": 0.8489,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 1.0,
+            "trend": 1.0,
+            "mean_rev": -0.511,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.59,
+          "ret5": 19.81
+        },
+        {
+          "ticker": "CIBR",
+          "price": 105.58999633789062,
+          "total": 0.8201,
+          "scores": {
+            "momentum": 0.969,
+            "volume": 0.014,
+            "trend": 1.0,
+            "mean_rev": -0.275,
+            "regime_fit": 1.0
+          },
+          "ret20": 11.63,
+          "ret5": 3.86
+        },
+        {
+          "ticker": "ARKG",
+          "price": 55.54999923706055,
+          "total": 0.7814,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.268,
+            "trend": 1.0,
+            "mean_rev": -0.552,
+            "regime_fit": 1.0
+          },
+          "ret20": 17.84,
+          "ret5": 4.12
+        },
+        {
+          "ticker": "TQQQ",
+          "price": 82.1050033569336,
+          "total": 0.7752,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.284,
+            "trend": 1.0,
+            "mean_rev": -0.606,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.67,
+          "ret5": 6.57
+        },
+        {
+          "ticker": "SOXL",
+          "price": 162.22000122070312,
+          "total": 0.7695,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.315,
+            "trend": 1.0,
+            "mean_rev": -0.647,
+            "regime_fit": 1.0
+          },
+          "ret20": 38.41,
+          "ret5": 14.01
+        },
+        {
+          "ticker": "SOXX",
+          "price": 587.030029296875,
+          "total": 0.7644,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.353,
+            "trend": 1.0,
+            "mean_rev": -0.679,
+            "regime_fit": 1.0
+          },
+          "ret20": 12.99,
+          "ret5": 4.68
+        },
+        {
+          "ticker": "TECL",
+          "price": 249.09500122070312,
+          "total": 0.7644,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.321,
+            "trend": 1.0,
+            "mean_rev": -0.696,
+            "regime_fit": 1.0
+          },
+          "ret20": 21.43,
+          "ret5": 9.15
+        },
+        {
+          "ticker": "ETHA",
+          "price": 20.239999771118164,
+          "total": 0.7596,
+          "scores": {
+            "momentum": 0.708,
+            "volume": -0.34,
+            "trend": 1.0,
+            "mean_rev": -0.442,
+            "regime_fit": 1.0
+          },
+          "ret20": 9.29,
+          "ret5": 0.45
+        },
+        {
+          "ticker": "CLOU",
+          "price": 29.125,
+          "total": 0.7581,
+          "scores": {
+            "momentum": 0.451,
+            "volume": -0.349,
+            "trend": 1.0,
+            "mean_rev": -0.196,
+            "regime_fit": 1.0
+          },
+          "ret20": 4.8,
+          "ret5": 3.65
+        },
+        {
+          "ticker": "FNGU",
+          "price": 35.332401275634766,
+          "total": 0.7523,
+          "scores": {
+            "momentum": 0.609,
+            "volume": -0.385,
+            "trend": 1.0,
+            "mean_rev": -0.393,
+            "regime_fit": 1.0
+          },
+          "ret20": 7.0,
+          "ret5": 3.34
+        }
+      ],
+      "prev_mode": "trend_following"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "trend_following",
+  "active_mode": "defensive",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -9406,7 +9649,8 @@
     "2026-09-29": "mean_reversion",
     "2026-09-30": "mean_reversion",
     "2026-10-01": "defensive",
-    "2026-10-02": "trend_following"
+    "2026-10-02": "trend_following",
+    "2026-10-05": "defensive"
   },
   "mode_pnl": {
     "momentum": [
@@ -9453,8 +9697,6 @@
       2.72
     ],
     "mean_reversion": [
-      3.31,
-      2.64,
       -0.34,
       -7.68,
       -1.02,
@@ -9472,7 +9714,9 @@
       5.61,
       -2.18,
       -2.09,
-      2.18
+      2.18,
+      -0.91,
+      -1.26
     ],
     "defensive": [
       0.21,
@@ -9486,154 +9730,154 @@
   },
   "last_backtest": [
     {
-      "mode": "trend_following",
-      "avg_return": 1.444,
-      "picks": [
-        "TECL",
-        "TQQQ",
-        "SOXX",
-        "FNGU",
-        "SMCI"
-      ],
-      "raw": [
-        {
-          "ticker": "TECL",
-          "return": 5.02,
-          "score": 0.826
-        },
-        {
-          "ticker": "TQQQ",
-          "return": 1.36,
-          "score": 0.8251
-        },
-        {
-          "ticker": "SOXX",
-          "return": 2.63,
-          "score": 0.7877
-        },
-        {
-          "ticker": "FNGU",
-          "return": -2.5,
-          "score": 0.7869
-        },
-        {
-          "ticker": "SMCI",
-          "return": 0.71,
-          "score": 0.7519
-        }
-      ]
-    },
-    {
       "mode": "defensive",
-      "avg_return": 1.166,
+      "avg_return": 4.994,
       "picks": [
-        "TQQQ",
         "TECL",
-        "FNGU",
         "SOXX",
-        "IEMG"
+        "ARKG",
+        "TQQQ",
+        "ETHA"
       ],
       "raw": [
         {
-          "ticker": "TQQQ",
-          "return": 1.36,
-          "score": 0.8145
-        },
-        {
           "ticker": "TECL",
-          "return": 5.02,
-          "score": 0.8118
-        },
-        {
-          "ticker": "FNGU",
-          "return": -2.5,
-          "score": 0.7983
+          "return": 9.15,
+          "score": 0.8259
         },
         {
           "ticker": "SOXX",
-          "return": 2.63,
-          "score": 0.7933
+          "return": 4.68,
+          "score": 0.808
         },
         {
-          "ticker": "IEMG",
-          "return": -0.68,
-          "score": 0.7748
+          "ticker": "ARKG",
+          "return": 4.12,
+          "score": 0.7906
+        },
+        {
+          "ticker": "TQQQ",
+          "return": 6.57,
+          "score": 0.7857
+        },
+        {
+          "ticker": "ETHA",
+          "return": 0.45,
+          "score": 0.7775
         }
       ]
     },
     {
-      "mode": "mean_reversion",
-      "avg_return": -0.806,
+      "mode": "trend_following",
+      "avg_return": 4.29,
       "picks": [
-        "GEN",
-        "MGM",
-        "CAH",
-        "O",
-        "JNK"
+        "TECL",
+        "ARKG",
+        "SOXX",
+        "USO",
+        "TQQQ"
       ],
       "raw": [
         {
-          "ticker": "GEN",
-          "return": 2.45,
-          "score": 0.4889
+          "ticker": "TECL",
+          "return": 9.15,
+          "score": 0.8381
         },
         {
-          "ticker": "MGM",
-          "return": -6.75,
-          "score": 0.4786
+          "ticker": "ARKG",
+          "return": 4.12,
+          "score": 0.8023
         },
         {
-          "ticker": "CAH",
-          "return": 3.33,
-          "score": 0.46
+          "ticker": "SOXX",
+          "return": 4.68,
+          "score": 0.7968
         },
         {
-          "ticker": "O",
-          "return": -2.3,
-          "score": 0.4478
+          "ticker": "USO",
+          "return": -3.07,
+          "score": 0.768
         },
         {
-          "ticker": "JNK",
-          "return": -0.76,
-          "score": 0.4229
+          "ticker": "TQQQ",
+          "return": 6.57,
+          "score": 0.75
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -0.886,
+      "avg_return": 0.786,
       "picks": [
-        "SMCI",
-        "ILMN",
         "USO",
+        "VTRS",
+        "TECL",
         "QCOM",
-        "TECL"
+        "META"
       ],
       "raw": [
         {
-          "ticker": "SMCI",
-          "return": 0.71,
-          "score": 0.6954
-        },
-        {
-          "ticker": "ILMN",
-          "return": -0.92,
-          "score": 0.6808
-        },
-        {
           "ticker": "USO",
-          "return": -1.02,
-          "score": 0.6718
+          "return": -3.07,
+          "score": 0.7278
         },
         {
-          "ticker": "QCOM",
-          "return": -8.22,
-          "score": 0.6716
+          "ticker": "VTRS",
+          "return": -3.26,
+          "score": 0.6934
         },
         {
           "ticker": "TECL",
-          "return": 5.02,
-          "score": 0.6661
+          "return": 9.15,
+          "score": 0.6884
+        },
+        {
+          "ticker": "QCOM",
+          "return": -2.66,
+          "score": 0.675
+        },
+        {
+          "ticker": "META",
+          "return": 3.77,
+          "score": 0.6745
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": -0.356,
+      "picks": [
+        "HYG",
+        "JNK",
+        "DTE",
+        "MGM",
+        "O"
+      ],
+      "raw": [
+        {
+          "ticker": "HYG",
+          "return": -0.38,
+          "score": 0.4792
+        },
+        {
+          "ticker": "JNK",
+          "return": -0.27,
+          "score": 0.4612
+        },
+        {
+          "ticker": "DTE",
+          "return": 4.25,
+          "score": 0.4435
+        },
+        {
+          "ticker": "MGM",
+          "return": -3.56,
+          "score": 0.4373
+        },
+        {
+          "ticker": "O",
+          "return": -1.82,
+          "score": 0.4242
         }
       ]
     }
