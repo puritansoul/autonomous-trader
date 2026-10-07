@@ -17,6 +17,8 @@ try:
 except ImportError:
     sys.exit("pip install yfinance pandas numpy")
 
+from zoneinfo import ZoneInfo
+
 BASE_DIR      = Path(__file__).parent
 STATE_FILE    = BASE_DIR / "state.json"
 STARTING_CAP  = 10_000.0
@@ -234,23 +236,52 @@ def fetch_volume(tickers: list, period: str = "3mo") -> pd.DataFrame:
 
 
 def fetch_opens(tickers: list) -> dict:
-    """Fetch today's open price for each ticker. Returns {ticker: open_price}."""
+    """Fetch price at ~9:35 AM ET using 1-minute intraday bars.
+    Falls back to daily open if intraday data is unavailable.
+    """
     if not tickers:
         return {}
-    raw = yf.download(tickers, period="2d", interval="1d", auto_adjust=True,
-                      progress=False, threads=True)
-    opens = {}
-    for tk in tickers:
+    prices = {}
+    try:
+        raw = yf.download(tickers, period="1d", interval="1m", auto_adjust=True,
+                          progress=False, threads=True)
+        closes = raw["Close"] if isinstance(raw.columns, pd.MultiIndex) else raw[["Close"]]
+        et = ZoneInfo("America/New_York")
+        for tk in tickers:
+            try:
+                series = (closes[tk] if isinstance(closes.columns, pd.Index) and tk in closes.columns
+                          else closes.iloc[:, 0]).dropna()
+                if series.empty:
+                    continue
+                # Find the 9:35 AM ET candle (first candle at or after 9:35)
+                target = series.index.tz_convert(et)
+                mask = (target.hour == 9) & (target.minute >= 35)
+                if mask.any():
+                    prices[tk] = round(float(series[mask.values].iloc[0]), 4)
+                else:
+                    prices[tk] = round(float(series.iloc[-1]), 4)
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    # Fall back to daily open for any tickers we missed
+    missing = [tk for tk in tickers if tk not in prices]
+    if missing:
         try:
-            if isinstance(raw.columns, pd.MultiIndex):
-                series = raw["Open"][tk].dropna()
-            else:
-                series = raw["Open"].dropna()
-            if len(series) > 0:
-                opens[tk] = round(float(series.iloc[-1]), 4)
+            raw2 = yf.download(missing, period="2d", interval="1d", auto_adjust=True,
+                               progress=False, threads=True)
+            for tk in missing:
+                try:
+                    series = (raw2["Open"][tk] if isinstance(raw2.columns, pd.MultiIndex)
+                              else raw2["Open"]).dropna()
+                    if len(series) > 0:
+                        prices[tk] = round(float(series.iloc[-1]), 4)
+                except Exception:
+                    pass
         except Exception:
             pass
-    return opens
+    return prices
 
 
 # ── Regime detection ──────────────────────────────────────────────────────────
@@ -575,6 +606,41 @@ def check_exits(positions: dict, prices: pd.DataFrame,
             remaining[tk] = pos
 
     return closed, remaining
+
+
+# ── Split detection ───────────────────────────────────────────────────────────
+
+def adjust_for_splits(positions: dict, prices: pd.DataFrame) -> None:
+    """Detect stock splits by comparing stored cost_per_share to yfinance-adjusted
+    historical price on the entry date. Mutates positions in-place."""
+    for tk, pos in positions.items():
+        if tk not in prices.columns:
+            continue
+        try:
+            entry_ts = pd.Timestamp(pos["entry_date"])
+            series = prices[tk].dropna()
+            # Find closest available date at or after entry
+            future = series.index[series.index >= entry_ts]
+            hist_price = float(series.loc[future[0]]) if len(future) else None
+            if hist_price is None or hist_price <= 0:
+                continue
+            stored = pos["cost_per_share"]
+            ratio = hist_price / stored
+            # Only adjust if ratio suggests a real split (>1.4x or <0.6x)
+            if ratio > 1.4:
+                # Reverse split: price went up, shares went down
+                pos["cost_per_share"] = round(stored * ratio, 4)
+                pos["shares"] = max(1, round(pos["shares"] / ratio))
+                pos["cost"] = round(pos["cost_per_share"] * pos["shares"], 2)
+                print(f"  SPLIT adj {tk}: ratio {ratio:.2f}x → {pos['shares']} shares @ ${pos['cost_per_share']:.2f}")
+            elif ratio < 0.6:
+                # Forward split: price went down, shares went up
+                pos["cost_per_share"] = round(stored * ratio, 4)
+                pos["shares"] = round(pos["shares"] / ratio)
+                pos["cost"] = round(pos["cost_per_share"] * pos["shares"], 2)
+                print(f"  SPLIT adj {tk}: ratio {ratio:.2f}x → {pos['shares']} shares @ ${pos['cost_per_share']:.2f}")
+        except Exception:
+            pass
 
 
 # ── Portfolio valuation ───────────────────────────────────────────────────────
@@ -1365,6 +1431,10 @@ def run():
     if prices.empty:
         print("  No data — aborting")
         return
+
+    # 1b. Adjust any open positions for splits before evaluating them
+    if state["positions"]:
+        adjust_for_splits(state["positions"], prices)
 
     # 2. Detect regime from yesterday's close
     regime, regime_details = detect_regime(prices)
