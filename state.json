@@ -1,5 +1,5 @@
 {
-  "capital": 620.2,
+  "capital": -2016.56,
   "positions": {
     "TQQQ": {
       "shares": 14,
@@ -1219,11 +1219,11 @@
       "exit_date": "2026-10-06",
       "entry_price": 20.5,
       "exit_price": 61.32,
-      "shares": 64,
+      "shares": 21,
       "cost": 1312.0,
-      "pnl": 2612.48,
-      "pnl_pct": 199.12,
-      "reason": "take profit (+196.8%)",
+      "pnl": -24.28,
+      "pnl_pct": -1.85,
+      "reason": "split-adjusted exit (-1.85%)",
       "top_signal": "trend",
       "entry_mode": "defensive"
     },
@@ -1296,8 +1296,8 @@
     "2026-10-01": 10585.73,
     "2026-10-02": 10673.09,
     "2026-10-05": 10855.87,
-    "2026-10-06": 13461.4,
-    "2026-10-07": 13356.37
+    "2026-10-06": 10824.64,
+    "2026-10-07": 10719.61
   },
   "signal_weights": {
     "momentum": 0.5,
