@@ -1,15 +1,6 @@
 {
-  "capital": -1075.23,
+  "capital": 522.42,
   "positions": {
-    "TQQQ": {
-      "shares": 14,
-      "cost_per_share": 80.527,
-      "cost": 1127.38,
-      "entry_date": "2026-09-23",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.823 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
     "SOXL": {
       "shares": 7,
       "cost_per_share": 148.555,
@@ -64,23 +55,41 @@
       "entry_mode": "defensive",
       "thesis": "score +0.773 \u00b7 led by trend \u00b7 mode defensive"
     },
-    "MRVL": {
-      "shares": 8,
-      "cost_per_share": 280.995,
-      "cost": 2247.96,
-      "entry_date": "2026-10-07",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.611 \u00b7 led by momentum \u00b7 mode momentum"
+    "INDA": {
+      "shares": 24,
+      "cost_per_share": 45.54,
+      "cost": 1092.96,
+      "entry_date": "2026-10-08",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.319 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
-    "MRNA": {
-      "shares": 12,
-      "cost_per_share": 183.01,
-      "cost": 2196.12,
-      "entry_date": "2026-10-07",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.585 \u00b7 led by momentum \u00b7 mode momentum"
+    "ETHA": {
+      "shares": 18,
+      "cost_per_share": 57.27,
+      "cost": 1030.86,
+      "entry_date": "2026-10-08",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.316 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
+    },
+    "JNK": {
+      "shares": 11,
+      "cost_per_share": 92.6,
+      "cost": 1018.6,
+      "entry_date": "2026-10-08",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.306 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
+    },
+    "ARE": {
+      "shares": 22,
+      "cost_per_share": 45.02,
+      "cost": 990.44,
+      "entry_date": "2026-10-08",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.295 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -1259,6 +1268,48 @@
       "reason": "rotation \u2192 VST (score +0.29)",
       "top_signal": "trend",
       "entry_mode": "defensive"
+    },
+    {
+      "ticker": "TQQQ",
+      "entry_date": "2026-09-23",
+      "exit_date": "2026-10-08",
+      "entry_price": 80.527,
+      "exit_price": 82.325,
+      "shares": 14,
+      "cost": 1127.38,
+      "pnl": 25.17,
+      "pnl_pct": 2.23,
+      "reason": "max hold 15d",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "MRNA",
+      "entry_date": "2026-10-07",
+      "exit_date": "2026-10-08",
+      "entry_price": 183.01,
+      "exit_price": 196.43,
+      "shares": 12,
+      "cost": 2196.12,
+      "pnl": 161.04,
+      "pnl_pct": 7.33,
+      "reason": "rotation \u2192 INDA (score +0.37)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "MRVL",
+      "entry_date": "2026-10-07",
+      "exit_date": "2026-10-08",
+      "entry_price": 280.995,
+      "exit_price": 277.6,
+      "shares": 8,
+      "cost": 2247.96,
+      "pnl": -27.16,
+      "pnl_pct": -1.21,
+      "reason": "rotation \u2192 ETHA (score +0.29)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -1302,14 +1353,15 @@
     "2026-10-02": 10673.09,
     "2026-10-05": 10855.87,
     "2026-10-06": 10824.64,
-    "2026-10-07": 10807.25
+    "2026-10-07": 10807.25,
+    "2026-10-08": 10521.93
   },
   "signal_weights": {
-    "momentum": 0.5,
-    "volume": 0.25,
-    "trend": 0.15,
-    "mean_rev": 0.05,
-    "regime_fit": 0.05
+    "momentum": 0.05,
+    "volume": 0.15,
+    "trend": 0.1,
+    "mean_rev": 0.55,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -1352,7 +1404,8 @@
     "2026-10-02": "bull",
     "2026-10-05": "bull",
     "2026-10-06": "bull",
-    "2026-10-07": "bull"
+    "2026-10-07": "bull",
+    "2026-10-08": "bull"
   },
   "daily_log": [
     {
@@ -10711,11 +10764,272 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-10-08",
+      "thesis": "Regime: BULL\nVIX 15.6 \u00b7 SPY trend up \u00b7 risk appetite up\nStrategy mode switched: momentum \u2192 mean_reversion (Buy oversold dips in trending markets)\nBacktest (5d): mean reversion +0.64%  |  momentum -0.87%  |  trend following -2.51%  |  defensive -3.78%\nExited 3 position(s): TQQQ +25 (max hold 15d), MRNA +161 (rotation \u2192 INDA (score +0.37)), MRVL -27 (rotation \u2192 ETHA (score +0.29))\nEntered 4 position(s):\n  INDA $45.54 \u00d7 24 shares (score +0.319, led by regime_fit)\n  ETHA $57.27 \u00d7 18 shares (score +0.316, led by regime_fit)\n  JNK $92.60 \u00d7 11 shares (score +0.306, led by regime_fit)\n  ARE $45.02 \u00d7 22 shares (score +0.295, led by mean_rev)\nTop candidates screened: INDA +0.319, ETHA +0.316, JNK +0.306\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "INDA",
+          "price": 45.54,
+          "total": 0.3188,
+          "scores": {
+            "momentum": -0.444,
+            "volume": 0.039,
+            "trend": -1.0,
+            "mean_rev": 0.518,
+            "regime_fit": 1.0
+          },
+          "ret20": -5.33,
+          "ret5": -1.76,
+          "shares": 24,
+          "cost": 1092.96,
+          "top_signal": "regime_fit"
+        },
+        {
+          "ticker": "ETHA",
+          "price": 57.27,
+          "total": 0.3164,
+          "scores": {
+            "momentum": -0.243,
+            "volume": 0.476,
+            "trend": -0.5,
+            "mean_rev": 0.286,
+            "regime_fit": 1.0
+          },
+          "ret20": -0.22,
+          "ret5": -9.08,
+          "shares": 18,
+          "cost": 1030.86,
+          "top_signal": "regime_fit"
+        },
+        {
+          "ticker": "JNK",
+          "price": 92.6,
+          "total": 0.3063,
+          "scores": {
+            "momentum": -0.093,
+            "volume": 0.175,
+            "trend": -1.0,
+            "mean_rev": 0.427,
+            "regime_fit": 1.0
+          },
+          "ret20": -1.41,
+          "ret5": 0.5,
+          "shares": 11,
+          "cost": 1018.6,
+          "top_signal": "regime_fit"
+        },
+        {
+          "ticker": "ARE",
+          "price": 45.02,
+          "total": 0.2955,
+          "scores": {
+            "momentum": -0.599,
+            "volume": -0.212,
+            "trend": -1.0,
+            "mean_rev": 0.75,
+            "regime_fit": 0.3
+          },
+          "ret20": -6.88,
+          "ret5": -3.33,
+          "shares": 22,
+          "cost": 990.44,
+          "top_signal": "mean_rev"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "TQQQ",
+          "entry_date": "2026-09-23",
+          "exit_date": "2026-10-08",
+          "entry_price": 80.527,
+          "exit_price": 82.325,
+          "shares": 14,
+          "cost": 1127.38,
+          "pnl": 25.17,
+          "pnl_pct": 2.23,
+          "reason": "max hold 15d",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "MRNA",
+          "entry_date": "2026-10-07",
+          "exit_date": "2026-10-08",
+          "entry_price": 183.01,
+          "exit_price": 196.43,
+          "shares": 12,
+          "cost": 2196.12,
+          "pnl": 161.04,
+          "pnl_pct": 7.33,
+          "reason": "rotation \u2192 INDA (score +0.37)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "MRVL",
+          "entry_date": "2026-10-07",
+          "exit_date": "2026-10-08",
+          "entry_price": 280.995,
+          "exit_price": 277.6,
+          "shares": 8,
+          "cost": 2247.96,
+          "pnl": -27.16,
+          "pnl_pct": -1.21,
+          "reason": "rotation \u2192 ETHA (score +0.29)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "INDA",
+          "price": 45.54499816894531,
+          "total": 0.3188,
+          "scores": {
+            "momentum": -0.444,
+            "volume": 0.039,
+            "trend": -1.0,
+            "mean_rev": 0.518,
+            "regime_fit": 1.0
+          },
+          "ret20": -5.33,
+          "ret5": -1.76
+        },
+        {
+          "ticker": "ETHA",
+          "price": 55.560001373291016,
+          "total": 0.3164,
+          "scores": {
+            "momentum": -0.243,
+            "volume": 0.476,
+            "trend": -0.5,
+            "mean_rev": 0.286,
+            "regime_fit": 1.0
+          },
+          "ret20": -0.22,
+          "ret5": -9.08
+        },
+        {
+          "ticker": "JNK",
+          "price": 92.76499938964844,
+          "total": 0.3063,
+          "scores": {
+            "momentum": -0.093,
+            "volume": 0.175,
+            "trend": -1.0,
+            "mean_rev": 0.427,
+            "regime_fit": 1.0
+          },
+          "ret20": -1.41,
+          "ret5": 0.5
+        },
+        {
+          "ticker": "ARE",
+          "price": 45.46500015258789,
+          "total": 0.2955,
+          "scores": {
+            "momentum": -0.599,
+            "volume": -0.212,
+            "trend": -1.0,
+            "mean_rev": 0.75,
+            "regime_fit": 0.3
+          },
+          "ret20": -6.88,
+          "ret5": -3.33
+        },
+        {
+          "ticker": "HYG",
+          "price": 77.17500305175781,
+          "total": 0.2778,
+          "scores": {
+            "momentum": -0.096,
+            "volume": -0.2,
+            "trend": -1.0,
+            "mean_rev": 0.477,
+            "regime_fit": 1.0
+          },
+          "ret20": -1.4,
+          "ret5": 0.36
+        },
+        {
+          "ticker": "MOS",
+          "price": 19.795000076293945,
+          "total": 0.2638,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.073,
+            "trend": -1.0,
+            "mean_rev": 0.69,
+            "regime_fit": 0.3
+          },
+          "ret20": -22.07,
+          "ret5": -8.14
+        },
+        {
+          "ticker": "MGM",
+          "price": 30.155000686645508,
+          "total": 0.259,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.147,
+            "trend": -1.0,
+            "mean_rev": 0.702,
+            "regime_fit": 0.3
+          },
+          "ret20": -25.96,
+          "ret5": -1.03
+        },
+        {
+          "ticker": "PFG",
+          "price": 109.9000015258789,
+          "total": 0.2589,
+          "scores": {
+            "momentum": -0.382,
+            "volume": -0.299,
+            "trend": -0.5,
+            "mean_rev": 0.596,
+            "regime_fit": 0.3
+          },
+          "ret20": -4.4,
+          "ret5": -2.08
+        },
+        {
+          "ticker": "CMG",
+          "price": 32.89500045776367,
+          "total": 0.2551,
+          "scores": {
+            "momentum": -0.627,
+            "volume": 1.0,
+            "trend": 0.5,
+            "mean_rev": 0.075,
+            "regime_fit": 0.3
+          },
+          "ret20": -8.95,
+          "ret5": 1.78
+        },
+        {
+          "ticker": "BAC",
+          "price": 53.439998626708984,
+          "total": 0.253,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.097,
+            "trend": -1.0,
+            "mean_rev": 0.624,
+            "regime_fit": 0.3
+          },
+          "ret20": -14.58,
+          "ret5": -0.54
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "momentum",
+  "active_mode": "mean_reversion",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -10756,12 +11070,11 @@
     "2026-10-02": "trend_following",
     "2026-10-05": "defensive",
     "2026-10-06": "defensive",
-    "2026-10-07": "momentum"
+    "2026-10-07": "momentum",
+    "2026-10-08": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
-      -2.51,
-      -8.76,
       -5.08,
       -5.78,
       10.55,
@@ -10779,10 +11092,11 @@
       -10.09,
       5.74,
       -2.92,
-      12.3
+      12.3,
+      7.33,
+      -1.21
     ],
     "trend_following": [
-      3.93,
       2.66,
       -2.63,
       -0.97,
@@ -10801,7 +11115,8 @@
       -1.0,
       5.57,
       2.72,
-      -6.09
+      -6.09,
+      2.23
     ],
     "mean_reversion": [
       -7.68,
@@ -10840,154 +11155,154 @@
   },
   "last_backtest": [
     {
-      "mode": "momentum",
-      "avg_return": 6.03,
+      "mode": "mean_reversion",
+      "avg_return": 0.636,
       "picks": [
-        "RVTY",
-        "MRNA",
-        "MU",
-        "HPE",
-        "NTAP"
+        "XLF",
+        "HYG",
+        "BNY",
+        "O",
+        "JNK"
       ],
       "raw": [
         {
-          "ticker": "RVTY",
-          "return": 0.56,
-          "score": 0.7557
+          "ticker": "XLF",
+          "return": 1.59,
+          "score": 0.4402
         },
         {
-          "ticker": "MRNA",
-          "return": 1.82,
-          "score": 0.6826
+          "ticker": "HYG",
+          "return": 0.36,
+          "score": 0.4391
         },
         {
-          "ticker": "MU",
-          "return": 1.44,
-          "score": 0.682
+          "ticker": "BNY",
+          "return": -0.03,
+          "score": 0.4174
         },
         {
-          "ticker": "HPE",
-          "return": 13.85,
-          "score": 0.6742
+          "ticker": "O",
+          "return": 0.76,
+          "score": 0.4172
         },
         {
-          "ticker": "NTAP",
-          "return": 12.48,
-          "score": 0.6707
+          "ticker": "JNK",
+          "return": 0.5,
+          "score": 0.4132
         }
       ]
     },
     {
-      "mode": "mean_reversion",
-      "avg_return": 2.83,
+      "mode": "momentum",
+      "avg_return": -0.866,
       "picks": [
-        "JNK",
-        "FICO",
-        "XLF",
-        "HYG",
-        "O"
+        "ACN",
+        "SNPS",
+        "MU",
+        "LITE",
+        "TQQQ"
       ],
       "raw": [
         {
-          "ticker": "JNK",
-          "return": 0.53,
-          "score": 0.4867
+          "ticker": "ACN",
+          "return": -2.75,
+          "score": 0.8973
         },
         {
-          "ticker": "FICO",
-          "return": 14.24,
-          "score": 0.4683
+          "ticker": "SNPS",
+          "return": 2.27,
+          "score": 0.8882
         },
         {
-          "ticker": "XLF",
-          "return": 0.66,
-          "score": 0.4147
+          "ticker": "MU",
+          "return": -5.5,
+          "score": 0.7503
         },
         {
-          "ticker": "HYG",
-          "return": 0.35,
-          "score": 0.4107
+          "ticker": "LITE",
+          "return": -0.13,
+          "score": 0.7325
         },
         {
-          "ticker": "O",
-          "return": -1.63,
-          "score": 0.3971
+          "ticker": "TQQQ",
+          "return": 1.78,
+          "score": 0.7275
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 1.204,
+      "avg_return": -2.512,
       "picks": [
-        "TECL",
         "TQQQ",
-        "SOXX",
-        "ARKG",
-        "ETHA"
+        "SOXL",
+        "TECL",
+        "ACN",
+        "SOXX"
       ],
       "raw": [
         {
-          "ticker": "TECL",
-          "return": 8.03,
-          "score": 0.8229
+          "ticker": "TQQQ",
+          "return": 1.78,
+          "score": 0.8508
         },
         {
-          "ticker": "TQQQ",
-          "return": 6.76,
-          "score": 0.8215
+          "ticker": "SOXL",
+          "return": -8.18,
+          "score": 0.8468
+        },
+        {
+          "ticker": "TECL",
+          "return": -0.83,
+          "score": 0.832
+        },
+        {
+          "ticker": "ACN",
+          "return": -2.75,
+          "score": 0.8273
         },
         {
           "ticker": "SOXX",
-          "return": 2.19,
-          "score": 0.8142
-        },
-        {
-          "ticker": "ARKG",
-          "return": -7.06,
-          "score": 0.8122
-        },
-        {
-          "ticker": "ETHA",
-          "return": -3.9,
-          "score": 0.7657
+          "return": -2.58,
+          "score": 0.827
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": 1.204,
+      "avg_return": -3.778,
       "picks": [
         "TQQQ",
+        "SOXL",
         "SOXX",
         "TECL",
-        "ETHA",
-        "ARKG"
+        "ETHA"
       ],
       "raw": [
         {
           "ticker": "TQQQ",
-          "return": 6.76,
-          "score": 0.8082
+          "return": 1.78,
+          "score": 0.8251
+        },
+        {
+          "ticker": "SOXL",
+          "return": -8.18,
+          "score": 0.8251
         },
         {
           "ticker": "SOXX",
-          "return": 2.19,
-          "score": 0.8061
+          "return": -2.58,
+          "score": 0.8131
         },
         {
           "ticker": "TECL",
-          "return": 8.03,
-          "score": 0.8059
+          "return": -0.83,
+          "score": 0.8111
         },
         {
           "ticker": "ETHA",
-          "return": -3.9,
-          "score": 0.7868
-        },
-        {
-          "ticker": "ARKG",
-          "return": -7.06,
-          "score": 0.7805
+          "return": -9.08,
+          "score": 0.8099
         }
       ]
     }
