@@ -1,15 +1,6 @@
 {
-  "capital": 580.31,
+  "capital": 554.05,
   "positions": {
-    "FNGU": {
-      "shares": 31,
-      "cost_per_share": 35.02,
-      "cost": 1085.62,
-      "entry_date": "2026-10-05",
-      "top_signal": "trend",
-      "entry_mode": "defensive",
-      "thesis": "score +0.773 \u00b7 led by trend \u00b7 mode defensive"
-    },
     "INDA": {
       "shares": 24,
       "cost_per_share": 45.54,
@@ -36,24 +27,6 @@
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.306 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "MOS": {
-      "shares": 70,
-      "cost_per_share": 18.81,
-      "cost": 1316.7,
-      "entry_date": "2026-10-12",
-      "top_signal": "mean_rev",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.381 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
-    },
-    "INCY": {
-      "shares": 9,
-      "cost_per_share": 113.14,
-      "cost": 1018.26,
-      "entry_date": "2026-10-12",
-      "top_signal": "mean_rev",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.350 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
     },
     "DHR": {
       "shares": 3,
@@ -90,6 +63,33 @@
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.388 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
+    },
+    "VIXY": {
+      "shares": 78,
+      "cost_per_share": 16.12,
+      "cost": 1257.36,
+      "entry_date": "2026-10-16",
+      "top_signal": "volume",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.685 \u00b7 led by volume \u00b7 mode mean_reversion"
+    },
+    "MRNA": {
+      "shares": 4,
+      "cost_per_share": 234.9,
+      "cost": 939.6,
+      "entry_date": "2026-10-16",
+      "top_signal": "momentum",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.675 \u00b7 led by momentum \u00b7 mode mean_reversion"
+    },
+    "UVXY": {
+      "shares": 77,
+      "cost_per_share": 16.06,
+      "cost": 1236.62,
+      "entry_date": "2026-10-16",
+      "top_signal": "volume",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.668 \u00b7 led by volume \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -1464,6 +1464,48 @@
       "reason": "rotation \u2192 SOXL (score +0.33)",
       "top_signal": "momentum",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "FNGU",
+      "entry_date": "2026-10-05",
+      "exit_date": "2026-10-16",
+      "entry_price": 35.02,
+      "exit_price": 33.88,
+      "shares": 31,
+      "cost": 1085.62,
+      "pnl": -35.34,
+      "pnl_pct": -3.26,
+      "reason": "stop loss (-10.0%)",
+      "top_signal": "trend",
+      "entry_mode": "defensive"
+    },
+    {
+      "ticker": "MOS",
+      "entry_date": "2026-10-12",
+      "exit_date": "2026-10-16",
+      "entry_price": 18.81,
+      "exit_price": 19.02,
+      "shares": 70,
+      "cost": 1316.7,
+      "pnl": 14.7,
+      "pnl_pct": 1.12,
+      "reason": "rotation \u2192 VIXY (score +0.65)",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "INCY",
+      "entry_date": "2026-10-12",
+      "exit_date": "2026-10-16",
+      "entry_price": 113.14,
+      "exit_price": 113.96,
+      "shares": 9,
+      "cost": 1018.26,
+      "pnl": 7.38,
+      "pnl_pct": 0.72,
+      "reason": "rotation \u2192 MRNA (score +0.56)",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1513,7 +1555,8 @@
     "2026-10-12": 10470.74,
     "2026-10-13": 10474.51,
     "2026-10-14": 10415.86,
-    "2026-10-15": 10600.76
+    "2026-10-15": 10600.76,
+    "2026-10-16": 10675.74
   },
   "signal_weights": {
     "momentum": 0.05,
@@ -1569,7 +1612,8 @@
     "2026-10-12": "bull",
     "2026-10-13": "bull",
     "2026-10-14": "neutral",
-    "2026-10-15": "bull"
+    "2026-10-15": "bull",
+    "2026-10-16": "neutral"
   },
   "daily_log": [
     {
@@ -12283,6 +12327,250 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-10-16",
+      "thesis": "Regime: NEUTRAL\nVIX 21.0 \u00b7 SPY trend mixed \u00b7 risk appetite down\nStrategy mode: mean_reversion \u2014 Buy oversold dips in trending markets\nBacktest (5d): mean reversion -2.81%  |  momentum -4.66%  |  defensive -6.59%  |  trend following -7.91%\nExited 3 position(s): FNGU -35 (stop loss (-10.0%)), MOS +15 (rotation \u2192 VIXY (score +0.65)), INCY +7 (rotation \u2192 MRNA (score +0.56))\nEntered 3 position(s):\n  VIXY $16.12 \u00d7 78 shares (score +0.685, led by volume)\n  MRNA $234.90 \u00d7 4 shares (score +0.675, led by momentum)\n  UVXY $16.06 \u00d7 77 shares (score +0.668, led by volume)\nTop candidates screened: VIXY +0.685, MRNA +0.675, UVXY +0.668\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "VIXY",
+          "price": 16.12,
+          "total": 0.6851,
+          "scores": {
+            "momentum": 0.281,
+            "volume": 1.0,
+            "trend": 0.5,
+            "mean_rev": 0.856,
+            "regime_fit": 0.0
+          },
+          "ret20": 1.58,
+          "ret5": 6.5,
+          "shares": 78,
+          "cost": 1257.36,
+          "top_signal": "volume"
+        },
+        {
+          "ticker": "MRNA",
+          "price": 234.9,
+          "total": 0.675,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.081,
+            "trend": 1.0,
+            "mean_rev": 0.895,
+            "regime_fit": 0.3
+          },
+          "ret20": 38.06,
+          "ret5": -5.48,
+          "shares": 4,
+          "cost": 939.6,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "UVXY",
+          "price": 16.06,
+          "total": 0.6682,
+          "scores": {
+            "momentum": 0.639,
+            "volume": 1.0,
+            "trend": 0.5,
+            "mean_rev": 0.793,
+            "regime_fit": 0.0
+          },
+          "ret20": 4.45,
+          "ret5": 12.19,
+          "shares": 77,
+          "cost": 1236.62,
+          "top_signal": "volume"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "FNGU",
+          "entry_date": "2026-10-05",
+          "exit_date": "2026-10-16",
+          "entry_price": 35.02,
+          "exit_price": 33.88,
+          "shares": 31,
+          "cost": 1085.62,
+          "pnl": -35.34,
+          "pnl_pct": -3.26,
+          "reason": "stop loss (-10.0%)",
+          "top_signal": "trend",
+          "entry_mode": "defensive"
+        },
+        {
+          "ticker": "MOS",
+          "entry_date": "2026-10-12",
+          "exit_date": "2026-10-16",
+          "entry_price": 18.81,
+          "exit_price": 19.02,
+          "shares": 70,
+          "cost": 1316.7,
+          "pnl": 14.7,
+          "pnl_pct": 1.12,
+          "reason": "rotation \u2192 VIXY (score +0.65)",
+          "top_signal": "mean_rev",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "INCY",
+          "entry_date": "2026-10-12",
+          "exit_date": "2026-10-16",
+          "entry_price": 113.14,
+          "exit_price": 113.96,
+          "shares": 9,
+          "cost": 1018.26,
+          "pnl": 7.38,
+          "pnl_pct": 0.72,
+          "reason": "rotation \u2192 MRNA (score +0.56)",
+          "top_signal": "mean_rev",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "VIXY",
+          "price": 17.360000610351562,
+          "total": 0.6851,
+          "scores": {
+            "momentum": 0.281,
+            "volume": 1.0,
+            "trend": 0.5,
+            "mean_rev": 0.856,
+            "regime_fit": 0.0
+          },
+          "ret20": 1.58,
+          "ret5": 6.5
+        },
+        {
+          "ticker": "MRNA",
+          "price": 212.66000366210938,
+          "total": 0.675,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.081,
+            "trend": 1.0,
+            "mean_rev": 0.895,
+            "regime_fit": 0.3
+          },
+          "ret20": 38.06,
+          "ret5": -5.48
+        },
+        {
+          "ticker": "UVXY",
+          "price": 18.309999465942383,
+          "total": 0.6682,
+          "scores": {
+            "momentum": 0.639,
+            "volume": 1.0,
+            "trend": 0.5,
+            "mean_rev": 0.793,
+            "regime_fit": 0.0
+          },
+          "ret20": 4.45,
+          "ret5": 12.19
+        },
+        {
+          "ticker": "VTRS",
+          "price": 18.399999618530273,
+          "total": 0.6632,
+          "scores": {
+            "momentum": 0.749,
+            "volume": -0.297,
+            "trend": 1.0,
+            "mean_rev": 0.955,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.55,
+          "ret5": 4.31
+        },
+        {
+          "ticker": "DHR",
+          "price": 229.5,
+          "total": 0.6622,
+          "scores": {
+            "momentum": 0.751,
+            "volume": -0.281,
+            "trend": 1.0,
+            "mean_rev": 0.949,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.54,
+          "ret5": 4.41
+        },
+        {
+          "ticker": "FAST",
+          "price": 50.67499923706055,
+          "total": 0.6607,
+          "scores": {
+            "momentum": 0.251,
+            "volume": -0.223,
+            "trend": 1.0,
+            "mean_rev": 0.975,
+            "regime_fit": 0.3
+          },
+          "ret20": 3.4,
+          "ret5": -0.15
+        },
+        {
+          "ticker": "EMR",
+          "price": 160.90499877929688,
+          "total": 0.6601,
+          "scores": {
+            "momentum": 0.535,
+            "volume": -0.179,
+            "trend": 1.0,
+            "mean_rev": 0.937,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.33,
+          "ret5": -0.57
+        },
+        {
+          "ticker": "VXX",
+          "price": 18.3799991607666,
+          "total": 0.6578,
+          "scores": {
+            "momentum": 0.466,
+            "volume": 1.0,
+            "trend": 0.5,
+            "mean_rev": 0.79,
+            "regime_fit": 0.0
+          },
+          "ret20": 3.49,
+          "ret5": 8.18
+        },
+        {
+          "ticker": "TECH",
+          "price": 72.50499725341797,
+          "total": 0.656,
+          "scores": {
+            "momentum": 0.016,
+            "volume": -0.247,
+            "trend": 1.0,
+            "mean_rev": 0.995,
+            "regime_fit": 0.3
+          },
+          "ret20": 0.19,
+          "ret5": 0.06
+        },
+        {
+          "ticker": "TMO",
+          "price": 688.25,
+          "total": 0.6439,
+          "scores": {
+            "momentum": 0.539,
+            "volume": -0.269,
+            "trend": 1.0,
+            "mean_rev": 0.931,
+            "regime_fit": 0.3
+          },
+          "ret20": 5.65,
+          "ret5": 4.59
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
@@ -12334,7 +12622,8 @@
     "2026-10-12": "mean_reversion",
     "2026-10-13": "mean_reversion",
     "2026-10-14": "mean_reversion",
-    "2026-10-15": "mean_reversion"
+    "2026-10-15": "mean_reversion",
+    "2026-10-16": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -12382,8 +12671,6 @@
       -10.2
     ],
     "mean_reversion": [
-      0.0,
-      -1.77,
       23.45,
       10.43,
       3.33,
@@ -12401,7 +12688,9 @@
       0.69,
       -3.86,
       9.46,
-      1.63
+      1.63,
+      1.12,
+      0.72
     ],
     "defensive": [
       0.21,
@@ -12416,159 +12705,160 @@
       -0.67,
       1.02,
       -9.51,
-      -6.61
+      -6.61,
+      -3.26
     ]
   },
   "last_backtest": [
     {
       "mode": "mean_reversion",
-      "avg_return": -0.24,
+      "avg_return": -2.812,
       "picks": [
-        "ARE",
-        "INDA",
-        "ETHA",
-        "JNK",
-        "VRSN"
+        "ARKW",
+        "ECHO",
+        "ELV",
+        "IBB",
+        "GDDY"
       ],
       "raw": [
         {
-          "ticker": "ARE",
-          "return": -6.66,
-          "score": 0.3484
+          "ticker": "ARKW",
+          "return": -7.05,
+          "score": 0.7857
         },
         {
-          "ticker": "INDA",
-          "return": 5.05,
-          "score": 0.3399
+          "ticker": "ECHO",
+          "return": -9.66,
+          "score": 0.7352
         },
         {
-          "ticker": "ETHA",
-          "return": -0.68,
-          "score": 0.3291
+          "ticker": "ELV",
+          "return": 3.84,
+          "score": 0.7285
         },
         {
-          "ticker": "JNK",
-          "return": -0.09,
-          "score": 0.3207
+          "ticker": "IBB",
+          "return": -2.19,
+          "score": 0.7239
         },
         {
-          "ticker": "VRSN",
-          "return": 1.18,
-          "score": 0.3184
+          "ticker": "GDDY",
+          "return": 1.0,
+          "score": 0.7093
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -4.842,
+      "avg_return": -4.662,
       "picks": [
+        "CCI",
+        "HUM",
         "MRNA",
-        "FNGU",
-        "SOXL",
-        "TECL",
-        "PLTR"
+        "PLTR",
+        "ARKW"
       ],
       "raw": [
         {
+          "ticker": "CCI",
+          "return": 3.25,
+          "score": 0.8749
+        },
+        {
+          "ticker": "HUM",
+          "return": -3.2,
+          "score": 0.7876
+        },
+        {
           "ticker": "MRNA",
-          "return": 20.51,
-          "score": 0.8217
-        },
-        {
-          "ticker": "FNGU",
-          "return": -4.46,
-          "score": 0.8048
-        },
-        {
-          "ticker": "SOXL",
-          "return": -27.08,
-          "score": 0.7767
-        },
-        {
-          "ticker": "TECL",
-          "return": -14.01,
-          "score": 0.752
+          "return": -5.48,
+          "score": 0.7808
         },
         {
           "ticker": "PLTR",
-          "return": 0.83,
-          "score": 0.7483
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": -11.14,
-      "picks": [
-        "FNGU",
-        "SOXL",
-        "TECL",
-        "TQQQ",
-        "EWZ"
-      ],
-      "raw": [
-        {
-          "ticker": "FNGU",
-          "return": -4.46,
-          "score": 0.8835
+          "return": -10.83,
+          "score": 0.7621
         },
         {
-          "ticker": "SOXL",
-          "return": -27.08,
-          "score": 0.8745
-        },
-        {
-          "ticker": "TECL",
-          "return": -14.01,
-          "score": 0.8609
-        },
-        {
-          "ticker": "TQQQ",
-          "return": -8.64,
-          "score": 0.8511
-        },
-        {
-          "ticker": "EWZ",
-          "return": -1.51,
-          "score": 0.8355
+          "ticker": "ARKW",
+          "return": -7.05,
+          "score": 0.7563
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -11.28,
+      "avg_return": -6.594,
       "picks": [
-        "SOXL",
-        "FNGU",
-        "TECL",
-        "TQQQ",
-        "ARKW"
+        "AMD",
+        "HUM",
+        "MRNA",
+        "TWLO",
+        "DHR"
       ],
       "raw": [
         {
-          "ticker": "SOXL",
-          "return": -27.08,
-          "score": 0.8468
+          "ticker": "AMD",
+          "return": -11.8,
+          "score": 0.5502
         },
         {
-          "ticker": "FNGU",
-          "return": -4.46,
-          "score": 0.8456
+          "ticker": "HUM",
+          "return": -3.2,
+          "score": 0.5446
         },
         {
-          "ticker": "TECL",
-          "return": -14.01,
-          "score": 0.8307
+          "ticker": "MRNA",
+          "return": -5.48,
+          "score": 0.538
         },
         {
-          "ticker": "TQQQ",
-          "return": -8.64,
-          "score": 0.8274
+          "ticker": "TWLO",
+          "return": -16.9,
+          "score": 0.5376
         },
         {
-          "ticker": "ARKW",
-          "return": -2.21,
-          "score": 0.8216
+          "ticker": "DHR",
+          "return": 4.41,
+          "score": 0.5342
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -7.914,
+      "picks": [
+        "HUM",
+        "MRNA",
+        "PLTR",
+        "LITE",
+        "VEEV"
+      ],
+      "raw": [
+        {
+          "ticker": "HUM",
+          "return": -3.2,
+          "score": 0.8124
+        },
+        {
+          "ticker": "MRNA",
+          "return": -5.48,
+          "score": 0.808
+        },
+        {
+          "ticker": "PLTR",
+          "return": -10.83,
+          "score": 0.7943
+        },
+        {
+          "ticker": "LITE",
+          "return": -23.91,
+          "score": 0.7829
+        },
+        {
+          "ticker": "VEEV",
+          "return": 3.85,
+          "score": 0.7799
         }
       ]
     }
