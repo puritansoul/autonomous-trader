@@ -1,5 +1,5 @@
 {
-  "capital": 554.05,
+  "capital": 901.94,
   "positions": {
     "INDA": {
       "shares": 24,
@@ -9,15 +9,6 @@
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.319 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "ETHA": {
-      "shares": 18,
-      "cost_per_share": 57.27,
-      "cost": 1030.86,
-      "entry_date": "2026-10-08",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.316 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
     "JNK": {
       "shares": 11,
@@ -45,15 +36,6 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.668 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
-    "SOXX": {
-      "shares": 2,
-      "cost_per_share": 500.41,
-      "cost": 1000.82,
-      "entry_date": "2026-10-15",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.420 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
     "SOXL": {
       "shares": 10,
@@ -90,6 +72,24 @@
       "top_signal": "volume",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.668 \u00b7 led by volume \u00b7 mode mean_reversion"
+    },
+    "VTRS": {
+      "shares": 66,
+      "cost_per_share": 18.64,
+      "cost": 1230.24,
+      "entry_date": "2026-10-19",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.694 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "AMGN": {
+      "shares": 1,
+      "cost_per_share": 429.96,
+      "cost": 429.96,
+      "entry_date": "2026-10-19",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.675 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -1506,6 +1506,34 @@
       "reason": "rotation \u2192 MRNA (score +0.56)",
       "top_signal": "mean_rev",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "ETHA",
+      "entry_date": "2026-10-08",
+      "exit_date": "2026-10-19",
+      "entry_price": 57.27,
+      "exit_price": 54.75,
+      "shares": 18,
+      "cost": 1030.86,
+      "pnl": -45.36,
+      "pnl_pct": -4.4,
+      "reason": "rotation \u2192 VTRS (score +0.54)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "SOXX",
+      "entry_date": "2026-10-15",
+      "exit_date": "2026-10-19",
+      "entry_price": 500.41,
+      "exit_price": 511.295,
+      "shares": 2,
+      "cost": 1000.82,
+      "pnl": 21.77,
+      "pnl_pct": 2.18,
+      "reason": "rotation \u2192 AMGN (score +0.48)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1556,7 +1584,8 @@
     "2026-10-13": 10474.51,
     "2026-10-14": 10415.86,
     "2026-10-15": 10600.76,
-    "2026-10-16": 10675.74
+    "2026-10-16": 10675.74,
+    "2026-10-19": 10600.38
   },
   "signal_weights": {
     "momentum": 0.05,
@@ -1613,7 +1642,8 @@
     "2026-10-13": "bull",
     "2026-10-14": "neutral",
     "2026-10-15": "bull",
-    "2026-10-16": "neutral"
+    "2026-10-16": "neutral",
+    "2026-10-19": "neutral"
   },
   "daily_log": [
     {
@@ -12571,6 +12601,219 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-10-19",
+      "thesis": "Regime: NEUTRAL\nVIX 18.2 \u00b7 SPY trend mixed \u00b7 risk appetite down\nStrategy mode: mean_reversion \u2014 Buy oversold dips in trending markets\nBacktest (5d): mean reversion -6.69%  |  defensive -8.02%  |  momentum -10.46%  |  trend following -11.34%\nExited 2 position(s): ETHA -45 (rotation \u2192 VTRS (score +0.54)), SOXX +22 (rotation \u2192 AMGN (score +0.48))\nEntered 2 position(s):\n  VTRS $18.64 \u00d7 66 shares (score +0.694, led by trend)\n  AMGN $429.96 \u00d7 1 shares (score +0.675, led by trend)\nTop candidates screened: VTRS +0.694, TMO +0.679, AMGN +0.675\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "VTRS",
+          "price": 18.64,
+          "total": 0.6938,
+          "scores": {
+            "momentum": 0.577,
+            "volume": -0.115,
+            "trend": 1.0,
+            "mean_rev": 0.977,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.43,
+          "ret5": 3.76,
+          "shares": 66,
+          "cost": 1230.24,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "AMGN",
+          "price": 429.96,
+          "total": 0.6748,
+          "scores": {
+            "momentum": 0.675,
+            "volume": -0.257,
+            "trend": 1.0,
+            "mean_rev": 0.972,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.33,
+          "ret5": 2.0,
+          "shares": 1,
+          "cost": 429.96,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "ETHA",
+          "entry_date": "2026-10-08",
+          "exit_date": "2026-10-19",
+          "entry_price": 57.27,
+          "exit_price": 54.75,
+          "shares": 18,
+          "cost": 1030.86,
+          "pnl": -45.36,
+          "pnl_pct": -4.4,
+          "reason": "rotation \u2192 VTRS (score +0.54)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "SOXX",
+          "entry_date": "2026-10-15",
+          "exit_date": "2026-10-19",
+          "entry_price": 500.41,
+          "exit_price": 511.295,
+          "shares": 2,
+          "cost": 1000.82,
+          "pnl": 21.77,
+          "pnl_pct": 2.18,
+          "reason": "rotation \u2192 AMGN (score +0.48)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "VTRS",
+          "price": 18.200000762939453,
+          "total": 0.6938,
+          "scores": {
+            "momentum": 0.577,
+            "volume": -0.115,
+            "trend": 1.0,
+            "mean_rev": 0.977,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.43,
+          "ret5": 3.76
+        },
+        {
+          "ticker": "TMO",
+          "price": 680.5999755859375,
+          "total": 0.6789,
+          "scores": {
+            "momentum": 0.318,
+            "volume": -0.188,
+            "trend": 1.0,
+            "mean_rev": 0.993,
+            "regime_fit": 0.3
+          },
+          "ret20": 3.32,
+          "ret5": 2.77
+        },
+        {
+          "ticker": "AMGN",
+          "price": 425.9100036621094,
+          "total": 0.6748,
+          "scores": {
+            "momentum": 0.675,
+            "volume": -0.257,
+            "trend": 1.0,
+            "mean_rev": 0.972,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.33,
+          "ret5": 2.0
+        },
+        {
+          "ticker": "VXX",
+          "price": 17.645000457763672,
+          "total": 0.6706,
+          "scores": {
+            "momentum": 0.124,
+            "volume": 0.57,
+            "trend": 0.5,
+            "mean_rev": 0.962,
+            "regime_fit": 0.0
+          },
+          "ret20": -0.25,
+          "ret5": 5.72
+        },
+        {
+          "ticker": "DHR",
+          "price": 224.39500427246094,
+          "total": 0.663,
+          "scores": {
+            "momentum": 0.347,
+            "volume": -0.24,
+            "trend": 1.0,
+            "mean_rev": 0.976,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.15,
+          "ret5": 1.44
+        },
+        {
+          "ticker": "ZBRA",
+          "price": 377.4549865722656,
+          "total": 0.6624,
+          "scores": {
+            "momentum": 0.5,
+            "volume": -0.284,
+            "trend": 1.0,
+            "mean_rev": 0.973,
+            "regime_fit": 0.3
+          },
+          "ret20": 7.59,
+          "ret5": -2.75
+        },
+        {
+          "ticker": "RVTY",
+          "price": 152.25,
+          "total": 0.6553,
+          "scores": {
+            "momentum": 0.398,
+            "volume": -0.334,
+            "trend": 1.0,
+            "mean_rev": 0.983,
+            "regime_fit": 0.3
+          },
+          "ret20": 6.03,
+          "ret5": -2.16
+        },
+        {
+          "ticker": "UVXY",
+          "price": 17.19969940185547,
+          "total": 0.6427,
+          "scores": {
+            "momentum": 0.113,
+            "volume": 0.352,
+            "trend": 0.5,
+            "mean_rev": 0.971,
+            "regime_fit": 0.0
+          },
+          "ret20": -1.04,
+          "ret5": 7.63
+        },
+        {
+          "ticker": "MRNA",
+          "price": 228.7949981689453,
+          "total": 0.6362,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.086,
+            "trend": 1.0,
+            "mean_rev": 0.826,
+            "regime_fit": 0.3
+          },
+          "ret20": 32.3,
+          "ret5": 7.04
+        },
+        {
+          "ticker": "GILD",
+          "price": 153.61000061035156,
+          "total": 0.6295,
+          "scores": {
+            "momentum": 0.205,
+            "volume": -0.224,
+            "trend": 1.0,
+            "mean_rev": 0.923,
+            "regime_fit": 0.3
+          },
+          "ret20": 2.03,
+          "ret5": 2.11
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
@@ -12623,7 +12866,8 @@
     "2026-10-13": "mean_reversion",
     "2026-10-14": "mean_reversion",
     "2026-10-15": "mean_reversion",
-    "2026-10-16": "mean_reversion"
+    "2026-10-16": "mean_reversion",
+    "2026-10-19": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -12671,8 +12915,6 @@
       -10.2
     ],
     "mean_reversion": [
-      23.45,
-      10.43,
       3.33,
       3.3,
       -9.89,
@@ -12690,7 +12932,9 @@
       9.46,
       1.63,
       1.12,
-      0.72
+      0.72,
+      -4.4,
+      2.18
     ],
     "defensive": [
       0.21,
@@ -12712,153 +12956,153 @@
   "last_backtest": [
     {
       "mode": "mean_reversion",
-      "avg_return": -2.812,
+      "avg_return": -6.69,
       "picks": [
-        "ARKW",
+        "META",
         "ECHO",
-        "ELV",
-        "IBB",
-        "GDDY"
+        "LITE",
+        "MRVL",
+        "EL"
       ],
       "raw": [
         {
-          "ticker": "ARKW",
-          "return": -7.05,
-          "score": 0.7857
+          "ticker": "META",
+          "return": -5.1,
+          "score": 0.733
         },
         {
           "ticker": "ECHO",
-          "return": -9.66,
-          "score": 0.7352
+          "return": -9.04,
+          "score": 0.718
         },
         {
-          "ticker": "ELV",
-          "return": 3.84,
-          "score": 0.7285
+          "ticker": "LITE",
+          "return": -15.37,
+          "score": 0.7178
         },
         {
-          "ticker": "IBB",
-          "return": -2.19,
-          "score": 0.7239
+          "ticker": "MRVL",
+          "return": -10.13,
+          "score": 0.7177
         },
         {
-          "ticker": "GDDY",
-          "return": 1.0,
-          "score": 0.7093
-        }
-      ]
-    },
-    {
-      "mode": "momentum",
-      "avg_return": -4.662,
-      "picks": [
-        "CCI",
-        "HUM",
-        "MRNA",
-        "PLTR",
-        "ARKW"
-      ],
-      "raw": [
-        {
-          "ticker": "CCI",
-          "return": 3.25,
-          "score": 0.8749
-        },
-        {
-          "ticker": "HUM",
-          "return": -3.2,
-          "score": 0.7876
-        },
-        {
-          "ticker": "MRNA",
-          "return": -5.48,
-          "score": 0.7808
-        },
-        {
-          "ticker": "PLTR",
-          "return": -10.83,
-          "score": 0.7621
-        },
-        {
-          "ticker": "ARKW",
-          "return": -7.05,
-          "score": 0.7563
+          "ticker": "EL",
+          "return": 6.19,
+          "score": 0.7165
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -6.594,
+      "avg_return": -8.016,
       "picks": [
-        "AMD",
-        "HUM",
-        "MRNA",
+        "LITE",
+        "MRVL",
+        "META",
         "TWLO",
-        "DHR"
+        "A"
       ],
       "raw": [
         {
-          "ticker": "AMD",
-          "return": -11.8,
-          "score": 0.5502
+          "ticker": "LITE",
+          "return": -15.37,
+          "score": 0.564
         },
         {
-          "ticker": "HUM",
-          "return": -3.2,
-          "score": 0.5446
+          "ticker": "MRVL",
+          "return": -10.13,
+          "score": 0.5598
         },
         {
-          "ticker": "MRNA",
-          "return": -5.48,
-          "score": 0.538
+          "ticker": "META",
+          "return": -5.1,
+          "score": 0.5538
         },
         {
           "ticker": "TWLO",
-          "return": -16.9,
-          "score": 0.5376
+          "return": -9.12,
+          "score": 0.549
         },
         {
-          "ticker": "DHR",
-          "return": 4.41,
-          "score": 0.5342
+          "ticker": "A",
+          "return": -0.36,
+          "score": 0.5408
+        }
+      ]
+    },
+    {
+      "mode": "momentum",
+      "avg_return": -10.464,
+      "picks": [
+        "LITE",
+        "MRVL",
+        "CCI",
+        "VST",
+        "HPE"
+      ],
+      "raw": [
+        {
+          "ticker": "LITE",
+          "return": -15.37,
+          "score": 0.7535
+        },
+        {
+          "ticker": "MRVL",
+          "return": -10.13,
+          "score": 0.7101
+        },
+        {
+          "ticker": "CCI",
+          "return": -0.72,
+          "score": 0.6921
+        },
+        {
+          "ticker": "VST",
+          "return": -5.58,
+          "score": 0.6906
+        },
+        {
+          "ticker": "HPE",
+          "return": -20.52,
+          "score": 0.6894
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -7.914,
+      "avg_return": -11.34,
       "picks": [
-        "HUM",
-        "MRNA",
-        "PLTR",
         "LITE",
-        "VEEV"
+        "MRVL",
+        "META",
+        "VST",
+        "HPE"
       ],
       "raw": [
         {
-          "ticker": "HUM",
-          "return": -3.2,
-          "score": 0.8124
-        },
-        {
-          "ticker": "MRNA",
-          "return": -5.48,
-          "score": 0.808
-        },
-        {
-          "ticker": "PLTR",
-          "return": -10.83,
-          "score": 0.7943
-        },
-        {
           "ticker": "LITE",
-          "return": -23.91,
-          "score": 0.7829
+          "return": -15.37,
+          "score": 0.8075
         },
         {
-          "ticker": "VEEV",
-          "return": 3.85,
-          "score": 0.7799
+          "ticker": "MRVL",
+          "return": -10.13,
+          "score": 0.7916
+        },
+        {
+          "ticker": "META",
+          "return": -5.1,
+          "score": 0.7772
+        },
+        {
+          "ticker": "VST",
+          "return": -5.58,
+          "score": 0.7758
+        },
+        {
+          "ticker": "HPE",
+          "return": -20.52,
+          "score": 0.773
         }
       ]
     }
