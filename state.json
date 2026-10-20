@@ -1,5 +1,5 @@
 {
-  "capital": 901.94,
+  "capital": 341.57,
   "positions": {
     "INDA": {
       "shares": 24,
@@ -9,15 +9,6 @@
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.319 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "JNK": {
-      "shares": 11,
-      "cost_per_share": 92.6,
-      "cost": 1018.6,
-      "entry_date": "2026-10-08",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.306 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
     "DHR": {
       "shares": 3,
@@ -36,15 +27,6 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.668 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
-    "SOXL": {
-      "shares": 10,
-      "cost_per_share": 98.35,
-      "cost": 983.5,
-      "entry_date": "2026-10-15",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.388 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
     "VIXY": {
       "shares": 78,
@@ -90,6 +72,24 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.675 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "BAX": {
+      "shares": 55,
+      "cost_per_share": 25.08,
+      "cost": 1379.4,
+      "entry_date": "2026-10-20",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.655 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
+    },
+    "NXPI": {
+      "shares": 5,
+      "cost_per_share": 227.69,
+      "cost": 1138.45,
+      "entry_date": "2026-10-20",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.650 \u00b7 led by trend \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -1534,6 +1534,34 @@
       "reason": "rotation \u2192 AMGN (score +0.48)",
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "SOXL",
+      "entry_date": "2026-10-15",
+      "exit_date": "2026-10-20",
+      "entry_price": 98.35,
+      "exit_price": 94.515,
+      "shares": 10,
+      "cost": 983.5,
+      "pnl": -38.35,
+      "pnl_pct": -3.9,
+      "reason": "rotation \u2192 BAX (score +0.48)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "JNK",
+      "entry_date": "2026-10-08",
+      "exit_date": "2026-10-20",
+      "entry_price": 92.6,
+      "exit_price": 92.03,
+      "shares": 11,
+      "cost": 1018.6,
+      "pnl": -6.27,
+      "pnl_pct": -0.62,
+      "reason": "rotation \u2192 NXPI (score +0.26)",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1585,7 +1613,8 @@
     "2026-10-14": 10415.86,
     "2026-10-15": 10600.76,
     "2026-10-16": 10675.74,
-    "2026-10-19": 10600.38
+    "2026-10-19": 10600.38,
+    "2026-10-20": 10598.96
   },
   "signal_weights": {
     "momentum": 0.05,
@@ -1643,7 +1672,8 @@
     "2026-10-14": "neutral",
     "2026-10-15": "bull",
     "2026-10-16": "neutral",
-    "2026-10-19": "neutral"
+    "2026-10-19": "neutral",
+    "2026-10-20": "neutral"
   },
   "daily_log": [
     {
@@ -12814,6 +12844,219 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-10-20",
+      "thesis": "Regime: NEUTRAL\nVIX 17.4 \u00b7 SPY trend mixed \u00b7 risk appetite down\nStrategy mode: mean_reversion \u2014 Buy oversold dips in trending markets\nBacktest (5d): mean reversion +1.36%  |  momentum -5.56%  |  trend following -7.53%  |  defensive -10.82%\nExited 2 position(s): SOXL -38 (rotation \u2192 BAX (score +0.48)), JNK -6 (rotation \u2192 NXPI (score +0.26))\nEntered 2 position(s):\n  BAX $25.08 \u00d7 55 shares (score +0.655, led by mean_rev)\n  NXPI $227.69 \u00d7 5 shares (score +0.650, led by trend)\nTop candidates screened: DHR +0.679, TMO +0.661, BAX +0.655\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "BAX",
+          "price": 25.08,
+          "total": 0.6555,
+          "scores": {
+            "momentum": 0.114,
+            "volume": 0.198,
+            "trend": 0.5,
+            "mean_rev": 0.955,
+            "regime_fit": 0.3
+          },
+          "ret20": 2.39,
+          "ret5": -2.59,
+          "shares": 55,
+          "cost": 1379.4,
+          "top_signal": "mean_rev"
+        },
+        {
+          "ticker": "NXPI",
+          "price": 227.69,
+          "total": 0.6498,
+          "scores": {
+            "momentum": 0.163,
+            "volume": -0.294,
+            "trend": 1.0,
+            "mean_rev": 0.983,
+            "regime_fit": 0.3
+          },
+          "ret20": 0.39,
+          "ret5": 5.38,
+          "shares": 5,
+          "cost": 1138.45,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "SOXL",
+          "entry_date": "2026-10-15",
+          "exit_date": "2026-10-20",
+          "entry_price": 98.35,
+          "exit_price": 94.515,
+          "shares": 10,
+          "cost": 983.5,
+          "pnl": -38.35,
+          "pnl_pct": -3.9,
+          "reason": "rotation \u2192 BAX (score +0.48)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "JNK",
+          "entry_date": "2026-10-08",
+          "exit_date": "2026-10-20",
+          "entry_price": 92.6,
+          "exit_price": 92.03,
+          "shares": 11,
+          "cost": 1018.6,
+          "pnl": -6.27,
+          "pnl_pct": -0.62,
+          "reason": "rotation \u2192 NXPI (score +0.26)",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "DHR",
+          "price": 224.25,
+          "total": 0.6794,
+          "scores": {
+            "momentum": 0.136,
+            "volume": 0.048,
+            "trend": 1.0,
+            "mean_rev": 0.946,
+            "regime_fit": 0.3
+          },
+          "ret20": 1.61,
+          "ret5": 0.63
+        },
+        {
+          "ticker": "TMO",
+          "price": 689.1199951171875,
+          "total": 0.6613,
+          "scores": {
+            "momentum": 0.447,
+            "volume": -0.038,
+            "trend": 1.0,
+            "mean_rev": 0.909,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.65,
+          "ret5": 3.93
+        },
+        {
+          "ticker": "BAX",
+          "price": 24.2450008392334,
+          "total": 0.6555,
+          "scores": {
+            "momentum": 0.114,
+            "volume": 0.198,
+            "trend": 0.5,
+            "mean_rev": 0.955,
+            "regime_fit": 0.3
+          },
+          "ret20": 2.39,
+          "ret5": -2.59
+        },
+        {
+          "ticker": "NXPI",
+          "price": 238.4875030517578,
+          "total": 0.6498,
+          "scores": {
+            "momentum": 0.163,
+            "volume": -0.294,
+            "trend": 1.0,
+            "mean_rev": 0.983,
+            "regime_fit": 0.3
+          },
+          "ret20": 0.39,
+          "ret5": 5.38
+        },
+        {
+          "ticker": "A",
+          "price": 173.3699951171875,
+          "total": 0.6368,
+          "scores": {
+            "momentum": 0.311,
+            "volume": -0.329,
+            "trend": 1.0,
+            "mean_rev": 0.956,
+            "regime_fit": 0.3
+          },
+          "ret20": 3.81,
+          "ret5": 1.03
+        },
+        {
+          "ticker": "WAT",
+          "price": 445.2550048828125,
+          "total": 0.6343,
+          "scores": {
+            "momentum": 0.437,
+            "volume": -0.298,
+            "trend": 1.0,
+            "mean_rev": 0.931,
+            "regime_fit": 0.3
+          },
+          "ret20": 4.58,
+          "ret5": 3.75
+        },
+        {
+          "ticker": "TECH",
+          "price": 72.55999755859375,
+          "total": 0.6319,
+          "scores": {
+            "momentum": 0.004,
+            "volume": -0.095,
+            "trend": 1.0,
+            "mean_rev": 0.911,
+            "regime_fit": 0.3
+          },
+          "ret20": 0.01,
+          "ret5": 0.11
+        },
+        {
+          "ticker": "RVTY",
+          "price": 156.85000610351562,
+          "total": 0.627,
+          "scores": {
+            "momentum": 0.737,
+            "volume": -0.308,
+            "trend": 1.0,
+            "mean_rev": 0.893,
+            "regime_fit": 0.3
+          },
+          "ret20": 9.45,
+          "ret5": 1.14
+        },
+        {
+          "ticker": "IQV",
+          "price": 266.0799865722656,
+          "total": 0.6269,
+          "scores": {
+            "momentum": -0.06,
+            "volume": -0.222,
+            "trend": 1.0,
+            "mean_rev": 0.942,
+            "regime_fit": 0.3
+          },
+          "ret20": -1.48,
+          "ret5": 2.07
+        },
+        {
+          "ticker": "IBB",
+          "price": 210.4199981689453,
+          "total": 0.6121,
+          "scores": {
+            "momentum": 0.116,
+            "volume": -0.25,
+            "trend": 0.5,
+            "mean_rev": 0.998,
+            "regime_fit": 0.3
+          },
+          "ret20": -0.19,
+          "ret5": 5.2
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
@@ -12867,7 +13110,8 @@
     "2026-10-14": "mean_reversion",
     "2026-10-15": "mean_reversion",
     "2026-10-16": "mean_reversion",
-    "2026-10-19": "mean_reversion"
+    "2026-10-19": "mean_reversion",
+    "2026-10-20": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
@@ -12915,8 +13159,6 @@
       -10.2
     ],
     "mean_reversion": [
-      3.33,
-      3.3,
       -9.89,
       5.61,
       -2.18,
@@ -12934,7 +13176,9 @@
       1.12,
       0.72,
       -4.4,
-      2.18
+      2.18,
+      -3.9,
+      -0.62
     ],
     "defensive": [
       0.21,
@@ -12956,153 +13200,153 @@
   "last_backtest": [
     {
       "mode": "mean_reversion",
-      "avg_return": -6.69,
+      "avg_return": 1.36,
       "picks": [
+        "DHR",
+        "TEL",
         "META",
-        "ECHO",
-        "LITE",
-        "MRVL",
-        "EL"
+        "BIIB",
+        "UNH"
       ],
       "raw": [
         {
-          "ticker": "META",
-          "return": -5.1,
-          "score": 0.733
+          "ticker": "DHR",
+          "return": 0.63,
+          "score": 0.7268
         },
         {
-          "ticker": "ECHO",
-          "return": -9.04,
-          "score": 0.718
-        },
-        {
-          "ticker": "LITE",
-          "return": -15.37,
-          "score": 0.7178
-        },
-        {
-          "ticker": "MRVL",
-          "return": -10.13,
-          "score": 0.7177
-        },
-        {
-          "ticker": "EL",
-          "return": 6.19,
-          "score": 0.7165
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": -8.016,
-      "picks": [
-        "LITE",
-        "MRVL",
-        "META",
-        "TWLO",
-        "A"
-      ],
-      "raw": [
-        {
-          "ticker": "LITE",
-          "return": -15.37,
-          "score": 0.564
-        },
-        {
-          "ticker": "MRVL",
-          "return": -10.13,
-          "score": 0.5598
+          "ticker": "TEL",
+          "return": -1.63,
+          "score": 0.7191
         },
         {
           "ticker": "META",
-          "return": -5.1,
-          "score": 0.5538
+          "return": -9.51,
+          "score": 0.7007
         },
         {
-          "ticker": "TWLO",
-          "return": -9.12,
-          "score": 0.549
+          "ticker": "BIIB",
+          "return": 6.11,
+          "score": 0.6885
         },
         {
-          "ticker": "A",
-          "return": -0.36,
-          "score": 0.5408
+          "ticker": "UNH",
+          "return": 11.2,
+          "score": 0.6869
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -10.464,
+      "avg_return": -5.56,
       "picks": [
-        "LITE",
-        "MRVL",
-        "CCI",
-        "VST",
-        "HPE"
+        "VEEV",
+        "HPE",
+        "JCI",
+        "META",
+        "EWZ"
       ],
       "raw": [
         {
-          "ticker": "LITE",
-          "return": -15.37,
-          "score": 0.7535
-        },
-        {
-          "ticker": "MRVL",
-          "return": -10.13,
-          "score": 0.7101
-        },
-        {
-          "ticker": "CCI",
-          "return": -0.72,
-          "score": 0.6921
-        },
-        {
-          "ticker": "VST",
-          "return": -5.58,
-          "score": 0.6906
+          "ticker": "VEEV",
+          "return": 5.12,
+          "score": 0.7471
         },
         {
           "ticker": "HPE",
-          "return": -20.52,
-          "score": 0.6894
+          "return": -17.91,
+          "score": 0.7261
+        },
+        {
+          "ticker": "JCI",
+          "return": -5.66,
+          "score": 0.7257
+        },
+        {
+          "ticker": "META",
+          "return": -9.51,
+          "score": 0.715
+        },
+        {
+          "ticker": "EWZ",
+          "return": 0.16,
+          "score": 0.7127
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -11.34,
+      "avg_return": -7.53,
       "picks": [
-        "LITE",
-        "MRVL",
+        "VEEV",
         "META",
-        "VST",
-        "HPE"
+        "HPE",
+        "JCI",
+        "MRVL"
       ],
       "raw": [
         {
-          "ticker": "LITE",
-          "return": -15.37,
-          "score": 0.8075
-        },
-        {
-          "ticker": "MRVL",
-          "return": -10.13,
-          "score": 0.7916
+          "ticker": "VEEV",
+          "return": 5.12,
+          "score": 0.7929
         },
         {
           "ticker": "META",
-          "return": -5.1,
-          "score": 0.7772
-        },
-        {
-          "ticker": "VST",
-          "return": -5.58,
-          "score": 0.7758
+          "return": -9.51,
+          "score": 0.7924
         },
         {
           "ticker": "HPE",
-          "return": -20.52,
-          "score": 0.773
+          "return": -17.91,
+          "score": 0.7913
+        },
+        {
+          "ticker": "JCI",
+          "return": -5.66,
+          "score": 0.7885
+        },
+        {
+          "ticker": "MRVL",
+          "return": -9.69,
+          "score": 0.7876
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": -10.82,
+      "picks": [
+        "META",
+        "MRVL",
+        "HPE",
+        "KEYS",
+        "TWLO"
+      ],
+      "raw": [
+        {
+          "ticker": "META",
+          "return": -9.51,
+          "score": 0.5573
+        },
+        {
+          "ticker": "MRVL",
+          "return": -9.69,
+          "score": 0.5536
+        },
+        {
+          "ticker": "HPE",
+          "return": -17.91,
+          "score": 0.5429
+        },
+        {
+          "ticker": "KEYS",
+          "return": -9.38,
+          "score": 0.5424
+        },
+        {
+          "ticker": "TWLO",
+          "return": -7.61,
+          "score": 0.5412
         }
       ]
     }
