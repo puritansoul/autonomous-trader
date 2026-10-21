@@ -1,5 +1,5 @@
 {
-  "capital": 341.57,
+  "capital": 485.65,
   "positions": {
     "INDA": {
       "shares": 24,
@@ -10,15 +10,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.319 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     },
-    "DHR": {
-      "shares": 3,
-      "cost_per_share": 225.0,
-      "cost": 675.0,
-      "entry_date": "2026-10-14",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.673 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "TMO": {
       "shares": 1,
       "cost_per_share": 664.01,
@@ -28,15 +19,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.668 \u00b7 led by trend \u00b7 mode mean_reversion"
     },
-    "VIXY": {
-      "shares": 78,
-      "cost_per_share": 16.12,
-      "cost": 1257.36,
-      "entry_date": "2026-10-16",
-      "top_signal": "volume",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.685 \u00b7 led by volume \u00b7 mode mean_reversion"
-    },
     "MRNA": {
       "shares": 4,
       "cost_per_share": 234.9,
@@ -45,15 +27,6 @@
       "top_signal": "momentum",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.675 \u00b7 led by momentum \u00b7 mode mean_reversion"
-    },
-    "UVXY": {
-      "shares": 77,
-      "cost_per_share": 16.06,
-      "cost": 1236.62,
-      "entry_date": "2026-10-16",
-      "top_signal": "volume",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.668 \u00b7 led by volume \u00b7 mode mean_reversion"
     },
     "VTRS": {
       "shares": 66,
@@ -73,15 +46,6 @@
       "entry_mode": "mean_reversion",
       "thesis": "score +0.675 \u00b7 led by trend \u00b7 mode mean_reversion"
     },
-    "BAX": {
-      "shares": 55,
-      "cost_per_share": 25.08,
-      "cost": 1379.4,
-      "entry_date": "2026-10-20",
-      "top_signal": "mean_rev",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.655 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
-    },
     "NXPI": {
       "shares": 5,
       "cost_per_share": 227.69,
@@ -90,6 +54,42 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.650 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "EWZ": {
+      "shares": 27,
+      "cost_per_share": 42.95,
+      "cost": 1159.65,
+      "entry_date": "2026-10-21",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.797 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "FBTC": {
+      "shares": 15,
+      "cost_per_share": 72.73,
+      "cost": 1090.95,
+      "entry_date": "2026-10-21",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.770 \u00b7 led by trend \u00b7 mode defensive"
+    },
+    "IBIT": {
+      "shares": 23,
+      "cost_per_share": 47.35,
+      "cost": 1089.05,
+      "entry_date": "2026-10-21",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.762 \u00b7 led by trend \u00b7 mode defensive"
+    },
+    "CLOU": {
+      "shares": 38,
+      "cost_per_share": 29.24,
+      "cost": 1111.12,
+      "entry_date": "2026-10-21",
+      "top_signal": "trend",
+      "entry_mode": "defensive",
+      "thesis": "score +0.755 \u00b7 led by trend \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -1562,6 +1562,62 @@
       "reason": "rotation \u2192 NXPI (score +0.26)",
       "top_signal": "regime_fit",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "VIXY",
+      "entry_date": "2026-10-16",
+      "exit_date": "2026-10-21",
+      "entry_price": 16.12,
+      "exit_price": 16.71,
+      "shares": 78,
+      "cost": 1257.36,
+      "pnl": 46.02,
+      "pnl_pct": 3.66,
+      "reason": "regime flip \u2192 bull",
+      "top_signal": "volume",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "UVXY",
+      "entry_date": "2026-10-16",
+      "exit_date": "2026-10-21",
+      "entry_price": 16.06,
+      "exit_price": 16.87,
+      "shares": 77,
+      "cost": 1236.62,
+      "pnl": 62.37,
+      "pnl_pct": 5.04,
+      "reason": "regime flip \u2192 bull",
+      "top_signal": "volume",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "BAX",
+      "entry_date": "2026-10-20",
+      "exit_date": "2026-10-21",
+      "entry_price": 25.08,
+      "exit_price": 24.36,
+      "shares": 55,
+      "cost": 1379.4,
+      "pnl": -39.6,
+      "pnl_pct": -2.87,
+      "reason": "rotation \u2192 EWZ (score +0.53)",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "DHR",
+      "entry_date": "2026-10-14",
+      "exit_date": "2026-10-21",
+      "entry_price": 225.0,
+      "exit_price": 217.56,
+      "shares": 3,
+      "cost": 675.0,
+      "pnl": -22.32,
+      "pnl_pct": -3.31,
+      "reason": "rotation \u2192 FBTC (score +0.40)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1614,14 +1670,15 @@
     "2026-10-15": 10600.76,
     "2026-10-16": 10675.74,
     "2026-10-19": 10600.38,
-    "2026-10-20": 10598.96
+    "2026-10-20": 10598.96,
+    "2026-10-21": 10672.64
   },
   "signal_weights": {
-    "momentum": 0.05,
-    "volume": 0.15,
-    "trend": 0.1,
-    "mean_rev": 0.55,
-    "regime_fit": 0.15
+    "momentum": 0.1,
+    "volume": 0.05,
+    "trend": 0.2,
+    "mean_rev": 0.1,
+    "regime_fit": 0.55
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -1673,7 +1730,8 @@
     "2026-10-15": "bull",
     "2026-10-16": "neutral",
     "2026-10-19": "neutral",
-    "2026-10-20": "neutral"
+    "2026-10-20": "neutral",
+    "2026-10-21": "bull"
   },
   "daily_log": [
     {
@@ -13057,11 +13115,286 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-10-21",
+      "thesis": "Regime: BULL\nVIX 16.6 \u00b7 SPY trend up \u00b7 risk appetite down\nStrategy mode switched: mean_reversion \u2192 defensive (Prioritize regime-fit safe-haven assets)\nBacktest (5d): defensive +1.93%  |  mean reversion +1.39%  |  trend following +0.12%  |  momentum -0.22%\nExited 4 position(s): VIXY +46 (regime flip \u2192 bull), UVXY +62 (regime flip \u2192 bull), BAX -40 (rotation \u2192 EWZ (score +0.53)), DHR -22 (rotation \u2192 FBTC (score +0.40))\nEntered 4 position(s):\n  EWZ $42.95 \u00d7 27 shares (score +0.797, led by momentum)\n  FBTC $72.73 \u00d7 15 shares (score +0.770, led by trend)\n  IBIT $47.35 \u00d7 23 shares (score +0.762, led by trend)\n  CLOU $29.24 \u00d7 38 shares (score +0.755, led by trend)\nTop candidates screened: EWZ +0.797, FBTC +0.770, IBIT +0.762\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "EWZ",
+          "price": 42.95,
+          "total": 0.7971,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.138,
+            "trend": 1.0,
+            "mean_rev": -0.46,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.54,
+          "ret5": -0.4,
+          "shares": 27,
+          "cost": 1159.65,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "FBTC",
+          "price": 72.73,
+          "total": 0.77,
+          "scores": {
+            "momentum": 0.094,
+            "volume": 0.214,
+            "trend": 1.0,
+            "mean_rev": -0.001,
+            "regime_fit": 1.0
+          },
+          "ret20": 0.06,
+          "ret5": 3.58,
+          "shares": 15,
+          "cost": 1090.95,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "IBIT",
+          "price": 47.35,
+          "total": 0.7616,
+          "scores": {
+            "momentum": 0.102,
+            "volume": 0.024,
+            "trend": 1.0,
+            "mean_rev": 0.002,
+            "regime_fit": 1.0
+          },
+          "ret20": 0.14,
+          "ret5": 3.69,
+          "shares": 23,
+          "cost": 1089.05,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "CLOU",
+          "price": 29.24,
+          "total": 0.7549,
+          "scores": {
+            "momentum": 0.239,
+            "volume": -0.17,
+            "trend": 1.0,
+            "mean_rev": -0.105,
+            "regime_fit": 1.0
+          },
+          "ret20": 2.16,
+          "ret5": 3.08,
+          "shares": 38,
+          "cost": 1111.12,
+          "top_signal": "trend"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "VIXY",
+          "entry_date": "2026-10-16",
+          "exit_date": "2026-10-21",
+          "entry_price": 16.12,
+          "exit_price": 16.71,
+          "shares": 78,
+          "cost": 1257.36,
+          "pnl": 46.02,
+          "pnl_pct": 3.66,
+          "reason": "regime flip \u2192 bull",
+          "top_signal": "volume",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "UVXY",
+          "entry_date": "2026-10-16",
+          "exit_date": "2026-10-21",
+          "entry_price": 16.06,
+          "exit_price": 16.87,
+          "shares": 77,
+          "cost": 1236.62,
+          "pnl": 62.37,
+          "pnl_pct": 5.04,
+          "reason": "regime flip \u2192 bull",
+          "top_signal": "volume",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "BAX",
+          "entry_date": "2026-10-20",
+          "exit_date": "2026-10-21",
+          "entry_price": 25.08,
+          "exit_price": 24.36,
+          "shares": 55,
+          "cost": 1379.4,
+          "pnl": -39.6,
+          "pnl_pct": -2.87,
+          "reason": "rotation \u2192 EWZ (score +0.53)",
+          "top_signal": "mean_rev",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "DHR",
+          "entry_date": "2026-10-14",
+          "exit_date": "2026-10-21",
+          "entry_price": 225.0,
+          "exit_price": 217.56,
+          "shares": 3,
+          "cost": 675.0,
+          "pnl": -22.32,
+          "pnl_pct": -3.31,
+          "reason": "rotation \u2192 FBTC (score +0.40)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "EWZ",
+          "price": 42.43000030517578,
+          "total": 0.7971,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.138,
+            "trend": 1.0,
+            "mean_rev": -0.46,
+            "regime_fit": 1.0
+          },
+          "ret20": 13.54,
+          "ret5": -0.4
+        },
+        {
+          "ticker": "FBTC",
+          "price": 73.625,
+          "total": 0.77,
+          "scores": {
+            "momentum": 0.094,
+            "volume": 0.214,
+            "trend": 1.0,
+            "mean_rev": -0.001,
+            "regime_fit": 1.0
+          },
+          "ret20": 0.06,
+          "ret5": 3.58
+        },
+        {
+          "ticker": "IBIT",
+          "price": 47.94499969482422,
+          "total": 0.7616,
+          "scores": {
+            "momentum": 0.102,
+            "volume": 0.024,
+            "trend": 1.0,
+            "mean_rev": 0.002,
+            "regime_fit": 1.0
+          },
+          "ret20": 0.14,
+          "ret5": 3.69
+        },
+        {
+          "ticker": "CLOU",
+          "price": 29.770000457763672,
+          "total": 0.7549,
+          "scores": {
+            "momentum": 0.239,
+            "volume": -0.17,
+            "trend": 1.0,
+            "mean_rev": -0.105,
+            "regime_fit": 1.0
+          },
+          "ret20": 2.16,
+          "ret5": 3.08
+        },
+        {
+          "ticker": "QUAL",
+          "price": 226.31199645996094,
+          "total": 0.7496,
+          "scores": {
+            "momentum": 0.145,
+            "volume": 0.216,
+            "trend": 1.0,
+            "mean_rev": -0.257,
+            "regime_fit": 1.0
+          },
+          "ret20": 1.88,
+          "ret5": 0.17
+        },
+        {
+          "ticker": "UPRO",
+          "price": 152.52999877929688,
+          "total": 0.7401,
+          "scores": {
+            "momentum": 0.147,
+            "volume": -0.197,
+            "trend": 1.0,
+            "mean_rev": -0.148,
+            "regime_fit": 1.0
+          },
+          "ret20": 1.48,
+          "ret5": 1.44
+        },
+        {
+          "ticker": "SPY",
+          "price": 774.030029296875,
+          "total": 0.7239,
+          "scores": {
+            "momentum": 0.075,
+            "volume": -0.31,
+            "trend": 1.0,
+            "mean_rev": -0.181,
+            "regime_fit": 1.0
+          },
+          "ret20": 0.81,
+          "ret5": 0.58
+        },
+        {
+          "ticker": "XBI",
+          "price": 153.60000610351562,
+          "total": 0.6456,
+          "scores": {
+            "momentum": 0.039,
+            "volume": -0.214,
+            "trend": 0.5,
+            "mean_rev": 0.024,
+            "regime_fit": 1.0
+          },
+          "ret20": -1.03,
+          "ret5": 4.65
+        },
+        {
+          "ticker": "XLI",
+          "price": 168.7100067138672,
+          "total": 0.6373,
+          "scores": {
+            "momentum": -0.036,
+            "volume": -0.171,
+            "trend": 0.5,
+            "mean_rev": -0.005,
+            "regime_fit": 1.0
+          },
+          "ret20": -0.82,
+          "ret5": 1.0
+        },
+        {
+          "ticker": "IJR",
+          "price": 138.07000732421875,
+          "total": 0.6318,
+          "scores": {
+            "momentum": 0.045,
+            "volume": -0.275,
+            "trend": 0.5,
+            "mean_rev": -0.09,
+            "regime_fit": 1.0
+          },
+          "ret20": -0.05,
+          "ret5": 1.96
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "mean_reversion",
+  "active_mode": "defensive",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -13111,7 +13444,8 @@
     "2026-10-15": "mean_reversion",
     "2026-10-16": "mean_reversion",
     "2026-10-19": "mean_reversion",
-    "2026-10-20": "mean_reversion"
+    "2026-10-20": "mean_reversion",
+    "2026-10-21": "defensive"
   },
   "mode_pnl": {
     "momentum": [
@@ -13159,10 +13493,6 @@
       -10.2
     ],
     "mean_reversion": [
-      -9.89,
-      5.61,
-      -2.18,
-      -2.09,
       2.18,
       -0.91,
       -1.26,
@@ -13178,7 +13508,11 @@
       -4.4,
       2.18,
       -3.9,
-      -0.62
+      -0.62,
+      3.66,
+      5.04,
+      -2.87,
+      -3.31
     ],
     "defensive": [
       0.21,
@@ -13199,154 +13533,154 @@
   },
   "last_backtest": [
     {
-      "mode": "mean_reversion",
-      "avg_return": 1.36,
+      "mode": "defensive",
+      "avg_return": 1.932,
       "picks": [
-        "DHR",
-        "TEL",
-        "META",
-        "BIIB",
-        "UNH"
+        "EWZ",
+        "CLOU",
+        "QUAL",
+        "XLY",
+        "XLF"
       ],
       "raw": [
         {
-          "ticker": "DHR",
-          "return": 0.63,
-          "score": 0.7268
+          "ticker": "EWZ",
+          "return": -0.4,
+          "score": 0.8062
         },
         {
-          "ticker": "TEL",
-          "return": -1.63,
-          "score": 0.7191
+          "ticker": "CLOU",
+          "return": 3.08,
+          "score": 0.7791
         },
         {
-          "ticker": "META",
-          "return": -9.51,
-          "score": 0.7007
+          "ticker": "QUAL",
+          "return": 0.17,
+          "score": 0.7452
         },
         {
-          "ticker": "BIIB",
-          "return": 6.11,
-          "score": 0.6885
+          "ticker": "XLY",
+          "return": 4.03,
+          "score": 0.6548
         },
         {
-          "ticker": "UNH",
-          "return": 11.2,
-          "score": 0.6869
+          "ticker": "XLF",
+          "return": 2.78,
+          "score": 0.6411
         }
       ]
     },
     {
-      "mode": "momentum",
-      "avg_return": -5.56,
+      "mode": "mean_reversion",
+      "avg_return": 1.392,
       "picks": [
-        "VEEV",
-        "HPE",
-        "JCI",
-        "META",
-        "EWZ"
+        "ARE",
+        "STT",
+        "ARKW",
+        "SOXX",
+        "ETHA"
       ],
       "raw": [
         {
-          "ticker": "VEEV",
-          "return": 5.12,
-          "score": 0.7471
+          "ticker": "ARE",
+          "return": 2.75,
+          "score": 0.3838
         },
         {
-          "ticker": "HPE",
-          "return": -17.91,
-          "score": 0.7261
+          "ticker": "STT",
+          "return": 1.04,
+          "score": 0.378
         },
         {
-          "ticker": "JCI",
-          "return": -5.66,
-          "score": 0.7257
+          "ticker": "ARKW",
+          "return": 0.98,
+          "score": 0.3763
         },
         {
-          "ticker": "META",
-          "return": -9.51,
-          "score": 0.715
+          "ticker": "SOXX",
+          "return": -1.57,
+          "score": 0.3688
         },
         {
-          "ticker": "EWZ",
-          "return": 0.16,
-          "score": 0.7127
+          "ticker": "ETHA",
+          "return": 3.76,
+          "score": 0.3635
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -7.53,
+      "avg_return": 0.122,
       "picks": [
-        "VEEV",
-        "META",
-        "HPE",
-        "JCI",
-        "MRVL"
+        "EWZ",
+        "CDNS",
+        "FAST",
+        "SNPS",
+        "MTD"
       ],
       "raw": [
         {
-          "ticker": "VEEV",
-          "return": 5.12,
-          "score": 0.7929
+          "ticker": "EWZ",
+          "return": -0.4,
+          "score": 0.844
         },
         {
-          "ticker": "META",
-          "return": -9.51,
-          "score": 0.7924
+          "ticker": "CDNS",
+          "return": 0.45,
+          "score": 0.7515
         },
         {
-          "ticker": "HPE",
-          "return": -17.91,
-          "score": 0.7913
+          "ticker": "FAST",
+          "return": 1.56,
+          "score": 0.747
         },
         {
-          "ticker": "JCI",
-          "return": -5.66,
-          "score": 0.7885
+          "ticker": "SNPS",
+          "return": -4.92,
+          "score": 0.7413
         },
         {
-          "ticker": "MRVL",
-          "return": -9.69,
-          "score": 0.7876
+          "ticker": "MTD",
+          "return": 3.92,
+          "score": 0.7408
         }
       ]
     },
     {
-      "mode": "defensive",
-      "avg_return": -10.82,
+      "mode": "momentum",
+      "avg_return": -0.22,
       "picks": [
-        "META",
-        "MRVL",
-        "HPE",
-        "KEYS",
-        "TWLO"
+        "EWZ",
+        "CDNS",
+        "FAST",
+        "SNPS",
+        "ULTA"
       ],
       "raw": [
         {
-          "ticker": "META",
-          "return": -9.51,
-          "score": 0.5573
+          "ticker": "EWZ",
+          "return": -0.4,
+          "score": 0.7258
         },
         {
-          "ticker": "MRVL",
-          "return": -9.69,
-          "score": 0.5536
+          "ticker": "CDNS",
+          "return": 0.45,
+          "score": 0.6882
         },
         {
-          "ticker": "HPE",
-          "return": -17.91,
-          "score": 0.5429
+          "ticker": "FAST",
+          "return": 1.56,
+          "score": 0.686
         },
         {
-          "ticker": "KEYS",
-          "return": -9.38,
-          "score": 0.5424
+          "ticker": "SNPS",
+          "return": -4.92,
+          "score": 0.6822
         },
         {
-          "ticker": "TWLO",
-          "return": -7.61,
-          "score": 0.5412
+          "ticker": "ULTA",
+          "return": 2.21,
+          "score": 0.6821
         }
       ]
     }
