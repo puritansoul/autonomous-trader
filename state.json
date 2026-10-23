@@ -1,33 +1,6 @@
 {
-  "capital": 999.65,
+  "capital": 744.56,
   "positions": {
-    "INDA": {
-      "shares": 24,
-      "cost_per_share": 45.54,
-      "cost": 1092.96,
-      "entry_date": "2026-10-08",
-      "top_signal": "regime_fit",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.319 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
-    },
-    "TMO": {
-      "shares": 1,
-      "cost_per_share": 664.01,
-      "cost": 664.01,
-      "entry_date": "2026-10-14",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.668 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
-    "VTRS": {
-      "shares": 66,
-      "cost_per_share": 18.64,
-      "cost": 1230.24,
-      "entry_date": "2026-10-19",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.694 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "AMGN": {
       "shares": 1,
       "cost_per_share": 429.96,
@@ -90,6 +63,33 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.702 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "CCI": {
+      "shares": 15,
+      "cost_per_share": 91.02,
+      "cost": 1365.3,
+      "entry_date": "2026-10-23",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.842 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "AMT": {
+      "shares": 5,
+      "cost_per_share": 200.72,
+      "cost": 1003.6,
+      "entry_date": "2026-10-23",
+      "top_signal": "trend",
+      "entry_mode": "momentum",
+      "thesis": "score +0.746 \u00b7 led by trend \u00b7 mode momentum"
+    },
+    "ISRG": {
+      "shares": 2,
+      "cost_per_share": 443.65,
+      "cost": 887.3,
+      "entry_date": "2026-10-23",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.672 \u00b7 led by momentum \u00b7 mode momentum"
     }
   },
   "closed": [
@@ -1660,6 +1660,48 @@
       "reason": "rotation \u2192 PG (score +0.92)",
       "top_signal": "trend",
       "entry_mode": "defensive"
+    },
+    {
+      "ticker": "INDA",
+      "entry_date": "2026-10-08",
+      "exit_date": "2026-10-23",
+      "entry_price": 45.54,
+      "exit_price": 46.61,
+      "shares": 24,
+      "cost": 1092.96,
+      "pnl": 25.68,
+      "pnl_pct": 2.35,
+      "reason": "max hold 15d",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "TMO",
+      "entry_date": "2026-10-14",
+      "exit_date": "2026-10-23",
+      "entry_price": 664.01,
+      "exit_price": 672.69,
+      "shares": 1,
+      "cost": 664.01,
+      "pnl": 8.68,
+      "pnl_pct": 1.31,
+      "reason": "rotation \u2192 CCI (score +1.00)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "VTRS",
+      "entry_date": "2026-10-19",
+      "exit_date": "2026-10-23",
+      "entry_price": 18.64,
+      "exit_price": 18.33,
+      "shares": 66,
+      "cost": 1230.24,
+      "pnl": -20.46,
+      "pnl_pct": -1.66,
+      "reason": "rotation \u2192 AMT (score +0.61)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1714,7 +1756,8 @@
     "2026-10-19": 10600.38,
     "2026-10-20": 10598.96,
     "2026-10-21": 10672.64,
-    "2026-10-22": 10543.9
+    "2026-10-22": 10543.9,
+    "2026-10-23": 10404.21
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -1775,7 +1818,8 @@
     "2026-10-19": "neutral",
     "2026-10-20": "neutral",
     "2026-10-21": "bull",
-    "2026-10-22": "neutral"
+    "2026-10-22": "neutral",
+    "2026-10-23": "neutral"
   },
   "daily_log": [
     {
@@ -13678,6 +13722,250 @@
         }
       ],
       "prev_mode": "defensive"
+    },
+    {
+      "date": "2026-10-23",
+      "thesis": "Regime: NEUTRAL\nVIX 20.1 \u00b7 SPY trend mixed \u00b7 risk appetite down\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +2.59%  |  mean reversion +1.17%  |  trend following -0.12%  |  defensive -1.71%\nExited 3 position(s): INDA +26 (max hold 15d), TMO +9 (rotation \u2192 CCI (score +1.00)), VTRS -20 (rotation \u2192 AMT (score +0.61))\nEntered 3 position(s):\n  CCI $91.02 \u00d7 15 shares (score +0.842, led by momentum)\n  AMT $200.72 \u00d7 5 shares (score +0.746, led by trend)\n  ISRG $443.65 \u00d7 2 shares (score +0.672, led by momentum)\nTop candidates screened: CCI +0.842, AMT +0.746, EWZ +0.687\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%",
+      "buys": [
+        {
+          "ticker": "CCI",
+          "price": 91.02,
+          "total": 0.8423,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.636,
+            "trend": 1.0,
+            "mean_rev": 0.369,
+            "regime_fit": 0.3
+          },
+          "ret20": 27.04,
+          "ret5": 4.77,
+          "shares": 15,
+          "cost": 1365.3,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "AMT",
+          "price": 200.72,
+          "total": 0.7456,
+          "scores": {
+            "momentum": 0.917,
+            "volume": 0.394,
+            "trend": 1.0,
+            "mean_rev": 0.477,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.89,
+          "ret5": 0.99,
+          "shares": 5,
+          "cost": 1003.6,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "ISRG",
+          "price": 443.65,
+          "total": 0.6718,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.064,
+            "trend": 1.0,
+            "mean_rev": 0.454,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.29,
+          "ret5": 6.62,
+          "shares": 2,
+          "cost": 887.3,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "INDA",
+          "entry_date": "2026-10-08",
+          "exit_date": "2026-10-23",
+          "entry_price": 45.54,
+          "exit_price": 46.61,
+          "shares": 24,
+          "cost": 1092.96,
+          "pnl": 25.68,
+          "pnl_pct": 2.35,
+          "reason": "max hold 15d",
+          "top_signal": "regime_fit",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "TMO",
+          "entry_date": "2026-10-14",
+          "exit_date": "2026-10-23",
+          "entry_price": 664.01,
+          "exit_price": 672.69,
+          "shares": 1,
+          "cost": 664.01,
+          "pnl": 8.68,
+          "pnl_pct": 1.31,
+          "reason": "rotation \u2192 CCI (score +1.00)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "VTRS",
+          "entry_date": "2026-10-19",
+          "exit_date": "2026-10-23",
+          "entry_price": 18.64,
+          "exit_price": 18.33,
+          "shares": 66,
+          "cost": 1230.24,
+          "pnl": -20.46,
+          "pnl_pct": -1.66,
+          "reason": "rotation \u2192 AMT (score +0.61)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "CCI",
+          "price": 86.18499755859375,
+          "total": 0.8423,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.636,
+            "trend": 1.0,
+            "mean_rev": 0.369,
+            "regime_fit": 0.3
+          },
+          "ret20": 27.04,
+          "ret5": 4.77
+        },
+        {
+          "ticker": "AMT",
+          "price": 187.11000061035156,
+          "total": 0.7456,
+          "scores": {
+            "momentum": 0.917,
+            "volume": 0.394,
+            "trend": 1.0,
+            "mean_rev": 0.477,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.89,
+          "ret5": 0.99
+        },
+        {
+          "ticker": "EWZ",
+          "price": 42.23500061035156,
+          "total": 0.6869,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.03,
+            "trend": 1.0,
+            "mean_rev": 0.887,
+            "regime_fit": 0.0
+          },
+          "ret20": 14.71,
+          "ret5": 0.97
+        },
+        {
+          "ticker": "ISRG",
+          "price": 454.9599914550781,
+          "total": 0.6718,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.064,
+            "trend": 1.0,
+            "mean_rev": 0.454,
+            "regime_fit": 0.3
+          },
+          "ret20": 12.29,
+          "ret5": 6.62
+        },
+        {
+          "ticker": "USO",
+          "price": 168.4499969482422,
+          "total": 0.6661,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.035,
+            "trend": 1.0,
+            "mean_rev": 0.195,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.56,
+          "ret5": 4.14
+        },
+        {
+          "ticker": "ALLE",
+          "price": 180.17999267578125,
+          "total": 0.6623,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.094,
+            "trend": 1.0,
+            "mean_rev": 0.417,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.64,
+          "ret5": 15.1
+        },
+        {
+          "ticker": "OXY",
+          "price": 64.48999786376953,
+          "total": 0.6571,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.103,
+            "trend": 1.0,
+            "mean_rev": 0.354,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.42,
+          "ret5": 3.38
+        },
+        {
+          "ticker": "APA",
+          "price": 51.880001068115234,
+          "total": 0.6522,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.1,
+            "trend": 1.0,
+            "mean_rev": 0.244,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.0,
+          "ret5": 6.09
+        },
+        {
+          "ticker": "ULTA",
+          "price": 621.0250244140625,
+          "total": 0.6491,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.16,
+            "trend": 1.0,
+            "mean_rev": 0.481,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.91,
+          "ret5": 4.74
+        },
+        {
+          "ticker": "EL",
+          "price": 107.92500305175781,
+          "total": 0.6468,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.159,
+            "trend": 1.0,
+            "mean_rev": 0.431,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.24,
+          "ret5": 3.24
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
@@ -13734,7 +14022,8 @@
     "2026-10-19": "mean_reversion",
     "2026-10-20": "mean_reversion",
     "2026-10-21": "defensive",
-    "2026-10-22": "momentum"
+    "2026-10-22": "momentum",
+    "2026-10-23": "momentum"
   },
   "mode_pnl": {
     "momentum": [
@@ -13782,9 +14071,6 @@
       -10.2
     ],
     "mean_reversion": [
-      -0.91,
-      -1.26,
-      -0.91,
       -2.24,
       -0.54,
       0.69,
@@ -13801,7 +14087,10 @@
       5.04,
       -2.87,
       -3.31,
-      2.2
+      2.2,
+      2.35,
+      1.31,
+      -1.66
     ],
     "defensive": [
       0.21,
@@ -13825,153 +14114,153 @@
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 0.606,
+      "avg_return": 2.59,
       "picks": [
-        "VEEV",
-        "KDP",
         "WSM",
+        "UVXY",
+        "HST",
         "MAR",
-        "SNPS"
+        "CCI"
       ],
       "raw": [
         {
-          "ticker": "VEEV",
-          "return": 2.74,
-          "score": 0.7916
-        },
-        {
-          "ticker": "KDP",
-          "return": 2.91,
-          "score": 0.7581
-        },
-        {
           "ticker": "WSM",
-          "return": 2.44,
-          "score": 0.7487
+          "return": 0.55,
+          "score": 0.7535
+        },
+        {
+          "ticker": "UVXY",
+          "return": 3.4,
+          "score": 0.7379
+        },
+        {
+          "ticker": "HST",
+          "return": 3.25,
+          "score": 0.7346
         },
         {
           "ticker": "MAR",
-          "return": 3.35,
-          "score": 0.7366
+          "return": 0.98,
+          "score": 0.7332
         },
         {
-          "ticker": "SNPS",
-          "return": -8.41,
-          "score": 0.7313
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": 0.606,
-      "picks": [
-        "VEEV",
-        "KDP",
-        "WSM",
-        "SNPS",
-        "MAR"
-      ],
-      "raw": [
-        {
-          "ticker": "VEEV",
-          "return": 2.74,
-          "score": 0.8121
-        },
-        {
-          "ticker": "KDP",
-          "return": 2.91,
-          "score": 0.802
-        },
-        {
-          "ticker": "WSM",
-          "return": 2.44,
-          "score": 0.7943
-        },
-        {
-          "ticker": "SNPS",
-          "return": -8.41,
-          "score": 0.7939
-        },
-        {
-          "ticker": "MAR",
-          "return": 3.35,
-          "score": 0.7876
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": -1.586,
-      "picks": [
-        "A",
-        "SNPS",
-        "ADI",
-        "KDP",
-        "VEEV"
-      ],
-      "raw": [
-        {
-          "ticker": "A",
-          "return": -1.57,
-          "score": 0.5469
-        },
-        {
-          "ticker": "SNPS",
-          "return": -8.41,
-          "score": 0.5453
-        },
-        {
-          "ticker": "ADI",
-          "return": -3.6,
-          "score": 0.545
-        },
-        {
-          "ticker": "KDP",
-          "return": 2.91,
-          "score": 0.543
-        },
-        {
-          "ticker": "VEEV",
-          "return": 2.74,
-          "score": 0.5398
+          "ticker": "CCI",
+          "return": 4.77,
+          "score": 0.7325
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": -3.194,
+      "avg_return": 1.168,
       "picks": [
-        "INDA",
-        "UNG",
-        "PNR",
-        "ILMN",
-        "AME"
+        "PPG",
+        "ECL",
+        "A",
+        "RF",
+        "EMR"
       ],
       "raw": [
         {
-          "ticker": "INDA",
-          "return": -1.42,
-          "score": 0.7241
+          "ticker": "PPG",
+          "return": 3.1,
+          "score": 0.7319
         },
         {
-          "ticker": "UNG",
-          "return": -10.19,
-          "score": 0.7236
+          "ticker": "ECL",
+          "return": 0.1,
+          "score": 0.7269
         },
         {
-          "ticker": "PNR",
-          "return": 2.68,
-          "score": 0.7178
+          "ticker": "A",
+          "return": -0.99,
+          "score": 0.7072
         },
         {
-          "ticker": "ILMN",
-          "return": -2.17,
-          "score": 0.6951
+          "ticker": "RF",
+          "return": 3.59,
+          "score": 0.6989
         },
         {
-          "ticker": "AME",
-          "return": -4.87,
-          "score": 0.6928
+          "ticker": "EMR",
+          "return": 0.04,
+          "score": 0.6969
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": -0.124,
+      "picks": [
+        "WSM",
+        "MRNA",
+        "ECL",
+        "MTD",
+        "HST"
+      ],
+      "raw": [
+        {
+          "ticker": "WSM",
+          "return": 0.55,
+          "score": 0.7965
+        },
+        {
+          "ticker": "MRNA",
+          "return": -6.89,
+          "score": 0.7961
+        },
+        {
+          "ticker": "ECL",
+          "return": 0.1,
+          "score": 0.7933
+        },
+        {
+          "ticker": "MTD",
+          "return": 2.37,
+          "score": 0.7898
+        },
+        {
+          "ticker": "HST",
+          "return": 3.25,
+          "score": 0.7889
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": -1.714,
+      "picks": [
+        "MRNA",
+        "ECL",
+        "A",
+        "VTRS",
+        "MTD"
+      ],
+      "raw": [
+        {
+          "ticker": "MRNA",
+          "return": -6.89,
+          "score": 0.5545
+        },
+        {
+          "ticker": "ECL",
+          "return": 0.1,
+          "score": 0.546
+        },
+        {
+          "ticker": "A",
+          "return": -0.99,
+          "score": 0.5453
+        },
+        {
+          "ticker": "VTRS",
+          "return": -3.16,
+          "score": 0.5427
+        },
+        {
+          "ticker": "MTD",
+          "return": 2.37,
+          "score": 0.5405
         }
       ]
     }
