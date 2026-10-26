@@ -1,15 +1,6 @@
 {
-  "capital": 744.56,
+  "capital": 447.44,
   "positions": {
-    "AMGN": {
-      "shares": 1,
-      "cost_per_share": 429.96,
-      "cost": 429.96,
-      "entry_date": "2026-10-19",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.675 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "NXPI": {
       "shares": 5,
       "cost_per_share": 227.69,
@@ -18,15 +9,6 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.650 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
-    "EWZ": {
-      "shares": 27,
-      "cost_per_share": 42.95,
-      "cost": 1159.65,
-      "entry_date": "2026-10-21",
-      "top_signal": "momentum",
-      "entry_mode": "defensive",
-      "thesis": "score +0.797 \u00b7 led by momentum \u00b7 mode defensive"
     },
     "CLOU": {
       "shares": 38,
@@ -45,15 +27,6 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.761 \u00b7 led by momentum \u00b7 mode momentum"
-    },
-    "PG": {
-      "shares": 6,
-      "cost_per_share": 162.14,
-      "cost": 972.84,
-      "entry_date": "2026-10-22",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.745 \u00b7 led by momentum \u00b7 mode momentum"
     },
     "LMT": {
       "shares": 1,
@@ -90,6 +63,33 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.672 \u00b7 led by momentum \u00b7 mode momentum"
+    },
+    "EQT": {
+      "shares": 19,
+      "cost_per_share": 52.73,
+      "cost": 1001.87,
+      "entry_date": "2026-10-26",
+      "top_signal": "volume",
+      "entry_mode": "momentum",
+      "thesis": "score +0.707 \u00b7 led by volume \u00b7 mode momentum"
+    },
+    "TSLA": {
+      "shares": 2,
+      "cost_per_share": 383.9725,
+      "cost": 767.95,
+      "entry_date": "2026-10-26",
+      "top_signal": "trend",
+      "entry_mode": "momentum",
+      "thesis": "score +0.698 \u00b7 led by trend \u00b7 mode momentum"
+    },
+    "NOW": {
+      "shares": 5,
+      "cost_per_share": 158.55,
+      "cost": 792.75,
+      "entry_date": "2026-10-26",
+      "top_signal": "momentum",
+      "entry_mode": "momentum",
+      "thesis": "score +0.691 \u00b7 led by momentum \u00b7 mode momentum"
     }
   },
   "closed": [
@@ -1702,6 +1702,48 @@
       "reason": "rotation \u2192 AMT (score +0.61)",
       "top_signal": "trend",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "EWZ",
+      "entry_date": "2026-10-21",
+      "exit_date": "2026-10-26",
+      "entry_price": 42.95,
+      "exit_price": 31.71,
+      "shares": 27,
+      "cost": 1159.65,
+      "pnl": -303.48,
+      "pnl_pct": -26.17,
+      "reason": "stop loss (-20.1%)",
+      "top_signal": "momentum",
+      "entry_mode": "defensive"
+    },
+    {
+      "ticker": "AMGN",
+      "entry_date": "2026-10-19",
+      "exit_date": "2026-10-26",
+      "entry_price": 429.96,
+      "exit_price": 444.72,
+      "shares": 1,
+      "cost": 429.96,
+      "pnl": 14.76,
+      "pnl_pct": 3.43,
+      "reason": "rotation \u2192 EQT (score +0.31)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "PG",
+      "entry_date": "2026-10-22",
+      "exit_date": "2026-10-26",
+      "entry_price": 162.14,
+      "exit_price": 160.76,
+      "shares": 6,
+      "cost": 972.84,
+      "pnl": -8.28,
+      "pnl_pct": -0.85,
+      "reason": "rotation \u2192 TSLA (score +0.26)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -1757,7 +1799,8 @@
     "2026-10-20": 10598.96,
     "2026-10-21": 10672.64,
     "2026-10-22": 10543.9,
-    "2026-10-23": 10404.21
+    "2026-10-23": 10404.21,
+    "2026-10-26": 10288.56
   },
   "signal_weights": {
     "momentum": 0.5,
@@ -1819,7 +1862,8 @@
     "2026-10-20": "neutral",
     "2026-10-21": "bull",
     "2026-10-22": "neutral",
-    "2026-10-23": "neutral"
+    "2026-10-23": "neutral",
+    "2026-10-26": "neutral"
   },
   "daily_log": [
     {
@@ -13966,6 +14010,250 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-10-26",
+      "thesis": "Regime: NEUTRAL\nVIX 18.4 \u00b7 SPY trend mixed \u00b7 risk appetite down\nStrategy mode: momentum \u2014 Chase price strength and volume breakouts\nBacktest (5d): momentum +3.75%  |  mean reversion +2.22%  |  trend following +0.28%  |  defensive -1.30%\nExited 3 position(s): EWZ -303 (stop loss (-20.1%)), AMGN +15 (rotation \u2192 EQT (score +0.31)), PG -8 (rotation \u2192 TSLA (score +0.26))\nEntered 3 position(s):\n  EQT $52.73 \u00d7 19 shares (score +0.707, led by volume)\n  TSLA $383.97 \u00d7 2 shares (score +0.698, led by trend)\n  NOW $158.55 \u00d7 5 shares (score +0.691, led by momentum)\nTop candidates screened: EQT +0.707, TSLA +0.698, NOW +0.691\nSignal weights: momentum 50% \u00b7 volume 25% \u00b7 trend 15% \u00b7 mean_rev 5% \u00b7 regime_fit 5%",
+      "buys": [
+        {
+          "ticker": "EQT",
+          "price": 52.73,
+          "total": 0.7068,
+          "scores": {
+            "momentum": 0.655,
+            "volume": 0.992,
+            "trend": 0.5,
+            "mean_rev": 0.829,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.82,
+          "ret5": -0.28,
+          "shares": 19,
+          "cost": 1001.87,
+          "top_signal": "volume"
+        },
+        {
+          "ticker": "TSLA",
+          "price": 383.9725,
+          "total": 0.6983,
+          "scores": {
+            "momentum": 0.932,
+            "volume": 0.092,
+            "trend": 1.0,
+            "mean_rev": 0.881,
+            "regime_fit": 0.3
+          },
+          "ret20": 10.12,
+          "ret5": 6.94,
+          "shares": 2,
+          "cost": 767.95,
+          "top_signal": "trend"
+        },
+        {
+          "ticker": "NOW",
+          "price": 158.55,
+          "total": 0.6913,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.002,
+            "trend": 1.0,
+            "mean_rev": 0.535,
+            "regime_fit": 0.3
+          },
+          "ret20": 19.41,
+          "ret5": 7.99,
+          "shares": 5,
+          "cost": 792.75,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "EWZ",
+          "entry_date": "2026-10-21",
+          "exit_date": "2026-10-26",
+          "entry_price": 42.95,
+          "exit_price": 31.71,
+          "shares": 27,
+          "cost": 1159.65,
+          "pnl": -303.48,
+          "pnl_pct": -26.17,
+          "reason": "stop loss (-20.1%)",
+          "top_signal": "momentum",
+          "entry_mode": "defensive"
+        },
+        {
+          "ticker": "AMGN",
+          "entry_date": "2026-10-19",
+          "exit_date": "2026-10-26",
+          "entry_price": 429.96,
+          "exit_price": 444.72,
+          "shares": 1,
+          "cost": 429.96,
+          "pnl": 14.76,
+          "pnl_pct": 3.43,
+          "reason": "rotation \u2192 EQT (score +0.31)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "PG",
+          "entry_date": "2026-10-22",
+          "exit_date": "2026-10-26",
+          "entry_price": 162.14,
+          "exit_price": 160.76,
+          "shares": 6,
+          "cost": 972.84,
+          "pnl": -8.28,
+          "pnl_pct": -0.85,
+          "reason": "rotation \u2192 TSLA (score +0.26)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "EQT",
+          "price": 54.27000045776367,
+          "total": 0.7068,
+          "scores": {
+            "momentum": 0.655,
+            "volume": 0.992,
+            "trend": 0.5,
+            "mean_rev": 0.829,
+            "regime_fit": 0.3
+          },
+          "ret20": 8.82,
+          "ret5": -0.28
+        },
+        {
+          "ticker": "TSLA",
+          "price": 393.614990234375,
+          "total": 0.6983,
+          "scores": {
+            "momentum": 0.932,
+            "volume": 0.092,
+            "trend": 1.0,
+            "mean_rev": 0.881,
+            "regime_fit": 0.3
+          },
+          "ret20": 10.12,
+          "ret5": 6.94
+        },
+        {
+          "ticker": "NOW",
+          "price": 156.97000122070312,
+          "total": 0.6913,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.002,
+            "trend": 1.0,
+            "mean_rev": 0.535,
+            "regime_fit": 0.3
+          },
+          "ret20": 19.41,
+          "ret5": 7.99
+        },
+        {
+          "ticker": "ALLE",
+          "price": 179.2100067138672,
+          "total": 0.6856,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.006,
+            "trend": 1.0,
+            "mean_rev": 0.442,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.34,
+          "ret5": 15.29
+        },
+        {
+          "ticker": "KMI",
+          "price": 34.1349983215332,
+          "total": 0.6792,
+          "scores": {
+            "momentum": 0.914,
+            "volume": 0.089,
+            "trend": 1.0,
+            "mean_rev": 0.7,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.44,
+          "ret5": 2.23
+        },
+        {
+          "ticker": "CCI",
+          "price": 87.05999755859375,
+          "total": 0.6784,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.02,
+            "trend": 1.0,
+            "mean_rev": 0.367,
+            "regime_fit": 0.3
+          },
+          "ret20": 29.75,
+          "ret5": 7.4
+        },
+        {
+          "ticker": "BRO",
+          "price": 71.08499908447266,
+          "total": 0.6755,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.244,
+            "trend": 0.5,
+            "mean_rev": 0.488,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.0,
+          "ret5": 2.69
+        },
+        {
+          "ticker": "USO",
+          "price": 167.4980010986328,
+          "total": 0.67,
+          "scores": {
+            "momentum": 0.978,
+            "volume": 0.002,
+            "trend": 1.0,
+            "mean_rev": 0.307,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.66,
+          "ret5": 4.16
+        },
+        {
+          "ticker": "APA",
+          "price": 51.78499984741211,
+          "total": 0.6682,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.041,
+            "trend": 1.0,
+            "mean_rev": 0.268,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.96,
+          "ret5": 4.6
+        },
+        {
+          "ticker": "GDDY",
+          "price": 109.55999755859375,
+          "total": 0.6643,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.131,
+            "trend": 1.0,
+            "mean_rev": 0.639,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.91,
+          "ret5": 2.68
+        }
+      ],
+      "prev_mode": "momentum"
     }
   ],
   "inception_date": "2026-08-11",
@@ -14023,11 +14311,11 @@
     "2026-10-20": "mean_reversion",
     "2026-10-21": "defensive",
     "2026-10-22": "momentum",
-    "2026-10-23": "momentum"
+    "2026-10-23": "momentum",
+    "2026-10-26": "momentum"
   },
   "mode_pnl": {
     "momentum": [
-      -5.08,
       -5.78,
       10.55,
       -2.05,
@@ -14046,7 +14334,8 @@
       -2.92,
       12.3,
       7.33,
-      -1.21
+      -1.21,
+      -0.85
     ],
     "trend_following": [
       -0.97,
@@ -14071,7 +14360,6 @@
       -10.2
     ],
     "mean_reversion": [
-      -2.24,
       -0.54,
       0.69,
       -3.86,
@@ -14090,7 +14378,8 @@
       2.2,
       2.35,
       1.31,
-      -1.66
+      -1.66,
+      3.43
     ],
     "defensive": [
       0.21,
@@ -14108,159 +14397,160 @@
       -6.61,
       -3.26,
       -2.27,
-      -2.28
+      -2.28,
+      -26.17
     ]
   },
   "last_backtest": [
     {
       "mode": "momentum",
-      "avg_return": 2.59,
+      "avg_return": 3.75,
       "picks": [
-        "WSM",
-        "UVXY",
-        "HST",
-        "MAR",
-        "CCI"
+        "CAH",
+        "HAS",
+        "HLT",
+        "MRNA",
+        "IT"
       ],
       "raw": [
         {
-          "ticker": "WSM",
-          "return": 0.55,
-          "score": 0.7535
+          "ticker": "CAH",
+          "return": 0.05,
+          "score": 0.7571
         },
         {
-          "ticker": "UVXY",
-          "return": 3.4,
-          "score": 0.7379
+          "ticker": "HAS",
+          "return": 19.79,
+          "score": 0.7451
         },
         {
-          "ticker": "HST",
-          "return": 3.25,
-          "score": 0.7346
+          "ticker": "HLT",
+          "return": 1.78,
+          "score": 0.7196
         },
         {
-          "ticker": "MAR",
-          "return": 0.98,
-          "score": 0.7332
+          "ticker": "MRNA",
+          "return": -13.83,
+          "score": 0.7098
         },
         {
-          "ticker": "CCI",
-          "return": 4.77,
-          "score": 0.7325
+          "ticker": "IT",
+          "return": 10.96,
+          "score": 0.6921
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": 1.168,
+      "avg_return": 2.216,
       "picks": [
-        "PPG",
-        "ECL",
-        "A",
-        "RF",
-        "EMR"
+        "VTRS",
+        "TMO",
+        "AMGN",
+        "DHR",
+        "GILD"
       ],
       "raw": [
         {
-          "ticker": "PPG",
-          "return": 3.1,
-          "score": 0.7319
+          "ticker": "VTRS",
+          "return": 0.27,
+          "score": 0.7226
         },
         {
-          "ticker": "ECL",
-          "return": 0.1,
-          "score": 0.7269
+          "ticker": "TMO",
+          "return": 0.14,
+          "score": 0.7157
         },
         {
-          "ticker": "A",
-          "return": -0.99,
-          "score": 0.7072
+          "ticker": "AMGN",
+          "return": 4.05,
+          "score": 0.7149
         },
         {
-          "ticker": "RF",
-          "return": 3.59,
-          "score": 0.6989
+          "ticker": "DHR",
+          "return": 3.18,
+          "score": 0.6949
         },
         {
-          "ticker": "EMR",
-          "return": 0.04,
-          "score": 0.6969
+          "ticker": "GILD",
+          "return": 3.44,
+          "score": 0.6892
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": -0.124,
+      "avg_return": 0.284,
       "picks": [
-        "WSM",
         "MRNA",
-        "ECL",
-        "MTD",
-        "HST"
+        "HLT",
+        "IT",
+        "CCL",
+        "MAR"
       ],
       "raw": [
         {
-          "ticker": "WSM",
-          "return": 0.55,
-          "score": 0.7965
-        },
-        {
           "ticker": "MRNA",
-          "return": -6.89,
-          "score": 0.7961
+          "return": -13.83,
+          "score": 0.788
         },
         {
-          "ticker": "ECL",
-          "return": 0.1,
-          "score": 0.7933
+          "ticker": "HLT",
+          "return": 1.78,
+          "score": 0.7839
         },
         {
-          "ticker": "MTD",
-          "return": 2.37,
-          "score": 0.7898
+          "ticker": "IT",
+          "return": 10.96,
+          "score": 0.7746
         },
         {
-          "ticker": "HST",
-          "return": 3.25,
-          "score": 0.7889
+          "ticker": "CCL",
+          "return": 1.25,
+          "score": 0.7702
+        },
+        {
+          "ticker": "MAR",
+          "return": 1.26,
+          "score": 0.7679
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": -1.714,
+      "avg_return": -1.296,
       "picks": [
         "MRNA",
-        "ECL",
-        "A",
+        "CCL",
         "VTRS",
-        "MTD"
+        "AMGN",
+        "HLT"
       ],
       "raw": [
         {
           "ticker": "MRNA",
-          "return": -6.89,
-          "score": 0.5545
+          "return": -13.83,
+          "score": 0.5493
         },
         {
-          "ticker": "ECL",
-          "return": 0.1,
-          "score": 0.546
-        },
-        {
-          "ticker": "A",
-          "return": -0.99,
-          "score": 0.5453
+          "ticker": "CCL",
+          "return": 1.25,
+          "score": 0.5369
         },
         {
           "ticker": "VTRS",
-          "return": -3.16,
-          "score": 0.5427
+          "return": 0.27,
+          "score": 0.5286
         },
         {
-          "ticker": "MTD",
-          "return": 2.37,
-          "score": 0.5405
+          "ticker": "AMGN",
+          "return": 4.05,
+          "score": 0.5272
+        },
+        {
+          "ticker": "HLT",
+          "return": 1.78,
+          "score": 0.5271
         }
       ]
     }
