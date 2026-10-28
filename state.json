@@ -1,5 +1,5 @@
 {
-  "capital": 703.06,
+  "capital": 143.36,
   "positions": {
     "NXPI": {
       "shares": 5,
@@ -18,24 +18,6 @@
       "top_signal": "trend",
       "entry_mode": "defensive",
       "thesis": "score +0.755 \u00b7 led by trend \u00b7 mode defensive"
-    },
-    "CCI": {
-      "shares": 15,
-      "cost_per_share": 91.02,
-      "cost": 1365.3,
-      "entry_date": "2026-10-23",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.842 \u00b7 led by momentum \u00b7 mode momentum"
-    },
-    "ISRG": {
-      "shares": 2,
-      "cost_per_share": 443.65,
-      "cost": 887.3,
-      "entry_date": "2026-10-23",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.672 \u00b7 led by momentum \u00b7 mode momentum"
     },
     "EQT": {
       "shares": 19,
@@ -90,6 +72,24 @@
       "top_signal": "trend",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.683 \u00b7 led by trend \u00b7 mode mean_reversion"
+    },
+    "WEAT": {
+      "shares": 70,
+      "cost_per_share": 22.35,
+      "cost": 1564.5,
+      "entry_date": "2026-10-28",
+      "top_signal": "mean_rev",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.477 \u00b7 led by mean_rev \u00b7 mode mean_reversion"
+    },
+    "EWZ": {
+      "shares": 35,
+      "cost_per_share": 34.17,
+      "cost": 1195.95,
+      "entry_date": "2026-10-28",
+      "top_signal": "regime_fit",
+      "entry_mode": "mean_reversion",
+      "thesis": "score +0.370 \u00b7 led by regime_fit \u00b7 mode mean_reversion"
     }
   },
   "closed": [
@@ -1786,6 +1786,34 @@
       "reason": "rotation \u2192 PANW (score +0.32)",
       "top_signal": "momentum",
       "entry_mode": "momentum"
+    },
+    {
+      "ticker": "CCI",
+      "entry_date": "2026-10-23",
+      "exit_date": "2026-10-28",
+      "entry_price": 91.02,
+      "exit_price": 87.86,
+      "shares": 15,
+      "cost": 1365.3,
+      "pnl": -47.4,
+      "pnl_pct": -3.47,
+      "reason": "rotation \u2192 WEAT (score +0.64)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
+    },
+    {
+      "ticker": "ISRG",
+      "entry_date": "2026-10-23",
+      "exit_date": "2026-10-28",
+      "entry_price": 443.65,
+      "exit_price": 441.425,
+      "shares": 2,
+      "cost": 887.3,
+      "pnl": -4.45,
+      "pnl_pct": -0.5,
+      "reason": "rotation \u2192 EWZ (score +0.44)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -1843,7 +1871,8 @@
     "2026-10-22": 10543.9,
     "2026-10-23": 10404.21,
     "2026-10-26": 10288.56,
-    "2026-10-27": 10372.31
+    "2026-10-27": 10372.31,
+    "2026-10-28": 10293.13
   },
   "signal_weights": {
     "momentum": 0.05,
@@ -1907,7 +1936,8 @@
     "2026-10-22": "neutral",
     "2026-10-23": "neutral",
     "2026-10-26": "neutral",
-    "2026-10-27": "neutral"
+    "2026-10-27": "neutral",
+    "2026-10-28": "bull"
   },
   "daily_log": [
     {
@@ -14542,6 +14572,219 @@
         }
       ],
       "prev_mode": "momentum"
+    },
+    {
+      "date": "2026-10-28",
+      "thesis": "Regime: BULL\nVIX 17.1 \u00b7 SPY trend up \u00b7 risk appetite down\nStrategy mode: mean_reversion \u2014 Buy oversold dips in trending markets\nBacktest (5d): mean reversion +1.41%  |  momentum -3.25%  |  trend following -4.67%  |  defensive -5.61%\nExited 2 position(s): CCI -47 (rotation \u2192 WEAT (score +0.64)), ISRG -4 (rotation \u2192 EWZ (score +0.44))\nEntered 2 position(s):\n  WEAT $22.35 \u00d7 70 shares (score +0.477, led by mean_rev)\n  EWZ $34.17 \u00d7 35 shares (score +0.370, led by regime_fit)\nTop candidates screened: WEAT +0.477, EWZ +0.370, FFIV +0.363\nSignal weights: mean_rev 55% \u00b7 volume 15% \u00b7 regime_fit 15% \u00b7 trend 10% \u00b7 momentum 5%",
+      "buys": [
+        {
+          "ticker": "WEAT",
+          "price": 22.35,
+          "total": 0.4773,
+          "scores": {
+            "momentum": -0.861,
+            "volume": 0.584,
+            "trend": -1.0,
+            "mean_rev": 0.887,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.05,
+          "ret5": -4.29,
+          "shares": 70,
+          "cost": 1564.5,
+          "top_signal": "mean_rev"
+        },
+        {
+          "ticker": "EWZ",
+          "price": 34.17,
+          "total": 0.3698,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.003,
+            "trend": -0.5,
+            "mean_rev": 0.582,
+            "regime_fit": 1.0
+          },
+          "ret20": -9.62,
+          "ret5": -20.81,
+          "shares": 35,
+          "cost": 1195.95,
+          "top_signal": "regime_fit"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "CCI",
+          "entry_date": "2026-10-23",
+          "exit_date": "2026-10-28",
+          "entry_price": 91.02,
+          "exit_price": 87.86,
+          "shares": 15,
+          "cost": 1365.3,
+          "pnl": -47.4,
+          "pnl_pct": -3.47,
+          "reason": "rotation \u2192 WEAT (score +0.64)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        },
+        {
+          "ticker": "ISRG",
+          "entry_date": "2026-10-23",
+          "exit_date": "2026-10-28",
+          "entry_price": 443.65,
+          "exit_price": 441.425,
+          "shares": 2,
+          "cost": 887.3,
+          "pnl": -4.45,
+          "pnl_pct": -0.5,
+          "reason": "rotation \u2192 EWZ (score +0.44)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "WEAT",
+          "price": 22.100000381469727,
+          "total": 0.4773,
+          "scores": {
+            "momentum": -0.861,
+            "volume": 0.584,
+            "trend": -1.0,
+            "mean_rev": 0.887,
+            "regime_fit": 0.3
+          },
+          "ret20": -10.05,
+          "ret5": -4.29
+        },
+        {
+          "ticker": "EWZ",
+          "price": 33.665000915527344,
+          "total": 0.3698,
+          "scores": {
+            "momentum": -1.0,
+            "volume": -0.003,
+            "trend": -0.5,
+            "mean_rev": 0.582,
+            "regime_fit": 1.0
+          },
+          "ret20": -9.62,
+          "ret5": -20.81
+        },
+        {
+          "ticker": "FFIV",
+          "price": 368.70001220703125,
+          "total": 0.3627,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 1.0,
+            "trend": -0.5,
+            "mean_rev": 0.487,
+            "regime_fit": 0.3
+          },
+          "ret20": -17.18,
+          "ret5": -19.6
+        },
+        {
+          "ticker": "XLC",
+          "price": 103.12999725341797,
+          "total": 0.3103,
+          "scores": {
+            "momentum": -0.664,
+            "volume": -0.069,
+            "trend": -1.0,
+            "mean_rev": 0.553,
+            "regime_fit": 1.0
+          },
+          "ret20": -7.06,
+          "ret5": -5.36
+        },
+        {
+          "ticker": "XYL",
+          "price": 88.1500015258789,
+          "total": 0.3008,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 1.0,
+            "trend": -1.0,
+            "mean_rev": 0.465,
+            "regime_fit": 0.3
+          },
+          "ret20": -12.96,
+          "ret5": -17.11
+        },
+        {
+          "ticker": "CORN",
+          "price": 17.479999542236328,
+          "total": 0.2813,
+          "scores": {
+            "momentum": -0.684,
+            "volume": -0.356,
+            "trend": -1.0,
+            "mean_rev": 0.771,
+            "regime_fit": 0.3
+          },
+          "ret20": -8.19,
+          "ret5": -2.78
+        },
+        {
+          "ticker": "UPRO",
+          "price": 151.11000061035156,
+          "total": 0.2617,
+          "scores": {
+            "momentum": 0.196,
+            "volume": -0.2,
+            "trend": 1.0,
+            "mean_rev": 0.058,
+            "regime_fit": 1.0
+          },
+          "ret20": 2.82,
+          "ret5": -0.59
+        },
+        {
+          "ticker": "VLUE",
+          "price": 198.32000732421875,
+          "total": 0.2546,
+          "scores": {
+            "momentum": 0.061,
+            "volume": 0.723,
+            "trend": 0.5,
+            "mean_rev": 0.087,
+            "regime_fit": 0.3
+          },
+          "ret20": 0.16,
+          "ret5": 1.97
+        },
+        {
+          "ticker": "CLOU",
+          "price": 30.239999771118164,
+          "total": 0.2502,
+          "scores": {
+            "momentum": 0.52,
+            "volume": 0.447,
+            "trend": 1.0,
+            "mean_rev": -0.169,
+            "regime_fit": 1.0
+          },
+          "ret20": 6.25,
+          "ret5": 2.02
+        },
+        {
+          "ticker": "META",
+          "price": 614.0,
+          "total": 0.2461,
+          "scores": {
+            "momentum": -1.0,
+            "volume": 0.059,
+            "trend": -0.5,
+            "mean_rev": 0.532,
+            "regime_fit": 0.3
+          },
+          "ret20": -15.33,
+          "ret5": -11.97
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
@@ -14601,12 +14844,11 @@
     "2026-10-22": "momentum",
     "2026-10-23": "momentum",
     "2026-10-26": "momentum",
-    "2026-10-27": "mean_reversion"
+    "2026-10-27": "mean_reversion",
+    "2026-10-28": "mean_reversion"
   },
   "mode_pnl": {
     "momentum": [
-      8.94,
-      -0.17,
       2.93,
       -0.24,
       -0.9,
@@ -14624,7 +14866,9 @@
       -0.85,
       -7.08,
       8.18,
-      3.08
+      3.08,
+      -3.47,
+      -0.5
     ],
     "trend_following": [
       -0.97,
@@ -14693,153 +14937,153 @@
   "last_backtest": [
     {
       "mode": "mean_reversion",
-      "avg_return": 3.708,
+      "avg_return": 1.41,
       "picks": [
-        "DHR",
-        "TMO",
-        "IQV",
-        "NXPI",
-        "WAT"
+        "LRCX",
+        "MTUM",
+        "SOXL",
+        "AMAT",
+        "SOXX"
       ],
       "raw": [
         {
-          "ticker": "DHR",
-          "return": 3.28,
-          "score": 0.7614
+          "ticker": "LRCX",
+          "return": -2.09,
+          "score": 0.4072
         },
         {
-          "ticker": "TMO",
-          "return": 1.7,
-          "score": 0.716
+          "ticker": "MTUM",
+          "return": 1.48,
+          "score": 0.3632
         },
         {
-          "ticker": "IQV",
-          "return": 2.07,
-          "score": 0.7094
+          "ticker": "SOXL",
+          "return": 3.33,
+          "score": 0.3542
         },
         {
-          "ticker": "NXPI",
-          "return": 5.99,
-          "score": 0.695
+          "ticker": "AMAT",
+          "return": 2.16,
+          "score": 0.3536
         },
         {
-          "ticker": "WAT",
-          "return": 5.5,
-          "score": 0.6845
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": 2.902,
-      "picks": [
-        "IT",
-        "HLT",
-        "CRL",
-        "HUM",
-        "HAS"
-      ],
-      "raw": [
-        {
-          "ticker": "IT",
-          "return": 0.77,
-          "score": 0.5496
-        },
-        {
-          "ticker": "HLT",
-          "return": -4.8,
-          "score": 0.5423
-        },
-        {
-          "ticker": "CRL",
-          "return": 13.16,
-          "score": 0.5409
-        },
-        {
-          "ticker": "HUM",
-          "return": -3.38,
-          "score": 0.5401
-        },
-        {
-          "ticker": "HAS",
-          "return": 8.76,
-          "score": 0.5355
+          "ticker": "SOXX",
+          "return": 2.17,
+          "score": 0.3454
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": 1.424,
+      "avg_return": -3.25,
       "picks": [
+        "CRL",
         "HAS",
         "HLT",
-        "IT",
-        "KDP",
-        "USO"
+        "CTAS",
+        "EWZ"
       ],
       "raw": [
         {
+          "ticker": "CRL",
+          "return": 7.87,
+          "score": 0.8616
+        },
+        {
           "ticker": "HAS",
-          "return": 8.76,
-          "score": 0.9253
+          "return": 4.03,
+          "score": 0.8002
         },
         {
           "ticker": "HLT",
-          "return": -4.8,
-          "score": 0.9086
+          "return": -3.27,
+          "score": 0.7041
         },
         {
-          "ticker": "IT",
-          "return": 0.77,
-          "score": 0.852
+          "ticker": "CTAS",
+          "return": -4.07,
+          "score": 0.671
         },
         {
-          "ticker": "KDP",
-          "return": 0.58,
-          "score": 0.7406
-        },
-        {
-          "ticker": "USO",
-          "return": 1.81,
-          "score": 0.7332
+          "ticker": "EWZ",
+          "return": -20.81,
+          "score": 0.6664
         }
       ]
     },
     {
       "mode": "trend_following",
-      "avg_return": 0.632,
+      "avg_return": -4.672,
       "picks": [
+        "EWZ",
+        "CRL",
         "HAS",
         "HLT",
-        "IT",
-        "HUM",
-        "USO"
+        "VLO"
       ],
       "raw": [
         {
+          "ticker": "EWZ",
+          "return": -20.81,
+          "score": 0.8225
+        },
+        {
+          "ticker": "CRL",
+          "return": 7.87,
+          "score": 0.8065
+        },
+        {
           "ticker": "HAS",
-          "return": 8.76,
-          "score": 0.8553
+          "return": 4.03,
+          "score": 0.7748
         },
         {
           "ticker": "HLT",
-          "return": -4.8,
-          "score": 0.852
+          "return": -3.27,
+          "score": 0.7375
         },
         {
-          "ticker": "IT",
-          "return": 0.77,
-          "score": 0.8355
+          "ticker": "VLO",
+          "return": -11.18,
+          "score": 0.7282
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": -5.608,
+      "picks": [
+        "EWZ",
+        "FBTC",
+        "IBIT",
+        "CLOU",
+        "QUAL"
+      ],
+      "raw": [
+        {
+          "ticker": "EWZ",
+          "return": -20.81,
+          "score": 0.8009
         },
         {
-          "ticker": "HUM",
-          "return": -3.38,
-          "score": 0.7916
+          "ticker": "FBTC",
+          "return": -4.01,
+          "score": 0.7778
         },
         {
-          "ticker": "USO",
-          "return": 1.81,
-          "score": 0.788
+          "ticker": "IBIT",
+          "return": -4.04,
+          "score": 0.769
+        },
+        {
+          "ticker": "CLOU",
+          "return": 2.02,
+          "score": 0.7581
+        },
+        {
+          "ticker": "QUAL",
+          "return": -1.2,
+          "score": 0.7562
         }
       ]
     }
