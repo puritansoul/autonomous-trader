@@ -1,5 +1,5 @@
 {
-  "capital": 146.0,
+  "capital": 352.76,
   "positions": {
     "NXPI": {
       "shares": 5,
@@ -37,24 +37,6 @@
       "entry_mode": "momentum",
       "thesis": "score +0.698 \u00b7 led by trend \u00b7 mode momentum"
     },
-    "CDNS": {
-      "shares": 2,
-      "cost_per_share": 328.0,
-      "cost": 656.0,
-      "entry_date": "2026-10-27",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.702 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
-    "PANW": {
-      "shares": 2,
-      "cost_per_share": 390.99,
-      "cost": 781.98,
-      "entry_date": "2026-10-27",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.688 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "JCI": {
       "shares": 6,
       "cost_per_share": 153.61,
@@ -90,6 +72,24 @@
       "top_signal": "momentum",
       "entry_mode": "mean_reversion",
       "thesis": "score +0.680 \u00b7 led by momentum \u00b7 mode mean_reversion"
+    },
+    "KDP": {
+      "shares": 19,
+      "cost_per_share": 36.13,
+      "cost": 686.47,
+      "entry_date": "2026-10-30",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.799 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "EL": {
+      "shares": 5,
+      "cost_per_share": 108.93,
+      "cost": 544.65,
+      "entry_date": "2026-10-30",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.798 \u00b7 led by momentum \u00b7 mode trend_following"
     }
   },
   "closed": [
@@ -1856,6 +1856,34 @@
       "reason": "rotation \u2192 DVA (score +0.61)",
       "top_signal": "mean_rev",
       "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "PANW",
+      "entry_date": "2026-10-27",
+      "exit_date": "2026-10-30",
+      "entry_price": 390.99,
+      "exit_price": 383.95,
+      "shares": 2,
+      "cost": 781.98,
+      "pnl": -14.08,
+      "pnl_pct": -1.8,
+      "reason": "rotation \u2192 KDP (score +1.16)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "CDNS",
+      "entry_date": "2026-10-27",
+      "exit_date": "2026-10-30",
+      "entry_price": 328.0,
+      "exit_price": 334.99,
+      "shares": 2,
+      "cost": 656.0,
+      "pnl": 13.98,
+      "pnl_pct": 2.13,
+      "reason": "rotation \u2192 EL (score +1.10)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
     }
   ],
   "nav_history": {
@@ -1915,13 +1943,14 @@
     "2026-10-26": 10288.56,
     "2026-10-27": 10372.31,
     "2026-10-28": 10293.13,
-    "2026-10-29": 10201.36
+    "2026-10-29": 10201.36,
+    "2026-10-30": 9995.79
   },
   "signal_weights": {
-    "momentum": 0.05,
-    "volume": 0.15,
-    "trend": 0.1,
-    "mean_rev": 0.55,
+    "momentum": 0.2,
+    "volume": 0.1,
+    "trend": 0.5,
+    "mean_rev": 0.05,
     "regime_fit": 0.15
   },
   "regime_history": {
@@ -1981,7 +2010,8 @@
     "2026-10-26": "neutral",
     "2026-10-27": "neutral",
     "2026-10-28": "bull",
-    "2026-10-29": "neutral"
+    "2026-10-29": "neutral",
+    "2026-10-30": "neutral"
   },
   "daily_log": [
     {
@@ -15073,11 +15103,224 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-10-30",
+      "thesis": "Regime: NEUTRAL\nVIX 23.8 \u00b7 SPY trend mixed \u00b7 risk appetite down\nStrategy mode switched: mean_reversion \u2192 trend_following (Follow SMA alignment and regime-matched assets)\nBacktest (5d): trend following +1.89%  |  defensive -1.05%  |  momentum -2.94%  |  mean reversion -5.36%\nExited 2 position(s): PANW -14 (rotation \u2192 KDP (score +1.16)), CDNS +14 (rotation \u2192 EL (score +1.10))\nEntered 2 position(s):\n  KDP $36.13 \u00d7 19 shares (score +0.799, led by momentum)\n  EL $108.93 \u00d7 5 shares (score +0.798, led by momentum)\nTop candidates screened: KDP +0.799, EL +0.798, CBOE +0.796\nSignal weights: trend 50% \u00b7 momentum 20% \u00b7 regime_fit 15% \u00b7 volume 10% \u00b7 mean_rev 5%",
+      "buys": [
+        {
+          "ticker": "KDP",
+          "price": 36.13,
+          "total": 0.7995,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.344,
+            "trend": 1.0,
+            "mean_rev": 0.402,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.13,
+          "ret5": 3.45,
+          "shares": 19,
+          "cost": 686.47,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "EL",
+          "price": 108.93,
+          "total": 0.7984,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.234,
+            "trend": 1.0,
+            "mean_rev": 0.6,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.2,
+          "ret5": 0.04,
+          "shares": 5,
+          "cost": 544.65,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "PANW",
+          "entry_date": "2026-10-27",
+          "exit_date": "2026-10-30",
+          "entry_price": 390.99,
+          "exit_price": 383.95,
+          "shares": 2,
+          "cost": 781.98,
+          "pnl": -14.08,
+          "pnl_pct": -1.8,
+          "reason": "rotation \u2192 KDP (score +1.16)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "CDNS",
+          "entry_date": "2026-10-27",
+          "exit_date": "2026-10-30",
+          "entry_price": 328.0,
+          "exit_price": 334.99,
+          "shares": 2,
+          "cost": 656.0,
+          "pnl": 13.98,
+          "pnl_pct": 2.13,
+          "reason": "rotation \u2192 EL (score +1.10)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "KDP",
+          "price": 35.877498626708984,
+          "total": 0.7995,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.344,
+            "trend": 1.0,
+            "mean_rev": 0.402,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.13,
+          "ret5": 3.45
+        },
+        {
+          "ticker": "EL",
+          "price": 108.70999908447266,
+          "total": 0.7984,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.234,
+            "trend": 1.0,
+            "mean_rev": 0.6,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.2,
+          "ret5": 0.04
+        },
+        {
+          "ticker": "CBOE",
+          "price": 336.2200012207031,
+          "total": 0.7957,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.171,
+            "trend": 1.0,
+            "mean_rev": 0.672,
+            "regime_fit": 0.3
+          },
+          "ret20": 23.95,
+          "ret5": -1.23
+        },
+        {
+          "ticker": "GDDY",
+          "price": 114.97000122070312,
+          "total": 0.7864,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.096,
+            "trend": 1.0,
+            "mean_rev": 0.637,
+            "regime_fit": 0.3
+          },
+          "ret20": 18.27,
+          "ret5": 1.93
+        },
+        {
+          "ticker": "TYL",
+          "price": 395.5799865722656,
+          "total": 0.7858,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.125,
+            "trend": 1.0,
+            "mean_rev": 0.567,
+            "regime_fit": 0.3
+          },
+          "ret20": 22.54,
+          "ret5": 1.39
+        },
+        {
+          "ticker": "XLV",
+          "price": 185.22000122070312,
+          "total": 0.7855,
+          "scores": {
+            "momentum": 0.942,
+            "volume": 0.266,
+            "trend": 1.0,
+            "mean_rev": 0.509,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.46,
+          "ret5": 3.31
+        },
+        {
+          "ticker": "EXC",
+          "price": 46.38999938964844,
+          "total": 0.7803,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.137,
+            "trend": 1.0,
+            "mean_rev": 0.433,
+            "regime_fit": 0.3
+          },
+          "ret20": 13.9,
+          "ret5": 4.41
+        },
+        {
+          "ticker": "LLY",
+          "price": 1422.800048828125,
+          "total": 0.7801,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.153,
+            "trend": 1.0,
+            "mean_rev": 0.397,
+            "regime_fit": 0.3
+          },
+          "ret20": 24.5,
+          "ret5": 11.73
+        },
+        {
+          "ticker": "CL",
+          "price": 96.1050033569336,
+          "total": 0.7778,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.021,
+            "trend": 1.0,
+            "mean_rev": 0.699,
+            "regime_fit": 0.3
+          },
+          "ret20": 14.71,
+          "ret5": 2.2
+        },
+        {
+          "ticker": "MDLZ",
+          "price": 64.93990325927734,
+          "total": 0.7761,
+          "scores": {
+            "momentum": 0.915,
+            "volume": 0.094,
+            "trend": 1.0,
+            "mean_rev": 0.775,
+            "regime_fit": 0.3
+          },
+          "ret20": 11.6,
+          "ret5": 1.79
+        }
+      ],
+      "prev_mode": "mean_reversion"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "mean_reversion",
+  "active_mode": "trend_following",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -15134,7 +15377,8 @@
     "2026-10-26": "momentum",
     "2026-10-27": "mean_reversion",
     "2026-10-28": "mean_reversion",
-    "2026-10-29": "mean_reversion"
+    "2026-10-29": "mean_reversion",
+    "2026-10-30": "trend_following"
   },
   "mode_pnl": {
     "momentum": [
@@ -15182,8 +15426,6 @@
       -10.2
     ],
     "mean_reversion": [
-      -3.86,
-      9.46,
       1.63,
       1.12,
       0.72,
@@ -15201,7 +15443,9 @@
       -1.66,
       3.43,
       -2.17,
-      -1.43
+      -1.43,
+      -1.8,
+      2.13
     ],
     "defensive": [
       0.21,
@@ -15225,154 +15469,154 @@
   },
   "last_backtest": [
     {
-      "mode": "mean_reversion",
-      "avg_return": 5.45,
+      "mode": "trend_following",
+      "avg_return": 1.892,
       "picks": [
-        "LUV",
-        "NXPI",
-        "URI",
-        "TSLA",
-        "CBRE"
+        "CCI",
+        "AMT",
+        "ALLE",
+        "RSG",
+        "EL"
       ],
       "raw": [
         {
-          "ticker": "LUV",
-          "return": 3.78,
-          "score": 0.7567
+          "ticker": "CCI",
+          "return": 3.77,
+          "score": 0.8636
         },
         {
-          "ticker": "NXPI",
-          "return": 10.3,
-          "score": 0.7505
+          "ticker": "AMT",
+          "return": -0.17,
+          "score": 0.8559
         },
         {
-          "ticker": "URI",
-          "return": 7.31,
-          "score": 0.7417
+          "ticker": "ALLE",
+          "return": 3.96,
+          "score": 0.802
         },
         {
-          "ticker": "TSLA",
-          "return": 8.2,
-          "score": 0.7067
+          "ticker": "RSG",
+          "return": 1.86,
+          "score": 0.7889
         },
         {
-          "ticker": "CBRE",
-          "return": -2.34,
-          "score": 0.7023
+          "ticker": "EL",
+          "return": 0.04,
+          "score": 0.7873
         }
       ]
     },
     {
       "mode": "defensive",
-      "avg_return": 3.98,
+      "avg_return": -1.052,
       "picks": [
-        "URI",
-        "CRL",
-        "RCL",
+        "AMT",
+        "CCI",
+        "CCL",
         "MPC",
-        "MAR"
+        "HPQ"
       ],
       "raw": [
         {
-          "ticker": "URI",
-          "return": 7.31,
-          "score": 0.5589
+          "ticker": "AMT",
+          "return": -0.17,
+          "score": 0.5549
         },
         {
-          "ticker": "CRL",
-          "return": 10.48,
-          "score": 0.5564
+          "ticker": "CCI",
+          "return": 3.77,
+          "score": 0.5522
         },
         {
-          "ticker": "RCL",
-          "return": 9.26,
-          "score": 0.5433
+          "ticker": "CCL",
+          "return": 10.15,
+          "score": 0.5496
         },
         {
           "ticker": "MPC",
-          "return": -7.91,
-          "score": 0.5398
+          "return": -3.15,
+          "score": 0.5352
         },
         {
-          "ticker": "MAR",
-          "return": 0.76,
-          "score": 0.5356
-        }
-      ]
-    },
-    {
-      "mode": "trend_following",
-      "avg_return": 2.176,
-      "picks": [
-        "CRL",
-        "PG",
-        "KDP",
-        "MAR",
-        "ULTA"
-      ],
-      "raw": [
-        {
-          "ticker": "CRL",
-          "return": 10.48,
-          "score": 0.8494
-        },
-        {
-          "ticker": "PG",
-          "return": -2.56,
-          "score": 0.8322
-        },
-        {
-          "ticker": "KDP",
-          "return": 0.13,
-          "score": 0.8305
-        },
-        {
-          "ticker": "MAR",
-          "return": 0.76,
-          "score": 0.8198
-        },
-        {
-          "ticker": "ULTA",
-          "return": 2.07,
-          "score": 0.813
+          "ticker": "HPQ",
+          "return": -15.86,
+          "score": 0.5291
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": 1.834,
+      "avg_return": -2.944,
       "picks": [
-        "CRL",
-        "PG",
-        "KDP",
-        "MAR",
-        "CSX"
+        "CCI",
+        "AMT",
+        "ALLE",
+        "EWZ",
+        "SBAC"
       ],
       "raw": [
         {
-          "ticker": "CRL",
-          "return": 10.48,
-          "score": 0.8869
+          "ticker": "CCI",
+          "return": 3.77,
+          "score": 0.9336
         },
         {
-          "ticker": "PG",
-          "return": -2.56,
-          "score": 0.8588
+          "ticker": "AMT",
+          "return": -0.17,
+          "score": 0.9078
         },
         {
-          "ticker": "KDP",
-          "return": 0.13,
-          "score": 0.8567
+          "ticker": "ALLE",
+          "return": 3.96,
+          "score": 0.7754
         },
         {
-          "ticker": "MAR",
-          "return": 0.76,
-          "score": 0.8188
+          "ticker": "EWZ",
+          "return": -24.28,
+          "score": 0.7749
         },
         {
-          "ticker": "CSX",
-          "return": 0.36,
-          "score": 0.8149
+          "ticker": "SBAC",
+          "return": 2.0,
+          "score": 0.7592
+        }
+      ]
+    },
+    {
+      "mode": "mean_reversion",
+      "avg_return": -5.356,
+      "picks": [
+        "EWZ",
+        "LUV",
+        "CIBR",
+        "MET",
+        "EMR"
+      ],
+      "raw": [
+        {
+          "ticker": "EWZ",
+          "return": -24.28,
+          "score": 0.7158
+        },
+        {
+          "ticker": "LUV",
+          "return": 0.84,
+          "score": 0.7094
+        },
+        {
+          "ticker": "CIBR",
+          "return": -5.78,
+          "score": 0.7089
+        },
+        {
+          "ticker": "MET",
+          "return": 1.26,
+          "score": 0.7085
+        },
+        {
+          "ticker": "EMR",
+          "return": 1.18,
+          "score": 0.6942
         }
       ]
     }
