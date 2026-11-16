@@ -1,24 +1,6 @@
 {
-  "capital": 204.1,
+  "capital": 386.91,
   "positions": {
-    "KDP": {
-      "shares": 19,
-      "cost_per_share": 36.13,
-      "cost": 686.47,
-      "entry_date": "2026-10-30",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.799 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
-    "EL": {
-      "shares": 5,
-      "cost_per_share": 108.93,
-      "cost": 544.65,
-      "entry_date": "2026-10-30",
-      "top_signal": "momentum",
-      "entry_mode": "trend_following",
-      "thesis": "score +0.798 \u00b7 led by momentum \u00b7 mode trend_following"
-    },
     "DD": {
       "shares": 8,
       "cost_per_share": 149.95,
@@ -55,24 +37,6 @@
       "entry_mode": "momentum",
       "thesis": "score +0.893 \u00b7 led by momentum \u00b7 mode momentum"
     },
-    "ALGN": {
-      "shares": 6,
-      "cost_per_share": 167.9,
-      "cost": 1007.4,
-      "entry_date": "2026-11-09",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.837 \u00b7 led by momentum \u00b7 mode momentum"
-    },
-    "KHC": {
-      "shares": 49,
-      "cost_per_share": 24.6,
-      "cost": 1205.4,
-      "entry_date": "2026-11-12",
-      "top_signal": "trend",
-      "entry_mode": "mean_reversion",
-      "thesis": "score +0.695 \u00b7 led by trend \u00b7 mode mean_reversion"
-    },
     "UPS": {
       "shares": 10,
       "cost_per_share": 111.8,
@@ -90,6 +54,42 @@
       "top_signal": "momentum",
       "entry_mode": "trend_following",
       "thesis": "score +0.774 \u00b7 led by momentum \u00b7 mode trend_following"
+    },
+    "SQQQ": {
+      "shares": 19,
+      "cost_per_share": 44.15,
+      "cost": 838.85,
+      "entry_date": "2026-11-16",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.873 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "VIXY": {
+      "shares": 47,
+      "cost_per_share": 18.08,
+      "cost": 849.76,
+      "entry_date": "2026-11-16",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.869 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "SOXS": {
+      "shares": 14,
+      "cost_per_share": 57.18,
+      "cost": 800.52,
+      "entry_date": "2026-11-16",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.864 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "VXX": {
+      "shares": 44,
+      "cost_per_share": 18.88,
+      "cost": 830.72,
+      "entry_date": "2026-11-16",
+      "top_signal": "momentum",
+      "entry_mode": "defensive",
+      "thesis": "score +0.863 \u00b7 led by momentum \u00b7 mode defensive"
     }
   },
   "closed": [
@@ -2150,6 +2150,62 @@
       "reason": "rotation \u2192 ECHO (score +0.28)",
       "top_signal": "momentum",
       "entry_mode": "momentum"
+    },
+    {
+      "ticker": "KDP",
+      "entry_date": "2026-10-30",
+      "exit_date": "2026-11-16",
+      "entry_price": 36.13,
+      "exit_price": 36.71,
+      "shares": 19,
+      "cost": 686.47,
+      "pnl": 11.02,
+      "pnl_pct": 1.61,
+      "reason": "max hold 17d",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "EL",
+      "entry_date": "2026-10-30",
+      "exit_date": "2026-11-16",
+      "entry_price": 108.93,
+      "exit_price": 110.5,
+      "shares": 5,
+      "cost": 544.65,
+      "pnl": 7.85,
+      "pnl_pct": 1.44,
+      "reason": "max hold 17d",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following"
+    },
+    {
+      "ticker": "KHC",
+      "entry_date": "2026-11-12",
+      "exit_date": "2026-11-16",
+      "entry_price": 24.6,
+      "exit_price": 25.35,
+      "shares": 49,
+      "cost": 1205.4,
+      "pnl": 36.75,
+      "pnl_pct": 3.05,
+      "reason": "rotation \u2192 SQQQ (score +0.42)",
+      "top_signal": "trend",
+      "entry_mode": "mean_reversion"
+    },
+    {
+      "ticker": "ALGN",
+      "entry_date": "2026-11-09",
+      "exit_date": "2026-11-16",
+      "entry_price": 167.9,
+      "exit_price": 168.42,
+      "shares": 6,
+      "cost": 1007.4,
+      "pnl": 3.12,
+      "pnl_pct": 0.31,
+      "reason": "rotation \u2192 VIXY (score +0.41)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -2219,14 +2275,15 @@
     "2026-11-09": 10667.13,
     "2026-11-10": 10716.64,
     "2026-11-12": 10452.14,
-    "2026-11-13": 10606.86
+    "2026-11-13": 10606.86,
+    "2026-11-16": 10745.9
   },
   "signal_weights": {
-    "momentum": 0.2,
-    "volume": 0.1,
-    "trend": 0.5,
-    "mean_rev": 0.05,
-    "regime_fit": 0.15
+    "momentum": 0.1,
+    "volume": 0.05,
+    "trend": 0.2,
+    "mean_rev": 0.1,
+    "regime_fit": 0.55
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -2295,7 +2352,8 @@
     "2026-11-09": "bear",
     "2026-11-10": "bear",
     "2026-11-12": "neutral",
-    "2026-11-13": "neutral"
+    "2026-11-13": "neutral",
+    "2026-11-16": "bear"
   },
   "daily_log": [
     {
@@ -17548,11 +17606,286 @@
         }
       ],
       "prev_mode": "mean_reversion"
+    },
+    {
+      "date": "2026-11-16",
+      "thesis": "Regime: BEAR\nVIX 22.9 \u00b7 SPY trend down \u00b7 risk appetite down\nStrategy mode switched: trend_following \u2192 defensive (Prioritize regime-fit safe-haven assets)\nBacktest (5d): defensive +8.23%  |  trend following +5.50%  |  mean reversion +1.31%  |  momentum -1.22%\nExited 4 position(s): KDP +11 (max hold 17d), EL +8 (max hold 17d), KHC +37 (rotation \u2192 SQQQ (score +0.42)), ALGN +3 (rotation \u2192 VIXY (score +0.41))\nEntered 4 position(s):\n  SQQQ $44.15 \u00d7 19 shares (score +0.873, led by momentum)\n  VIXY $18.08 \u00d7 47 shares (score +0.869, led by momentum)\n  SOXS $57.18 \u00d7 14 shares (score +0.864, led by momentum)\n  VXX $18.88 \u00d7 44 shares (score +0.863, led by momentum)\nTop candidates screened: SQQQ +0.873, VIXY +0.869, SOXS +0.864\nSignal weights: regime_fit 55% \u00b7 trend 20% \u00b7 momentum 10% \u00b7 mean_rev 10% \u00b7 volume 5%",
+      "buys": [
+        {
+          "ticker": "SQQQ",
+          "price": 44.15,
+          "total": 0.8734,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.062,
+            "trend": 1.0,
+            "mean_rev": 0.265,
+            "regime_fit": 1.0
+          },
+          "ret20": 22.33,
+          "ret5": 7.27,
+          "shares": 19,
+          "cost": 838.85,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "VIXY",
+          "price": 18.08,
+          "total": 0.8688,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.11,
+            "trend": 1.0,
+            "mean_rev": 0.133,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.99,
+          "ret5": 7.41,
+          "shares": 47,
+          "cost": 849.76,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "SOXS",
+          "price": 57.18,
+          "total": 0.8644,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.034,
+            "trend": 1.0,
+            "mean_rev": 0.162,
+            "regime_fit": 1.0
+          },
+          "ret20": 26.91,
+          "ret5": 7.31,
+          "shares": 14,
+          "cost": 800.52,
+          "top_signal": "momentum"
+        },
+        {
+          "ticker": "VXX",
+          "price": 18.88,
+          "total": 0.8627,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.03,
+            "trend": 1.0,
+            "mean_rev": 0.142,
+            "regime_fit": 1.0
+          },
+          "ret20": 15.57,
+          "ret5": 8.1,
+          "shares": 44,
+          "cost": 830.72,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "KDP",
+          "entry_date": "2026-10-30",
+          "exit_date": "2026-11-16",
+          "entry_price": 36.13,
+          "exit_price": 36.71,
+          "shares": 19,
+          "cost": 686.47,
+          "pnl": 11.02,
+          "pnl_pct": 1.61,
+          "reason": "max hold 17d",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "EL",
+          "entry_date": "2026-10-30",
+          "exit_date": "2026-11-16",
+          "entry_price": 108.93,
+          "exit_price": 110.5,
+          "shares": 5,
+          "cost": 544.65,
+          "pnl": 7.85,
+          "pnl_pct": 1.44,
+          "reason": "max hold 17d",
+          "top_signal": "momentum",
+          "entry_mode": "trend_following"
+        },
+        {
+          "ticker": "KHC",
+          "entry_date": "2026-11-12",
+          "exit_date": "2026-11-16",
+          "entry_price": 24.6,
+          "exit_price": 25.35,
+          "shares": 49,
+          "cost": 1205.4,
+          "pnl": 36.75,
+          "pnl_pct": 3.05,
+          "reason": "rotation \u2192 SQQQ (score +0.42)",
+          "top_signal": "trend",
+          "entry_mode": "mean_reversion"
+        },
+        {
+          "ticker": "ALGN",
+          "entry_date": "2026-11-09",
+          "exit_date": "2026-11-16",
+          "entry_price": 167.9,
+          "exit_price": 168.42,
+          "shares": 6,
+          "cost": 1007.4,
+          "pnl": 3.12,
+          "pnl_pct": 0.31,
+          "reason": "rotation \u2192 VIXY (score +0.41)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "SQQQ",
+          "price": 45.900001525878906,
+          "total": 0.8734,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.062,
+            "trend": 1.0,
+            "mean_rev": 0.265,
+            "regime_fit": 1.0
+          },
+          "ret20": 22.33,
+          "ret5": 7.27
+        },
+        {
+          "ticker": "VIXY",
+          "price": 19.559999465942383,
+          "total": 0.8688,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.11,
+            "trend": 1.0,
+            "mean_rev": 0.133,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.99,
+          "ret5": 7.41
+        },
+        {
+          "ticker": "SOXS",
+          "price": 59.18000030517578,
+          "total": 0.8644,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.034,
+            "trend": 1.0,
+            "mean_rev": 0.162,
+            "regime_fit": 1.0
+          },
+          "ret20": 26.91,
+          "ret5": 7.31
+        },
+        {
+          "ticker": "VXX",
+          "price": 20.559999465942383,
+          "total": 0.8627,
+          "scores": {
+            "momentum": 1.0,
+            "volume": -0.03,
+            "trend": 1.0,
+            "mean_rev": 0.142,
+            "regime_fit": 1.0
+          },
+          "ret20": 15.57,
+          "ret5": 8.1
+        },
+        {
+          "ticker": "UVXY",
+          "price": 20.450000762939453,
+          "total": 0.8614,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.024,
+            "trend": 1.0,
+            "mean_rev": 0.102,
+            "regime_fit": 1.0
+          },
+          "ret20": 17.66,
+          "ret5": 11.08
+        },
+        {
+          "ticker": "SPXS",
+          "price": 26.93000030517578,
+          "total": 0.8567,
+          "scores": {
+            "momentum": 0.872,
+            "volume": -0.036,
+            "trend": 1.0,
+            "mean_rev": 0.213,
+            "regime_fit": 1.0
+          },
+          "ret20": 9.92,
+          "ret5": 5.11
+        },
+        {
+          "ticker": "PSQ",
+          "price": 27.68000030517578,
+          "total": 0.8539,
+          "scores": {
+            "momentum": 0.673,
+            "volume": 0.123,
+            "trend": 1.0,
+            "mean_rev": 0.304,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.12,
+          "ret5": 2.56
+        },
+        {
+          "ticker": "XLP",
+          "price": 92.5999984741211,
+          "total": 0.8392,
+          "scores": {
+            "momentum": 0.511,
+            "volume": 0.003,
+            "trend": 1.0,
+            "mean_rev": 0.38,
+            "regime_fit": 1.0
+          },
+          "ret20": 6.18,
+          "ret5": 1.88
+        },
+        {
+          "ticker": "XLU",
+          "price": 44.119998931884766,
+          "total": 0.8305,
+          "scores": {
+            "momentum": 0.519,
+            "volume": -0.136,
+            "trend": 1.0,
+            "mean_rev": 0.354,
+            "regime_fit": 1.0
+          },
+          "ret20": 6.67,
+          "ret5": 0.75
+        },
+        {
+          "ticker": "SDS",
+          "price": 57.959999084472656,
+          "total": 0.8253,
+          "scores": {
+            "momentum": 0.609,
+            "volume": -0.167,
+            "trend": 1.0,
+            "mean_rev": 0.227,
+            "regime_fit": 1.0
+          },
+          "ret20": 6.98,
+          "ret5": 3.44
+        }
+      ],
+      "prev_mode": "trend_following"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "trend_following",
+  "active_mode": "defensive",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -17619,11 +17952,11 @@
     "2026-11-09": "momentum",
     "2026-11-10": "momentum",
     "2026-11-12": "mean_reversion",
-    "2026-11-13": "trend_following"
+    "2026-11-13": "trend_following",
+    "2026-11-16": "defensive"
   },
   "mode_pnl": {
     "momentum": [
-      4.88,
       -10.09,
       5.74,
       -2.92,
@@ -17642,11 +17975,10 @@
       5.11,
       1.94,
       2.4,
-      5.75
+      5.75,
+      0.31
     ],
     "trend_following": [
-      2.37,
-      -0.84,
       -9.06,
       3.13,
       -0.29,
@@ -17664,10 +17996,11 @@
       2.32,
       -10.2,
       -3.4,
-      12.68
+      12.68,
+      1.61,
+      1.44
     ],
     "mean_reversion": [
-      -0.62,
       3.66,
       5.04,
       -2.87,
@@ -17686,7 +18019,8 @@
       15.77,
       4.04,
       7.27,
-      -1.78
+      -1.78,
+      3.05
     ],
     "defensive": [
       -4.66,
@@ -17713,154 +18047,154 @@
   },
   "last_backtest": [
     {
-      "mode": "trend_following",
-      "avg_return": 1.682,
+      "mode": "defensive",
+      "avg_return": 8.234,
       "picks": [
-        "ABNB",
-        "CPAY",
-        "FOXA",
-        "ALGN",
-        "VTRS"
+        "SQQQ",
+        "SOXS",
+        "VXX",
+        "VIXY",
+        "UVXY"
       ],
       "raw": [
         {
-          "ticker": "ABNB",
-          "return": -1.86,
-          "score": 0.8839
+          "ticker": "SQQQ",
+          "return": 7.27,
+          "score": 0.8692
         },
         {
-          "ticker": "CPAY",
-          "return": 1.53,
-          "score": 0.8229
+          "ticker": "SOXS",
+          "return": 7.31,
+          "score": 0.8634
         },
         {
-          "ticker": "FOXA",
-          "return": 2.56,
-          "score": 0.8206
+          "ticker": "VXX",
+          "return": 8.1,
+          "score": 0.8528
         },
         {
-          "ticker": "ALGN",
-          "return": 1.73,
-          "score": 0.8107
+          "ticker": "VIXY",
+          "return": 7.41,
+          "score": 0.8511
         },
         {
-          "ticker": "VTRS",
-          "return": 4.45,
-          "score": 0.8107
+          "ticker": "UVXY",
+          "return": 11.08,
+          "score": 0.8458
+        }
+      ]
+    },
+    {
+      "mode": "trend_following",
+      "avg_return": 5.5,
+      "picks": [
+        "SOXS",
+        "SQQQ",
+        "FERG",
+        "VXX",
+        "VIXY"
+      ],
+      "raw": [
+        {
+          "ticker": "SOXS",
+          "return": 7.31,
+          "score": 0.8649
+        },
+        {
+          "ticker": "SQQQ",
+          "return": 7.27,
+          "score": 0.8642
+        },
+        {
+          "ticker": "FERG",
+          "return": -2.59,
+          "score": 0.8505
+        },
+        {
+          "ticker": "VXX",
+          "return": 8.1,
+          "score": 0.8414
+        },
+        {
+          "ticker": "VIXY",
+          "return": 7.41,
+          "score": 0.8381
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": 0.836,
+      "avg_return": 1.31,
       "picks": [
-        "FOXA",
-        "FOX",
-        "ABNB",
-        "LYV",
-        "GRMN"
+        "EXR",
+        "MSI",
+        "SPG",
+        "EW",
+        "CLX"
       ],
       "raw": [
         {
-          "ticker": "FOXA",
-          "return": 2.56,
-          "score": 0.8443
+          "ticker": "EXR",
+          "return": -1.21,
+          "score": 0.6601
         },
         {
-          "ticker": "FOX",
-          "return": 2.42,
-          "score": 0.7729
+          "ticker": "MSI",
+          "return": 1.17,
+          "score": 0.6255
         },
         {
-          "ticker": "ABNB",
-          "return": -1.86,
-          "score": 0.7727
+          "ticker": "SPG",
+          "return": -0.1,
+          "score": 0.6205
         },
         {
-          "ticker": "LYV",
-          "return": 1.7,
-          "score": 0.7434
+          "ticker": "EW",
+          "return": 2.29,
+          "score": 0.6145
         },
         {
-          "ticker": "GRMN",
-          "return": -0.64,
-          "score": 0.7188
-        }
-      ]
-    },
-    {
-      "mode": "defensive",
-      "avg_return": 0.602,
-      "picks": [
-        "ABNB",
-        "FOXA",
-        "INTU",
-        "BRO",
-        "WM"
-      ],
-      "raw": [
-        {
-          "ticker": "ABNB",
-          "return": -1.86,
-          "score": 0.5928
-        },
-        {
-          "ticker": "FOXA",
-          "return": 2.56,
-          "score": 0.5733
-        },
-        {
-          "ticker": "INTU",
-          "return": -0.2,
-          "score": 0.5513
-        },
-        {
-          "ticker": "BRO",
-          "return": -0.47,
-          "score": 0.5503
-        },
-        {
-          "ticker": "WM",
-          "return": 2.98,
-          "score": 0.5493
+          "ticker": "CLX",
+          "return": 4.4,
+          "score": 0.5892
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -0.358,
+      "avg_return": -1.22,
       "picks": [
-        "ABNB",
-        "SDS",
-        "CPAY",
-        "VIXY",
-        "CHTR"
+        "FERG",
+        "ALGN",
+        "GWW",
+        "EXR",
+        "NXPI"
       ],
       "raw": [
         {
-          "ticker": "ABNB",
-          "return": -1.86,
-          "score": 0.9539
+          "ticker": "FERG",
+          "return": -2.59,
+          "score": 0.8929
         },
         {
-          "ticker": "SDS",
-          "return": -4.6,
-          "score": 0.8354
+          "ticker": "ALGN",
+          "return": -4.75,
+          "score": 0.8372
         },
         {
-          "ticker": "CPAY",
-          "return": 1.53,
-          "score": 0.8251
+          "ticker": "GWW",
+          "return": 3.32,
+          "score": 0.8111
         },
         {
-          "ticker": "VIXY",
-          "return": -13.93,
-          "score": 0.804
+          "ticker": "EXR",
+          "return": -1.21,
+          "score": 0.7843
         },
         {
-          "ticker": "CHTR",
-          "return": 17.07,
-          "score": 0.8012
+          "ticker": "NXPI",
+          "return": -0.87,
+          "score": 0.7741
         }
       ]
     }
