@@ -1,5 +1,5 @@
 {
-  "capital": 386.91,
+  "capital": 78.09,
   "positions": {
     "DD": {
       "shares": 8,
@@ -27,15 +27,6 @@
       "top_signal": "momentum",
       "entry_mode": "momentum",
       "thesis": "score +0.877 \u00b7 led by momentum \u00b7 mode momentum"
-    },
-    "FERG": {
-      "shares": 4,
-      "cost_per_share": 251.68,
-      "cost": 1006.72,
-      "entry_date": "2026-11-09",
-      "top_signal": "momentum",
-      "entry_mode": "momentum",
-      "thesis": "score +0.893 \u00b7 led by momentum \u00b7 mode momentum"
     },
     "UPS": {
       "shares": 10,
@@ -90,6 +81,15 @@
       "top_signal": "momentum",
       "entry_mode": "defensive",
       "thesis": "score +0.863 \u00b7 led by momentum \u00b7 mode defensive"
+    },
+    "UVXY": {
+      "shares": 66,
+      "cost_per_share": 19.91,
+      "cost": 1314.06,
+      "entry_date": "2026-11-17",
+      "top_signal": "momentum",
+      "entry_mode": "trend_following",
+      "thesis": "score +0.905 \u00b7 led by momentum \u00b7 mode trend_following"
     }
   },
   "closed": [
@@ -2206,6 +2206,20 @@
       "reason": "rotation \u2192 VIXY (score +0.41)",
       "top_signal": "momentum",
       "entry_mode": "momentum"
+    },
+    {
+      "ticker": "FERG",
+      "entry_date": "2026-11-09",
+      "exit_date": "2026-11-17",
+      "entry_price": 251.68,
+      "exit_price": 251.31,
+      "shares": 4,
+      "cost": 1006.72,
+      "pnl": -1.48,
+      "pnl_pct": -0.15,
+      "reason": "rotation \u2192 UVXY (score +0.23)",
+      "top_signal": "momentum",
+      "entry_mode": "momentum"
     }
   ],
   "nav_history": {
@@ -2276,14 +2290,15 @@
     "2026-11-10": 10716.64,
     "2026-11-12": 10452.14,
     "2026-11-13": 10606.86,
-    "2026-11-16": 10745.9
+    "2026-11-16": 10745.9,
+    "2026-11-17": 10996.52
   },
   "signal_weights": {
-    "momentum": 0.1,
-    "volume": 0.05,
-    "trend": 0.2,
-    "mean_rev": 0.1,
-    "regime_fit": 0.55
+    "momentum": 0.2,
+    "volume": 0.1,
+    "trend": 0.5,
+    "mean_rev": 0.05,
+    "regime_fit": 0.15
   },
   "regime_history": {
     "2026-08-11": "bull",
@@ -2353,7 +2368,8 @@
     "2026-11-10": "bear",
     "2026-11-12": "neutral",
     "2026-11-13": "neutral",
-    "2026-11-16": "bear"
+    "2026-11-16": "bear",
+    "2026-11-17": "bear"
   },
   "daily_log": [
     {
@@ -17881,11 +17897,193 @@
         }
       ],
       "prev_mode": "trend_following"
+    },
+    {
+      "date": "2026-11-17",
+      "thesis": "Regime: BEAR\nVIX 25.5 \u00b7 SPY trend down \u00b7 risk appetite down\nStrategy mode switched: defensive \u2192 trend_following (Follow SMA alignment and regime-matched assets)\nBacktest (5d): trend following +9.34%  |  defensive +8.16%  |  mean reversion -0.69%  |  momentum -3.41%\nExited 1 position(s): FERG -1 (rotation \u2192 UVXY (score +0.23))\nEntered 1 position(s):\n  UVXY $19.91 \u00d7 66 shares (score +0.905, led by momentum)\nTop candidates screened: VIXY +0.932, UVXY +0.905, SPXS +0.875\nSignal weights: trend 50% \u00b7 momentum 20% \u00b7 regime_fit 15% \u00b7 volume 10% \u00b7 mean_rev 5%",
+      "buys": [
+        {
+          "ticker": "UVXY",
+          "price": 19.91,
+          "total": 0.9053,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.454,
+            "trend": 1.0,
+            "mean_rev": 0.198,
+            "regime_fit": 1.0
+          },
+          "ret20": 32.01,
+          "ret5": 24.07,
+          "shares": 66,
+          "cost": 1314.06,
+          "top_signal": "momentum"
+        }
+      ],
+      "exits": [
+        {
+          "ticker": "FERG",
+          "entry_date": "2026-11-09",
+          "exit_date": "2026-11-17",
+          "entry_price": 251.68,
+          "exit_price": 251.31,
+          "shares": 4,
+          "cost": 1006.72,
+          "pnl": -1.48,
+          "pnl_pct": -0.15,
+          "reason": "rotation \u2192 UVXY (score +0.23)",
+          "top_signal": "momentum",
+          "entry_mode": "momentum"
+        }
+      ],
+      "scores_top": [
+        {
+          "ticker": "VIXY",
+          "price": 21.010000228881836,
+          "total": 0.932,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.705,
+            "trend": 1.0,
+            "mean_rev": 0.229,
+            "regime_fit": 1.0
+          },
+          "ret20": 24.61,
+          "ret5": 15.69
+        },
+        {
+          "ticker": "UVXY",
+          "price": 22.68000030517578,
+          "total": 0.9053,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.454,
+            "trend": 1.0,
+            "mean_rev": 0.198,
+            "regime_fit": 1.0
+          },
+          "ret20": 32.01,
+          "ret5": 24.07
+        },
+        {
+          "ticker": "SPXS",
+          "price": 27.780000686645508,
+          "total": 0.8751,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.107,
+            "trend": 1.0,
+            "mean_rev": 0.288,
+            "regime_fit": 1.0
+          },
+          "ret20": 14.46,
+          "ret5": 7.26
+        },
+        {
+          "ticker": "SQQQ",
+          "price": 46.95000076293945,
+          "total": 0.875,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.094,
+            "trend": 1.0,
+            "mean_rev": 0.312,
+            "regime_fit": 1.0
+          },
+          "ret20": 24.6,
+          "ret5": 7.78
+        },
+        {
+          "ticker": "VXX",
+          "price": 22.139999389648438,
+          "total": 0.8735,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.117,
+            "trend": 1.0,
+            "mean_rev": 0.236,
+            "regime_fit": 1.0
+          },
+          "ret20": 26.01,
+          "ret5": 16.96
+        },
+        {
+          "ticker": "SOXS",
+          "price": 58.77000045776367,
+          "total": 0.8604,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.01,
+            "trend": 1.0,
+            "mean_rev": 0.188,
+            "regime_fit": 1.0
+          },
+          "ret20": 24.7,
+          "ret5": 6.16
+        },
+        {
+          "ticker": "SDS",
+          "price": 59.18000030517578,
+          "total": 0.852,
+          "scores": {
+            "momentum": 0.861,
+            "volume": 0.149,
+            "trend": 1.0,
+            "mean_rev": 0.3,
+            "regime_fit": 1.0
+          },
+          "ret20": 9.86,
+          "ret5": 4.85
+        },
+        {
+          "ticker": "PSQ",
+          "price": 27.8799991607666,
+          "total": 0.7978,
+          "scores": {
+            "momentum": 0.718,
+            "volume": -0.135,
+            "trend": 1.0,
+            "mean_rev": 0.353,
+            "regime_fit": 1.0
+          },
+          "ret20": 8.69,
+          "ret5": 2.65
+        },
+        {
+          "ticker": "TSCO",
+          "price": 38.4900016784668,
+          "total": 0.7942,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.145,
+            "trend": 1.0,
+            "mean_rev": 0.694,
+            "regime_fit": 0.3
+          },
+          "ret20": 16.96,
+          "ret5": 2.64
+        },
+        {
+          "ticker": "SWK",
+          "price": 108.80999755859375,
+          "total": 0.7905,
+          "scores": {
+            "momentum": 1.0,
+            "volume": 0.347,
+            "trend": 1.0,
+            "mean_rev": 0.216,
+            "regime_fit": 0.3
+          },
+          "ret20": 15.64,
+          "ret5": -6.55
+        }
+      ],
+      "prev_mode": "defensive"
     }
   ],
   "inception_date": "2026-08-11",
   "pending_orders": [],
-  "active_mode": "defensive",
+  "active_mode": "trend_following",
   "mode_history": {
     "2026-08-12": "momentum",
     "2026-08-14": "momentum",
@@ -17953,11 +18151,11 @@
     "2026-11-10": "momentum",
     "2026-11-12": "mean_reversion",
     "2026-11-13": "trend_following",
-    "2026-11-16": "defensive"
+    "2026-11-16": "defensive",
+    "2026-11-17": "trend_following"
   },
   "mode_pnl": {
     "momentum": [
-      -10.09,
       5.74,
       -2.92,
       12.3,
@@ -17976,7 +18174,8 @@
       1.94,
       2.4,
       5.75,
-      0.31
+      0.31,
+      -0.15
     ],
     "trend_following": [
       -9.06,
@@ -18047,154 +18246,154 @@
   },
   "last_backtest": [
     {
-      "mode": "defensive",
-      "avg_return": 8.234,
-      "picks": [
-        "SQQQ",
-        "SOXS",
-        "VXX",
-        "VIXY",
-        "UVXY"
-      ],
-      "raw": [
-        {
-          "ticker": "SQQQ",
-          "return": 7.27,
-          "score": 0.8692
-        },
-        {
-          "ticker": "SOXS",
-          "return": 7.31,
-          "score": 0.8634
-        },
-        {
-          "ticker": "VXX",
-          "return": 8.1,
-          "score": 0.8528
-        },
-        {
-          "ticker": "VIXY",
-          "return": 7.41,
-          "score": 0.8511
-        },
-        {
-          "ticker": "UVXY",
-          "return": 11.08,
-          "score": 0.8458
-        }
-      ]
-    },
-    {
       "mode": "trend_following",
-      "avg_return": 5.5,
+      "avg_return": 9.336,
       "picks": [
+        "CLX",
         "SOXS",
         "SQQQ",
-        "FERG",
         "VXX",
         "VIXY"
       ],
       "raw": [
         {
+          "ticker": "CLX",
+          "return": 0.09,
+          "score": 0.885
+        },
+        {
           "ticker": "SOXS",
-          "return": 7.31,
-          "score": 0.8649
+          "return": 6.16,
+          "score": 0.8613
         },
         {
           "ticker": "SQQQ",
-          "return": 7.27,
-          "score": 0.8642
-        },
-        {
-          "ticker": "FERG",
-          "return": -2.59,
-          "score": 0.8505
+          "return": 7.78,
+          "score": 0.859
         },
         {
           "ticker": "VXX",
-          "return": 8.1,
-          "score": 0.8414
+          "return": 16.96,
+          "score": 0.8283
         },
         {
           "ticker": "VIXY",
-          "return": 7.41,
-          "score": 0.8381
+          "return": 15.69,
+          "score": 0.824
+        }
+      ]
+    },
+    {
+      "mode": "defensive",
+      "avg_return": 8.162,
+      "picks": [
+        "SQQQ",
+        "SOXS",
+        "PSQ",
+        "SPXS",
+        "VXX"
+      ],
+      "raw": [
+        {
+          "ticker": "SQQQ",
+          "return": 7.78,
+          "score": 0.8714
+        },
+        {
+          "ticker": "SOXS",
+          "return": 6.16,
+          "score": 0.864
+        },
+        {
+          "ticker": "PSQ",
+          "return": 2.65,
+          "score": 0.8493
+        },
+        {
+          "ticker": "SPXS",
+          "return": 7.26,
+          "score": 0.8484
+        },
+        {
+          "ticker": "VXX",
+          "return": 16.96,
+          "score": 0.8468
         }
       ]
     },
     {
       "mode": "mean_reversion",
-      "avg_return": 1.31,
+      "avg_return": -0.692,
       "picks": [
+        "CLX",
         "EXR",
-        "MSI",
         "SPG",
-        "EW",
-        "CLX"
+        "MSI",
+        "AIZ"
       ],
       "raw": [
         {
-          "ticker": "EXR",
-          "return": -1.21,
-          "score": 0.6601
+          "ticker": "CLX",
+          "return": 0.09,
+          "score": 0.7845
         },
         {
-          "ticker": "MSI",
-          "return": 1.17,
-          "score": 0.6255
+          "ticker": "EXR",
+          "return": -1.51,
+          "score": 0.6367
         },
         {
           "ticker": "SPG",
-          "return": -0.1,
-          "score": 0.6205
+          "return": -1.81,
+          "score": 0.6248
         },
         {
-          "ticker": "EW",
-          "return": 2.29,
-          "score": 0.6145
+          "ticker": "MSI",
+          "return": -0.23,
+          "score": 0.611
         },
         {
-          "ticker": "CLX",
-          "return": 4.4,
-          "score": 0.5892
+          "ticker": "AIZ",
+          "return": 0.0,
+          "score": 0.6077
         }
       ]
     },
     {
       "mode": "momentum",
-      "avg_return": -1.22,
+      "avg_return": -3.408,
       "picks": [
-        "FERG",
+        "CLX",
+        "TTWO",
         "ALGN",
-        "GWW",
-        "EXR",
-        "NXPI"
+        "AIZ",
+        "PSA"
       ],
       "raw": [
         {
-          "ticker": "FERG",
-          "return": -2.59,
-          "score": 0.8929
+          "ticker": "CLX",
+          "return": 0.09,
+          "score": 0.955
+        },
+        {
+          "ticker": "TTWO",
+          "return": -9.22,
+          "score": 0.8359
         },
         {
           "ticker": "ALGN",
-          "return": -4.75,
-          "score": 0.8372
+          "return": -6.2,
+          "score": 0.7663
         },
         {
-          "ticker": "GWW",
-          "return": 3.32,
-          "score": 0.8111
+          "ticker": "AIZ",
+          "return": 0.0,
+          "score": 0.7657
         },
         {
-          "ticker": "EXR",
-          "return": -1.21,
-          "score": 0.7843
-        },
-        {
-          "ticker": "NXPI",
-          "return": -0.87,
-          "score": 0.7741
+          "ticker": "PSA",
+          "return": -1.71,
+          "score": 0.752
         }
       ]
     }
