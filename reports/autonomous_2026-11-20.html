@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autonomous Trader — 2026-11-20</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0a0a; color: #e0e0e0;
+           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    h1 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    h2 { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase;
+          letter-spacing: 1px; margin: 20px 0 8px; }
+    .header { display:flex; justify-content:space-between; align-items:center;
+               border-bottom: 1px solid #1e1e1e; padding-bottom: 12px; margin-bottom: 16px; }
+    .regime-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px;
+                     font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .regime-bull   { background:#003300; color:#00e676; border:1px solid #00e676; }
+    .regime-bear   { background:#330000; color:#ff5252; border:1px solid #ff5252; }
+    .regime-neutral{ background:#1a1a1a; color:#ffd740; border:1px solid #ffd740; }
+    .stats-row { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:16px; }
+    .stat-card { background:#111; border-radius:10px; padding:14px 16px;
+                  border: 1px solid #1e1e1e; }
+    .stat-label { font-size:11px; color:#666; text-transform:uppercase; letter-spacing:.5px; }
+    .stat-val   { font-size:22px; font-weight:700; margin-top:4px; }
+    .drag-handle { color:#2a2a2a; cursor:grab; margin-right:6px; font-size:16px; user-select:none; }
+    .drag-handle:active { cursor:grabbing; }
+    .section-toggle:hover .drag-handle { color:#555; }
+    .sortable-ghost { opacity:0.3; background:#1a1a1a; }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+    .card { background:#111; border-radius:10px; padding:16px;
+             border:1px solid #1e1e1e; overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th { color:#555; font-weight:600; padding:6px 8px; text-align:left;
+          border-bottom:1px solid #1e1e1e; font-size:11px; text-transform:uppercase; }
+    td { padding:6px 8px; border-bottom:1px solid #141414; }
+    tr:last-child td { border-bottom:none; }
+    .tk { font-weight:700; color:#7c4dff; }
+    .spark-wrap { margin: 4px 0 12px; }
+    details { margin-bottom: 4px; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    .section-toggle {
+      cursor: pointer; padding: 10px 4px; margin: 12px 0 0;
+      font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase;
+      letter-spacing: 1px; border-bottom: 1px solid #1e1e1e; user-select: none;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .section-toggle .toggle-arrow { color: #555; transition: transform .15s; font-style: normal; display:inline-block; }
+    details[open] > .section-toggle .toggle-arrow { color: #7c4dff; transform: rotate(90deg); }
+    details[open] > summary.section-toggle { color: #ccc; border-bottom-color: #333; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>&#9889; Autonomous Trader</h1>
+      <div style="font-size:12px;color:#555;margin-top:2px">Nov 20, 2026 · $10k paper portfolio</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px">Mode</span>
+      <span style="font-size:13px;font-weight:700;color:#66bb6a">Defensive</span>
+      <span class="regime-badge regime-bear" style="margin-left:8px">bear</span>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Portfolio</div>
+      <div class="stat-val" id="port-value">$11,882</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Today</div>
+      <div class="stat-val" id="day-pnl" data-pnl="824.40" style="color:#00e676">+$824<br>
+        <span style="font-size:14px">+7.46%</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Since Inception</div>
+      <div class="stat-val" id="since-inception" data-starting="10000.00" style="color:#00e676">
+        <span id="since-inception-pct">+18.82%</span><br>
+        <span id="since-inception-dollar" style="font-size:14px">+$1,882</span>
+      </div>
+      <div style="font-size:10px;color:#333;margin-top:5px">Aug 11, 2026</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unrealized P&amp;L</div>
+      <div class="stat-val" id="unreal-pnl" style="color:#00e676">+$923</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Cash</div>
+      <div class="stat-val">$701
+        <span style="font-size:14px;color:#666"> / 6%</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="sections-container">
+
+  <details open data-section="briefing">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Today's Briefing</summary>
+    <div style="margin-top:10px"><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ff5252;font-weight:700">BEAR</span> market · VIX <strong>35.9</strong> · SPY trend <strong>down</strong> · risk appetite <strong>down</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Staying in <span style="color:#66bb6a;font-weight:700">Defensive</span> mode. Prioritize regime-fit safe-haven assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#66bb6a;font-weight:700">Defensive <span style="color:#ffd740;font-size:10px">▲ selected</span></span><span style="width:56px;font-size:13px;font-weight:700;color:#00e676">+10.17%</span><span style="font-size:11px;color:#444">XLP, XLU, SQQQ</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#ff9800;font-weight:400">Momentum</span><span style="width:56px;font-size:13px;font-weight:700;color:#ff5252">-4.78%</span><span style="font-size:11px;color:#444">UPS, GWW, REGN</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#00bcd4;font-weight:400">Trend Following</span><span style="width:56px;font-size:13px;font-weight:700;color:#ff5252">-4.78%</span><span style="font-size:11px;color:#444">CLX, UPS, GWW</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#ab47bc;font-weight:400">Mean Reversion</span><span style="width:56px;font-size:13px;font-weight:700;color:#ff5252">-4.95%</span><span style="font-size:11px;color:#444">CLX, VLTO, EW</span></div></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SQQQ</span> sold · P&L <span style="color:#00e676;font-weight:700">+$129</span> <span style="font-size:11px;color:#555">(take profit (+30.4%))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SOXS</span> sold · P&L <span style="color:#00e676;font-weight:700">+$138</span> <span style="font-size:11px;color:#555">(take profit (+45.6%))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">EW</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$5</span> <span style="font-size:11px;color:#555">(rotation → VIXY (score +0.44))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">DPZ</span> sold · P&L <span style="color:#00e676;font-weight:700">+$18</span> <span style="font-size:11px;color:#555">(rotation → VXX (score +0.42))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VIXY</span> @ <strong>$23.19</strong> × 42 shares · score <span style="color:#ffd740">+0.930</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VXX</span> @ <strong>$24.23</strong> × 40 shares · score <span style="color:#ffd740">+0.924</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">UVXY</span> @ <strong>$26.21</strong> × 36 shares · score <span style="color:#ffd740">+0.902</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">XLP</span> @ <strong>$90.93</strong> × 8 shares · score <span style="color:#ffd740">+0.779</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VIXY</span> +0.930</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VXX</span> +0.924</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SH</span> +0.920</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SPXS</span> +0.914</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SDS</span> +0.913</span></div>
+  </div>
+</div></div>
+  </details>
+
+  <details open data-section="equity">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Equity &amp; Mode</summary>
+    <div class="two-col" style="margin-top:10px">
+      <div class="card">
+        <h2>Equity Curve</h2>
+        <div class="spark-wrap"><svg width="300" height="60" viewBox="0 0 300 60" style="display:block">
+          <polygon points="0,60 0.0,53.2 4.2,53.1 8.5,53.1 12.7,54.6 16.9,56.0 21.1,51.9 25.4,51.9 29.6,49.5 33.8,51.8 38.0,48.3 42.3,48.1 46.5,43.0 50.7,48.7 54.9,49.5 59.2,54.6 63.4,53.2 67.6,43.7 71.8,44.5 76.1,45.0 80.3,48.2 84.5,47.2 88.7,52.2 93.0,48.7 97.2,48.7 101.4,50.7 105.6,51.5 109.9,44.7 114.1,44.9 118.3,36.5 122.5,36.5 126.8,36.5 131.0,35.8 135.2,33.9 139.4,39.8 143.7,41.3 147.9,40.2 152.1,37.9 156.3,35.6 160.6,30.8 164.8,31.7 169.0,32.1 173.2,39.6 177.5,38.9 181.7,40.9 185.9,40.8 190.1,42.4 194.4,37.5 198.6,35.6 202.8,37.5 207.0,37.6 211.3,35.6 215.5,39.0 219.7,42.7 223.9,45.7 228.2,43.5 232.4,45.6 236.6,48.0 240.8,53.3 245.1,49.8 249.3,46.7 253.5,39.5 257.7,34.2 262.0,35.7 266.2,35.8 270.4,34.5 274.6,41.4 278.9,37.4 283.1,33.7 287.3,27.2 291.5,30.1 295.8,25.6 300.0,4.0 300,60" fill="#00e67618"/>
+          <polyline points="0.0,53.2 4.2,53.1 8.5,53.1 12.7,54.6 16.9,56.0 21.1,51.9 25.4,51.9 29.6,49.5 33.8,51.8 38.0,48.3 42.3,48.1 46.5,43.0 50.7,48.7 54.9,49.5 59.2,54.6 63.4,53.2 67.6,43.7 71.8,44.5 76.1,45.0 80.3,48.2 84.5,47.2 88.7,52.2 93.0,48.7 97.2,48.7 101.4,50.7 105.6,51.5 109.9,44.7 114.1,44.9 118.3,36.5 122.5,36.5 126.8,36.5 131.0,35.8 135.2,33.9 139.4,39.8 143.7,41.3 147.9,40.2 152.1,37.9 156.3,35.6 160.6,30.8 164.8,31.7 169.0,32.1 173.2,39.6 177.5,38.9 181.7,40.9 185.9,40.8 190.1,42.4 194.4,37.5 198.6,35.6 202.8,37.5 207.0,37.6 211.3,35.6 215.5,39.0 219.7,42.7 223.9,45.7 228.2,43.5 232.4,45.6 236.6,48.0 240.8,53.3 245.1,49.8 249.3,46.7 253.5,39.5 257.7,34.2 262.0,35.7 266.2,35.8 270.4,34.5 274.6,41.4 278.9,37.4 283.1,33.7 287.3,27.2 291.5,30.1 295.8,25.6 300.0,4.0" fill="none" stroke="#00e676" stroke-width="2"/>
+        </svg></div>
+        <div style="font-size:11px;color:#444">72 trading days tracked</div>
+      </div>
+      <div class="card">
+        <h2>Active Mode · Signal Weights</h2>
+        <div style="margin-top:8px"><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">regime_fit</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:55%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">55%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">trend</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:20%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">20%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">momentum</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:10%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">10%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">mean_rev</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:10%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">10%</span>
+        </div><div style="display:flex;align-items:center;gap:8px;margin:3px 0">
+          <span style="width:90px;font-size:11px;color:#aaa">volume</span>
+          <div style="flex:1;height:8px;background:#1e1e1e;border-radius:4px">
+            <div style="width:5%;height:8px;background:#7c4dff;border-radius:4px"></div>
+          </div>
+          <span style="width:32px;font-size:11px;color:#ccc;text-align:right">5%</span>
+        </div></div>
+      </div>
+    </div>
+  </details>
+
+  <details open data-section="scorecard">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Strategy Mode Scorecard</summary>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 16px">
+      <div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#ff9800;font-size:13px">Momentum</span>
+            <span style="font-size:10px;color:#444;font-weight:600"></span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:8px">Chase price strength and volume breakouts</div>
+          <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
+          <div style="display:flex;gap:12px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:700;color:#ff5252">-4.78%</span>
+            <span style="font-size:11px;color:#555;align-self:flex-end">UPS, GWW, REGN</span>
+          </div>
+          <div style="font-size:11px;color:#444">10/20 trades</div>
+        </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#00bcd4;font-size:13px">Trend Following</span>
+            <span style="font-size:10px;color:#444;font-weight:600"></span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:8px">Follow SMA alignment and regime-matched assets</div>
+          <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
+          <div style="display:flex;gap:12px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:700;color:#ff5252">-4.78%</span>
+            <span style="font-size:11px;color:#555;align-self:flex-end">CLX, UPS, GWW</span>
+          </div>
+          <div style="font-size:11px;color:#444">12/20 trades</div>
+        </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:1px solid #1e1e1e">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#ab47bc;font-size:13px">Mean Reversion</span>
+            <span style="font-size:10px;color:#444;font-weight:600"></span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:8px">Buy oversold dips in trending markets</div>
+          <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
+          <div style="display:flex;gap:12px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:700;color:#ff5252">-4.95%</span>
+            <span style="font-size:11px;color:#555;align-self:flex-end">CLX, VLTO, EW</span>
+          </div>
+          <div style="font-size:11px;color:#444">11/20 trades</div>
+        </div><div style="background:#111;border-radius:8px;padding:12px 14px;border:2px solid #66bb6a">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span style="font-weight:700;color:#66bb6a;font-size:13px">Defensive</span>
+            <span style="font-size:10px;color:#00e676;font-weight:600">● ACTIVE</span>
+          </div>
+          <div style="font-size:11px;color:#555;margin-bottom:8px">Prioritize regime-fit safe-haven assets</div>
+          <div style="font-size:11px;color:#666;margin-bottom:4px">5-day paper backtest</div>
+          <div style="display:flex;gap:12px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:700;color:#00e676">+10.17%</span>
+            <span style="font-size:11px;color:#555;align-self:flex-end">XLP, XLU, SQQQ</span>
+          </div>
+          <div style="font-size:11px;color:#444">8/20 trades</div>
+        </div>
+    </div>
+  </details>
+
+  <details open data-section="positions">
+    <summary class="section-toggle">
+      <span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Open Positions
+      <span id="live-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#555;border:1px solid #222;font-weight:400;text-transform:none;letter-spacing:0">fetching…</span>
+      <span id="live-port" style="font-size:12px;color:#888;margin-left:auto;font-weight:400;text-transform:none;letter-spacing:0"></span>
+    </summary>
+    <div class="card" style="margin:10px 0 16px">
+      <table>
+        <thead><tr>
+          <th>Ticker</th><th>Entry</th><th>Hold</th><th>Cost/sh</th>
+          <th>Now</th><th>Shares</th><th>Cost</th><th>Value</th><th>Unreal P&amp;L</th><th>Lead Signal</th>
+        </tr></thead>
+        <tbody><tr data-ticker="PSQ" data-cost="27.7200" data-shares="40">
+          <td class="tk">PSQ</td>
+          <td>2026-11-18</td>
+          <td>2d</td>
+          <td>$27.72</td>
+          <td class="live-price">$29.95</td>
+          <td>40</td>
+          <td>$1,109</td>
+          <td class="live-curval">$1,198</td>
+          <td class="live-upnl" style="color:#00e676">+89 (+8.0%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr data-ticker="SDS" data-cost="59.0400" data-shares="19">
+          <td class="tk">SDS</td>
+          <td>2026-11-18</td>
+          <td>2d</td>
+          <td>$59.04</td>
+          <td class="live-price">$66.27</td>
+          <td>19</td>
+          <td>$1,122</td>
+          <td class="live-curval">$1,259</td>
+          <td class="live-upnl" style="color:#00e676">+137 (+12.2%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr data-ticker="SH" data-cost="33.8700" data-shares="32">
+          <td class="tk">SH</td>
+          <td>2026-11-18</td>
+          <td>2d</td>
+          <td>$33.87</td>
+          <td class="live-price">$35.92</td>
+          <td>32</td>
+          <td>$1,084</td>
+          <td class="live-curval">$1,149</td>
+          <td class="live-upnl" style="color:#00e676">+66 (+6.1%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr data-ticker="SHY" data-cost="81.2900" data-shares="16">
+          <td class="tk">SHY</td>
+          <td>2026-11-19</td>
+          <td>1d</td>
+          <td>$81.29</td>
+          <td class="live-price">$81.61</td>
+          <td>16</td>
+          <td>$1,301</td>
+          <td class="live-curval">$1,306</td>
+          <td class="live-upnl" style="color:#00e676">+5 (+0.4%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr><tr data-ticker="SPXS" data-cost="27.6850" data-shares="40">
+          <td class="tk">SPXS</td>
+          <td>2026-11-18</td>
+          <td>2d</td>
+          <td>$27.68</td>
+          <td class="live-price">$32.95</td>
+          <td>40</td>
+          <td>$1,107</td>
+          <td class="live-curval">$1,318</td>
+          <td class="live-upnl" style="color:#00e676">+211 (+19.0%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr data-ticker="TSCO" data-cost="38.3700" data-shares="24">
+          <td class="tk">TSCO</td>
+          <td>2026-11-19</td>
+          <td>1d</td>
+          <td>$38.37</td>
+          <td class="live-price">$38.44</td>
+          <td>24</td>
+          <td>$921</td>
+          <td class="live-curval">$923</td>
+          <td class="live-upnl" style="color:#00e676">+2 (+0.2%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr data-ticker="UVXY" data-cost="26.2100" data-shares="36">
+          <td class="tk">UVXY</td>
+          <td>2026-11-20</td>
+          <td>0d</td>
+          <td>$26.21</td>
+          <td class="live-price">$31.13</td>
+          <td>36</td>
+          <td>$944</td>
+          <td class="live-curval">$1,121</td>
+          <td class="live-upnl" style="color:#00e676">+177 (+18.8%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr data-ticker="VIXY" data-cost="23.1900" data-shares="42">
+          <td class="tk">VIXY</td>
+          <td>2026-11-20</td>
+          <td>0d</td>
+          <td>$23.19</td>
+          <td class="live-price">$26.06</td>
+          <td>42</td>
+          <td>$974</td>
+          <td class="live-curval">$1,095</td>
+          <td class="live-upnl" style="color:#00e676">+121 (+12.4%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr data-ticker="VXX" data-cost="24.2300" data-shares="40">
+          <td class="tk">VXX</td>
+          <td>2026-11-20</td>
+          <td>0d</td>
+          <td>$24.23</td>
+          <td class="live-price">$27.22</td>
+          <td>40</td>
+          <td>$969</td>
+          <td class="live-curval">$1,089</td>
+          <td class="live-upnl" style="color:#00e676">+120 (+12.3%)</td>
+          <td style="font-size:11px;color:#aaa">momentum</td>
+        </tr><tr data-ticker="XLP" data-cost="90.9300" data-shares="8">
+          <td class="tk">XLP</td>
+          <td>2026-11-20</td>
+          <td>0d</td>
+          <td>$90.93</td>
+          <td class="live-price">$90.51</td>
+          <td>8</td>
+          <td>$727</td>
+          <td class="live-curval">$724</td>
+          <td class="live-upnl" style="color:#ff5252">-3 (-0.5%)</td>
+          <td style="font-size:11px;color:#aaa">trend</td>
+        </tr></tbody>
+        <tfoot>
+      <tr style="border-top:1px solid #2a2a2a;font-weight:600">
+        <td colspan="6" style="text-align:right;font-size:11px;color:#444;padding-right:8px">Total</td>
+        <td>$10,258</td>
+        <td id="tfoot-curval">$11,181</td>
+        <td id="tfoot-upnl" style="color:#00e676">+$923</td>
+        <td></td>
+      </tr>
+    </tfoot>
+      </table>
+    </div>
+  </details>
+
+  <details data-section="closed">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Closed Trades</summary>
+    <div class="card" style="margin:10px 0 16px">
+      <table>
+        <thead><tr>
+          <th>Ticker</th><th>Entry</th><th>Exit</th><th>Entry $</th>
+          <th>Exit $</th><th>Shares</th><th>P&amp;L</th><th>Reason</th>
+        </tr></thead>
+        <tbody><tr>
+          <td class="tk">DPZ</td>
+          <td>2026-11-19</td>
+          <td>2026-11-20</td>
+          <td>$348.72</td>
+          <td>$357.94</td>
+          <td>2</td>
+          <td style="color:#00e676">+18 (+2.6%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → VXX (score +0.42)</td>
+        </tr><tr>
+          <td class="tk">EW</td>
+          <td>2026-11-19</td>
+          <td>2026-11-20</td>
+          <td>$105.11</td>
+          <td>$104.48</td>
+          <td>8</td>
+          <td style="color:#ff5252">-5 (-0.6%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → VIXY (score +0.44)</td>
+        </tr><tr>
+          <td class="tk">SOXS</td>
+          <td>2026-11-16</td>
+          <td>2026-11-20</td>
+          <td>$57.18</td>
+          <td>$67.06</td>
+          <td>14</td>
+          <td style="color:#00e676">+138 (+17.3%)</td>
+          <td style="font-size:11px;color:#aaa">take profit (+45.6%)</td>
+        </tr><tr>
+          <td class="tk">SQQQ</td>
+          <td>2026-11-16</td>
+          <td>2026-11-20</td>
+          <td>$44.15</td>
+          <td>$50.93</td>
+          <td>19</td>
+          <td style="color:#00e676">+129 (+15.4%)</td>
+          <td style="font-size:11px;color:#aaa">take profit (+30.4%)</td>
+        </tr><tr>
+          <td class="tk">UVXY</td>
+          <td>2026-11-17</td>
+          <td>2026-11-19</td>
+          <td>$19.91</td>
+          <td>$20.81</td>
+          <td>66</td>
+          <td style="color:#00e676">+59 (+4.5%)</td>
+          <td style="font-size:11px;color:#aaa">take profit (+27.7%)</td>
+        </tr><tr>
+          <td class="tk">VXX</td>
+          <td>2026-11-16</td>
+          <td>2026-11-19</td>
+          <td>$18.88</td>
+          <td>$20.73</td>
+          <td>44</td>
+          <td style="color:#00e676">+81 (+9.8%)</td>
+          <td style="font-size:11px;color:#aaa">take profit (+26.2%)</td>
+        </tr><tr>
+          <td class="tk">VIXY</td>
+          <td>2026-11-16</td>
+          <td>2026-11-19</td>
+          <td>$18.08</td>
+          <td>$19.88</td>
+          <td>47</td>
+          <td style="color:#00e676">+85 (+10.0%)</td>
+          <td style="font-size:11px;color:#aaa">take profit (+26.5%)</td>
+        </tr><tr>
+          <td class="tk">SWK</td>
+          <td>2026-11-04</td>
+          <td>2026-11-19</td>
+          <td>$111.56</td>
+          <td>$110.37</td>
+          <td>9</td>
+          <td style="color:#ff5252">-11 (-1.1%)</td>
+          <td style="font-size:11px;color:#aaa">max hold 15d</td>
+        </tr><tr>
+          <td class="tk">UPS</td>
+          <td>2026-11-13</td>
+          <td>2026-11-18</td>
+          <td>$111.80</td>
+          <td>$109.92</td>
+          <td>10</td>
+          <td style="color:#ff5252">-19 (-1.7%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → SPXS (score +0.39)</td>
+        </tr><tr>
+          <td class="tk">ECHO</td>
+          <td>2026-11-13</td>
+          <td>2026-11-18</td>
+          <td>$99.13</td>
+          <td>$99.29</td>
+          <td>11</td>
+          <td style="color:#00e676">+2 (+0.2%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → SDS (score +0.50)</td>
+        </tr><tr>
+          <td class="tk">FISV</td>
+          <td>2026-11-03</td>
+          <td>2026-11-18</td>
+          <td>$56.59</td>
+          <td>$61.85</td>
+          <td>22</td>
+          <td style="color:#00e676">+116 (+9.3%)</td>
+          <td style="font-size:11px;color:#aaa">max hold 15d</td>
+        </tr><tr>
+          <td class="tk">DD</td>
+          <td>2026-11-03</td>
+          <td>2026-11-18</td>
+          <td>$149.95</td>
+          <td>$149.35</td>
+          <td>8</td>
+          <td style="color:#ff5252">-5 (-0.4%)</td>
+          <td style="font-size:11px;color:#aaa">max hold 15d</td>
+        </tr><tr>
+          <td class="tk">FERG</td>
+          <td>2026-11-09</td>
+          <td>2026-11-17</td>
+          <td>$251.68</td>
+          <td>$251.31</td>
+          <td>4</td>
+          <td style="color:#ff5252">-1 (-0.1%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → UVXY (score +0.23)</td>
+        </tr><tr>
+          <td class="tk">ALGN</td>
+          <td>2026-11-09</td>
+          <td>2026-11-16</td>
+          <td>$167.90</td>
+          <td>$168.42</td>
+          <td>6</td>
+          <td style="color:#00e676">+3 (+0.3%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → VIXY (score +0.41)</td>
+        </tr><tr>
+          <td class="tk">KHC</td>
+          <td>2026-11-12</td>
+          <td>2026-11-16</td>
+          <td>$24.60</td>
+          <td>$25.35</td>
+          <td>49</td>
+          <td style="color:#00e676">+37 (+3.0%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → SQQQ (score +0.42)</td>
+        </tr><tr>
+          <td class="tk">EL</td>
+          <td>2026-10-30</td>
+          <td>2026-11-16</td>
+          <td>$108.93</td>
+          <td>$110.50</td>
+          <td>5</td>
+          <td style="color:#00e676">+8 (+1.4%)</td>
+          <td style="font-size:11px;color:#aaa">max hold 17d</td>
+        </tr><tr>
+          <td class="tk">KDP</td>
+          <td>2026-10-30</td>
+          <td>2026-11-16</td>
+          <td>$36.13</td>
+          <td>$36.71</td>
+          <td>19</td>
+          <td style="color:#00e676">+11 (+1.6%)</td>
+          <td style="font-size:11px;color:#aaa">max hold 17d</td>
+        </tr><tr>
+          <td class="tk">TTWO</td>
+          <td>2026-11-10</td>
+          <td>2026-11-13</td>
+          <td>$218.18</td>
+          <td>$230.72</td>
+          <td>4</td>
+          <td style="color:#00e676">+50 (+5.8%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → ECHO (score +0.28)</td>
+        </tr><tr>
+          <td class="tk">LMT</td>
+          <td>2026-11-12</td>
+          <td>2026-11-13</td>
+          <td>$615.97</td>
+          <td>$605.00</td>
+          <td>1</td>
+          <td style="color:#ff5252">-11 (-1.8%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → UPS (score +0.83)</td>
+        </tr><tr>
+          <td class="tk">VXX</td>
+          <td>2026-11-05</td>
+          <td>2026-11-12</td>
+          <td>$17.30</td>
+          <td>$18.28</td>
+          <td>71</td>
+          <td style="color:#00e676">+70 (+5.7%)</td>
+          <td style="font-size:11px;color:#aaa">rotation → KHC (score +0.24)</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </details>
+
+  <details open data-section="log">
+    <summary class="section-toggle"><span class="drag-handle">⠿</span><i class="toggle-arrow">▶</i> Daily Thesis Log</summary>
+    <div style="margin:10px 0 16px"><details open><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-20</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ff5252;font-weight:700">BEAR</span> market · VIX <strong>35.9</strong> · SPY trend <strong>down</strong> · risk appetite <strong>down</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Staying in <span style="color:#66bb6a;font-weight:700">Defensive</span> mode. Prioritize regime-fit safe-haven assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#66bb6a;font-weight:700">Defensive <span style="color:#ffd740;font-size:10px">▲ selected</span></span><span style="width:56px;font-size:13px;font-weight:700;color:#00e676">+10.17%</span><span style="font-size:11px;color:#444">XLP, XLU, SQQQ</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#ff9800;font-weight:400">Momentum</span><span style="width:56px;font-size:13px;font-weight:700;color:#ff5252">-4.78%</span><span style="font-size:11px;color:#444">UPS, GWW, REGN</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#00bcd4;font-weight:400">Trend Following</span><span style="width:56px;font-size:13px;font-weight:700;color:#ff5252">-4.78%</span><span style="font-size:11px;color:#444">CLX, UPS, GWW</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px solid #1a1a1a"><span style="width:130px;font-size:12px;color:#ab47bc;font-weight:400">Mean Reversion</span><span style="width:56px;font-size:13px;font-weight:700;color:#ff5252">-4.95%</span><span style="font-size:11px;color:#444">CLX, VLTO, EW</span></div></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SQQQ</span> sold · P&L <span style="color:#00e676;font-weight:700">+$129</span> <span style="font-size:11px;color:#555">(take profit (+30.4%))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SOXS</span> sold · P&L <span style="color:#00e676;font-weight:700">+$138</span> <span style="font-size:11px;color:#555">(take profit (+45.6%))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">EW</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$5</span> <span style="font-size:11px;color:#555">(rotation → VIXY (score +0.44))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">DPZ</span> sold · P&L <span style="color:#00e676;font-weight:700">+$18</span> <span style="font-size:11px;color:#555">(rotation → VXX (score +0.42))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VIXY</span> @ <strong>$23.19</strong> × 42 shares · score <span style="color:#ffd740">+0.930</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VXX</span> @ <strong>$24.23</strong> × 40 shares · score <span style="color:#ffd740">+0.924</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">UVXY</span> @ <strong>$26.21</strong> × 36 shares · score <span style="color:#ffd740">+0.902</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">XLP</span> @ <strong>$90.93</strong> × 8 shares · score <span style="color:#ffd740">+0.779</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VIXY</span> +0.930</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VXX</span> +0.924</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SH</span> +0.920</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SPXS</span> +0.914</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SDS</span> +0.913</span></div>
+  </div>
+</div></details><details ><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-19</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ff5252;font-weight:700">BEAR</span> market · VIX <strong>?</strong> · SPY trend <strong>?</strong> · risk appetite <strong>?</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Staying in <span style="color:#66bb6a;font-weight:700">Defensive</span> mode. Prioritize regime-fit safe-haven assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SWK</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$11</span> <span style="font-size:11px;color:#555">(max hold 15d)</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VIXY</span> sold · P&L <span style="color:#00e676;font-weight:700">+$85</span> <span style="font-size:11px;color:#555">(take profit (+26.5%))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VXX</span> sold · P&L <span style="color:#00e676;font-weight:700">+$81</span> <span style="font-size:11px;color:#555">(take profit (+26.2%))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">UVXY</span> sold · P&L <span style="color:#00e676;font-weight:700">+$59</span> <span style="font-size:11px;color:#555">(take profit (+27.7%))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SHY</span> @ <strong>$81.29</strong> × 16 shares · score <span style="color:#ffd740">+0.744</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">DPZ</span> @ <strong>$348.72</strong> × 2 shares · score <span style="color:#ffd740">+0.521</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">EW</span> @ <strong>$105.11</strong> × 8 shares · score <span style="color:#ffd740">+0.518</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">TSCO</span> @ <strong>$38.37</strong> × 24 shares · score <span style="color:#ffd740">+0.517</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SPXS</span> +0.894</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SDS</span> +0.890</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SQQQ</span> +0.886</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VIXY</span> +0.882</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VXX</span> +0.877</span></div>
+  </div>
+</div></details><details ><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-18</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ff5252;font-weight:700">BEAR</span> market · VIX <strong>?</strong> · SPY trend <strong>?</strong> · risk appetite <strong>?</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Switched from <span style="color:#00bcd4;font-weight:700">Trend Following</span> → <span style="color:#66bb6a;font-weight:700">Defensive</span>. Prioritize regime-fit safe-haven assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">DD</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$5</span> <span style="font-size:11px;color:#555">(max hold 15d)</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">FISV</span> sold · P&L <span style="color:#00e676;font-weight:700">+$116</span> <span style="font-size:11px;color:#555">(max hold 15d)</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">ECHO</span> sold · P&L <span style="color:#00e676;font-weight:700">+$2</span> <span style="font-size:11px;color:#555">(rotation → SDS (score +0.50))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">UPS</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$19</span> <span style="font-size:11px;color:#555">(rotation → SPXS (score +0.39))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SDS</span> @ <strong>$59.04</strong> × 19 shares · score <span style="color:#ffd740">+0.874</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SPXS</span> @ <strong>$27.68</strong> × 40 shares · score <span style="color:#ffd740">+0.874</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">PSQ</span> @ <strong>$27.72</strong> × 40 shares · score <span style="color:#ffd740">+0.850</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SH</span> @ <strong>$33.87</strong> × 32 shares · score <span style="color:#ffd740">+0.840</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SDS</span> +0.874</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SQQQ</span> +0.874</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SPXS</span> +0.874</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VIXY</span> +0.872</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">UVXY</span> +0.866</span></div>
+  </div>
+</div></details><details ><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-17</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ff5252;font-weight:700">BEAR</span> market · VIX <strong>?</strong> · SPY trend <strong>?</strong> · risk appetite <strong>?</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Switched from <span style="color:#66bb6a;font-weight:700">Defensive</span> → <span style="color:#00bcd4;font-weight:700">Trend Following</span>. Follow SMA alignment and regime-matched assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">FERG</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$1</span> <span style="font-size:11px;color:#555">(rotation → UVXY (score +0.23))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">UVXY</span> @ <strong>$19.91</strong> × 66 shares · score <span style="color:#ffd740">+0.905</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VIXY</span> +0.932</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">UVXY</span> +0.905</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SPXS</span> +0.875</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SQQQ</span> +0.875</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VXX</span> +0.874</span></div>
+  </div>
+</div></details><details ><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-16</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ff5252;font-weight:700">BEAR</span> market · VIX <strong>?</strong> · SPY trend <strong>?</strong> · risk appetite <strong>?</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Switched from <span style="color:#00bcd4;font-weight:700">Trend Following</span> → <span style="color:#66bb6a;font-weight:700">Defensive</span>. Prioritize regime-fit safe-haven assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">KDP</span> sold · P&L <span style="color:#00e676;font-weight:700">+$11</span> <span style="font-size:11px;color:#555">(max hold 17d)</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">EL</span> sold · P&L <span style="color:#00e676;font-weight:700">+$8</span> <span style="font-size:11px;color:#555">(max hold 17d)</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">KHC</span> sold · P&L <span style="color:#00e676;font-weight:700">+$37</span> <span style="font-size:11px;color:#555">(rotation → SQQQ (score +0.42))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">ALGN</span> sold · P&L <span style="color:#00e676;font-weight:700">+$3</span> <span style="font-size:11px;color:#555">(rotation → VIXY (score +0.41))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SQQQ</span> @ <strong>$44.15</strong> × 19 shares · score <span style="color:#ffd740">+0.873</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VIXY</span> @ <strong>$18.08</strong> × 47 shares · score <span style="color:#ffd740">+0.869</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">SOXS</span> @ <strong>$57.18</strong> × 14 shares · score <span style="color:#ffd740">+0.864</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VXX</span> @ <strong>$18.88</strong> × 44 shares · score <span style="color:#ffd740">+0.863</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SQQQ</span> +0.873</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VIXY</span> +0.869</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">SOXS</span> +0.864</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">VXX</span> +0.863</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">UVXY</span> +0.861</span></div>
+  </div>
+</div></details><details ><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-13</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ffd740;font-weight:700">NEUTRAL</span> market · VIX <strong>?</strong> · SPY trend <strong>?</strong> · risk appetite <strong>?</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Switched from <span style="color:#ab47bc;font-weight:700">Mean Reversion</span> → <span style="color:#00bcd4;font-weight:700">Trend Following</span>. Follow SMA alignment and regime-matched assets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">LMT</span> sold · P&L <span style="color:#ff5252;font-weight:700">-$11</span> <span style="font-size:11px;color:#555">(rotation → UPS (score +0.83))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">TTWO</span> sold · P&L <span style="color:#00e676;font-weight:700">+$50</span> <span style="font-size:11px;color:#555">(rotation → ECHO (score +0.28))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">UPS</span> @ <strong>$111.80</strong> × 10 shares · score <span style="color:#ffd740">+0.776</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">ECHO</span> @ <strong>$99.13</strong> × 11 shares · score <span style="color:#ffd740">+0.774</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">UPS</span> +0.776</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">ECHO</span> +0.774</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">TSLA</span> +0.772</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">CDW</span> +0.769</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">NDAQ</span> +0.764</span></div>
+  </div>
+</div></details><details ><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:12px;color:#666;user-select:none"><span style="color:#7c4dff">▸</span> 2026-11-12</summary><div style="background:#0f0f0f;border:1px solid #1e1e1e;border-radius:12px;
+  padding:20px;margin-bottom:4px">
+  <div style="font-size:10px;color:#444;margin-bottom:14px">
+    generated at market open · signals from yesterday's close
+  </div>
+
+  <!-- Market -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Market Conditions</div>
+    <div style="font-size:13px;color:#ccc"><span style="color:#ffd740;font-weight:700">NEUTRAL</span> market · VIX <strong>?</strong> · SPY trend <strong>?</strong> · risk appetite <strong>?</strong></div>
+  </div>
+
+  <!-- Strategy -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:4px">Strategy Decision</div>
+    <div style="font-size:13px;color:#ccc;margin-bottom:10px">Switched from <span style="color:#ff9800;font-weight:700">Momentum</span> → <span style="color:#ab47bc;font-weight:700">Mean Reversion</span>. Buy oversold dips in trending markets.</div>
+    <div style="font-size:10px;color:#555;margin-bottom:4px">5-day paper backtest · why this mode won:</div>
+    <div style="font-size:12px"></div>
+  </div>
+
+  <!-- Actions -->
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Actions Taken</div>
+    <div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Exits</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">CLX</span> sold · P&L <span style="color:#00e676;font-weight:700">+$25</span> <span style="font-size:11px;color:#555">(rotation → LMT (score +0.48))</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">VXX</span> sold · P&L <span style="color:#00e676;font-weight:700">+$70</span> <span style="font-size:11px;color:#555">(rotation → KHC (score +0.24))</span></div></div><div style="margin-bottom:8px"><div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Entries</div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">LMT</span> @ <strong>$615.97</strong> × 1 shares · score <span style="color:#ffd740">+0.707</span> · led by <span style="font-size:11px;color:#aaa">momentum</span></div><div style="padding:4px 0;border-bottom:1px solid #1a1a1a"><span style="color:#7c4dff;font-weight:700">KHC</span> @ <strong>$24.60</strong> × 49 shares · score <span style="color:#ffd740">+0.695</span> · led by <span style="font-size:11px;color:#aaa">trend</span></div></div>
+  </div>
+
+  <!-- Top candidates -->
+  <div>
+    <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;
+      margin-bottom:6px">Top Candidates Screened</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">LMT</span> +0.707</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">KHC</span> +0.695</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">NOC</span> +0.691</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">BIIB</span> +0.690</span><span style="background:#1a1a1a;border-radius:4px;padding:3px 7px;font-size:11px;color:#aaa"><span style="color:#7c4dff;font-weight:700">AEP</span> +0.682</span></div>
+  </div>
+</div></details></div>
+  </details>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Tickers with open positions — baked in at report generation time
+  const POSITIONS = [{"ticker": "PSQ", "cost": 27.72, "shares": 40}, {"ticker": "SDS", "cost": 59.04, "shares": 19}, {"ticker": "SH", "cost": 33.87, "shares": 32}, {"ticker": "SHY", "cost": 81.29, "shares": 16}, {"ticker": "SPXS", "cost": 27.685, "shares": 40}, {"ticker": "TSCO", "cost": 38.37, "shares": 24}, {"ticker": "UVXY", "cost": 26.21, "shares": 36}, {"ticker": "VIXY", "cost": 23.19, "shares": 42}, {"ticker": "VXX", "cost": 24.23, "shares": 40}, {"ticker": "XLP", "cost": 90.93, "shares": 8}];
+  const CASH = 700.66;
+
+  if (!POSITIONS.length) return;
+
+  function isMarketHours() {
+    const et = new Date(new Date().toLocaleString('en-US', {timeZone: 'America/New_York'}));
+    const d = et.getDay(), m = et.getHours() * 60 + et.getMinutes();
+    return d >= 1 && d <= 5 && m >= 570 && m < 960;
+  }
+
+  function fmt(n, prefix) {
+    const s = prefix + '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
+    return s;
+  }
+
+  function setStatus(msg, col) {
+    const b = document.getElementById('live-badge');
+    if (b) { b.textContent = msg; b.style.color = col || '#555'; b.style.borderColor = col || '#222'; }
+  }
+
+  const FINNHUB_TOKEN = 'd93d6v1r01qgqnua64j0d93d6v1r01qgqnua64jg';
+
+  async function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function fetchQuotes() {
+    const priceMap = {};
+    for (const pos of POSITIONS) {
+      try {
+        const q = await fetch(`https://finnhub.io/api/v1/quote?symbol=${pos.ticker}&token=${FINNHUB_TOKEN}`).then(r => r.json());
+        if (q && q.c) priceMap[pos.ticker] = q.c;
+      } catch(e) {}
+      await delay(1100);
+    }
+    if (!Object.keys(priceMap).length) {
+      setStatus('price unavailable', '#555');
+      return null;
+    }
+    return priceMap;
+  }
+
+  async function update() {
+    setStatus('fetching…', '#555');
+    const prices = await fetchQuotes();
+    if (!prices) return;
+
+    let totalLive = CASH;
+    let totalUnreal = 0;
+
+    POSITIONS.forEach(pos => {
+      const price = prices[pos.ticker];
+      if (price == null) return;
+      const row = document.querySelector(`tr[data-ticker="${pos.ticker}"]`);
+      if (!row) return;
+
+      const upnl = (price - pos.cost) * pos.shares;
+      const upnlPct = (price - pos.cost) / pos.cost * 100;
+      const col = upnl >= 0 ? '#00e676' : '#ff5252';
+      const sign = upnl >= 0 ? '+' : '';
+
+      const curVal = price * pos.shares;
+      const priceCell  = row.querySelector('.live-price');
+      const curValCell = row.querySelector('.live-curval');
+      const upnlCell   = row.querySelector('.live-upnl');
+      if (priceCell)  priceCell.textContent = '$' + price.toFixed(2);
+      if (curValCell) curValCell.textContent = '$' + Math.round(curVal).toLocaleString('en-US');
+      if (upnlCell) {
+        upnlCell.textContent = sign + '$' + Math.abs(upnl).toLocaleString('en-US', {maximumFractionDigits:0}) +
+          ' (' + sign + upnlPct.toFixed(1) + '%)';
+        upnlCell.style.color = col;
+      }
+
+      totalLive  += curVal;
+      totalUnreal += upnl;
+    });
+
+    // Update portfolio value card
+    const pv = document.getElementById('port-value');
+    if (pv) pv.textContent = '$' + Math.round(totalLive).toLocaleString('en-US');
+
+    // Update since-inception card
+    const si = document.getElementById('since-inception');
+    const siPct = document.getElementById('since-inception-pct');
+    const siDollar = document.getElementById('since-inception-dollar');
+    if (si && siPct && siDollar) {
+      const startCap = parseFloat(si.dataset.starting);
+      const gain = totalLive - startCap;
+      const gainPct = gain / startCap * 100;
+      const siCol = gain >= 0 ? '#00e676' : '#ff5252';
+      const siSign = gain >= 0 ? '+' : '';
+      si.style.color = siCol;
+      siPct.textContent = siSign + gainPct.toFixed(2) + '%';
+      siDollar.textContent = siSign + '$' + Math.abs(gain).toLocaleString('en-US', {maximumFractionDigits:0});
+    }
+
+    // Update live portfolio line
+    const lp = document.getElementById('live-port');
+    if (lp) {
+      const sign = totalUnreal >= 0 ? '+' : '';
+      lp.textContent = 'Unrealized: ' + sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {maximumFractionDigits:0});
+      lp.style.color = totalUnreal >= 0 ? '#00e676' : '#ff5252';
+    }
+
+    // Update unrealized P&L stat card and table footer
+    const sign = totalUnreal >= 0 ? '+' : '';
+    const unrFmt = sign + '$' + Math.abs(totalUnreal).toLocaleString('en-US', {maximumFractionDigits:0});
+    const unrCol = totalUnreal >= 0 ? '#00e676' : '#ff5252';
+    const up = document.getElementById('unreal-pnl');
+    if (up) { up.textContent = unrFmt; up.style.color = unrCol; }
+    const tf = document.getElementById('tfoot-upnl');
+    if (tf) { tf.textContent = unrFmt; tf.style.color = unrCol; }
+    const tcv = document.getElementById('tfoot-curval');
+    if (tcv) tcv.textContent = '$' + Math.round(totalLive - CASH).toLocaleString('en-US');
+
+    const now = new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/New_York'});
+    setStatus('live · ' + now + ' ET', '#00e676');
+  }
+
+  // Run immediately, then every 5 minutes during market hours
+  update();
+  setInterval(() => { if (isMarketHours()) update(); }, 5 * 60 * 1000);
+})();
+
+// Drag-to-reorder sections
+(function() {
+  const LAYOUT_KEY = 'at-layout-v1';
+  const container  = document.getElementById('sections-container');
+  if (!container || typeof Sortable === 'undefined') return;
+
+  function saveLayout() {
+    const ids = Array.from(container.children).map(el => el.dataset.section);
+    localStorage.setItem(LAYOUT_KEY, JSON.stringify(ids));
+  }
+
+  function restoreLayout() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || '[]');
+      if (!saved.length) return;
+      const map = {};
+      Array.from(container.children).forEach(el => { map[el.dataset.section] = el; });
+      saved.forEach(id => { if (map[id]) container.appendChild(map[id]); });
+    } catch(e) {}
+  }
+
+  restoreLayout();
+  Sortable.create(container, {
+    handle: '.drag-handle',
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    onEnd: saveLayout
+  });
+})();
+</script>
+</body>
+</html>
